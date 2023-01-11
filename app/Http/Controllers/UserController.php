@@ -6,6 +6,7 @@ use App\Models\Division;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\View;
 
 class UserController extends Controller
@@ -85,6 +86,14 @@ class UserController extends Controller
         $user = User::find($id);
         $user->division_id = $request->input('department');
         $user->role_id = $request->input('role');
+        $user->update();
+        return redirect('superadmin/home')->with('message', 'Data User Berhasil Diperbaharui');
+    }
+
+    public function reset(Request $request)
+    {
+        $user = User::find($request->user_reset_id);
+        $user->password = Hash::make('B1nu$');
         $user->update();
         return redirect('superadmin/home')->with('message', 'Data User Berhasil Diperbaharui');
     }

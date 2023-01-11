@@ -77,6 +77,7 @@ Route::get('superadmin/home', [\App\Http\Controllers\UserController::class, 'ind
 //UPDATE
 Route::get('superadmin/editUser/{id}', [\App\Http\Controllers\UserController::class, 'edit']);
 Route::put('updateUser/{id}', [\App\Http\Controllers\UserController::class, 'update']);
+Route::post('resetPassword', [\App\Http\Controllers\UserController::class, 'reset']);
 //DELETE
 Route::post('deleteUser', [\App\Http\Controllers\UserController::class, 'destroy']);
 

@@ -14,6 +14,13 @@
                 $('#user_id').val(user_id);
                 $('#deleteModal').modal('show');
             });
+
+            $('.ResetPassBtn').click(function (e){
+                e.preventDefault();
+                var user_id = $(this).val();
+                $('#user_reset_id').val(user_id);
+                $('#resetModal').modal('show');
+            });
         });
     </script>
 @endsection
@@ -36,6 +43,30 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-danger">Hapus</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="resetModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <form action="{{ url('resetPassword') }}" method="post">
+                    @csrf
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Reset Password User</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="user_reset_id" id="user_reset_id">
+                        <h5>Apakah anda yakin ingin me-reset password user?</h5>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-danger">Ya</button>
                     </div>
                 </form>
 
@@ -165,6 +196,8 @@
 
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
+
+                                    <button type="button" class="btn btn-danger ResetPassBtn" value="{{ $data->id }}">Reset Password</button>
 
                                     <button type="button" class="btn btn-danger deleteUserBtn" value="{{ $data->id }}"><span class="material-symbols-outlined">delete</span>Hapus User</button>
 

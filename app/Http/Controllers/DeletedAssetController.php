@@ -18,7 +18,17 @@ class DeletedAssetController extends Controller
      */
     public function index()
     {
-        //
+        $id = \Illuminate\Support\Facades\Auth::user()->division->id;
+        $data = DeletedAsset::where('division_id', $id)->get();
+        //tarik user saat ini Auth::user
+        //tarik rolenya juga pake where role_id = id
+        //tarik data dari role_page_mappings kolom CRUDD (ditambahkan), tarik CRUDD pake where role_id, role_id = id
+        //lempar data ke viewnya
+        //di view tinggal selection
+        return view('admin.searchAsset', [
+            'data' => $data,
+            'mode' => 'deleted'
+        ]);
     }
 
     /**

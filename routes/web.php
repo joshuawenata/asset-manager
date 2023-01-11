@@ -58,6 +58,7 @@ Route::post('updateStatus', [\App\Http\Controllers\RequestController::class, 'up
 //ASSET
 //READ
 Route::get('searchAsset/{id}', [\App\Http\Controllers\AssetController::class, 'index']);
+Route::get('searchDeletedAsset', [\App\Http\Controllers\DeletedAssetController::class, 'index']);
 //CREATE
 Route::get('admin/createAsset', [\App\Http\Controllers\AssetController::class, 'create'])->name('createAsset');
 Route::post('admin/searchAsset', [\App\Http\Controllers\AssetController::class, 'store'])->name('storeAsset');

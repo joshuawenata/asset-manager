@@ -28,7 +28,8 @@ class AssetController extends Controller
         //lempar data ke viewnya
         //di view tinggal selection
         return view('admin.searchAsset', [
-            'data' => $data
+            'data' => $data,
+            'mode' => 'current'
         ]);
     }
 

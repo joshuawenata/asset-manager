@@ -17,7 +17,7 @@ class CreateDeletedAssetsTable extends Migration
             $table->id();
             $table->string('serial_number')->unique();
             $table->string('brand');
-            $table->string('assigned_location');
+            $table->string('location');
             $table->unsignedBigInteger('division_id');
             $table->unsignedBigInteger('asset_category_id');
             $table->foreign('asset_category_id')->references('id')->on('asset_categories');

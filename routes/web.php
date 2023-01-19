@@ -61,10 +61,14 @@ Route::get('searchAsset/{id}', [\App\Http\Controllers\AssetController::class, 'i
 Route::get('searchDeletedAsset', [\App\Http\Controllers\DeletedAssetController::class, 'index']);
 //CREATE
 Route::get('admin/createAsset', [\App\Http\Controllers\AssetController::class, 'create'])->name('createAsset');
+Route::get('admin/createRepairAsset/{id}', [\App\Http\Controllers\RepairAssetController::class, 'create']);
 Route::post('admin/searchAsset', [\App\Http\Controllers\AssetController::class, 'store'])->name('storeAsset');
+Route::post('admin/storeRepair', [\App\Http\Controllers\RepairAssetController::class, 'store'])->name('storeRepairAsset');
 //UPDATE
 Route::get('admin/editAsset/{id}', [\App\Http\Controllers\AssetController::class, 'edit']);
+Route::get('admin/repairAssetHistory/{id}', [\App\Http\Controllers\RepairAssetController::class, 'index']);
 Route::put('updateAsset/{id}', [\App\Http\Controllers\AssetController::class, 'update']);
+Route::post('admin/updateRepairAsset', [\App\Http\Controllers\RepairAssetController::class, 'update'])->name('updateRepairAsset');
 //DELETE
 Route::post('deleteAsset', [\App\Http\Controllers\AssetController::class, 'destroy']);
 //DOWNLOAD XLSX

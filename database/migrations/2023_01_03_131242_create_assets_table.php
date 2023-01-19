@@ -18,7 +18,6 @@ class CreateAssetsTable extends Migration
             $table->string('serial_number')->unique();
             $table->string('status')->default('tersedia');
             $table->string('brand');
-            $table->string('assigned_location');
             $table->string('current_location');
             $table->unsignedBigInteger('division_id');
             $table->unsignedBigInteger('asset_category_id');

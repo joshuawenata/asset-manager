@@ -38,6 +38,7 @@
                                 <th scope="col">Jenis</th>
                                 <th scope="col">Merek</th>
                                 @if($mode == 'current')
+                                    <th scope="col">Lokasi</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Aksi</th>
                                 @endif
@@ -52,6 +53,7 @@
                                     <td>{{$item->assetCategory->name}}</td>
                                     <td>{{$item->brand}}</td>
                                     @if($mode == 'current')
+                                        <td>{{$item->current_location}}</td>
                                         <td>{{$item->status}}</td>
                                         <td>
                                             <a class="btn btn-small btn-info" href="{{ URL::to('admin/editAsset/' . $item->id) }}"><span class="material-symbols-outlined">edit_square</span></a>
@@ -61,6 +63,7 @@
     {{--                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
     {{--                                        </form>--}}
                                             <a class="btn btn-small btn-danger" href="{{ URL::to('admin/editAsset/' . $item->id) }}"><span class="material-symbols-outlined">delete</span></a>
+                                            <a class="btn btn-small btn-info" href="{{ URL::to('admin/repairAssetHistory/' . $item->id) }}"><span class="material-symbols-outlined">build</span></a>
                                         </td>
                                     @endif
                                 </tr>

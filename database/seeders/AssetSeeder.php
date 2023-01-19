@@ -18,7 +18,6 @@ class AssetSeeder extends Seeder
             'serial_number' => 'SN1234',
             'status' => 'tersedia',
             'brand' => 'Canon',
-            'assigned_location' => 'Prodi DI Lt.6',
             'current_location' => 'Prodi DI Lt.6',
             'division_id' => 3,
             'asset_category_id' => 1
@@ -28,7 +27,6 @@ class AssetSeeder extends Seeder
             'serial_number' => 'DF5754',
             'status' => 'tersedia',
             'brand' => 'Saramonic',
-            'assigned_location' => 'SLSC Lt.6',
             'current_location' => 'SLSC Lt.6',
             'division_id' => 3,
             'asset_category_id' => 3
@@ -38,7 +36,6 @@ class AssetSeeder extends Seeder
             'serial_number' => 'AB7869',
             'status' => 'tersedia',
             'brand' => 'Nikon',
-            'assigned_location' => 'Prodi DKV Lt.6',
             'current_location' => 'Prodi DKV Lt.6',
             'division_id' => 2,
             'asset_category_id' => 1
@@ -48,7 +45,6 @@ class AssetSeeder extends Seeder
             'serial_number' => 'GF4363',
             'status' => 'tersedia',
             'brand' => 'HP',
-            'assigned_location' => 'Prodi DKV Lt.6',
             'current_location' => 'Prodi DKV Lt.6',
             'division_id' => 2,
             'asset_category_id' => 2

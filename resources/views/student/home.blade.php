@@ -104,8 +104,6 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
 
-                <a class="btn btn-small btn-success mb-3" href="{{ route('checkRequest') }}">Pinjam Aset</a>
-
                 <div class="card">
                     <div class="card-header">{{ __('Dashboard Mahasiswa') }}</div>
 

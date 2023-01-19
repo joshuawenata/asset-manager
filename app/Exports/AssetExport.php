@@ -28,7 +28,6 @@ class AssetExport implements FromCollection, WithHeadings
             'nomor seri',
             'status',
             'merek',
-            'lokasi simpan',
             'lokasi saat ini',
             'divisi',
             'jenis aset'

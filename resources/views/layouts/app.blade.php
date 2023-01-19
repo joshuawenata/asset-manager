@@ -35,10 +35,15 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-{{--                    {{ config('app.name', 'Asset Manager') }}--}}
-                    Asset Manager
-                </a>
+                @guest
+                    <a class="navbar-brand" href="{{ url('/') }}">
+                        Asset Manager
+                    </a>
+                @else
+                    <a class="navbar-brand" href="{{ url('/home') }}">
+                        Asset Manager
+                    </a>
+                @endguest
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -46,7 +51,20 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
+                        @guest
 
+                        @else
+                            @if(Auth::user()->role_id  == 1)
+                                <a class="nav-link active" href="{{ route('checkRequest') }}">Pinjam Aset</a>
+                            @elseif(Auth::user()->role_id  == 3)
+                                <a class="nav-link active" href="{{ url('searchAsset/' . \Illuminate\Support\Facades\Auth::user()->division->id) }}">Lihat Aset</a>
+                                <a class="nav-link active" href="{{ route('riwayat') }}">Riwayat Peminjaman</a>
+                            @elseif(Auth::user()->role_id  == 4)
+                                <a class="nav-link active" href="{{ route('riwayat') }}">Riwayat Peminjaman</a>
+                            @elseif(Auth::user()->role_id  == 5)
+                                <a class="nav-link active" href="{{ route('readDivision') }}">Lihat Departemen</a>
+                            @endif
+                        @endguest
                     </ul>
 
                     <!-- Right Side Of Navbar -->

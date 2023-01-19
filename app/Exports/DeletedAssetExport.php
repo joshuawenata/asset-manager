@@ -27,7 +27,7 @@ class DeletedAssetExport implements FromCollection, WithHeadings
             'id',
             'nomor seri',
             'merek',
-            'lokasi simpan',
+            'lokasi',
             'divisi',
             'jenis aset'
         ];

@@ -72,7 +72,6 @@ class AssetController extends Controller
             $aset = new Asset;
             $aset->serial_number = $data['serialnumber'];
             $aset->brand = $data['brand'];
-            $aset->assigned_location = $data['location'];
             $aset->current_location = $data['location'];
 
             if($data['asset-category'] != null){
@@ -129,9 +128,7 @@ class AssetController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'serialnumber' => 'required',
-            'location' => 'required',
             'brand' => 'required',
-            'asset-status' => 'required',
             'asset_category' => 'required'
         ]);
 
@@ -143,8 +140,6 @@ class AssetController extends Controller
         else {
             $aset = Asset::find($id);
             $aset->serial_number = $request->input('serialnumber');
-            $aset->status = $request->input('asset-status');
-            $aset->assigned_location = $request->input('location');
             $aset->brand = $request->input('brand');
             $aset->asset_category_id = $request->input('asset_category');
             $aset->update();
@@ -179,7 +174,7 @@ class AssetController extends Controller
             ->where('division_id', '=', \Illuminate\Support\Facades\Auth::user()->division->id)
             ->join('divisions', 'assets.division_id', '=', 'divisions.id')
             ->join('asset_categories', 'assets.asset_category_id', '=', 'asset_categories.id')
-            ->select('assets.id', 'assets.serial_number', 'assets.status', 'assets.brand', 'assets.assigned_location', 'assets.current_location', 'divisions.name as divisi', 'asset_categories.name as jenis')
+            ->select('assets.id', 'assets.serial_number', 'assets.status', 'assets.brand', 'assets.current_location', 'divisions.name as divisi', 'asset_categories.name as jenis')
             ->get();
 
         return Excel::download(new AssetExport($aset), 'rekap_aset.xlsx');

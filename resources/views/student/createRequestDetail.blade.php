@@ -30,13 +30,13 @@
                                 </div>
                             </div>
 
-{{--                            tambahin 1 lagi input lokasi peminjaman--}}
+{{--                            TODO: tambahin 1 lagi input lokasi peminjaman--}}
                             <div class="mb-3">
                                 <label class="col-form-label text-md-end">{{ __('Lokasi Peminjaman') }}</label>
 
                                 <div>
-                                    <input class="form-check-input mt-1" type="radio" id="hide" name="lokasi" value="{{ Auth::user()->address }}" checked />
-                                    <label for="hide">dibawa pulang</label>
+                                    <input class="form-check-input mt-1" type="radio" id="hide" name="lokasi" value="{{ "di luar BINUS" }}" checked />
+                                    <label for="hide">di luar BINUS</label>
 
                                     <div class="mt-2">
                                         <input class="form-check-input mt-1" type="radio" id="show" name="lokasi" value="" />

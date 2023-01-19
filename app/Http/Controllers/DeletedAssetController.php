@@ -52,7 +52,7 @@ class DeletedAssetController extends Controller
         $d_aset = new DeletedAsset;
         $d_aset->serial_number = $aset->serial_number;
         $d_aset->brand = $aset->brand;
-        $d_aset->assigned_location = $aset->assigned_location;
+        $d_aset->location = $aset->current_location;
         $d_aset->division_id = $aset->division_id;
         $d_aset->asset_category_id = $aset->asset_category_id;
         $d_aset->save();
@@ -113,7 +113,7 @@ class DeletedAssetController extends Controller
             ->where('division_id', '=', \Illuminate\Support\Facades\Auth::user()->division->id)
             ->join('divisions', 'deleted_assets.division_id', '=', 'divisions.id')
             ->join('asset_categories', 'deleted_assets.asset_category_id', '=', 'asset_categories.id')
-            ->select('deleted_assets.id', 'deleted_assets.serial_number', 'deleted_assets.brand', 'deleted_assets.assigned_location', 'divisions.name as divisi', 'asset_categories.name as jenis')
+            ->select('deleted_assets.id', 'deleted_assets.serial_number', 'deleted_assets.brand', 'deleted_assets.location', 'divisions.name as divisi', 'asset_categories.name as jenis')
             ->get();
 
         return Excel::download(new DeletedAssetExport($d_aset), 'rekap_aset_musnah.xlsx');

@@ -20,5 +20,9 @@ class Asset extends Model
     public function bookings(){
         return $this->hasMany(Booking::class);
     }
-//  3 diatas dah bener
+
+    public function repairAssets(){
+        return $this->hasMany(RepairAsset::class);
+    }
+    //  4 diatas dah bener
 }

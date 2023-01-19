@@ -142,7 +142,6 @@
             <div class="col-md-12">
 {{--                TODO: bisa lihat aset aja gabisa edit--}}
 {{--                <a class="btn btn-small btn-success" href="{{ url('searchAsset/' . \Illuminate\Support\Facades\Auth::user()->division->id) }}">Lihat Aset</a>--}}
-                <a class="btn btn-small btn-success" href="{{ route('riwayat') }}">Riwayat Peminjaman</a>
 
                 <div class="card">
                     <div class="card-header">{{ __('Dashboard Approver') }}</div>

@@ -24,5 +24,9 @@ class Asset extends Model
     public function repairAssets(){
         return $this->hasMany(RepairAsset::class);
     }
-    //  4 diatas dah bener
+
+    public function assetLocation(){
+        return$this->hasMany(assetLocation::class);
+    }
+    //  5 diatas dah bener
 }

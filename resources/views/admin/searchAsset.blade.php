@@ -17,6 +17,7 @@
                     <a class="btn btn-small btn-success mb-3" href="{{ route('createAsset') }}"><span class="material-symbols-outlined">add</span>Tambah Aset Baru</a>
                     <a class="btn btn-small btn-success mb-3" href="{{ route('downloadAsset') }}"><span class="material-symbols-outlined">download</span>Unduh Rekap Aset</a>
                     <a class="btn btn-small btn-success" href="{{ url('searchDeletedAsset/') }}">Lihat Aset Musnah</a>
+                    <a class="btn btn-small btn-success" href="{{ url('lookAtMovedAsset/' . \Illuminate\Support\Facades\Auth::user()->division->id) }}">Pemindahan Aset</a>
                 @elseif($mode == 'deleted')
                     <a class="btn btn-small btn-success mb-3" href="{{ route('downloadDeletedAsset') }}"><span class="material-symbols-outlined">download</span>Unduh Aset Musnah</a>
                 @endif
@@ -64,6 +65,7 @@
     {{--                                        </form>--}}
                                             <a class="btn btn-small btn-danger" href="{{ URL::to('admin/editAsset/' . $item->id) }}"><span class="material-symbols-outlined">delete</span></a>
                                             <a class="btn btn-small btn-info" href="{{ URL::to('admin/repairAssetHistory/' . $item->id) }}"><span class="material-symbols-outlined">build</span></a>
+                                            <a class="btn btn-small btn-info" href="{{ URL::to('admin/moveAssetHistory/' . $item->id) }}"><span class="material-symbols-outlined">trolley</span></a>
                                         </td>
                                     @endif
                                 </tr>

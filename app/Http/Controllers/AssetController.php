@@ -33,6 +33,15 @@ class AssetController extends Controller
         ]);
     }
 
+    public function pick($id){
+        $data = Asset::where('division_id', $id)
+            ->where('status', 'tersedia')
+            ->get();
+        return view('admin.selectMoveAsset', [
+            'data' => $data
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

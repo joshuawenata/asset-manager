@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
         $this->call(RolePageMappingSeeder::class);
         $this->call(RequestSeeder::class);
         $this->call(BookingSeeder::class);
+        $this->call(LocationSeeder::class);
     }
 }

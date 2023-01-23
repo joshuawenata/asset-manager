@@ -58,12 +58,17 @@ Route::post('updateStatus', [\App\Http\Controllers\RequestController::class, 'up
 //ASSET
 //READ
 Route::get('searchAsset/{id}', [\App\Http\Controllers\AssetController::class, 'index']);
+Route::get('lookAtMovedAsset/{id}', [\App\Http\Controllers\AssetController::class, 'pick']);
 Route::get('searchDeletedAsset', [\App\Http\Controllers\DeletedAssetController::class, 'index']);
+Route::get('admin/moveAssetHistory/{id}', [\App\Http\Controllers\AssetLocationController::class, 'show']);
 //CREATE
 Route::get('admin/createAsset', [\App\Http\Controllers\AssetController::class, 'create'])->name('createAsset');
 Route::get('admin/createRepairAsset/{id}', [\App\Http\Controllers\RepairAssetController::class, 'create']);
 Route::post('admin/searchAsset', [\App\Http\Controllers\AssetController::class, 'store'])->name('storeAsset');
 Route::post('admin/storeRepair', [\App\Http\Controllers\RepairAssetController::class, 'store'])->name('storeRepairAsset');
+Route::post('admin/addDetailMovedAsset', [\App\Http\Controllers\AssetLocationController::class, 'create'])->name('addDetailMovedAsset');
+Route::post('admin/storePemindahan', [\App\Http\Controllers\AssetLocationController::class, 'store'])->name('storePemindahan');
+
 //UPDATE
 Route::get('admin/editAsset/{id}', [\App\Http\Controllers\AssetController::class, 'edit']);
 Route::get('admin/repairAssetHistory/{id}', [\App\Http\Controllers\RepairAssetController::class, 'index']);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Asset;
 use App\Models\assetLocation;
+use App\Models\Location;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,10 +27,12 @@ class AssetLocationController extends Controller
      */
     public function create(Request $request)
     {
+        $data = Location::all();
         $assets = $request->input('assets');
 
         return view('admin.createMovedAsset', [
             'assets' => $assets,
+            'data' => $data
         ]);
     }
 

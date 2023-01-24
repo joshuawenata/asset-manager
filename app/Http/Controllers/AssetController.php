@@ -6,6 +6,7 @@ use App\Exports\AssetExport;
 use App\Models\Asset;
 use App\Models\AssetCategory;
 use App\Models\DeletedAsset;
+use App\Models\Location;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -49,9 +50,11 @@ class AssetController extends Controller
      */
     public function create()
     {
+        $data = Location::all();
         $show = AssetCategory::all();
         return View::make('admin.createAsset', [
-            'show' => $show
+            'show' => $show,
+            'data' => $data
         ]);
     }
 

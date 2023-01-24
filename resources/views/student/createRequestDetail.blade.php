@@ -43,7 +43,11 @@
                                         <label for="show">di BINUS</label>
                                     </div>
                                     <div id="box" class="col-sm-5 col-md-6" style="display: none;">
-                                        <input id="new-lokasi" type="text" class="form-control mt-2" name="new-lokasi" placeholder="detail lokasi (cth: Ruang 0908, Atrium Lt.4, ...)" />
+                                        <select class="form-select" name="new-lokasi" id="new-lokasi">
+                                            @foreach($data as $index => $item)
+                                                <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>

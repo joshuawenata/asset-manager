@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Location;
 use DateTime;
 use DateTimeZone;
 use Illuminate\Http\Request;
@@ -223,6 +224,7 @@ class RequestController extends Controller
 
     public function create(Request $request)
     {
+        $data = Location::all();
         $return_date = $request->input('return_date');
         $book_date = $request->input('book_date');
         $assets = $request->input('assets');
@@ -230,7 +232,8 @@ class RequestController extends Controller
         return view('student/createRequestDetail', [
             'assets' => $assets,
             'book_date' => $book_date,
-            'return_date' => $return_date
+            'return_date' => $return_date,
+            'data' => $data
         ]);
     }
 

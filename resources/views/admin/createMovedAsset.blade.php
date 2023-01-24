@@ -35,9 +35,11 @@
                                 <label for="to_location" class="col-form-label text-md-end"><b>{{ __('Dipindahkan ke: ') }}</b></label>
 
                                 <div>
-                                    <div class="col-sm-5 col-md-6">
-                                        <input type="text" class="form-control mt-2" required id="to_location" name="to_location" />
-                                    </div>
+                                    <select class="form-select" name="to_location" id="to_location">
+                                        @foreach($data as $index => $item)
+                                            <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
 

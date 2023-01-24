@@ -43,13 +43,11 @@
                                 <label for="location" class="col-md-4 col-form-label text-md-end">{{ __('Lokasi Penyimpanan') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="location" type="text" class="form-control @error('location') is-invalid @enderror" name="location" value="{{ old('location') }}" required autocomplete="location" autofocus>
-
-                                    @error('location')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
+                                    <select class="form-select" name="location" id="location">
+                                        @foreach($data as $index => $item)
+                                            <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
 

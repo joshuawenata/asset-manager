@@ -31,13 +31,25 @@ class PdfController extends Controller
         $book_date = date("d M Y H:i", strtotime($req->book_date));
         $return_date = date("d M Y H:i", strtotime($req->return_date));
 
-        $status = $req->return_status;
-        $desc = $req->return_notes;
+
+        if ($req->status == 'on use'){
+            $status = 'belum dikembalikan';
+            $desc = '';
+        }
+        else{
+            $status = $req->return_status;
+            $desc = $req->return_notes;
+        }
 
         $booking = Booking::firstWhere('request_id', $req->id);
 
         $taken_date = date("d M Y H:i", strtotime($booking->taken_date));
-        $realize_return_date = date("d M Y H:i", strtotime($booking->realize_return_date));
+        if($req->status == 'on use'){
+            $realize_return_date = '';
+        }
+        else{
+            $realize_return_date = date("d M Y H:i", strtotime($booking->realize_return_date));
+        }
 
         $this->fpdf->AddPage();
 

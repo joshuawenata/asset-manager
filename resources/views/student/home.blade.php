@@ -162,7 +162,7 @@
                                             </form>
                                         @elseif($req->status == 'on use' || $req->status == 'done')
 {{--                                        DONE: upgrade laravel biar bisa generate receipt DOMPDF--}}
-                                            <form action="{{ route('download') }}" method="post">
+                                            <form action="{{ route('download') }}" target="_blank" method="post">
                                                 @csrf
                                                 <button type="submit" class="btn btn-primary" name="request_id" value="{{$req->id}}"><span class="material-symbols-outlined">file_download</span></button>
                                             </form>

@@ -6,6 +6,7 @@ use App\Models\Division;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\View;
 
@@ -93,7 +94,7 @@ class UserController extends Controller
     public function reset(Request $request)
     {
         $user = User::find($request->user_reset_id);
-        $user->password = Hash::make('B1nu$');
+        $user->password = Hash::make('B1nu$-' . Auth::user()->binusianid);
         $user->update();
         return redirect('superadmin/home')->with('message', 'Data User Berhasil Diperbaharui');
     }

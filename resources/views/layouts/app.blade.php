@@ -63,6 +63,7 @@
                                 <a class="nav-link active" href="{{ route('riwayat') }}">Riwayat Peminjaman</a>
                             @elseif(Auth::user()->role_id  == 5)
                                 <a class="nav-link active" href="{{ route('readDivision') }}">Lihat Departemen</a>
+                                <a class="nav-link active" href="{{ route('readLocation') }}">Kelola Lokasi</a>
                             @endif
                         @endguest
                     </ul>

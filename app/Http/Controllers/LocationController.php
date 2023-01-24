@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Location;
 use Illuminate\Http\Request;
 
 class LocationController extends Controller
@@ -13,7 +14,10 @@ class LocationController extends Controller
      */
     public function index()
     {
-        //
+        $data = Location::all();
+        return view('superadmin.location', [
+           'data' => $data
+        ]);
     }
 
     /**
@@ -34,7 +38,10 @@ class LocationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $location = new Location();
+        $location->name = $request->input('location-name');
+        $location->save();
+        return redirect('superadmin/location')->with('message', 'Lokasi baru berhasil ditambahkan');
     }
 
     /**
@@ -77,8 +84,10 @@ class LocationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $loct = Location::find($request->location_id);
+        $loct->delete();
+        return redirect('superadmin/location')->with('message', 'Lokasi berhasil dihapus');
     }
 }

@@ -98,6 +98,11 @@ Route::get('superadmin/division', [\App\Http\Controllers\DivisionController::cla
 //DELETE
 Route::post('deleteDivision', [\App\Http\Controllers\DivisionController::class, 'destroy']);
 
+//LOCATION
+Route::post('superadmin/location', [\App\Http\Controllers\LocationController::class, 'store'])->name('storeLocation');
+Route::get('superadmin/location', [\App\Http\Controllers\LocationController::class, 'index'])->name('readLocation');
+Route::post('deleteLocation', [\App\Http\Controllers\LocationController::class, 'destroy']);
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

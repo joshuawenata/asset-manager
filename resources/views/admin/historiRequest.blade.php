@@ -116,7 +116,7 @@
                                     <td>
                                         @if($req->status == 'done')
 {{--                                        DONE: ini tampilin receiptnya--}}
-                                            <form action="{{ route('download') }}" method="post">
+                                            <form action="{{ route('download') }}" target="_blank" method="post">
                                                 @csrf
                                                 <button type="submit" class="btn btn-primary" name="request_id" value="{{$req->id}}"><span class="material-symbols-outlined">file_download</span></button>
                                             </form>

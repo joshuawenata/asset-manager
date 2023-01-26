@@ -19,6 +19,6 @@ class CekRole
         if(in_array(auth()->user()->role->name,$userType)){
             return $next($request);
         }
-        return response()->json(['You do not have permission to access for this page.']);
+        return redirect('/');
     }
 }

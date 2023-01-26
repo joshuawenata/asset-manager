@@ -29,20 +29,35 @@ class HomeController extends Controller
 
     public function index(){
 
-        $user_role_name = auth()->user()->role->name;
-        if($user_role_name == 'superadmin'){
-            return redirect('superadmin/dashboard');
-        }
-        elseif ($user_role_name == 'admin'){
-            return redirect('admin/dashboard');
-        }
-        elseif ($user_role_name == 'approver'){
-            return redirect('approver/dashboard');
-        }
-        else{
-            return redirect('dashboard');
+        for($i = 1; $i <= 5; $i++){
+            $res = $this->validateUser($i);
+            if($res->count()){
+                foreach ($res as $r){
+                    $role = $r->role_id;
+                }
+
+                $pages = DB::table('role_page_mappings')
+                    ->join('pages', 'role_page_mappings.page_id', '=', 'pages.id')
+                    ->select('pages.name')
+                    ->where('role_id', $role)
+                    ->where('page_id', $i)
+                    ->get();
+
+                foreach ($pages as $page){
+                    $p = $page->name;
+                }
+
+                return redirect($p);
+            }
         }
 
+    }
+
+    public function validateUser(int $page_id){
+        $user_role_id = auth()->user()->role->id;
+        $role = RolePageMapping::where('role_id', $user_role_id)->where('page_id', $page_id)->get();
+
+        return $role;
     }
 
     public function dashboard()

@@ -20,15 +20,15 @@ class PageSeeder extends Seeder
         ]);
 
         Page::create([
-            'name' => 'admin.dashboard'
+            'name' => 'admin/dashboard'
         ]);
 
         Page::create([
-            'name' => 'superadmin.dashboard'
+            'name' => 'superadmin/dashboard'
         ]);
 
         Page::create([
-            'name' => 'approver.dashboard'
+            'name' => 'approver/dashboard'
         ]);
     }
 }

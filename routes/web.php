@@ -21,15 +21,15 @@ Route::get('/', function () {
 Auth::routes();
 
 //HISTORI REQUEST
-Route::get('/requests-history', [\App\Http\Controllers\RequestController::class, 'show'])->name('admin.historiRequest')->middleware('cekRole:admin,approver');  //ini approver gabisa akses
-Route::get('/requests-history/{id}', [\App\Http\Controllers\BookingController::class, 'show2'])->name('rejectedbookings.show')->middleware('cekRole:admin,approver'); //ini approver gabisa akses
+Route::get('/requests-history', [\App\Http\Controllers\RequestController::class, 'show'])->name('admin.historiRequest')->middleware('cekRole:admin,approver');
+Route::get('/requests-history/{id}', [\App\Http\Controllers\BookingController::class, 'show2'])->name('rejectedbookings.show')->middleware('cekRole:admin,approver');
 //GENERATE PDF
-Route::post('download', [\App\Http\Controllers\PdfController::class, 'index'])->name('download')->middleware('cekRole:student,admin,approver'); //ini admin,approver gabisa akses
+Route::post('download', [\App\Http\Controllers\PdfController::class, 'index'])->name('download')->middleware('cekRole:student,staff,admin,approver');
 
 //TEST THIS
-Route::get('/see/{user}/dashboard/{id}', [\App\Http\Controllers\BookingController::class, 'show'])->name('bookings.show');
+Route::get('/see/{user}/dashboard/{id}', [\App\Http\Controllers\BookingController::class, 'show'])->name('bookings.show')->middleware('cekRole:student,staff,admin,approver');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::post('/update-request', [\App\Http\Controllers\RequestController::class, 'update'])->name('updateRequest')->middleware('cekRole:admin,approver');    //ini approver gabisa akses
+Route::post('/update-request', [\App\Http\Controllers\RequestController::class, 'update'])->name('updateRequest')->middleware('cekRole:admin,approver');
 
 //Student & Staff Routes
 Route::middleware(['auth', 'cekRole:student,staff'])->group(function(){

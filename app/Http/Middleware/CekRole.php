@@ -14,9 +14,9 @@ class CekRole
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next, $userType)
+    public function handle(Request $request, Closure $next, ...$userType)
     {
-        if(auth()->user()->role->name == $userType){
+        if(in_array(auth()->user()->role->name,$userType)){
             return $next($request);
         }
         return response()->json(['You do not have permission to access for this page.']);

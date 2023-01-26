@@ -86,7 +86,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
 
-                <form action="{{ url('updateRequests') }}" method="post">
+                <form action="{{ route('updateRequest') }}" method="post">
                     @csrf
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Reject Request</h1>
@@ -113,7 +113,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
 
-                <form action="{{ url('updateRequests') }}" method="post">
+                <form action="{{ route('updateRequest') }}" method="post">
                     @csrf
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Approve Request</h1>

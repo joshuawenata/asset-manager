@@ -25,7 +25,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
 
-                <form action="{{ url('deleteDivision') }}" method="post">
+                <form action="{{ url('delete-division') }}" method="post">
                     @csrf
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Hapus Departemen</h1>

@@ -20,9 +20,7 @@ class UserController extends Controller
     public function index()
     {
         $data = User::all()->diff(User::whereIn('role_id', [1, 5])->get());
-        return view('superadmin.home', [
-            'data' => $data
-        ]);
+        return $data;
     }
 
     /**
@@ -88,7 +86,7 @@ class UserController extends Controller
         $user->division_id = $request->input('department');
         $user->role_id = $request->input('role');
         $user->update();
-        return redirect('superadmin/home')->with('message', 'Data User Berhasil Diperbaharui');
+        return redirect('superadmin/dashboard')->with('message', 'Data User Berhasil Diperbaharui');
     }
 
     public function reset(Request $request)
@@ -96,7 +94,7 @@ class UserController extends Controller
         $user = User::find($request->user_reset_id);
         $user->password = Hash::make('B1nu$-' . Auth::user()->binusianid);
         $user->update();
-        return redirect('superadmin/home')->with('message', 'Data User Berhasil Diperbaharui');
+        return redirect('superadmin/dashboard')->with('message', 'Data User Berhasil Diperbaharui');
     }
 
     /**
@@ -109,6 +107,6 @@ class UserController extends Controller
     {
         $user = User::find($request->user_delete_id);
         $user->delete();
-        return redirect('superadmin/home')->with('message', 'User Berhasil Dihapus');
+        return redirect('superadmin/dashboard')->with('message', 'User Berhasil Dihapus');
     }
 }

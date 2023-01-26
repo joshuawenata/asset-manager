@@ -54,16 +54,16 @@
                         @guest
 
                         @else
-                            @if(Auth::user()->role_id  == 1)
+                            @if(auth()->user()->role->name == 'student' || auth()->user()->role->name == 'staff')
                                 <a class="nav-link active" href="{{ route('checkRequest') }}">Pinjam Aset</a>
-                            @elseif(Auth::user()->role_id  == 3)
-                                <a class="nav-link active" href="{{ url('searchAsset/' . \Illuminate\Support\Facades\Auth::user()->division->id) }}">Lihat Aset</a>
-                                <a class="nav-link active" href="{{ route('riwayat') }}">Riwayat Peminjaman</a>
-                            @elseif(Auth::user()->role_id  == 4)
-                                <a class="nav-link active" href="{{ route('riwayat') }}">Riwayat Peminjaman</a>
-                            @elseif(Auth::user()->role_id  == 5)
-                                <a class="nav-link active" href="{{ route('readDivision') }}">Lihat Departemen</a>
-                                <a class="nav-link active" href="{{ route('readLocation') }}">Kelola Lokasi</a>
+                            @elseif(auth()->user()->role->name == 'admin')
+                                <a class="nav-link active" href="{{ url('/search-asset/' . \Illuminate\Support\Facades\Auth::user()->division->id) }}">Lihat Aset</a>
+                                <a class="nav-link active" href="{{ route('admin.historiRequest') }}">Riwayat Peminjaman</a>
+                            @elseif(auth()->user()->role->name == 'approver')
+                                <a class="nav-link active" href="{{ route('admin.historiRequest') }}">Riwayat Peminjaman</a>
+                            @elseif(auth()->user()->role->name == 'superadmin')
+                                <a class="nav-link active" href="{{ route('superadmin.division') }}">Lihat Departemen</a>
+                                <a class="nav-link active" href="{{ route('superadmin.location') }}">Kelola Lokasi</a>
                             @endif
                         @endguest
                     </ul>

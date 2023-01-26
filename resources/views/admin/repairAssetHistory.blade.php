@@ -26,7 +26,7 @@
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <form method="POST" action="{{ route('updateRepairAsset') }}">
+                <form method="POST" action="{{ route('updateFixedAsset') }}">
                     @csrf
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Aset Diperbaiki</h1>
@@ -62,7 +62,7 @@
             <div class="col-md-12">
 
                 @if($fixed)
-                    <a class="btn btn-small btn-success mb-3" href="{{ url('admin/createRepairAsset/' . $asset) }}">Lapor Kerusakan</a>
+                    <a class="btn btn-small btn-success mb-3" href="{{ url('create-repair-asset/' . $asset) }}">Lapor Kerusakan</a>
                 @endif
 
                 <div class="card">

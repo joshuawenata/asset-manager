@@ -20,7 +20,7 @@
 
                     <div class="card-body">
 
-                        <form method="POST" action="{{ route('simpanKembali') }}">
+                        <form method="POST" action="{{ route('storeReturn') }}">
                             @csrf
 
                             @if($returned)

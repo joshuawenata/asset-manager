@@ -18,7 +18,7 @@
 
                     <div class="card-body">
 
-                        <form method="POST" action="{{ route('addDetailMovedAsset') }}" id="checkGroup">
+                        <form method="POST" action="{{ route('admin.createMovedAsset') }}" id="checkGroup">
                             @csrf
 
                             <table id="myTable" class="table">

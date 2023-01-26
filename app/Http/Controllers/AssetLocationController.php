@@ -59,7 +59,7 @@ class AssetLocationController extends Controller
             $new->save();
         }
 
-        return redirect('searchAsset/' . Auth::user()->division->id)->with('message', "Asset berhasil dipindahkan!");
+        return redirect('search-asset/' . Auth::user()->division->id)->with('message', "Asset berhasil dipindahkan!");
     }
 
     /**

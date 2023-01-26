@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Page;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class PageSeeder extends Seeder
@@ -15,19 +16,19 @@ class PageSeeder extends Seeder
     public function run()
     {
         Page::create([
-            'name' => 'dashboard/student'
+            'name' => 'dashboard'
         ]);
 
         Page::create([
-            'name' => 'dashboard/admin'
+            'name' => 'admin.dashboard'
         ]);
 
         Page::create([
-            'name' => 'superadmin/home'
+            'name' => 'superadmin.dashboard'
         ]);
 
         Page::create([
-            'name' => 'dashboard/approver'
+            'name' => 'approver.dashboard'
         ]);
     }
 }

@@ -85,7 +85,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
 
-                <form action="{{ url('updateRequests') }}" method="post">
+                <form action="{{ route('updateRequest') }}" method="post">
                     @csrf
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Reject Request</h1>
@@ -112,7 +112,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
 
-            <form action="{{ url('updateRequests') }}" method="post">
+            <form action="{{ route('updateRequest') }}" method="post">
                 @csrf
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Approve Request</h1>
@@ -194,7 +194,7 @@
                                                 Menunggu persetujuan.
                                             @endif
                                         @elseif($req->status == 'approved')
-                                            <form action="{{route('takenBookings')}}" method="post">
+                                            <form action="{{route('takenBooking')}}" method="post">
                                                 @csrf
                                                 <button type="submit" class="btn btn-primary" name="request_taken_id" value="{{$req->id}}">Barang sudah diambil</button>
                                             </form>
@@ -208,7 +208,7 @@
                                             </form>
 
                                             @if($req->flag_return == 1)
-                                                <form action="{{route('cekPengembalian')}}" method="post">
+                                                <form action="{{route('admin.formKembali')}}" method="post">
                                                     @csrf
                                                     <button type="submit" class="btn btn-primary" name="request_id" value="{{$req->id}}">Lihat form kembali</button>
                                                 </form>

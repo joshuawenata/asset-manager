@@ -23,7 +23,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
 
-                <form action="{{ url('deleteAsset') }}" method="post">
+                <form action="{{ url('delete-asset') }}" method="post">
                     @csrf
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Hapus Aset</h1>
@@ -55,7 +55,7 @@
 
 
 
-                        <form method="POST" action="{{ url('updateAsset/' . $data->id) }}">
+                        <form method="POST" action="{{ url('update-asset/' . $data->id) }}">
                             @csrf
                             @method('PUT')
 

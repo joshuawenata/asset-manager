@@ -98,7 +98,7 @@ class AssetController extends Controller
 
             $aset->division_id = $data['division_id'];
             $aset->save();
-            return redirect('searchAsset/' . $data['division_id'])->with('message', "Aset Berhasil Ditambahkan");
+            return redirect('search-asset/' . $data['division_id'])->with('message', "Aset Berhasil Ditambahkan");
         }
     }
 
@@ -155,7 +155,7 @@ class AssetController extends Controller
             $aset->brand = $request->input('brand');
             $aset->asset_category_id = $request->input('asset_category');
             $aset->update();
-            return redirect('searchAsset/' . \Illuminate\Support\Facades\Auth::user()->division->id)->with('message', 'Aset Berhasil Diperbaharui');
+            return redirect('search-asset/' . \Illuminate\Support\Facades\Auth::user()->division->id)->with('message', 'Aset Berhasil Diperbaharui');
         }
     }
 
@@ -172,7 +172,7 @@ class AssetController extends Controller
         $d_aset->store($aset);
 
         $aset->delete();
-        return redirect('searchAsset/' . \Illuminate\Support\Facades\Auth::user()->division->id)->with('message', 'Aset Berhasil Dihapus');
+        return redirect('search-asset/' . \Illuminate\Support\Facades\Auth::user()->division->id)->with('message', 'Aset Berhasil Dihapus');
 
     }
 

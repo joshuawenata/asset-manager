@@ -44,7 +44,7 @@ class DivisionController extends Controller
         $division->name = $request->input('division-name');
         $division->approver = $request->input('approver');
         $division->save();
-        return redirect('superadmin/division')->with('message', 'Departemen Baru Berhasil Ditambahkan');
+        return redirect('division')->with('message', 'Departemen Baru Berhasil Ditambahkan');
     }
 
     /**
@@ -91,6 +91,6 @@ class DivisionController extends Controller
     {
         $dept = Division::find($id->asset_division_id);
         $dept->delete();
-        return redirect('superadmin/division')->with('message', 'Departemen Berhasil Dihapus');
+        return redirect('division')->with('message', 'Departemen Berhasil Dihapus');
     }
 }

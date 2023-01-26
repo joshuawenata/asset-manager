@@ -30,7 +30,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
 
-                <form action="{{ url('deleteUser') }}" method="post">
+                <form action="{{ url('delete-user') }}" method="post">
                     @csrf
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Hapus User</h1>
@@ -54,7 +54,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
 
-                <form action="{{ url('resetPassword') }}" method="post">
+                <form action="{{ url('reset-password') }}" method="post">
                     @csrf
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Reset Password User</h1>
@@ -86,7 +86,7 @@
 
 
 
-                        <form method="POST" action="{{ url('updateUser/' . $data->id) }}">
+                        <form method="POST" action="{{ url('update-user/' . $data->id) }}">
                             @csrf
                             @method('PUT')
 

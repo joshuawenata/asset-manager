@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\RolePageMapping;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class RolePageMappingSeeder extends Seeder

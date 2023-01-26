@@ -14,10 +14,10 @@
             <div class="col-md-12">
 
                 @if($mode == 'current')
-                    <a class="btn btn-small btn-success mb-3" href="{{ route('createAsset') }}"><span class="material-symbols-outlined">add</span>Tambah Aset Baru</a>
+                    <a class="btn btn-small btn-success mb-3" href="{{ route('admin.createAsset') }}"><span class="material-symbols-outlined">add</span>Tambah Aset Baru</a>
                     <a class="btn btn-small btn-success mb-3" href="{{ route('downloadAsset') }}"><span class="material-symbols-outlined">download</span>Unduh Rekap Aset</a>
-                    <a class="btn btn-small btn-success" href="{{ url('searchDeletedAsset/') }}">Lihat Aset Musnah</a>
-                    <a class="btn btn-small btn-success" href="{{ url('lookAtMovedAsset/' . \Illuminate\Support\Facades\Auth::user()->division->id) }}">Pemindahan Aset</a>
+                    <a class="btn btn-small btn-success" href="{{ url('/deleted-asset/') }}">Lihat Aset Musnah</a>
+                    <a class="btn btn-small btn-success" href="{{ url('/move-asset/' . \Illuminate\Support\Facades\Auth::user()->division->id) }}">Pemindahan Aset</a>
                 @elseif($mode == 'deleted')
                     <a class="btn btn-small btn-success mb-3" href="{{ route('downloadDeletedAsset') }}"><span class="material-symbols-outlined">download</span>Unduh Aset Musnah</a>
                 @endif
@@ -57,15 +57,15 @@
                                         <td>{{$item->current_location}}</td>
                                         <td>{{$item->status}}</td>
                                         <td>
-                                            <a class="btn btn-small btn-info" href="{{ URL::to('admin/editAsset/' . $item->id) }}"><span class="material-symbols-outlined">edit_square</span></a>
+                                            <a class="btn btn-small btn-info" href="{{ URL::to('/edit-asset/' . $item->id) }}"><span class="material-symbols-outlined">edit_square</span></a>
     {{--                                        <form action="{{ url('deleteAsset/' . $item->id) }}" method="post">--}}
     {{--                                            <button class="btn btn-small btn-info" type="submit"><span class="material-symbols-outlined">delete</span></button>--}}
     {{--                                            <input type="hidden" name="_method" value="delete" />--}}
     {{--                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
     {{--                                        </form>--}}
-                                            <a class="btn btn-small btn-danger" href="{{ URL::to('admin/editAsset/' . $item->id) }}"><span class="material-symbols-outlined">delete</span></a>
-                                            <a class="btn btn-small btn-info" href="{{ URL::to('admin/repairAssetHistory/' . $item->id) }}"><span class="material-symbols-outlined">build</span></a>
-                                            <a class="btn btn-small btn-info" href="{{ URL::to('admin/moveAssetHistory/' . $item->id) }}"><span class="material-symbols-outlined">trolley</span></a>
+                                            <a class="btn btn-small btn-danger" href="{{ URL::to('/edit-asset/' . $item->id) }}"><span class="material-symbols-outlined">delete</span></a>
+                                            <a class="btn btn-small btn-info" href="{{ URL::to('/repair-asset-history/' . $item->id) }}"><span class="material-symbols-outlined">build</span></a>
+                                            <a class="btn btn-small btn-info" href="{{ URL::to('/move-asset-history/' . $item->id) }}"><span class="material-symbols-outlined">trolley</span></a>
                                         </td>
                                     @endif
                                 </tr>

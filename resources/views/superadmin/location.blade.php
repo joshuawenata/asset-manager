@@ -25,7 +25,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
 
-                <form action="{{ url('deleteLocation') }}" method="post">
+                <form action="{{ url('delete-location') }}" method="post">
                     @csrf
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Hapus Lokasi</h1>
@@ -49,7 +49,7 @@
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <form method="POST" action="{{ route('storeLocation') }}">
+                <form method="POST" action="{{ route('store-location') }}">
                     @csrf
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Location Baru</h1>

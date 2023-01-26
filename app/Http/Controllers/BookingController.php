@@ -59,7 +59,7 @@ class BookingController extends Controller
             $booking->save();
         }
 
-        return redirect('dashboard/student')->with('message', "Request Berhasil Ditambahkan");
+        return redirect('/dashboard')->with('message', "Request Berhasil Ditambahkan");
     }
 
     /**
@@ -77,7 +77,12 @@ class BookingController extends Controller
             ->where('bookings.request_id', '=', $id)
             ->get();
 
-        return Redirect::to('dashboard/'. $user . '#see')->with('bookings', $assets);
+        if($user == 'student' || $user == 'staff'){
+            return Redirect::to('/dashboard#see')->with('bookings', $assets);
+        }
+        else{
+            return Redirect::to($user . '/dashboard#see')->with('bookings', $assets);
+        }
     }
 
     public function show2($id)
@@ -89,7 +94,7 @@ class BookingController extends Controller
             ->where('bookings.request_id', '=', $id)
             ->get();
 
-        return Redirect::to('riwayat#see')->with('bookings', $assets);
+        return Redirect::to('requests-history#see')->with('bookings', $assets);
     }
 
     /**

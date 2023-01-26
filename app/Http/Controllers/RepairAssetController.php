@@ -63,7 +63,7 @@ class RepairAssetController extends Controller
         $aset->update();
 
         $new->save();
-        return redirect('admin/repairAssetHistory/' . $data['asset_id'])->with('message', "Riwayat kerusakan berhasil dicatat.");
+        return redirect('admin/repair-asset-history/' . $data['asset_id'])->with('message', "Riwayat kerusakan berhasil dicatat.");
     }
 
     /**
@@ -108,7 +108,7 @@ class RepairAssetController extends Controller
         $aset->update();
 
         $repair->update();
-        return redirect('admin/repairAssetHistory/' . $repair->asset_id)->with('message', "Riwayat perbaikan berhasil dicatat.");
+        return redirect('admin/repair-asset-history/' . $repair->asset_id)->with('message', "Riwayat perbaikan berhasil dicatat.");
     }
 
     /**

@@ -41,7 +41,7 @@ class LocationController extends Controller
         $location = new Location();
         $location->name = $request->input('location-name');
         $location->save();
-        return redirect('superadmin/location')->with('message', 'Lokasi baru berhasil ditambahkan');
+        return redirect('location')->with('message', 'Lokasi baru berhasil ditambahkan');
     }
 
     /**
@@ -88,6 +88,6 @@ class LocationController extends Controller
     {
         $loct = Location::find($request->location_id);
         $loct->delete();
-        return redirect('superadmin/location')->with('message', 'Lokasi berhasil dihapus');
+        return redirect('location')->with('message', 'Lokasi berhasil dihapus');
     }
 }

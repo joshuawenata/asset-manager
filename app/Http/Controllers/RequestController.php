@@ -19,7 +19,7 @@ class RequestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($p)
+    public function index()
     {
         $current_date_time = new DateTime("now", new DateTimeZone('Asia/Jakarta'));
         $current_date_time = $current_date_time->format('Y-m-d H:i:s');
@@ -30,7 +30,9 @@ class RequestController extends Controller
             ->where('requests.return_date', '<=', $current_date_time)
             ->update(['status' => 'rejected']);
 
-        if($p == 'student'){
+        $p = Auth::user()->role->name;
+
+        if($p == 'student' || $p == 'staff'){
             $user_id = \Illuminate\Support\Facades\Auth::user()->id;
             $data = \App\Models\Request::where('user_id', $user_id)->get();
             $approver = null;
@@ -62,10 +64,7 @@ class RequestController extends Controller
                 ->get();
             $approver = \Illuminate\Support\Facades\Auth::user()->division->approver;
         }
-        return view($p . '.home', [
-            'data' => $data,
-            'approver' => $approver
-        ]);
+        return [$data, $approver];
     }
 
     /**
@@ -75,7 +74,7 @@ class RequestController extends Controller
      */
     public function check()
     {
-        return view('student/checkRequest');
+        return view('checkRequest');
     }
 
     public function kembali(Request $request){
@@ -100,7 +99,7 @@ class RequestController extends Controller
         $current_date_time = new DateTime("now", new DateTimeZone('Asia/Jakarta'));
         $current_date_time = $current_date_time->format('l, d M Y H:i');
 
-        return view('student.kembali', [
+        return view('kembali', [
             'returned' => $returned,
             'aset' => $aset,
             'request' => $req,
@@ -108,7 +107,7 @@ class RequestController extends Controller
         ]);
     }
 
-    public function simpanKembali(Request $request){
+    public function updateReturn(Request $request){
         $req = \App\Models\Request::find($request->input('request_id'));
         $req->return_status = $request->input('kondisi_aset');
         $req->return_notes = $request->input('return_condition');
@@ -116,7 +115,7 @@ class RequestController extends Controller
         $req->realize_return_date = date("Y-m-d H:i:s", strtotime($request->input('realize_return_date')));
         $req->update();
 
-        return redirect('dashboard/student')->with('message', 'Berhasil mengajukan pengembalian.');
+        return redirect('/dashboard')->with('message', 'Berhasil mengajukan pengembalian.');
     }
 
     public function cekPengembalian(Request $request){
@@ -156,7 +155,7 @@ class RequestController extends Controller
             //barang bisa diambil = update bookings
             $bookings = new BookingController();
             $bookings->update($req_id);
-            return redirect('dashboard/admin')->with('message', "Barang berhasil diambil.");
+            return redirect('/admin/dashboard')->with('message', "Barang berhasil diambil.");
         }
         else{
             //gabisa diambil dulu = alert
@@ -164,7 +163,7 @@ class RequestController extends Controller
         }
     }
 
-    public function createRequestDetail(Request $request){
+    public function createRequest(Request $request){
         $res = $request->input('datetimes');
         $res = explode(" - ", $res);
         $book_date = strtotime($res[0]);
@@ -215,7 +214,7 @@ class RequestController extends Controller
             }
         }
 
-        return view('student/createRequest', [
+        return view('createRequest', [
             'book_date' => $book_date,
             'return_date' => $return_date,
             'assets' => $avail_items,
@@ -229,7 +228,7 @@ class RequestController extends Controller
         $book_date = $request->input('book_date');
         $assets = $request->input('assets');
 
-        return view('student/createRequestDetail', [
+        return view('createRequestDetail', [
             'assets' => $assets,
             'book_date' => $book_date,
             'return_date' => $return_date,
@@ -263,7 +262,7 @@ class RequestController extends Controller
         $return_date = $request->input('return_date');
         $book_date = $request->input('book_date');
 
-        return view('student/confirmRequest', [
+        return view('confirmRequest', [
             'assets' => $bookings,
             'book_date' => $book_date,
             'return_date' => $return_date,
@@ -356,7 +355,7 @@ class RequestController extends Controller
             $message = 'Request berhasil diapprove.';
         }
         //DONE: ini kembali ke dashboard/approvernya gimana
-        return redirect('dashboard/' . $user)->with('message', $message);
+        return redirect('/'. $user . '/dashboard')->with('message', $message);
     }
 
     public function updateStatus(Request $request){
@@ -364,7 +363,7 @@ class RequestController extends Controller
         $req->status = $request->input('status');
         $req->update();
         $user = $request->input('user');
-        return redirect('dashboard/' . $user)->with('message', 'Peminjaman berhasil diperbaharui');
+        return redirect('/dashboard')->with('message', 'Peminjaman berhasil diperbaharui');
     }
 
     /**
@@ -388,7 +387,7 @@ class RequestController extends Controller
         else{
             $message = 'Request peminjaman tidak bisa dicancel karena sudah diapprove admin.';
         }
-        return redirect('dashboard/student')->with('message', $message);
+        return redirect('/dashboard')->with('message', $message);
     }
 
     public function approvePengembalian(Request $request){
@@ -400,7 +399,7 @@ class RequestController extends Controller
         $bookings->updateReturn($id, $req->realize_return_date);
 
         $req->update();
-        return redirect('riwayat')->with('message', 'Peminjaman berhasil dikembalikan.');
+        return redirect('requests-history')->with('message', 'Peminjaman berhasil dikembalikan.');
     }
 
     public function rejectPengembalian(Request $request){
@@ -411,6 +410,6 @@ class RequestController extends Controller
         $req->realize_return_date = null;
         $req->update();
 
-        return redirect('dashboard/admin')->with('message', 'Pengembalian berhasil ditolak.');
+        return redirect('admin/dashboard')->with('message', 'Pengembalian berhasil ditolak.');
     }
 }

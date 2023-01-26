@@ -33,7 +33,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
 
-                <form action="{{ route('rejectPengembalian') }}" method="post">
+                <form action="{{ route('reject-return') }}" method="post">
                     @csrf
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Reject Pengembalian</h1>
@@ -58,7 +58,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
 
-                <form action="{{route('approvePengembalian')}}" method="post">
+                <form action="{{route('approve-return')}}" method="post">
                     @csrf
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Approve Pengembalian</h1>

@@ -166,10 +166,18 @@ class RequestController extends Controller
             //barang bisa diambil = update bookings
             $bookings = new BookingController();
             $bookings->update($req_id);
+
+            $email = new SendEmailController();
+            $subjek = 'BARANG SUDAH DIAMBIL';
+            $message = 'Pemberitahuan bahwa barang sudah anda ambil, silahkan konfirmasi pengambilan barang melalui website.';
+            $receiver = \App\Models\Request::find($req_id);
+            $receiver = $receiver->User->email;
+            $email->index($receiver, $message, $subjek);
+
             return redirect('/admin/dashboard')->with('message', "Barang berhasil diambil.");
         }
         else{
-            //gabisa diambil dulu = alert
+            //TODO: gabisa diambil dulu = alert
             echo 'alert';
         }
     }

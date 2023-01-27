@@ -59,6 +59,18 @@ class BookingController extends Controller
             $booking->save();
         }
 
+        $email = new SendEmailController();
+        $message ='REQUEST PEMINJAMAN ALAT LAB';
+        $subyek = 'Ada request peminjaman alat lab baru dari ' . Auth::user()->name . ' ' . Auth::user()->email;
+        //admin divisi yg sama
+        $receiver = DB::table('users')
+            ->select('email')
+            ->where('division_id', '=', Auth::user()->division_id)
+            ->where('role_id', '=', 3)
+            ->get();
+        $receiver = $receiver[0]->email;
+        $email->index($receiver, $subyek, $message);
+
         return redirect('/dashboard')->with('message', "Request Berhasil Ditambahkan");
     }
 

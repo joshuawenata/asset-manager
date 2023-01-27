@@ -115,6 +115,17 @@ class RequestController extends Controller
         $req->realize_return_date = date("Y-m-d H:i:s", strtotime($request->input('realize_return_date')));
         $req->update();
 
+        $email = new SendEmailController();
+        $receiver = DB::table('users')
+            ->select('email')
+            ->where('division_id', '=', Auth::user()->division_id)
+            ->where('role_id', '=', 3)
+            ->get();
+        $receiver = $receiver[0]->email;
+        $message = $req->User->name . ' mengajukan pengembalian barang.';;
+        $subjek = 'PENGAJUAN PENGEMBALIAN BARANG';
+        $email->index($receiver, $message, $subjek);
+
         return redirect('/dashboard')->with('message', 'Berhasil mengajukan pengembalian.');
     }
 
@@ -343,6 +354,10 @@ class RequestController extends Controller
             $req->status = $request->request_update;
             $req->update();
             $message = 'Request berhasil ditolak.';
+
+            $subyek = 'PEMINJAMAN REJECTED';
+            $pesan = 'Mohon maaf, peminjaman anda tidak disetujui oleh approver. Silahkan pilih tanggal lain untuk meminjam.';
+            $receiver = $req->User->email;
         }
         elseif ($request->request_update == 'approved'){
             $req->track_approver++;
@@ -350,10 +365,29 @@ class RequestController extends Controller
 
             if($req->track_approver == $approver){
                 $req->status = $request->request_update;
+
+                $subyek = 'PEMINJAMAN APPROVED';
+                $pesan = 'Selamat peminjaman anda berhasil di approve! silahkan ambil barang sesuai dengan tanggal peminjaman.';
+                $receiver = $req->User->email;
+            }
+            else{
+                //kirim email ke approver
+                $subyek = 'REQUEST PEMINJAMAN ALAT LAB';
+                $pesan = 'Ada request peminjaman alat lab baru dari ' . $req->User->name . ' ' . $req->User->email;
+                $receiver = DB::table('users')
+                    ->select('email')
+                    ->where('division_id', '=', Auth::user()->division_id)
+                    ->where('role_id', '=', 4)
+                    ->get();
+                $receiver = $receiver[0]->email;
             }
             $req->update();
             $message = 'Request berhasil diapprove.';
         }
+
+        $email = new SendEmailController();
+        $email->index($receiver, $pesan, $subyek);
+
         //DONE: ini kembali ke dashboard/approvernya gimana
         return redirect('/'. $user . '/dashboard')->with('message', $message);
     }
@@ -399,6 +433,13 @@ class RequestController extends Controller
         $bookings->updateReturn($id, $req->realize_return_date);
 
         $req->update();
+
+        $email = new SendEmailController();
+        $message = 'Selamat pengembalian anda di approve!';
+        $subjek = 'PENGEMBALIAN DI APPROVE';
+        $receiver = $req->User->email;
+        $email->index($receiver, $message, $subjek);
+
         return redirect('requests-history')->with('message', 'Peminjaman berhasil dikembalikan.');
     }
 
@@ -409,6 +450,12 @@ class RequestController extends Controller
         $req->flag_return = null;
         $req->realize_return_date = null;
         $req->update();
+
+        $email = new SendEmailController();
+        $message = 'Mohon maaf pengembalian anda di reject silahkan isi kembali!';
+        $subjek = 'PENGEMBALIAN DI REJECT';
+        $receiver = $req->User->email;
+        $email->index($receiver, $message, $subjek);
 
         return redirect('admin/dashboard')->with('message', 'Pengembalian berhasil ditolak.');
     }

@@ -67,6 +67,13 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $mail = explode('@', $data['email']);
+
+        if($mail[1] == 'binus.edu'){
+            $role = '2';
+        }
+        else $role = '1';
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -74,6 +81,7 @@ class RegisterController extends Controller
             'address' => $data['address'],
             'phone' => $data['phone'],
             'division_id' => $data['division_id'],
+            'role_id' => $role,
             'password' => Hash::make($data['password']),
         ]);
     }

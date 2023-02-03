@@ -30,6 +30,7 @@
                                 <th scope="col">Lokasi pemindahan</th>
                                 <th scope="col">Oleh</th>
                                 <th scope="col">Tanggal</th>
+                                <th scope="col">Status</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -43,6 +44,7 @@
                                     <td>{{$rec->to_location}}</td>
                                     <td>{{$rec->responsible}}</td>
                                     <td>{{date("d M Y H:i", strtotime($rec->created_at))}}</td>
+                                    <td>{{$rec->notes}}</td>
                                 </tr>
                             @endforeach
                             </tbody>

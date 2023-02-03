@@ -65,6 +65,15 @@
                         </tbody>
                     </table>
 
+                    @if(session('stat')  != 'waiting approval')
+                        @if(session('stat')  != 'rejected')
+                            <div class="mb-3">
+                                <label for="pesan" class="col-form-label">Catatan Peminjaman:</label>
+                                <textarea class="form-control" id="pesan" name="pesan" readonly autofocus>{{ session('request') }}</textarea>
+                            </div>
+                        @endif
+                    @endif
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

@@ -59,6 +59,10 @@ class RegisterController extends Controller
         ]);
     }
 
+    protected function show(){
+        return view('auth.registerDetail');
+    }
+
     /**
      * Create a new user instance after a valid registration.
      *
@@ -68,21 +72,36 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $mail = explode('@', $data['email']);
+        $role = $data['role_id'];
 
+        //HELP ini TODO bedain page student regist & login
         if($mail[1] == 'binus.edu'){
-            $role = '2';
+            if($role == 2){
+                return User::create([
+                    'name' => $data['name'],
+                    'email' => $data['email'],
+                    'binusianid' => $data['binusianid'],
+                    'address' => $data['address'],
+                    'phone' => $data['phone'],
+                    'division_id' => $data['division_id'],
+                    'role_id' => $role,
+                    'password' => Hash::make($data['password']),
+                ]);
+            }
         }
-        else $role = '1';
-
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'binusianid' => $data['binusianid'],
-            'address' => $data['address'],
-            'phone' => $data['phone'],
-            'division_id' => $data['division_id'],
-            'role_id' => $role,
-            'password' => Hash::make($data['password']),
-        ]);
+        else if($mail[1] == 'binus.ac.id'){
+            if($role == 1){
+                return User::create([
+                    'name' => $data['name'],
+                    'email' => $data['email'],
+                    'binusianid' => $data['binusianid'],
+                    'address' => $data['address'],
+                    'phone' => $data['phone'],
+                    'division_id' => $data['division_id'],
+                    'role_id' => $role,
+                    'password' => Hash::make($data['password']),
+                ]);
+            }
+        }
     }
 }

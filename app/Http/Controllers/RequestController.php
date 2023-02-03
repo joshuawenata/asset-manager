@@ -369,6 +369,7 @@ class RequestController extends Controller
         }
         elseif ($request->request_update == 'approved'){
             $req->track_approver++;
+            $req->notes = $req->notes . "\n" . $request->input('pesan');
             $approver = $request->approver_num;
 
             if($req->track_approver == $approver){

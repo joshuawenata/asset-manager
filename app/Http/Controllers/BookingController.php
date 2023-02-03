@@ -89,11 +89,15 @@ class BookingController extends Controller
             ->where('bookings.request_id', '=', $id)
             ->get();
 
+        $request = \App\Models\Request::find($id);
+        $stat = $request->status;
+        $request = $request->notes;
+
         if($user == 'student' || $user == 'staff'){
-            return Redirect::to('/dashboard#see')->with('bookings', $assets);
+            return Redirect::to('/dashboard#see')->with(['bookings'=> $assets, 'request' => $request, 'stat' => $stat]);
         }
         else{
-            return Redirect::to($user . '/dashboard#see')->with('bookings', $assets);
+            return Redirect::to($user . '/dashboard#see')->with(['bookings'=> $assets, 'request' => $request, 'stat' => $stat]);
         }
     }
 
@@ -105,8 +109,11 @@ class BookingController extends Controller
             ->select('assets.serial_number', 'assets.brand', 'asset_categories.name')
             ->where('bookings.request_id', '=', $id)
             ->get();
+        $request = \App\Models\Request::find($id);
+        $stat = $request->status;
+        $request = $request->notes;
 
-        return Redirect::to('requests-history#see')->with('bookings', $assets);
+        return Redirect::to('requests-history#see')->with(['bookings' => $assets, 'request' => $request, 'stat' => $stat]);
     }
 
     /**

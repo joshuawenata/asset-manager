@@ -35,7 +35,7 @@
                                 <label class="col-form-label text-md-end">{{ __('Lokasi Peminjaman') }}</label>
 
                                 <div>
-                                    <input class="form-check-input mt-1" type="radio" id="hide" name="lokasi" value="{{ "di luar BINUS" }}" checked />
+                                    <input class="form-check-input mt-1" type="radio" id="hide" name="lokasi" value="{{ "keluar kampus BINUS" }}" checked />
                                     <label for="hide">di luar BINUS</label>
 
                                     <div class="mt-2">

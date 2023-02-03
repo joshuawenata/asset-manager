@@ -52,6 +52,7 @@ class AssetLocationController extends Controller
             $new->asset_id = $a;
             $new->responsible = $data['responsible'];
             $new->to_location = $data['to_location'];
+            $new->notes = $data['notes'];
 
             $asset = Asset::find($a);
             $asset->current_location = $data['to_location'];

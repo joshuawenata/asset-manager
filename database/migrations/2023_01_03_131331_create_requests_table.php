@@ -29,6 +29,7 @@ class CreateRequestsTable extends Migration
             $table->dateTime('return_date');
             $table->text('purpose');
             $table->string('status')->default('waiting approval');
+            $table->string('notes')->default("");
             $table->text('return_notes')->nullable();
             $table->integer('track_approver')->default('0');
             $table->string('lokasi', 1000);

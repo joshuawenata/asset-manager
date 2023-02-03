@@ -71,6 +71,13 @@
                         </tbody>
                     </table>
 
+                    @if(session('request') != '')
+                    <div class="mb-3">
+                        <label for="pesan" class="col-form-label">Catatan Peminjaman:</label>
+                        <textarea class="form-control" id="pesan" name="pesan" readonly autofocus>{{ session('request') }}</textarea>
+                    </div>
+                    @endif
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -124,6 +131,10 @@
                     <input type="hidden" name="user" value="admin">
                     <input type="hidden" name="approver_num" value="{{\Illuminate\Support\Facades\Auth::user()->division->approver}}" >
                     <h5>Apakah anda yakin ingin meng-approve request peminjaman?</h5>
+                    <div class="mb-3">
+                        <label for="pesan" class="col-form-label">Pesan:</label>
+                        <textarea class="form-control" id="pesan" name="pesan" autofocus>{{ " " }}</textarea>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>

@@ -43,6 +43,12 @@
                                 </div>
                             </div>
 
+{{--                            keterangan barang saat dipindahkan--}}
+                            <div class="mb-3">
+                                <label for="notes" class="col-form-label"><b>Status Barang: </b></label>
+                                <textarea class="form-control" id="notes" name="notes" autofocus></textarea>
+                            </div>
+
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-0">
                                     <input type="hidden" name="assets" value="{{serialize($assets)}}">

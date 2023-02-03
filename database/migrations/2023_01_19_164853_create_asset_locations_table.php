@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreign('asset_id')->references('id')->on('assets');
             $table->string('to_location');
             $table->string('responsible');
+            $table->string('notes')->nullable();
             $table->timestamps();
         });
     }

@@ -37,11 +37,11 @@
             <div class="container">
                 @guest
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        Asset Manager
+                        Management Inventory
                     </a>
                 @else
                     <a class="navbar-brand" href="{{ url('/home') }}">
-                        Asset Manager
+                        Management Inventory
                     </a>
                 @endguest
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">

@@ -20,5 +20,9 @@ class Division extends Model
     public function deletedassets(){
         return $this->hasMany(DeletedAsset::class);
     }
-//    3 diatas dah bener
+
+    public function role(){
+        return $this->belongsTo(Role::class, 'role_id');
+    }
+//    4 diatas dah bener
 }

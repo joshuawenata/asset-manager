@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Division;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -59,8 +61,22 @@ class RegisterController extends Controller
         ]);
     }
 
-    protected function show(){
-        return view('auth.registerDetail');
+    protected function show(Request $request){
+
+        $role_id = $request->input('role_id');
+        //staff
+        if($role_id == 2){
+            $data = Division::all();
+        }
+        //student
+        else if($role_id == 1){
+            $data = Division::where('role_id', 1)->get();
+        }
+
+        return view('auth.registerDetail', [
+            'data' => $data,
+            'role_id' => $role_id
+        ]);
     }
 
     /**

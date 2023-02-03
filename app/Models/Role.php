@@ -16,5 +16,9 @@ class Role extends Model
     public function RolePageMappings(){
         return $this->hasMany(RolePageMapping::class);
     }
-//    2 above dah bener
+
+    public function divisions(){
+        return $this->hasMany(Division::class);
+    }
+//    3 above dah bener
 }

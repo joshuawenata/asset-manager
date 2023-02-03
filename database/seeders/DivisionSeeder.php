@@ -16,21 +16,25 @@ class DivisionSeeder extends Seeder
     {
         Division::create([
             'name' => 'IT',
+            'role_id' => '1',
             'approver' => '1'
         ]);
 
         Division::create([
             'name' => 'DKV',
+            'role_id' => '1',
             'approver' => '2'
         ]);
 
         Division::create([
             'name' => 'DI',
+            'role_id' => '1',
             'approver' => '2'
         ]);
 
         Division::create([
             'name' => 'BM',
+            'role_id' => '2',
             'approver' => '1'
         ]);
     }

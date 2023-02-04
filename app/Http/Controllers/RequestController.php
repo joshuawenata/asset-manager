@@ -188,8 +188,6 @@ class RequestController extends Controller
         $book_date = strtotime($res[0]);
         $return_date = strtotime($res[1]);
 
-//        dd($book_date, $return_date);
-
         $user_div_id = \Illuminate\Support\Facades\Auth::user()->division->id;
         $assets = DB::table('assets')
             ->join('asset_categories', 'assets.asset_category_id', '=', 'asset_categories.id')

@@ -40,7 +40,7 @@
                                                 endDate: moment().startOf('hour').add(32, 'hour'),
                                                 timePicker24Hour: true,
                                                 locale: {
-                                                    format: 'DD MMM YYYY ' + '\P\\k ' + 'HH:mm'
+                                                    format: 'DD MMM YYYY HH:mm'
                                                 }
                                             });
                                         });

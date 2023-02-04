@@ -36,6 +36,15 @@ class AssetLocationController extends Controller
         ]);
     }
 
+    public function initialize($aset){
+        $new = new assetLocation();
+        $new->asset_id = $aset->id;
+        $new->to_location = $aset->current_location;
+        $new->responsible = Auth::user()->name;
+        $new->notes = "Aset baru masuk";
+        $new->save();
+    }
+
     /**
      * Store a newly created resource in storage.
      *

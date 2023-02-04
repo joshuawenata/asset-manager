@@ -43,7 +43,7 @@
                                     <td>{{$rec->asset->assetcategory->name}}</td>
                                     <td>{{$rec->to_location}}</td>
                                     <td>{{$rec->responsible}}</td>
-                                    <td>{{date("d M Y H:i", strtotime($rec->created_at))}}</td>
+                                    <td>{{date("d M Y " . "\Pk" . " H:i", strtotime($rec->created_at))}}</td>
                                     <td>{{$rec->notes}}</td>
                                 </tr>
                             @endforeach

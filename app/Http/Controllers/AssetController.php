@@ -98,8 +98,19 @@ class AssetController extends Controller
 
             $aset->division_id = $data['division_id'];
             $aset->save();
+
+            $this->storeLoc();
+
             return redirect('search-asset/' . $data['division_id'])->with('message', "Aset Berhasil Ditambahkan");
         }
+    }
+
+    public function storeLoc(){
+
+        $aset = Asset::max('id');
+        $aset = Asset::find($aset);
+        $save_loc = new AssetLocationController();
+        $save_loc->initialize($aset);
     }
 
     /**

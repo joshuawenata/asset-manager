@@ -25,7 +25,7 @@
                             <tr>
                                 <th scope="col">No</th>
                                 <th scope="col">Nomor Seri</th>
-                                <th scope="col">Merek</th>
+                                <th scope="col">Spesifikasi</th>
                                 <th scope="col">Jenis</th>
                                 <th scope="col">Lokasi pemindahan</th>
                                 <th scope="col">Oleh</th>

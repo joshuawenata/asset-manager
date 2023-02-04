@@ -37,7 +37,7 @@
                             <th>No</th>
                             <th>Nomor Seri</th>
                             <th>Jenis</th>
-                            <th>Merek</th>
+                            <th>Spesifikasi</th>
                         </tr>
                         </thead>
                         <tbody>

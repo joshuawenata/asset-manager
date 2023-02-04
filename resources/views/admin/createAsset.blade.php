@@ -52,7 +52,7 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="brand" class="col-md-4 col-form-label text-md-end">{{ __('Merek') }}</label>
+                                <label for="brand" class="col-md-4 col-form-label text-md-end">{{ __('Spesifikasi') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="brand" type="text" class="form-control @error('brand') is-invalid @enderror" name="brand" value="{{ old('brand') }}" required autocomplete="brand" autofocus>

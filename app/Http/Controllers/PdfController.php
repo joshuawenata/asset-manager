@@ -84,7 +84,7 @@ class PdfController extends Controller
         $this->fpdf->Cell(10, 6, 'No', 1, 0, 'C');
         $this->fpdf->Cell(30, 6, 'Nomor Seri', 1, 0, 'C');
         $this->fpdf->Cell(70, 6, 'Jenis', 1, 0, 'C');
-        $this->fpdf->Cell(70, 6, 'Merek', 1, 1, 'C');
+        $this->fpdf->Cell(70, 6, 'Spesifikasi', 1, 1, 'C');
 
         $this->fpdf->SetFont('Arial', '', 11);
 

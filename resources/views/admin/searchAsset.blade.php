@@ -37,7 +37,7 @@
                                 <th scope="col">No</th>
                                 <th scope="col">Nomor Seri</th>
                                 <th scope="col">Jenis</th>
-                                <th scope="col">Merek</th>
+                                <th scope="col">Spesifikasi</th>
                                 @if($mode == 'current')
                                     <th scope="col">Lokasi</th>
                                     <th scope="col">Status</th>

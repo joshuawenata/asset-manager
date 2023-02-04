@@ -111,15 +111,15 @@
 
                             @if(!$returned)
                                 <div class="mb-3">
-                                    <label class="col-form-label text-md-end">{{ __('Apakah barang dalam kondisi yang baik?') }}</label>
+                                    <label class="col-form-label text-md-end">{{ __('Kondisi barang saat pengembalian:') }}</label>
 
                                     <div class="md-6">
-                                        <input class="form-check-input mt-1" type="radio" id="kondisi_aset" name="kondisi_aset" value="aman" checked onclick="document.getElementById('return_condition').removeAttribute('required')" />
-                                        <label for="kondisi_aset">Ya</label>
+                                        <input class="form-check-input mt-1" type="radio" id="kondisi_aset" name="kondisi_aset" value="baik" checked onclick="document.getElementById('return_condition').removeAttribute('required')" />
+                                        <label for="kondisi_aset">Barang dalam kondisi baik</label>
                                     </div>
                                     <div class="md-6">
                                         <input class="form-check-input mt-1" type="radio" id="kondisi_aset" name="kondisi_aset" value="rusak" onclick="document.getElementById('return_condition').setAttribute('required', 'required')" />
-                                        <label for="kondisi_aset">Tidak</label>
+                                        <label for="kondisi_aset">Barang rusak</label>
                                     </div>
                                 </div>
 

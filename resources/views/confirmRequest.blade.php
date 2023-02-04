@@ -67,8 +67,8 @@
                                     <div class="col-sm-5 col-md-6"><label class="col-form-label text-md-end"><b>{{ __('Tanggal Kembali') }}</b></label></div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-5 col-md-6"><input type="text" class="form-control mt-2" readonly name="book_date" value="{{date("l, d M Y H:i", $book_date)}}" /></div>
-                                    <div class="col-sm-5 col-md-6"><input type="text" class="form-control mt-2" readonly name="return_date" value="{{date("l, d M Y H:i", $return_date)}}" /></div>
+                                    <div class="col-sm-5 col-md-6"><input type="text" class="form-control mt-2" readonly name="book_date" value="{{date("l, d M Y " . "\Pk" . " H:i", $book_date)}}" /></div>
+                                    <div class="col-sm-5 col-md-6"><input type="text" class="form-control mt-2" readonly name="return_date" value="{{date("l, d M Y " . "\Pk" . " H:i", $return_date)}}" /></div>
                                 </div>
                             </div>
 

@@ -97,7 +97,7 @@ class RequestController extends Controller
             ->get();
 
         $current_date_time = new DateTime("now", new DateTimeZone('Asia/Jakarta'));
-        $current_date_time = $current_date_time->format('l, d M Y H:i');
+        $current_date_time = $current_date_time->format("l, d M Y " . "\Pk" . " H:i");
 
         return view('kembali', [
             'returned' => $returned,

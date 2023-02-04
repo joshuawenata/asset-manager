@@ -108,8 +108,8 @@
                                     <td>{{$req->name}}</td>
                                     <td>{{$req->binusianid}}</td>
                                     <td>{{$req->purpose}}</td>
-                                    <td>{{date("d M Y H:i", strtotime($req->book_date))}}</td>
-                                    <td>{{date("d M Y H:i", strtotime($req->return_date))}}</td>
+                                    <td>{{date("d M Y " . "\Pk" . " H:i", strtotime($req->book_date))}}</td>
+                                    <td>{{date("d M Y " . "\Pk" . " H:i", strtotime($req->return_date))}}</td>
                                     <td>
                                         {{--                                        DONE: ini masi error--}}
                                         <form action="{{ route('rejectedbookings.show', ['id' => $req->id]) }}" method="GET">

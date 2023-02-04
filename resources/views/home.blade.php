@@ -146,8 +146,8 @@
                                     {{--                masukin kolom--}}
                                     <th scope="row">{{$index+1}}</th>
                                     <td>{{$req->purpose}}</td>
-                                    <td>{{date("d M Y H:i", strtotime($req->book_date))}}</td>
-                                    <td>{{date("d M Y H:i", strtotime($req->return_date))}}</td>
+                                    <td>{{date("d M Y " . "\Pk" . " H:i", strtotime($req->book_date))}}</td>
+                                    <td>{{date("d M Y " . "\Pk" . " H:i", strtotime($req->return_date))}}</td>
                                     <td>
 {{--                                        DONE: ini kalo staff usernya gmn?--}}
                                         <form action="{{ route('bookings.show', ['user' => \Illuminate\Support\Facades\Auth::user()->role->name, 'id' => $req->id]) }}" method="GET">

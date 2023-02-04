@@ -42,7 +42,7 @@
                                     <label class="col-md-4 col-form-label text-md-end">{{ __('Periode Peminjaman') }}</label>
 
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control mt-2" value="{{ date("l, d M Y " . "\Pk" . " H:i", strtotime($request->book_date)) . ' - ' . date("l, d M Y H:i", strtotime($request->return_date)) }}" readonly>
+                                        <input type="text" class="form-control mt-2" value="{{ date("l, d M Y H:i", strtotime($request->book_date)) . ' - ' . date("l, d M Y H:i", strtotime($request->return_date)) }}" readonly>
                                     </div>
                                 </div>
                             @endif

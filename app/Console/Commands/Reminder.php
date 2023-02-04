@@ -41,7 +41,7 @@ class Reminder extends Command
 
         if($requests->count() > 0){
             foreach ($requests as $r){
-                $message = "Reminder pengembalian barang besok " . date("l, d M Y " . "\Pk" . " H:i", strtotime($r->return_date));
+                $message = "Reminder pengembalian barang besok " . date("l, d M Y H:i", strtotime($r->return_date));
                 Mail::to($r->User->email)->send(new NotifyMail($message, $subjek));
             }
         }

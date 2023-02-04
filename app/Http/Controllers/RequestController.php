@@ -436,6 +436,8 @@ class RequestController extends Controller
         $id = $request->input('request_return_id');
         $req = \App\Models\Request::find($id);
 
+//        $req->return_notice = $request->input('pesan') . "\n";
+        $req->return_notice = null;
         $req->status = 'done';
         $bookings = new BookingController();
         $bookings->updateReturn($id, $req->realize_return_date);
@@ -455,7 +457,7 @@ class RequestController extends Controller
         $id = $request->input('request_return_id');
         $req = \App\Models\Request::find($id);
 
-        $req->return_notice = $request->input('pesan');
+        $req->return_notice = $request->input('pesan') . "\n";
         $req->flag_return = null;
         $req->realize_return_date = null;
         $req->update();

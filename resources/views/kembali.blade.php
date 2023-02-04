@@ -141,6 +141,16 @@
                                 </div>
                             @endif
 
+                            @if(!empty($request->return_notice))
+                                <div class="mb-3">
+                                    <label for="return_notice" class="col-form-label text-md-end">{{ __('Pesan pengembalian:') }}</label>
+
+                                    <div>
+                                        <textarea class="form-control" id="return_notice" name="return_notice" autofocus readonly>{{$request->return_notice}}</textarea>
+                                    </div>
+                                </div>
+                            @endif
+
                         </form>
 
 

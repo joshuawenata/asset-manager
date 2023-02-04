@@ -85,7 +85,7 @@ class BookingController extends Controller
         $assets = DB::table('bookings')
             ->join('assets', 'bookings.asset_id', '=', 'assets.id')
             ->join('asset_categories', 'bookings.asset_category_id', '=', 'asset_categories.id')
-            ->select('assets.serial_number', 'assets.brand', 'asset_categories.name')
+            ->select('assets.serial_number', 'assets.brand', 'asset_categories.name', 'assets.status')
             ->where('bookings.request_id', '=', $id)
             ->get();
 
@@ -106,7 +106,7 @@ class BookingController extends Controller
         $assets = DB::table('bookings')
             ->join('assets', 'bookings.asset_id', '=', 'assets.id')
             ->join('asset_categories', 'bookings.asset_category_id', '=', 'asset_categories.id')
-            ->select('assets.serial_number', 'assets.brand', 'asset_categories.name')
+            ->select('assets.serial_number', 'assets.brand', 'asset_categories.name', 'assets.status')
             ->where('bookings.request_id', '=', $id)
             ->get();
         $request = \App\Models\Request::find($id);

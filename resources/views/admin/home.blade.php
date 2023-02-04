@@ -55,6 +55,7 @@
                             <th>Nomor Seri</th>
                             <th>Jenis</th>
                             <th>Spesifikasi</th>
+                            <th>Kondisi</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -65,6 +66,7 @@
                                     <td>{{$item->serial_number}}</td>
                                     <td>{{$item->name}}</td>
                                     <td>{{$item->brand}}</td>
+                                    <td>{{$item->status}}</td>
                                 </tr>
                             @endforeach
                         @endif

@@ -73,10 +73,6 @@
                         <input type="hidden" name="request_return_id" id="request_id2">
                         <h5>Apakah anda yakin ingin meng-approve request pengembalian?</h5>
 
-                        <div class="mb-3">
-                            <label for="pesan" class="col-form-label">Pesan:</label>
-                            <textarea class="form-control" id="pesan" name="pesan" autofocus></textarea>
-                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>

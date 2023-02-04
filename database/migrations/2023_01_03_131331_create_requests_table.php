@@ -29,11 +29,12 @@ class CreateRequestsTable extends Migration
             $table->dateTime('return_date');
             $table->text('purpose');
             $table->string('status')->default('waiting approval');
-            $table->string('notes')->default("");
+            $table->string('notes')->nullable();
             $table->text('return_notes')->nullable();
             $table->integer('track_approver')->default('0');
             $table->string('lokasi', 1000);
             $table->boolean('flag_return')->nullable();
+            $table->string('return_notice')->nullable();
             $table->dateTime('realize_return_date')->nullable();
             $table->string('return_status')->nullable();
             $table->unsignedBigInteger('user_id');

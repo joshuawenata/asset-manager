@@ -54,12 +54,10 @@
                         </tbody>
                     </table>
 
-                    @if(session('stat') != 'rejected')
-                        <div class="mb-3">
-                            <label for="pesan" class="col-form-label">Catatan Peminjaman:</label>
-                            <textarea class="form-control" id="pesan" name="pesan" readonly autofocus>{{ session('request') }}</textarea>
-                        </div>
-                    @endif
+                    <div class="mb-3">
+                        <label for="pesan" class="col-form-label">Catatan Peminjaman:</label>
+                        <textarea class="form-control" id="pesan" name="pesan" readonly autofocus>{{ session('request') }}</textarea>
+                    </div>
 
                 </div>
                 <div class="modal-footer">

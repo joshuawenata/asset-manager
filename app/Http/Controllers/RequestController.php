@@ -358,6 +358,7 @@ class RequestController extends Controller
         $req = \App\Models\Request::find($request->request_update_id);
         if($request->request_update == 'rejected'){
             $req->status = $request->request_update;
+            $req->notes = $request->input('pesan') . "\n";
             $req->update();
             $message = 'Request berhasil ditolak.';
 
@@ -454,6 +455,7 @@ class RequestController extends Controller
         $id = $request->input('request_return_id');
         $req = \App\Models\Request::find($id);
 
+        $req->return_notice = $request->input('pesan');
         $req->flag_return = null;
         $req->realize_return_date = null;
         $req->update();

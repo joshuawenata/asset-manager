@@ -20,6 +20,12 @@
                 e.preventDefault();
                 var request_id = $(this).val();
                 $('#request_id2').val(request_id);
+
+                if($('#isu_kerusakan').is(":checked")){
+                    var isu_rusak = $('input[name=isu_kerusakan]').val();
+                    $('#isu_rusak').val(isu_rusak);
+                }
+
                 $('#approveModal').modal('show');
             });
         });
@@ -71,8 +77,8 @@
                     </div>
                     <div class="modal-body">
                         <input type="hidden" name="request_return_id" id="request_id2">
+                        <input type="hidden" name="isu_rusak" id="isu_rusak">
                         <h5>Apakah anda yakin ingin meng-approve request pengembalian?</h5>
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
@@ -179,6 +185,15 @@
                                 <textarea class="form-control" readonly>{{$request->return_notes}}</textarea>
                             </div>
                         </div>
+
+                        @if($request->return_status == 'rusak')
+                            <div class="mb-3">
+                                <div>
+                                    <input class="form-check-input mt-0" type="checkbox" value="isu_rusak" name="isu_kerusakan" id="isu_kerusakan">
+                                    <label for="isu_kerusakan" class="text-md-end">Isu kerusakan barang akan dibahas lebih lanjut dengan BM [contact BM]</label>
+                                </div>
+                            </div>
+                        @endif
 
                         <div class="mb-0">
                             <div class="md-6">

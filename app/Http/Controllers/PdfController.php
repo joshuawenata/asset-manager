@@ -28,6 +28,7 @@ class PdfController extends Controller
 
         $purpose = $req->purpose;
         $lokasi = $req->lokasi;
+        $isu = $req->return_notice;
         $book_date = date("d M Y H:i", strtotime($req->book_date));
         $return_date = date("d M Y H:i", strtotime($req->return_date));
 
@@ -134,8 +135,16 @@ class PdfController extends Controller
         $this->fpdf->SetFont('Arial', 'B', 12);
         $this->fpdf->SetTextColor(0, 150, 0);
         $this->fpdf->Cell(110, 6, '', 0, 0);
+        if($isu == 'isu_rusak') {
+            $this->fpdf->SetTextColor(255, 0, 0);
+        }
         $this->fpdf->Cell(70, 6, $is_Approve, 1, 1, 'C');
         $this->fpdf->SetFont('Arial', '', 7);
+        $this->fpdf->SetTextColor(0, 0, 0);
+        if($isu == 'isu_rusak'){
+            $this->fpdf->SetTextColor(255, 0, 0);
+            $this->fpdf->Cell(180, 6, 'Isu kerusakan barang akan dibahas lebih lanjut dengan BM [contact BM]', 0, 1, 'R');
+        }
         $this->fpdf->SetTextColor(0, 0, 0);
         $this->fpdf->Cell(180, 6, '*Dokumen ini sah diketahui SCC koordinator dan peminjam meskipun tanpa tanda tangan', 0, 1, 'R');
 

@@ -80,7 +80,7 @@ class AssetLocationController extends Controller
      */
     public function show($id)
     {
-        $pemindahan = assetLocation::where('asset_id', $id)->get();
+        $pemindahan = assetLocation::orderBy('id', 'desc')->where('asset_id', $id)->get();
 
         return view('admin.moveAssetHistory', [
             'data' => $pemindahan

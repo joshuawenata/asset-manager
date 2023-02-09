@@ -19,7 +19,7 @@ class RepairAssetController extends Controller
     {
         $status = Asset::find($id);
         $status = $status->status;
-        $data = RepairAsset::where('asset_id', $id)->get();
+        $data = RepairAsset::orderBy('id', 'desc')->where('asset_id', $id)->get();
 
         $fixed_id = DB::table('repair_assets')->max('id');
         $fixed = RepairAsset::find($fixed_id);

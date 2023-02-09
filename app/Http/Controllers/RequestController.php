@@ -34,12 +34,13 @@ class RequestController extends Controller
 
         if($p == 'student' || $p == 'staff'){
             $user_id = \Illuminate\Support\Facades\Auth::user()->id;
-            $data = \App\Models\Request::where('user_id', $user_id)->get();
+            $data = \App\Models\Request::orderBy('id', 'desc')->where('user_id', $user_id)->get();
             $approver = null;
         }
         else if($p == 'admin'){
             $user_div_id = \Illuminate\Support\Facades\Auth::user()->division->id;
             $data = DB::table('requests')
+                ->orderBy('id', 'asc')
                 ->where('status', '=', 'waiting approval')
                 ->orWhere('status', '=', 'approved')
                 ->orWhere('status', '=', 'on use')
@@ -53,6 +54,7 @@ class RequestController extends Controller
         else if($p == 'approver'){
             $user_div_id = \Illuminate\Support\Facades\Auth::user()->division->id;
             $data = DB::table('requests')
+                ->orderBy('id', 'asc')
                 ->where('requests.track_approver', '>', 0)
                 ->where('status', '=', 'waiting approval')
                 ->orWhere('status', '=', 'approved')
@@ -324,6 +326,7 @@ class RequestController extends Controller
     {
         $user_div_id = \Illuminate\Support\Facades\Auth::user()->division->id;
         $data = DB::table('requests')
+            ->orderBy('id', 'desc')
             ->where('status', '=', 'done')
             ->orWhere('status', '=', 'rejected')
             ->join('users', 'requests.user_id', '=', 'users.id')

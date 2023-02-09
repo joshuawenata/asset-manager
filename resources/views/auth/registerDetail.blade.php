@@ -29,7 +29,13 @@
 
                             {{--                        1. BINUSIAN ID--}}
                             <div class="row mb-3">
-                                <label for="binusianid" class="col-md-4 col-form-label text-md-end">{{ __('Binusian ID') }}</label>
+                                <label for="binusianid" class="col-md-4 col-form-label text-md-end">
+                                    @if($role_id == 2)
+                                        {{ __('Binusian ID') }}
+                                    @elseif($role_id == 1)
+                                        {{ __('NIM') }}
+                                    @endif
+                                </label>
 
                                 <div class="col-md-6">
                                     <input id="binusianid" type="text" class="form-control @error('binusianid') is-invalid @enderror" name="binusianid" value="{{ old('binusianid') }}" required autocomplete="binusianid" autofocus>

@@ -22,7 +22,9 @@ class AssetController extends Controller
      */
     public function index($id)
     {
-        $data = Asset::where('division_id', $id)->get();
+        $data = Asset::orderBy('id', 'desc')
+            ->where('division_id', $id)
+            ->get();
         //tarik user saat ini Auth::user
         //tarik rolenya juga pake where role_id = id
         //tarik data dari role_page_mappings kolom CRUDD (ditambahkan), tarik CRUDD pake where role_id, role_id = id
@@ -35,7 +37,8 @@ class AssetController extends Controller
     }
 
     public function pick($id){
-        $data = Asset::where('division_id', $id)
+        $data = Asset::orderBy('id', 'desc')
+            ->where('division_id', $id)
             ->where('status', 'tersedia')
             ->orWhere('status', 'tidak tersedia')
             ->orWhere('status', 'rusak')
@@ -201,6 +204,7 @@ class AssetController extends Controller
      */
     public function export(){
         $aset = DB::table('assets')
+            ->orderBy('id', 'desc')
             ->where('division_id', '=', \Illuminate\Support\Facades\Auth::user()->division->id)
             ->join('divisions', 'assets.division_id', '=', 'divisions.id')
             ->join('asset_categories', 'assets.asset_category_id', '=', 'asset_categories.id')

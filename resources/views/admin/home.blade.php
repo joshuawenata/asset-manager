@@ -186,7 +186,7 @@
                             @foreach($data as $index => $req)
                                 <tr>
                                     {{--                masukin kolom--}}
-                                    <th scope="row">{{$req->id}}</th>
+                                    <th scope="row">{{$index+1}}</th>
                                     <td>{{$req->name}}</td>
                                     <td>{{$req->binusianid}}</td>
                                     <td>{{$req->purpose}}</td>

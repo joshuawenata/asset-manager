@@ -19,7 +19,7 @@ class DeletedAssetController extends Controller
     public function index()
     {
         $id = \Illuminate\Support\Facades\Auth::user()->division->id;
-        $data = DeletedAsset::where('division_id', $id)->get();
+        $data = DeletedAsset::orderBy('id', 'desc')->where('division_id', $id)->get();
         //tarik user saat ini Auth::user
         //tarik rolenya juga pake where role_id = id
         //tarik data dari role_page_mappings kolom CRUDD (ditambahkan), tarik CRUDD pake where role_id, role_id = id
@@ -110,6 +110,7 @@ class DeletedAssetController extends Controller
      */
     public function export(){
         $d_aset = DB::table('deleted_assets')
+            ->orderBy('id', 'desc')
             ->where('division_id', '=', \Illuminate\Support\Facades\Auth::user()->division->id)
             ->join('divisions', 'deleted_assets.division_id', '=', 'divisions.id')
             ->join('asset_categories', 'deleted_assets.asset_category_id', '=', 'asset_categories.id')

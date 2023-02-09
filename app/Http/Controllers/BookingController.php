@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Asset;
+use App\Models\assetLocation;
 use App\Models\Booking;
 use DateTime;
 use DateTimeZone;
@@ -154,6 +155,14 @@ class BookingController extends Controller
 
         foreach ($bookings as $b){
             $aset = Asset::find($b->asset_id);
+
+            $loc = new assetLocation();
+            $loc->asset_id = $b->asset_id;
+            $loc->responsible = $request->User->name . " (" . Auth::user()->name . ")";
+            $loc->to_location = $request->lokasi;
+            $loc->notes = 'peminjaman';
+            $loc->save();
+
             $aset->current_location = $request->lokasi;
             $aset->status = 'dipinjam';
             $aset->update();
@@ -180,8 +189,30 @@ class BookingController extends Controller
             ->where('request_id', '=', $id)
             ->get();
 
+        $request = \App\Models\Request::find($id);
+
+
         foreach ($bookings as $b){
             $aset = Asset::find($b->asset_id);
+
+//            $prev_pos = DB::table('asset_locations')
+//                ->select(DB::raw('id ORDER BY id DESC LIMIT 1,1'))
+//                ->where('asset_id', '=', $b->asset_id)
+//                ->get();
+            $prev_pos = assetLocation::orderBy('id', 'desc')
+                ->where('asset_id', '=', $b->asset_id)
+                ->offset(1)->limit(1)
+                ->get();
+            foreach ($prev_pos as $p) $lok = $p->to_location;
+
+            $loc = new assetLocation();
+            $loc->asset_id = $b->asset_id;
+            $loc->responsible = $request->User->name . " (" . Auth::user()->name . ")";
+            $loc->to_location = $lok;
+            $loc->notes = 'pengembalian';
+            $loc->save();
+
+            $aset->current_location = $lok;
             $aset->status = 'tersedia';
             $aset->update();
         }

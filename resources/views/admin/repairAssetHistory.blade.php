@@ -35,13 +35,13 @@
                     <div class="modal-body">
                         <div class="mb-3">
 
-                            <label for="pic" class="col-form-label">{{ __('PIC reparasi') }}</label>
+                            <label for="pic" class="col-form-label">{{ __('Diperbaiki oleh') }}</label>
                             <input type="text" class="form-control" id="pic" name="pic" autocomplete="pic" autofocus>
 
                         </div>
                         <div class="mb-3">
 
-                            <label for="repaired-by" class="col-form-label">{{ __('Diperbaiki oleh') }}</label>
+                            <label for="repaired-by" class="col-form-label">{{ __('Kontak') }}</label>
                             <input type="text" class="form-control" id="repaired-by" name="repaired-by" autocomplete="repaired-by" autofocus>
                             <input type="hidden" name="repair_id" id="repair_id">
 
@@ -61,7 +61,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
 
-                @if($fixed)
+                @if($fixed and $status != 'dipinjam')
                     <a class="btn btn-small btn-success mb-3" href="{{ url('create-repair-asset/' . $asset) }}">Lapor Kerusakan</a>
                 @endif
 
@@ -96,7 +96,7 @@
                                         @if(!$item->flag_fixed)
                                             <button type="button" class="btn btn-small btn-success mb-3 perbaikiBtn" value="{{ $item->id }}" >Sudah diperbaiki</button>
                                         @else
-                                            Sudah diperbaiki pada tanggal: {{date("l, d M Y", $item->update_at)}}
+                                            Sudah diperbaiki pada tanggal: {{date("l, d M Y", $item->update_at)}} oleh {{$item->pic_repair}} ({{$item->repaired_by}})
                                         @endif
                                     </td>
                                 </tr>

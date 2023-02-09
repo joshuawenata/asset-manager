@@ -117,7 +117,11 @@
                                             </button>
                                         </form>
                                     </td>
+{{--                                    @if($req->return_notice == 'isu_rusak')--}}
+{{--                                        <td style="color: red">{{$req->status}}</td>--}}
+{{--                                    @else--}}
                                     <td>{{$req->status}}</td>
+{{--                                    @endif--}}
                                     <td>
                                         @if($req->status == 'done')
 {{--                                        DONE: ini tampilin receiptnya--}}

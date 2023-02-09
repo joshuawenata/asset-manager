@@ -206,6 +206,7 @@ class RequestController extends Controller
                 ->select('requests.book_date', 'requests.return_date')
                 ->where('bookings.asset_id', '=', $id)
                 ->where('requests.status', '!=', 'rejected')
+                ->where('requests.status', '!=', 'done')
                 ->get();
 
             if($bookings->isEmpty()){

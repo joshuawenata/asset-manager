@@ -17,6 +17,8 @@ class RepairAssetController extends Controller
      */
     public function index($id)
     {
+        $status = Asset::find($id);
+        $status = $status->status;
         $data = RepairAsset::where('asset_id', $id)->get();
 
         $fixed_id = DB::table('repair_assets')->max('id');
@@ -27,7 +29,8 @@ class RepairAssetController extends Controller
         return view('admin.repairAssetHistory', [
             'data' => $data,
             'asset' => $id,
-            'fixed' => $fixed
+            'fixed' => $fixed,
+            'status' => $status
         ]);
     }
 
@@ -59,11 +62,11 @@ class RepairAssetController extends Controller
         $new->flag_fixed = 0;
 
         $aset = Asset::find($data['asset_id']);
-        $aset->status = 'tidak tersedia';
+        $aset->status = 'rusak';
         $aset->update();
 
         $new->save();
-        return redirect('admin/repair-asset-history/' . $data['asset_id'])->with('message', "Riwayat kerusakan berhasil dicatat.");
+        return redirect('repair-asset-history/' . $data['asset_id'])->with('message', "Riwayat kerusakan berhasil dicatat.");
     }
 
     /**
@@ -108,7 +111,7 @@ class RepairAssetController extends Controller
         $aset->update();
 
         $repair->update();
-        return redirect('admin/repair-asset-history/' . $repair->asset_id)->with('message', "Riwayat perbaikan berhasil dicatat.");
+        return redirect('repair-asset-history/' . $repair->asset_id)->with('message', "Riwayat perbaikan berhasil dicatat.");
     }
 
     /**

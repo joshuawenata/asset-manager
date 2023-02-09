@@ -63,7 +63,9 @@
     {{--                                            <input type="hidden" name="_method" value="delete" />--}}
     {{--                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
     {{--                                        </form>--}}
-                                            <a class="btn btn-small btn-danger" href="{{ URL::to('/edit-asset/' . $item->id) }}"><span class="material-symbols-outlined">delete</span></a>
+                                            @if($item->status != 'dipinjam')
+                                                <a class="btn btn-small btn-danger" href="{{ URL::to('/edit-asset/' . $item->id) }}"><span class="material-symbols-outlined">delete</span></a>
+                                            @endif
                                             <a class="btn btn-small btn-info" href="{{ URL::to('/repair-asset-history/' . $item->id) }}"><span class="material-symbols-outlined">build</span></a>
                                             <a class="btn btn-small btn-info" href="{{ URL::to('/move-asset-history/' . $item->id) }}"><span class="material-symbols-outlined">trolley</span></a>
                                         </td>

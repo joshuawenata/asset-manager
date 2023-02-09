@@ -37,6 +37,8 @@ class AssetController extends Controller
     public function pick($id){
         $data = Asset::where('division_id', $id)
             ->where('status', 'tersedia')
+            ->orWhere('status', 'tidak tersedia')
+            ->orWhere('status', 'rusak')
             ->get();
         return view('admin.selectMoveAsset', [
             'data' => $data
@@ -165,6 +167,11 @@ class AssetController extends Controller
             $aset->serial_number = $request->input('serialnumber');
             $aset->brand = $request->input('brand');
             $aset->asset_category_id = $request->input('asset_category');
+
+            if($request->input('asset-status')){
+                $aset->status = $request->input('asset-status');
+            }
+
             $aset->update();
             return redirect('search-asset/' . \Illuminate\Support\Facades\Auth::user()->division->id)->with('message', 'Aset Berhasil Diperbaharui');
         }

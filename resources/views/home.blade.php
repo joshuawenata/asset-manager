@@ -155,7 +155,11 @@
                                             </button>
                                         </form>
                                     </td>
-                                    <td>{{$req->status}}</td>
+                                    @if($req->status == 'waiting approval')
+                                        <td>{{$req->status . " dari " . \Illuminate\Support\Facades\Auth::user()->getAtasan($req->track_approver)}}</td>
+                                    @else
+                                        <td>{{$req->status}}</td>
+                                    @endif
                                     <td>
                                         @if($req->status == 'waiting approval')
                                             <button type="button" class="btn btn-danger deleteRequestBtn" value="{{ $req->id }}">Cancel</button>

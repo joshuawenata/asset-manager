@@ -31,7 +31,7 @@
                             <div class="alert alert-success">{{ session('message') }}</div>
                         @endif
 
-                        <table id="myTable" class="table">
+                        <table id="exampleTable" class="table">
                             <thead>
                             <tr>
                                 <th scope="col">No</th>

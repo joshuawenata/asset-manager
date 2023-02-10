@@ -55,7 +55,11 @@
                                     <td>{{$item->brand}}</td>
                                     @if($mode == 'current')
                                         <td>{{$item->current_location}}</td>
-                                        <td>{{$item->status}}</td>
+                                        @if($item->status == 'dipinjam')
+                                            <td>{{$item->status . ' oleh ' . $item->getNamaPeminjam($item->id)}}</td>
+                                        @else
+                                            <td>{{$item->status}}</td>
+                                        @endif
                                         <td>
                                             <a class="btn btn-small btn-info" href="{{ URL::to('/edit-asset/' . $item->id) }}"><span class="material-symbols-outlined">edit_square</span></a>
     {{--                                        <form action="{{ url('deleteAsset/' . $item->id) }}" method="post">--}}

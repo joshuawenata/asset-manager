@@ -29,4 +29,9 @@ class Asset extends Model
         return$this->hasMany(assetLocation::class);
     }
     //  5 diatas dah bener
+
+    public function getNamaPeminjam($id_aset){
+        $b = Asset::find($id_aset)->bookings->whereNotNull('taken_date')->whereNull('realize_return_date')->first()->request->User->name;
+        return $b;
+    }
 }

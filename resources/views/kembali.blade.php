@@ -69,7 +69,7 @@
                                 <label class="col-form-label text-md-end">{{ __('Barang yang dikembalikan') }}</label>
 
                                 <div class="md-6">
-                                    <table class="table">
+                                    <table class="display table">
                                         <thead>
                                         <tr>
                                             <th>No</th>

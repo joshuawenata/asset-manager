@@ -42,7 +42,7 @@
                 </div>
                 <div class="modal-body">
 
-                    <table class="table">
+                    <table class="display table">
                         <thead>
                         <tr>
                             <th>No</th>
@@ -125,7 +125,7 @@
                             @endif
                         @endif
 
-                        <table id="myTable" class="table">
+                        <table id="myTable" class="display table">
                             <thead>
                             <tr>
                                 <th scope="col">No</th>

@@ -21,7 +21,7 @@
                         <form method="POST" action="{{ route('createRequestDetail') }}" id="checkGroup">
                             @csrf
 
-                            <table id="myTable" class="table">
+                            <table id="myTable" class="display table">
                                 <thead>
                                 <tr>
                                     <th scope="col">No</th>

@@ -4,7 +4,12 @@ $(document).ready( function () {
     $('#exampleTable').DataTable( {
         dom: 'Bfrtip',
         buttons: [
-            'excel'
+            {
+                extend: 'excelHtml5',
+                exportOptions: {
+                    columns: [0, 1, 2, 3, 4, 5]
+                }
+            }
         ]
     } );
 } );

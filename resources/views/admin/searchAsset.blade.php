@@ -15,7 +15,7 @@
 
                 @if($mode == 'current')
                     <a class="btn btn-small btn-success mb-3" href="{{ route('admin.createAsset') }}"><span class="material-symbols-outlined">add</span>Tambah Aset Baru</a>
-                    <a class="btn btn-small btn-success mb-3" href="{{ route('downloadAsset') }}"><span class="material-symbols-outlined">download</span>Unduh Rekap Aset</a>
+{{--                    <a class="btn btn-small btn-success mb-3" href="{{ route('downloadAsset') }}"><span class="material-symbols-outlined">download</span>Unduh Rekap Aset</a>--}}
                     <a class="btn btn-small btn-success" href="{{ url('/deleted-asset/') }}">Lihat Aset Musnah</a>
                     <a class="btn btn-small btn-success" href="{{ url('/move-asset/' . \Illuminate\Support\Facades\Auth::user()->division->id) }}">Pemindahan Aset</a>
                 @elseif($mode == 'deleted')
@@ -31,7 +31,15 @@
                             <div class="alert alert-success">{{ session('message') }}</div>
                         @endif
 
-                        <table id="exampleTable" class="display nowrap table">
+                        <table
+                            class="display nowrap table"
+
+                            @if($mode == 'current')
+                                id="exampleTable"
+                            @else
+                                id="myTable"
+                            @endif
+                            >
                             <thead>
                             <tr>
                                 <th scope="col">No</th>

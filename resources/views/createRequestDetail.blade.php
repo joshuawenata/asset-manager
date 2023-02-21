@@ -57,6 +57,7 @@
                                     <input type="hidden" name="return_date" value="{{$return_date }}">
                                     <input type="hidden" name="book_date" value="{{$book_date }}">
                                     <input type="hidden" name="assets" value="{{serialize($assets)}}">
+                                    <input type="hidden" name="division_id" value="{{$division_id}}">
 
                                     <button type="submit" name="submit" class="btn btn-primary">
                                         {{ __('Next') }}

@@ -28,6 +28,9 @@
                                     <th scope="col">Nomor Seri</th>
                                     <th scope="col">Jenis</th>
                                     <th scope="col">Spesifikasi</th>
+                                    @if(\Illuminate\Support\Facades\Auth::user()->role->name == 'staff')
+                                        <th scope="col">Milik</th>
+                                    @endif
                                     <th scope="col">Aksi</th>
                                 </tr>
                                 </thead>
@@ -39,6 +42,9 @@
                                         <td>{{$item->serial_number}}</td>
                                         <td>{{$item->name}}</td>
                                         <td>{{$item->brand}}</td>
+                                        @if(\Illuminate\Support\Facades\Auth::user()->role->name == 'staff')
+                                            <td>{{\App\Http\Controllers\DivisionController::show($item->division_id)}}</td>
+                                        @endif
                                         <td>
                                             <input class="form-check-input mt-0 required_group" type="checkbox" value="{{$item->id}}" name="assets[]">
                                         </td>
@@ -51,6 +57,7 @@
                                 <div class="col-md-6 offset-md-0">
                                     <input type="hidden" name="return_date" value="{{$return_date }}">
                                     <input type="hidden" name="book_date" value="{{$book_date }}">
+                                    <input type="hidden" name="division_id" value="{{$division_id}}">
 
                                     @if($assets)
                                         <button type="submit" name="submit" class="btn btn-primary">

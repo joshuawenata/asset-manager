@@ -28,6 +28,9 @@
                                     <th scope="col">Nomor Seri</th>
                                     <th scope="col">Jenis</th>
                                     <th scope="col">Spesifikasi</th>
+                                    @if(\Illuminate\Support\Facades\Auth::user()->role->name == 'staff')
+                                        <th scope="col">Milik</th>
+                                    @endif
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -38,6 +41,9 @@
                                         <td>{{$item->serial_number}}</td>
                                         <td>{{$item->name}}</td>
                                         <td>{{$item->brand}}</td>
+                                        @if(\Illuminate\Support\Facades\Auth::user()->role->name == 'staff')
+                                        <td>{{\App\Models\Division::getName($item->division_id)}}</td>
+                                        @endif
                                         <input type="hidden" name="assets[]" value="{{$item->id}}">
                                     </tr>
                                 @endforeach
@@ -74,6 +80,7 @@
 
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-0">
+                                    <input type="hidden" name="division_id" value="{{$division_id}}">
                                     <button type="submit" class="btn btn-primary">
                                         {{ __('Konfirmasi') }}
                                     </button>

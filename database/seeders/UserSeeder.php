@@ -26,17 +26,6 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'name' => 'Joshua Wenata',
-            'email' => 'joshua.sunarto@binus.ac.id',
-            'password' => bcrypt('12345'),
-            'binusianid' => 'BN3452523443',
-            'phone' => '083543665654',
-            'address' => 'Jl. Elsewhere No.13',
-            'division_id' => '3',
-            'role_id' => '1'
-        ]);
-
-        User::create([
             'name' => 'LB001',
             'email' => 'lb001@binus.edu',
             'password' => bcrypt('12345'),
@@ -49,7 +38,7 @@ class UserSeeder extends Seeder
 
         User::create([
             'name' => 'Maria Auleria',
-            'email' => 'maria.auleria@binus.edu',
+            'email' => 'maria.auleria@gmail.com',
             'password' => bcrypt('12345'),
             'binusianid' => 'BN835638546',
             'phone' => '08145635438',
@@ -79,5 +68,8 @@ class UserSeeder extends Seeder
             'division_id' => null,
             'role_id' => '5'
         ]);
+
+        //daftar student => maria.auleria@binus.ac.id
+        //daftar staff => maria.auleria@binus.edu
     }
 }

@@ -39,6 +39,8 @@ class CreateRequestsTable extends Migration
             $table->string('return_status')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('division_id');
+            $table->foreign('division_id')->references('id')->on('divisions');
             $table->timestamps();
         });
     }

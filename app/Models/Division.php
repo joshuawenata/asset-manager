@@ -24,5 +24,14 @@ class Division extends Model
     public function role(){
         return $this->belongsTo(Role::class, 'role_id');
     }
+
+    public function request(){
+        return $this->hasMany(Division::class);
+    }
 //    4 diatas dah bener
+
+    public static function getName($id){
+        $div = Division::find($id);
+        return $div->name;
+    }
 }

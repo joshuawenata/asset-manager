@@ -68,8 +68,11 @@ class User extends Authenticatable
 //        );
 //    }
 
-    public function getAtasan($track_approver){
-        $atasan = Auth::user()->division->id;
+    public function getAtasan($track_approver, $atasan){
+
+//        $divisi = Booking::where('request_id', $req_id)->first();
+//        $atasan = $divisi->asset->division->id;
+
         if($track_approver == 1){
             $atasan = User::where('division_id', $atasan)->where('role_id', '4')->first()->name;
         }
@@ -78,5 +81,14 @@ class User extends Authenticatable
         }
 
         return $atasan;
+    }
+
+    public static function getRolePage(){
+        if(Auth::user()->role->name == 'student'){
+            return 'createRequest';
+        }
+        elseif (Auth::user()->role->name == 'staff'){
+            return 'chooseDivision';
+        }
     }
 }

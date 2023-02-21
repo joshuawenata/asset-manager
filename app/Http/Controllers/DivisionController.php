@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Division;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 
 
@@ -18,6 +19,16 @@ class DivisionController extends Controller
     {
         $data = Division::all();
         return View::make('superadmin.division', [
+            'data' => $data
+        ]);
+    }
+
+    public function index2(Request $request){
+        $data = Division::all();
+        $datetimes = $request->input('datetimes');
+
+        return Redirect::to('/check-request#see')->with([
+            'datetimes' => $datetimes,
             'data' => $data
         ]);
     }
@@ -53,9 +64,10 @@ class DivisionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public static function show($id)
     {
-        //
+        $div = Division::find($id);
+        return $div->name;
     }
 
     /**

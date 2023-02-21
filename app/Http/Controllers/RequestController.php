@@ -47,7 +47,7 @@ class RequestController extends Controller
                 ->orWhere('status', '=', 'taken')
                 ->join('users', 'requests.user_id', '=', 'users.id')
                 ->select('requests.*', 'users.id AS userid', 'users.name', 'users.binusianid')
-                ->where('users.division_id', '=', $user_div_id)
+                ->where('requests.division_id', '=', $user_div_id)
                 ->get();
             $approver = \Illuminate\Support\Facades\Auth::user()->division->approver;
         }
@@ -62,7 +62,7 @@ class RequestController extends Controller
                 ->orWhere('status', '=', 'taken')
                 ->join('users', 'requests.user_id', '=', 'users.id')
                 ->select('requests.*', 'users.id AS userid', 'users.name', 'users.binusianid')
-                ->where('users.division_id', '=', $user_div_id)
+                ->where('requests.division_id', '=', $user_div_id)
                 ->get();
             $approver = \Illuminate\Support\Facades\Auth::user()->division->approver;
         }
@@ -120,7 +120,7 @@ class RequestController extends Controller
         $email = new SendEmailController();
         $receiver = DB::table('users')
             ->select('email')
-            ->where('division_id', '=', Auth::user()->division_id)
+            ->where('division_id', '=', $req->division_id)
             ->where('role_id', '=', 3)
             ->get();
         $receiver = $receiver[0]->email;
@@ -190,11 +190,12 @@ class RequestController extends Controller
         $book_date = strtotime($res[0]);
         $return_date = strtotime($res[1]);
 
-        $user_div_id = \Illuminate\Support\Facades\Auth::user()->division->id;
+        $div_id = $request->input('division_id');
+
         $assets = DB::table('assets')
             ->join('asset_categories', 'assets.asset_category_id', '=', 'asset_categories.id')
             ->select('assets.*', 'asset_categories.name')
-            ->where('division_id', '=', $user_div_id)
+            ->where('division_id', '=', $div_id)
             ->where('status', 'tersedia')
             ->orWhere('status', 'dipinjam')
             ->get();
@@ -238,6 +239,7 @@ class RequestController extends Controller
             'book_date' => $book_date,
             'return_date' => $return_date,
             'assets' => $avail_items,
+            'division_id' => $div_id
         ]);
     }
 
@@ -247,12 +249,14 @@ class RequestController extends Controller
         $return_date = $request->input('return_date');
         $book_date = $request->input('book_date');
         $assets = $request->input('assets');
+        $division_id = $request->input('division_id');
 
         return view('createRequestDetail', [
             'assets' => $assets,
             'book_date' => $book_date,
             'return_date' => $return_date,
-            'data' => $data
+            'data' => $data,
+            'division_id' => $division_id
         ]);
     }
 
@@ -281,13 +285,15 @@ class RequestController extends Controller
         $purpose = $request->input('purpose');
         $return_date = $request->input('return_date');
         $book_date = $request->input('book_date');
+        $division_id = $request->input('division_id');
 
         return view('confirmRequest', [
             'assets' => $bookings,
             'book_date' => $book_date,
             'return_date' => $return_date,
             'purpose' => $purpose,
-            'lokasi' => $lokasi
+            'lokasi' => $lokasi,
+            'division_id' => $division_id
         ]);
     }
 
@@ -305,6 +311,7 @@ class RequestController extends Controller
         $request->purpose = $data['purpose'];
         $request->lokasi = $data['lokasi'];
         $request->user_id = Auth::user()->id;
+        $request->division_id = $data['division_id'];
 
         $request->book_date = date("Y-m-d H:i:s", strtotime($data['book_date']));
         $request->return_date = date("Y-m-d H:i:s", strtotime($data['return_date']));
@@ -331,7 +338,7 @@ class RequestController extends Controller
             ->orWhere('status', '=', 'rejected')
             ->join('users', 'requests.user_id', '=', 'users.id')
             ->select('requests.*', 'users.id AS userid', 'users.name', 'users.binusianid')
-            ->where('users.division_id', '=', $user_div_id)
+            ->where('requests.division_id', '=', $user_div_id)
             ->get();
         return view('admin.historiRequest', [
             'data' => $data

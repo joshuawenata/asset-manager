@@ -127,7 +127,13 @@
 {{--                                        DONE: ini tampilin receiptnya--}}
                                             <form action="{{ route('download') }}" target="_blank" method="post">
                                                 @csrf
-                                                <button type="submit" class="btn btn-primary" name="request_id" value="{{$req->id}}"><span class="material-symbols-outlined">file_download</span></button>
+                                                <button type="submit"
+                                                        @if($req->return_notice == 'isu_rusak')
+                                                            class="btn btn-danger"
+                                                        @else
+                                                            class="btn btn-primary"
+                                                        @endif
+                                                        name="request_id" value="{{$req->id}}"><span class="material-symbols-outlined">file_download</span></button>
                                             </form>
                                         @endif
                                     </td>

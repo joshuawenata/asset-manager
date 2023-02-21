@@ -19,7 +19,8 @@ class RequestSeeder extends Seeder
             'return_date' => '2022-12-25 07:00:00',
             'purpose' => 'Tugas LAB',
             'lokasi' => 'Jl. Everywhere No.110',
-            'user_id' => 1
+            'user_id' => 1,
+            'division_id' => 3
         ]);
     }
 }

@@ -208,7 +208,7 @@
                                                 <button type="button" class="btn btn-danger rejectBtn" value="{{ $req->id }}">Tolak</button>
                                                 <button type="button" class="btn btn-success approveBtn" value="{{ $req->id }}">Setuju</button>
                                             @elseif($req->track_approver != $approver)
-                                                Menunggu persetujuan dari {{ \Illuminate\Support\Facades\Auth::user()->getAtasan($req->track_approver) }}
+                                                Menunggu persetujuan dari {{ \Illuminate\Support\Facades\Auth::user()->getAtasan($req->track_approver, $req->division_id) }}
                                             @endif
                                         @elseif($req->status == 'approved')
                                             <form action="{{route('takenBooking')}}" method="post">

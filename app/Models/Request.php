@@ -16,5 +16,9 @@ class Request extends Model
     public function bookings(){
         return $this->hasMany(Booking::class);
     }
+
+    public function division(){
+        return $this->belongsTo(Division::class, 'division_id');
+    }
 //  2 diatas dah bener
 }

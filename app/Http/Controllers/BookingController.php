@@ -52,13 +52,16 @@ class BookingController extends Controller
             $booking = new Booking();
             $booking->request_id = $request_id;
             $booking->asset_id = $asset;
-            $category_id = DB::table('assets')
-                ->where('id', '=', $asset)
-                ->select('asset_category_id')
-                ->get();
-            $booking->asset_category_id = $category_id[0]->asset_category_id;
+//            $category_id = DB::table('assets')
+//                ->where('id', '=', $asset)
+//                ->select('asset_category_id')
+//                ->get();
+            $as = Asset::find($asset);
+            $booking->asset_category_id = $as->asset_category_id;
             $booking->save();
         }
+
+        $div_id = $data['division_id'];
 
         $email = new SendEmailController();
         $message ='REQUEST PEMINJAMAN ALAT LAB';
@@ -66,7 +69,7 @@ class BookingController extends Controller
         //admin divisi yg sama
         $receiver = DB::table('users')
             ->select('email')
-            ->where('division_id', '=', Auth::user()->division_id)
+            ->where('division_id', '=', $div_id)
             ->where('role_id', '=', 3)
             ->get();
         $receiver = $receiver[0]->email;
@@ -86,7 +89,7 @@ class BookingController extends Controller
         $assets = DB::table('bookings')
             ->join('assets', 'bookings.asset_id', '=', 'assets.id')
             ->join('asset_categories', 'bookings.asset_category_id', '=', 'asset_categories.id')
-            ->select('assets.serial_number', 'assets.brand', 'asset_categories.name', 'assets.status')
+            ->select('assets.serial_number', 'assets.brand', 'asset_categories.name', 'assets.status', 'assets.division_id')
             ->where('bookings.request_id', '=', $id)
             ->get();
 

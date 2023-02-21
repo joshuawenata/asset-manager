@@ -114,11 +114,19 @@
                                     <label class="col-form-label text-md-end">{{ __('Kondisi barang saat pengembalian:') }}</label>
 
                                     <div class="md-6">
-                                        <input class="form-check-input mt-1" type="radio" id="kondisi_aset" name="kondisi_aset" value="baik" checked onclick="document.getElementById('return_condition').removeAttribute('required')" />
+                                        <input class="form-check-input mt-1" type="radio" id="kondisi_aset" name="kondisi_aset" value="baik"
+                                               @if($request->return_status == 'baik' or !$request->return_status)
+                                                    checked
+                                               @endif
+                                               onclick="document.getElementById('return_condition').removeAttribute('required')" />
                                         <label for="kondisi_aset">Barang dalam kondisi baik</label>
                                     </div>
                                     <div class="md-6">
-                                        <input class="form-check-input mt-1" type="radio" id="kondisi_aset" name="kondisi_aset" value="rusak" onclick="document.getElementById('return_condition').setAttribute('required', 'required')" />
+                                        <input class="form-check-input mt-1" type="radio" id="kondisi_aset" name="kondisi_aset" value="rusak"
+                                               @if($request->return_status == 'rusak')
+                                                   checked
+                                               @endif
+                                               onclick="document.getElementById('return_condition').setAttribute('required', 'required')" />
                                         <label for="kondisi_aset">Barang rusak</label>
                                     </div>
                                 </div>

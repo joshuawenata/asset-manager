@@ -49,6 +49,9 @@
                             <th>Nomor Seri</th>
                             <th>Jenis</th>
                             <th>Spesifikasi</th>
+                            @if(\Illuminate\Support\Facades\Auth::user()->role->name == 'staff')
+                                <th>Milik</th>
+                            @endif
                         </tr>
                         </thead>
                         <tbody>
@@ -59,6 +62,9 @@
                                     <td>{{$item->serial_number}}</td>
                                     <td>{{$item->name}}</td>
                                     <td>{{$item->brand}}</td>
+                                    @if(\Illuminate\Support\Facades\Auth::user()->role->name == 'staff')
+                                    <td>{{\App\Models\Division::getName($item->division_id)}}</td>
+                                    @endif
                                 </tr>
                             @endforeach
                         @endif
@@ -156,7 +162,7 @@
                                         </form>
                                     </td>
                                     @if($req->status == 'waiting approval')
-                                        <td>{{$req->status . " dari " . \Illuminate\Support\Facades\Auth::user()->getAtasan($req->track_approver)}}</td>
+                                        <td>{{$req->status . " dari " . \Illuminate\Support\Facades\Auth::user()->getAtasan($req->track_approver, $req->division_id)}}</td>
                                     @else
                                         <td>{{$req->status}}</td>
                                     @endif

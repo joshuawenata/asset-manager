@@ -36,6 +36,7 @@ Route::middleware(['auth', 'cekRole:student,staff'])->group(function(){
     Route::get('/dashboard', [\App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
     //CHECK TGL
     Route::get('/check-request', [\App\Http\Controllers\RequestController::class, 'check'])->name('checkRequest');
+    Route::post('/choose-division', [\App\Http\Controllers\DivisionController::class, 'index2'])->name('chooseDivision');
     //CREATE
     Route::post('/create-request', [\App\Http\Controllers\RequestController::class, 'createRequest'])->name('createRequest');
     Route::post('/create-request-detail', [\App\Http\Controllers\RequestController::class, 'create'])->name('createRequestDetail');

@@ -94,7 +94,7 @@
                                     <td>{{$item->reported_by}}</td>
                                     <td>
                                         @if(!$item->flag_fixed)
-                                            <button type="button" class="btn btn-small btn-success mb-3 perbaikiBtn" value="{{ $item->id }}" >Sudah diperbaiki</button>
+                                            <button title="perbaiki aset" type="button" class="btn btn-small btn-success mb-3 perbaikiBtn" value="{{ $item->id }}" ><span class="material-symbols-outlined">build</span></button>
                                         @else
                                             Sudah diperbaiki pada tanggal: {{date("l, d M Y", $item->update_at)}} oleh {{$item->pic_repair}} ({{$item->repaired_by}})
                                         @endif

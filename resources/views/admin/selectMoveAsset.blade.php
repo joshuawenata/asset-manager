@@ -44,12 +44,19 @@
                                         <td>{{$item->current_location}}</td>
                                         <td>{{$item->status}}</td>
                                         <td>
-                                            <input class="form-check-input mt-0 required_group" type="checkbox" value="{{$item->id}}" name="assets[]">
+                                            <input class="form-check-input mt-0 required_group" type="checkbox" value="{{$item->id}}" id="assets" name="assets[]">
                                         </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
+
+                            <div class="row mb-0">
+                                <div class="col-md-6 offset-md-0">
+                                    <input class="form-check-input mt-0" type="checkbox" name="select-all" id="select-all">
+                                    <label for="select-all">pilih semua</label>
+                                </div>
+                            </div>
 
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-0">
@@ -86,6 +93,21 @@
 
         document.querySelector('[name=submit]').addEventListener('click', () => {
             validateGroup();
+        });
+    </script>
+
+    <script>
+        $('#select-all').click(function (event){
+           if(this.checked){
+               $(':checkbox').each(function (){
+                   this.checked = true;
+               });
+           }
+           else{
+               $(':checkbox').each(function(){
+                  this.checked = false;
+               });
+           }
         });
     </script>
 @endsection

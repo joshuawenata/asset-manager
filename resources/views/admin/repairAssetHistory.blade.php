@@ -61,8 +61,11 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
 
-                @if($fixed and $status != 'dipinjam')
-                    <a class="btn btn-small btn-success mb-3" href="{{ url('create-repair-asset/' . $asset) }}">Lapor Kerusakan</a>
+
+                @if($status != 'dipinjam')
+                    @if($fixed == 1)
+                        <a class="btn btn-small btn-success mb-3" href="{{ url('create-repair-asset/' . $asset) }}">Lapor Kerusakan</a>
+                    @endif
                 @endif
 
                 <div class="card">
@@ -88,7 +91,7 @@
                             @foreach($data as $index => $item)
                                 <tr>
                                     {{--                masukin kolom--}}
-                                    <td scope="row">{{$index+1}}</td>
+                                    <td>{{$index+1}}</td>
                                     <td>{{date("l, d M Y", $item->create_at)}}</td>
                                     <td>{{$item->description}}</td>
                                     <td>{{$item->reported_by}}</td>

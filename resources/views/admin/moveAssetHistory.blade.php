@@ -20,7 +20,7 @@
 
                     <div class="card-body">
 
-                        <table id="myTable" class="display table">
+                        <table id="moveTable" class="display table">
                             <thead>
                             <tr>
                                 <th scope="col">No</th>

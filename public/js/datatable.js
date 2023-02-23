@@ -12,4 +12,30 @@ $(document).ready( function () {
             }
         ]
     } );
+
+    $('#rusakTable').DataTable( {
+        dom: 'B<"clear">lfrtip',
+        buttons: [
+            {
+                extend: 'excelHtml5',
+                exportOptions: {
+                    columns: [0, 1, 2, 3]
+                }
+            }
+        ]
+    } );
+
+    $('#justTable').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'excel'
+        ]
+    } );
+
+    $('#moveTable').DataTable( {
+        dom: 'B<"clear">lfrtip',
+        buttons: [
+            'excel'
+        ]
+    } );
 } );

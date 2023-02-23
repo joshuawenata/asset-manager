@@ -87,7 +87,7 @@
                             <div class="alert alert-success">{{ session('message') }}</div>
                         @endif
 
-                        <table id="myTable" class="display table">
+                        <table id="rusakTable" class="display table">
                             <thead>
                             <tr>
                                 <th scope="col">No</th>

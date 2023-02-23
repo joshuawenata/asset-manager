@@ -118,7 +118,11 @@
             <div class="col-md-12">
 
                 <div class="card">
-                    <div class="card-header">{{ __('Dashboard Mahasiswa') }}</div>
+                    @if(\Illuminate\Support\Facades\Auth::user()->role->name == 'student')
+                        <div class="card-header">{{ __('Dashboard Mahasiswa') }}</div>
+                    @elseif(\Illuminate\Support\Facades\Auth::user()->role->name == 'staff')
+                        <div class="card-header">{{ __('Dashboard Karyawan') }}</div>
+                    @endif
 
                     <div class="card-body">
 

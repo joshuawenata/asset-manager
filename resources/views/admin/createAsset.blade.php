@@ -65,6 +65,16 @@
                                 </div>
                             </div>
 
+                            <div class="row mb-3">
+                                <label class="col-md-4 col-form-label text-md-end"></label>
+
+                                <div class="col-md-6">
+                                    <input type="hidden" name="asset-status" value="tersedia">
+                                    <input class="form-check-input mt-0" name="asset-status" type="checkbox" value="tidak tersedia">
+                                    <label for="brand">Barang tidak untuk dipinjam</label>
+                                </div>
+                            </div>
+
 {{--                            hidden division id--}}
                             <input type="hidden" name="division_id" id="division_id" value="{{ \Illuminate\Support\Facades\Auth::user()->division->id }}">
 

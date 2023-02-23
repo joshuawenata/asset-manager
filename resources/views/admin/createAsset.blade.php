@@ -82,12 +82,14 @@
                                 <label for="asset-category" class="col-md-4 col-form-label text-md-end">{{ __('Kategori Aset') }}</label>
 
                                 <div class="col-md-6">
-                                    @foreach($show as $index => $item)
-                                            <div class="mt-2">
-                                                <input class="form-check-input mt-1" type="radio" id="hide" name="asset-category" value="{{ $item->id }}" checked />
-                                                <label for="hide">{{ $item->name }}</label>
-                                            </div>
-                                    @endforeach
+                                    @if($show)
+                                        @foreach($show as $index => $item)
+                                                <div class="mt-2">
+                                                    <input class="form-check-input mt-1" type="radio" id="hide" name="asset-category" value="{{ $item->id }}" checked />
+                                                    <label for="hide">{{ $item->name }}</label>
+                                                </div>
+                                        @endforeach
+                                    @endif
                                         <div class="mt-2">
                                             <input class="form-check-input mt-1" type="radio" id="show" name="asset-category" value="" />
                                             <label for="show">Tambah Kategori Aset Baru</label>

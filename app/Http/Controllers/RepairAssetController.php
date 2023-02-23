@@ -18,6 +18,7 @@ class RepairAssetController extends Controller
     public function index($id)
     {
         $status = Asset::find($id);
+        $asset = $status;
         $status = $status->status;
 
         $data = RepairAsset::orderBy('id', 'desc')->where('asset_id', $id)->get();
@@ -30,7 +31,7 @@ class RepairAssetController extends Controller
 
         return view('admin.repairAssetHistory', [
             'data' => $data,
-            'asset' => $id,
+            'asset' => $asset,
             'fixed' => $fixed,
             'status' => $status
         ]);

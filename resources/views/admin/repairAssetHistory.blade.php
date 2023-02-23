@@ -61,10 +61,20 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
 
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <p><b>Kode Barang&emsp;&ensp;</b>: {{$asset->serial_number}}</p>
+                        <p><b>Jenis Barang&emsp;&ensp;</b>: {{$asset->assetcategory->name}}</p>
+                        <p><b>Spesifikasi&emsp;&emsp;&ensp;</b>: {{$asset->brand}}</p>
+                        <p><b>Lokasi&emsp;&emsp;&emsp;&emsp;&ensp;</b>: {{$asset->current_location}}</p>
+                        <p><b>Status Barang&emsp;</b>: {{$asset->status}}</p>
+                    </div>
+                </div>
+
 
                 @if($status != 'dipinjam')
                     @if($fixed == 1)
-                        <a class="btn btn-small btn-success mb-3" href="{{ url('create-repair-asset/' . $asset) }}">Lapor Kerusakan</a>
+                        <a class="btn btn-small btn-success mb-3" href="{{ url('create-repair-asset/' . $asset->id) }}">Lapor Kerusakan</a>
                     @endif
                 @endif
 

@@ -37,6 +37,17 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
+            'name' => 'Siska',
+            'email' => 'siska.novianti@binus.edu',
+            'password' => bcrypt('12345'),
+            'binusianid' => 'BN8345345865',
+            'phone' => '081345634543',
+            'address' => 'Jl. Panjaitan No.56',
+            'division_id' => '4',
+            'role_id' => '3'
+        ]);
+
+        User::create([
             'name' => 'Maria Auleria',
             'email' => 'maria.auleria@gmail.com',
             'password' => bcrypt('12345'),

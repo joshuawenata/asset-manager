@@ -45,7 +45,7 @@
 
 {{--                            keterangan barang saat dipindahkan--}}
                             <div class="mb-3">
-                                <label for="notes" class="col-form-label"><b>Status Barang: </b></label>
+                                <label for="notes" class="col-form-label"><b>Catatan Pemindahan: </b></label>
                                 <textarea class="form-control" id="notes" name="notes" autofocus></textarea>
                             </div>
 

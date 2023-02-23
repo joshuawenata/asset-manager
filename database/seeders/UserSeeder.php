@@ -40,7 +40,7 @@ class UserSeeder extends Seeder
             'name' => 'Siska',
             'email' => 'siska.novianti@binus.edu',
             'password' => bcrypt('12345'),
-            'binusianid' => 'BN8345345865',
+            'binusianid' => 'BN83453451865',
             'phone' => '081345634543',
             'address' => 'Jl. Panjaitan No.56',
             'division_id' => '4',

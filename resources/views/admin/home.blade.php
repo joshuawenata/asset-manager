@@ -176,7 +176,7 @@
                                 <th scope="col">Tujuan Peminjaman</th>
                                 <th scope="col">Tanggal Pinjam</th>
                                 <th scope="col">Tanggal Kembali</th>
-                                {{--                                TODO: tambahin keterangan lokasi pinjemnya dimana --}}
+                                <th scope="col">Lokasi</th>
                                 <th scope="col">Lihat aset</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Aksi</th>
@@ -192,6 +192,7 @@
                                     <td>{{$req->purpose}}</td>
                                     <td>{{date("d M Y H:i", strtotime($req->book_date))}}</td>
                                     <td>{{date("d M Y H:i", strtotime($req->return_date))}}</td>
+                                    <td>{{$req->lokasi}}</td>
                                     <td>
 {{--                                        DONE: ini masi error--}}
                                         <form action="{{ route('bookings.show', ['user' => 'admin', 'id' => $req->id]) }}" method="GET">

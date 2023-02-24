@@ -8,7 +8,7 @@
                     <div class="card-header">{{ __('Daftar') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('register') }}">
+                        <form method="POST" action="{{ route('register') }}" onsubmit="tambah()">
                             @csrf
 
                             <div class="row mb-3">
@@ -96,14 +96,15 @@
                             <div class="row mb-3">
                                 <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email') }}</label>
 
-                                <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                    @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
+                                <div class="col-md-6 input-group">
+                                    <input id="email" type="text" class="form-control" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                    <div class="input-group-append">
+                                        @if($role_id == 2)
+                                            <span class="input-group-text" id="basic-addon2">@binus.edu</span>
+                                        @elseif($role_id == 1)
+                                            <span class="input-group-text" id="basic-addon2">@binus.ac.id</span>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
 
@@ -144,4 +145,20 @@
             </div>
         </div>
     </div>
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function (){
+            var elem = document.getElementById('email');
+            elem.value = "";
+        });
+
+        function tambah(){
+            var elem = document.getElementById('email');
+            var old = elem.value;
+            var tambahan = document.getElementById('basic-addon2');
+            elem.value = old + tambahan.innerHTML;
+        }
+
+    </script>
 @endsection

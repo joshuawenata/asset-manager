@@ -8,7 +8,7 @@
                     <div class="card-header">{{ __('Daftar') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('register-show') }}">
+                        <form method="GET" action="{{ route('register-show') }}">
                             @csrf
 
                             {{--                        4. Role (Dropdown)--}}

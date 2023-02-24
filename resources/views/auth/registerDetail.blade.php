@@ -97,7 +97,7 @@
                                 <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email') }}</label>
 
                                 <div class="col-md-6 input-group">
-                                    <input id="email" type="text" class="form-control" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                    <input id="email" type="text" class="form-control" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                                     <div class="input-group-append">
                                         @if($role_id == 2)
                                             <span class="input-group-text" id="basic-addon2">@binus.edu</span>

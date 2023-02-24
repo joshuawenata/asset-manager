@@ -91,10 +91,12 @@
                             <thead>
                             <tr>
                                 <th scope="col">No</th>
-                                <th scope="col">Tanggal</th>
+                                <th scope="col">Tanggal Lapor</th>
                                 <th scope="col">Description</th>
                                 <th scope="col">Pelapor</th>
                                 <th scope="col">Action</th>
+                                <th scope="col">Tanggal Perbaikan</th>
+                                <th scope="col">Perbaikan Oleh</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -109,7 +111,21 @@
                                         @if(!$item->flag_fixed)
                                             <button title="perbaiki aset" type="button" class="btn btn-small btn-success mb-3 perbaikiBtn" value="{{ $item->id }}" ><span class="material-symbols-outlined">build</span></button>
                                         @else
-                                            Sudah diperbaiki pada tanggal: {{date("l, d M Y", $item->update_at)}} oleh {{$item->pic_repair}} ({{$item->repaired_by}})
+                                            Sudah diperbaiki
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($item->flag_fixed)
+                                            {{date("l, d M Y", $item->update_at)}}
+                                        @else
+                                            {{'-'}}
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($item->flag_fixed)
+                                            {{$item->pic_repair . " (" . $item->repaired_by . ")"}}
+                                        @else
+                                            {{'-'}}
                                         @endif
                                     </td>
                                 </tr>

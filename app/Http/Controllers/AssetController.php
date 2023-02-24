@@ -91,7 +91,7 @@ class AssetController extends Controller
             $aset->brand = $data['brand'];
             $aset->current_location = $data['location'];
 
-            if($data['asset-status'] == 'tidak tersedia'){
+            if($data['asset-status'] == 'tersedia'){
                 $aset->status = $data['asset-status'];
             }
 

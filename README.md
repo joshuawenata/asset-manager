@@ -1,5 +1,6 @@
 ### how to run
 
+<br>
 1. composer install --ignore-platform-reqs
 <br>
 2. php artisan serve

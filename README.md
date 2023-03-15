@@ -11,8 +11,12 @@
 <br>
 5. php artisan ui:auth
 <br>
-6. php artisan route:cache
+6. php artisan key:generate
 <br>
-7. php artisan migrate:fresh --seed
+7. php artisan config:cache
 <br>
-8. composer dump autoload
+8. php artisan route:cache
+<br>
+9. php artisan migrate:fresh --seed
+<br>
+10. composer dump autoload

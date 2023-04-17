@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +29,23 @@ Route::get('/requests-history/{id}', [\App\Http\Controllers\BookingController::c
 Route::post('download', [\App\Http\Controllers\PdfController::class, 'index'])->name('download')->middleware(['auth', 'cekRole:student,staff,admin,approver']);
 
 //TEST THIS
+Route::get('register-show', function (Request $request) {
+    $role_id = $request->input('role_id');
+    return view('auth.registerDetail')->with('role_id', $role_id);
+});
+Route::post('insert-account',function(Request $request){
+    DB::table('users')->insert([
+        'name' => $request->input('name'),
+        'binusianid' => $request->input('binusianid'),
+        'address' => $request->input('address'),
+        'phone' => $request->input('phone'),
+        'division_id' => $request->input('division_id'),
+        'email' => $request->input('email'),
+        'password' => bcrypt($request->input('password')),
+        'role_id' => 1,
+    ]);
+    return view('auth.login');
+});
 Route::get('/see/{user}/dashboard/{id}', [\App\Http\Controllers\BookingController::class, 'show'])->name('bookings.show')->middleware(['auth', 'cekRole:student,staff,admin,approver']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/update-request', [\App\Http\Controllers\RequestController::class, 'update'])->name('updateRequest')->middleware(['auth', 'cekRole:admin,approver']);

@@ -8,12 +8,13 @@
                     <div class="card-header">{{ __('Daftar') }}</div>
 
                     <div class="card-body">
-                        <form method="GET" action="{{ route('register-show') }}">
+                        <form method="GET" action="register-show">
                             @csrf
 
-                            {{--                        4. Role (Dropdown)--}}
+                            {{--                        4. Role (Dropdown) --}}
                             <div class="row mb-3">
-                                <label for="role_id" class="col-md-4 col-form-label text-md-end">{{ __('Role Anda') }}</label>
+                                <label for="role_id"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Role Anda') }}</label>
 
                                 <div class="col-md-6">
                                     <select class="form-select" name="role_id" id="role_id">

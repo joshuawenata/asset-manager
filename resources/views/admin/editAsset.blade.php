@@ -1,14 +1,15 @@
 @extends('layouts.app')
 
 @section('css')
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 @endsection
 
 @section('js')
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script defer>
-        $(document).ready(function (){
-            $('.deleteAssetBtn').click(function (e){
+        $(document).ready(function() {
+            $('.deleteAssetBtn').click(function(e) {
                 e.preventDefault();
                 var asset_id = $(this).val();
                 $('#asset_id').val(asset_id);
@@ -60,26 +61,30 @@
                             @method('PUT')
 
                             <div class="row mb-3">
-                                <label for="serialnumber" class="col-md-4 col-form-label text-md-end">{{ __('Nomor Seri') }}</label>
+                                <label for="serialnumber"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Nomor Seri') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="serialnumber" type="text" class="form-control @error('serialnumber') is-invalid @enderror" name="serialnumber" value="{{ $data->serial_number }}" required autocomplete="serialnumber" autofocus>
+                                    <input id="serialnumber" type="text"
+                                        class="form-control @error('serialnumber') is-invalid @enderror" name="serialnumber"
+                                        value="{{ $data->serial_number }}" required autocomplete="serialnumber" autofocus>
 
                                     @error('serialnumber')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                     @enderror
                                 </div>
                             </div>
 
                             <div class="row mb-3">
-                                <label for="asset_category" class="col-md-4 col-form-label text-md-end">{{ __('Jenis Aset') }}</label>
+                                <label for="asset_category"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Jenis Aset') }}</label>
 
                                 <div class="col-md-6">
                                     <select class="form-select" name="asset_category" id="asset_category">
-                                        @foreach($show as $index => $item)
-                                            @if($data->asset_category_id == $item->id)
+                                        @foreach ($show as $index => $item)
+                                            @if ($data->asset_category_id == $item->id)
                                                 <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
                                             @else
                                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -89,56 +94,63 @@
                                 </div>
                             </div>
 
-                            @if($data->status != 'dipinjam' and $data->status != 'rusak')
-                            <div class="row mb-3">
-                                <label for="asset-status" class="col-md-4 col-form-label text-md-end">{{ __('Status Aset') }}</label>
+                            @if ($data->status != 'dipinjam' and $data->status != 'rusak')
+                                <div class="row mb-3">
+                                    <label for="asset-status"
+                                        class="col-md-4 col-form-label text-md-end">{{ __('Status Aset') }}</label>
 
-                                <div class="col-md-6">
-                                    <select class="form-select" name="asset-status" id="asset-status">
-                                        @if($data->status == 'tersedia')
-                                            <option value="tersedia" selected>Tersedia di penyimpanan</option>
-                                            <option value="tidak tersedia">Tidak tersedia/unavailable</option>
-                                        @elseif($data->status == 'tidak tersedia')
-                                            <option value="tersedia">Tersedia di penyimpanan</option>
-                                            <option value="tidak tersedia" selected>Tidak tersedia/unavailable</option>
-                                        @endif
-                                    </select>
+                                    <div class="col-md-6">
+                                        <select class="form-select" name="asset-status" id="asset-status">
+                                            @if ($data->status == 'tersedia')
+                                                <option value="tersedia" selected>Tersedia di penyimpanan</option>
+                                                <option value="tidak tersedia">Tidak tersedia/unavailable</option>
+                                            @elseif($data->status == 'tidak tersedia')
+                                                <option value="tersedia">Tersedia di penyimpanan</option>
+                                                <option value="tidak tersedia" selected>Tidak tersedia/unavailable</option>
+                                            @endif
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
                             @endif
 
-{{--                            <div class="row mb-3">--}}
-{{--                                <label for="location" class="col-md-4 col-form-label text-md-end">{{ __('Lokasi Penyimpanan') }}</label>--}}
+                            {{--                            <div class="row mb-3"> --}}
+                            {{--                                <label for="location" class="col-md-4 col-form-label text-md-end">{{ __('Lokasi Penyimpanan') }}</label> --}}
 
-{{--                                <div class="col-md-6">--}}
-{{--                                    <input id="location" type="text" class="form-control @error('location') is-invalid @enderror" name="location" value="{{ $data->assigned_location }}" required autocomplete="location" autofocus>--}}
+                            {{--                                <div class="col-md-6"> --}}
+                            {{--                                    <input id="location" type="text" class="form-control @error('location') is-invalid @enderror" name="location" value="{{ $data->assigned_location }}" required autocomplete="location" autofocus> --}}
 
-{{--                                    @error('location')--}}
-{{--                                    <span class="invalid-feedback" role="alert">--}}
-{{--                                        <strong>{{ $message }}</strong>--}}
-{{--                                    </span>--}}
-{{--                                    @enderror--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
+                            {{--                                    @error('location') --}}
+                            {{--                                    <span class="invalid-feedback" role="alert"> --}}
+                            {{--                                        <strong>{{ $message }}</strong> --}}
+                            {{--                                    </span> --}}
+                            {{--                                    @enderror --}}
+                            {{--                                </div> --}}
+                            {{--                            </div> --}}
 
                             <div class="row mb-3">
-                                <label for="brand" class="col-md-4 col-form-label text-md-end">{{ __('Spesifikasi') }}</label>
+                                <label for="brand"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Spesifikasi') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="brand" type="text" class="form-control @error('brand') is-invalid @enderror" name="brand" value="{{ $data->brand }}" required autocomplete="brand" autofocus>
+                                    <input id="brand" type="text"
+                                        class="form-control @error('brand') is-invalid @enderror" name="brand"
+                                        value="{{ $data->brand }}" required autocomplete="brand" autofocus>
 
                                     @error('brand')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                     @enderror
                                 </div>
                             </div>
 
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                    @if($data->status != 'dipinjam')
-                                    <button type="button" class="btn btn-danger deleteAssetBtn" value="{{ $data->id }}"><span class="material-symbols-outlined">delete</span>Hapus Aset</button>
+                                    @if ($data->status != 'dipinjam')
+                                        <button type="button" class="btn btn-danger deleteAssetBtn"
+                                            value="{{ $data->id }}">
+                                            Hapus Aset
+                                        </button>
                                     @endif
                                     <button type="submit" class="btn btn-primary">
                                         {{ __('Perbarui Data') }}

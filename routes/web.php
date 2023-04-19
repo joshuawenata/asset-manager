@@ -4,17 +4,6 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 // TODO: ini klo udh login gabisa ke dashboard page / nya malah ke login mesti cek user session
 Route::get('/', function () {
     return view('auth.login');
@@ -73,6 +62,9 @@ Route::middleware(['auth', 'cekRole:student,staff'])->group(function(){
 //Admin Routes
 Route::middleware(['auth', 'cekRole:admin'])->group(function(){
     Route::get('/admin/dashboard', [\App\Http\Controllers\HomeController::class, 'adminDashboard'])->name('admin.dashboard');
+    Route::get('/admin/location', [\App\Http\Controllers\LocationController::class, 'index'])->name('admin.location');
+    Route::post('/delete-location-admin', [\App\Http\Controllers\LocationController::class, 'destroy']);
+    Route::post('/store-location-admin', [\App\Http\Controllers\LocationController::class, 'store'])->name('store-location-admin');
 
     //ASSET
     //READ
@@ -110,9 +102,6 @@ Route::middleware(['auth', 'cekRole:admin'])->group(function(){
 //Approver Routes
 Route::middleware(['auth', 'cekRole:approver'])->group(function(){
     Route::get('/approver/dashboard', [\App\Http\Controllers\HomeController::class, 'approverDashboard'])->name('approver.dashboard');
-
-
-
 });
 
 

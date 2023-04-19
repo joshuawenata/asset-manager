@@ -19,6 +19,7 @@ class BookingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         //
@@ -49,14 +50,10 @@ class BookingController extends Controller
         $assets = $data['assets'];
 
         foreach ($assets as $asset){
+            $as = Asset::find($asset);
             $booking = new Booking();
             $booking->request_id = $request_id;
             $booking->asset_id = $asset;
-//            $category_id = DB::table('assets')
-//                ->where('id', '=', $asset)
-//                ->select('asset_category_id')
-//                ->get();
-            $as = Asset::find($asset);
             $booking->asset_category_id = $as->asset_category_id;
             $booking->save();
         }
@@ -66,14 +63,15 @@ class BookingController extends Controller
         $email = new SendEmailController();
         $message ='REQUEST PEMINJAMAN ALAT LAB';
         $subyek = 'Ada request peminjaman alat lab baru dari ' . Auth::user()->name . ' ' . Auth::user()->email;
-        //admin divisi yg sama
-        $receiver = DB::table('users')
-            ->select('email')
-            ->where('division_id', '=', $div_id)
-            ->where('role_id', '=', 3)
-            ->get();
-        $receiver = $receiver[0]->email;
-        $email->index($receiver, $subyek, $message);
+        // //admin divisi yg sama
+        // $receiver = DB::table('users')
+        //     ->select('email')
+        //     ->where('division_id', '==', $div_id)
+        //     ->where('role_id', '==', 3)
+        //     ->get();
+        // var_dump($receiver);
+        // $receiver = $receiver[0]->email;
+        // $email->index($receiver, $subyek, $message);
 
         return redirect('/dashboard')->with('message', "Request Berhasil Ditambahkan");
     }

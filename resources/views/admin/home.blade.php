@@ -1,22 +1,23 @@
 @extends('layouts.app')
 
 @section('css')
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 @endsection
 
 @section('js')
-    <script defer src="{{ asset('js/datatable.js')}}"></script>
+    <script defer src="{{ asset('js/datatable.js') }}"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script defer>
-        $(document).ready(function (){
-            $('.rejectBtn').click(function (e){
+        $(document).ready(function() {
+            $('.rejectBtn').click(function(e) {
                 e.preventDefault();
                 var request_id = $(this).val();
                 $('#request_id').val(request_id);
                 $('#rejectModal').modal('show');
             });
 
-            $('.approveBtn').click(function (e){
+            $('.approveBtn').click(function(e) {
                 e.preventDefault();
                 var request_id = $(this).val();
                 $('#request_id2').val(request_id);
@@ -28,7 +29,7 @@
     <script defer>
         $(document).ready(function() {
 
-            if(window.location.href.indexOf('#see') != -1) {
+            if (window.location.href.indexOf('#see') != -1) {
                 $('#see').modal('show');
             }
 
@@ -37,7 +38,7 @@
 @endsection
 
 @section('content')
-{{--    modal see--}}
+    {{--    modal see --}}
     <div class="modal fade" id="see" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -50,34 +51,34 @@
 
                     <table class="display table">
                         <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Nomor Seri</th>
-                            <th>Jenis</th>
-                            <th>Spesifikasi</th>
-                            <th>Kondisi</th>
-                        </tr>
+                            <tr>
+                                <th>No</th>
+                                <th>Nomor Seri</th>
+                                <th>Jenis</th>
+                                <th>Spesifikasi</th>
+                                <th>Kondisi</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        @if(session('bookings'))
-                            @foreach(session('bookings') as $index => $item)
-                                <tr>
-                                    <th scope="row">{{$index+1}}</th>
-                                    <td>{{$item->serial_number}}</td>
-                                    <td>{{$item->name}}</td>
-                                    <td>{{$item->brand}}</td>
-                                    <td>{{$item->status}}</td>
-                                </tr>
-                            @endforeach
-                        @endif
+                            @if (session('bookings'))
+                                @foreach (session('bookings') as $index => $item)
+                                    <tr>
+                                        <th scope="row">{{ $index + 1 }}</th>
+                                        <td>{{ $item->serial_number }}</td>
+                                        <td>{{ $item->name }}</td>
+                                        <td>{{ $item->brand }}</td>
+                                        <td>{{ $item->status }}</td>
+                                    </tr>
+                                @endforeach
+                            @endif
                         </tbody>
                     </table>
 
-                    @if(session('request') != '')
-                    <div class="mb-3">
-                        <label for="pesan" class="col-form-label">Catatan Peminjaman:</label>
-                        <textarea class="form-control" id="pesan" name="pesan" readonly autofocus>{{ session('request') }}</textarea>
-                    </div>
+                    @if (session('request') != '')
+                        <div class="mb-3">
+                            <label for="pesan" class="col-form-label">Catatan Peminjaman:</label>
+                            <textarea class="form-control" id="pesan" name="pesan" readonly autofocus>{{ session('request') }}</textarea>
+                        </div>
                     @endif
 
                 </div>
@@ -89,7 +90,7 @@
         </div>
     </div>
 
-{{--    modal reject--}}
+    {{--    modal reject --}}
     <div class="modal fade" id="rejectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -107,7 +108,7 @@
                         <h5>Apakah anda yakin ingin me-reject request peminjaman?</h5>
                         <div class="mb-3">
                             <label for="pesan" class="col-form-label">Pesan:</label>
-                            <textarea class="form-control" id="pesan" name="pesan" autofocus>{{ " " }}</textarea>
+                            <textarea class="form-control" id="pesan" name="pesan" autofocus>{{ ' ' }}</textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -120,39 +121,40 @@
         </div>
     </div>
 
-{{--    modal approve--}}
-<div class="modal fade" id="approveModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
+    {{--    modal approve --}}
+    <div class="modal fade" id="approveModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
 
-            <form action="{{ route('updateRequest') }}" method="post">
-                @csrf
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Approve Request</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <input type="hidden" name="request_update_id" id="request_id2">
-                    <input type="hidden" name="request_update" value="approved">
-                    <input type="hidden" name="user" value="admin">
-                    <input type="hidden" name="approver_num" value="{{\Illuminate\Support\Facades\Auth::user()->division->approver}}" >
-                    <h5>Apakah anda yakin ingin meng-approve request peminjaman?</h5>
-                    <div class="mb-3">
-                        <label for="pesan" class="col-form-label">Pesan:</label>
-                        <textarea class="form-control" id="pesan" name="pesan" autofocus>{{ " " }}</textarea>
+                <form action="{{ route('updateRequest') }}" method="post">
+                    @csrf
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Approve Request</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
-                    <button type="submit" class="btn btn-success">Ya</button>
-                </div>
-            </form>
+                    <div class="modal-body">
+                        <input type="hidden" name="request_update_id" id="request_id2">
+                        <input type="hidden" name="request_update" value="approved">
+                        <input type="hidden" name="user" value="admin">
+                        <input type="hidden" name="approver_num"
+                            value="{{ \Illuminate\Support\Facades\Auth::user()->division->approver }}">
+                        <h5>Apakah anda yakin ingin meng-approve request peminjaman?</h5>
+                        <div class="mb-3">
+                            <label for="pesan" class="col-form-label">Pesan:</label>
+                            <textarea class="form-control" id="pesan" name="pesan" autofocus>{{ ' ' }}</textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+                        <button type="submit" class="btn btn-success">Ya</button>
+                    </div>
+                </form>
 
+            </div>
         </div>
     </div>
-</div>
 
-{{--content--}}
+    {{-- content --}}
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
@@ -169,72 +171,82 @@
 
                         <table id="myTable" class="display table" width="100%">
                             <thead>
-                            <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">Nama Peminjam</th>
-                                <th scope="col">Binusian ID</th>
-                                <th scope="col">Tujuan Peminjaman</th>
-                                <th scope="col">Tanggal Pinjam</th>
-                                <th scope="col">Tanggal Kembali</th>
-                                <th scope="col">Lokasi</th>
-                                <th scope="col">Lihat aset</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Aksi</th>
-                            </tr>
+                                <tr>
+                                    <th scope="col">No</th>
+                                    <th scope="col">Nama Peminjam</th>
+                                    <th scope="col">Binusian ID</th>
+                                    <th scope="col">Tujuan Peminjaman</th>
+                                    <th scope="col">Tanggal Pinjam</th>
+                                    <th scope="col">Tanggal Kembali</th>
+                                    <th scope="col">Lokasi</th>
+                                    <th scope="col">Lihat Inventory</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Aksi</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            @foreach($data as $index => $req)
-                                <tr>
-                                    {{--                masukin kolom--}}
-                                    <th scope="row">{{$index+1}}</th>
-                                    <td>{{$req->name}}</td>
-                                    <td>{{$req->binusianid}}</td>
-                                    <td>{{$req->purpose}}</td>
-                                    <td>{{date("d M Y H:i", strtotime($req->book_date))}}</td>
-                                    <td>{{date("d M Y H:i", strtotime($req->return_date))}}</td>
-                                    <td>{{$req->lokasi}}</td>
-                                    <td>
-{{--                                        DONE: ini masi error--}}
-                                        <form action="{{ route('bookings.show', ['user' => 'admin', 'id' => $req->id]) }}" method="GET">
-                                            @csrf
-                                            <button type="submit" class="btn btn-small btn-primary mb-3">
-                                                <span class="material-symbols-outlined">visibility</span>
-                                            </button>
-                                        </form>
-                                    </td>
-                                    <td>{{$req->status}}</td>
-                                    <td>
-                                        @if($req->status == 'waiting approval')
-                                            @if($req->track_approver == 0)
-                                                <button type="button" class="btn btn-danger rejectBtn" value="{{ $req->id }}">Tolak</button>
-                                                <button type="button" class="btn btn-success approveBtn" value="{{ $req->id }}">Setuju</button>
-                                            @elseif($req->track_approver != $approver)
-                                                Menunggu persetujuan dari {{ \Illuminate\Support\Facades\Auth::user()->getAtasan($req->track_approver, $req->division_id) }}
-                                            @endif
-                                        @elseif($req->status == 'approved')
-                                            <form action="{{route('takenBooking')}}" method="post">
+                                @foreach ($data as $index => $req)
+                                    <tr>
+                                        {{--                masukin kolom --}}
+                                        <th scope="row">{{ $index + 1 }}</th>
+                                        <td>{{ $req->name }}</td>
+                                        <td>{{ $req->binusianid }}</td>
+                                        <td>{{ $req->purpose }}</td>
+                                        <td>{{ date('d M Y H:i', strtotime($req->book_date)) }}</td>
+                                        <td>{{ date('d M Y H:i', strtotime($req->return_date)) }}</td>
+                                        <td>{{ $req->lokasi }}</td>
+                                        <td>
+                                            {{--                                        DONE: ini masi error --}}
+                                            <form
+                                                action="{{ route('bookings.show', ['user' => 'admin', 'id' => $req->id]) }}"
+                                                method="GET">
                                                 @csrf
-                                                <button type="submit" class="btn btn-primary" name="request_taken_id" value="{{$req->id}}">Barang sudah diambil</button>
+                                                <button type="submit" class="btn btn-small btn-primary mb-3">
+                                                    <span class="material-symbols-outlined">visibility</span>
+                                                </button>
                                             </form>
-                                        @elseif($req->status == 'taken')
-                                            Menunggu konfirmasi
-                                        @elseif($req->status == 'on use')
-{{--                                        DONE: ini tampilin receiptnya--}}
-                                            <form action="{{ route('download') }}" target="_blank" method="post">
-                                                @csrf
-                                                <button type="submit" class="btn btn-primary" name="request_id" value="{{$req->id}}"><span class="material-symbols-outlined">file_download</span></button>
-                                            </form>
-
-                                            @if($req->flag_return == 1)
-                                                <form action="{{route('admin.formKembali')}}" method="post">
+                                        </td>
+                                        <td>{{ $req->status }}</td>
+                                        <td>
+                                            @if ($req->status == 'waiting approval')
+                                                @if ($req->track_approver == 0)
+                                                    <button type="button" class="btn btn-danger rejectBtn"
+                                                        value="{{ $req->id }}">Tolak</button>
+                                                    <button type="button" class="btn btn-success approveBtn"
+                                                        value="{{ $req->id }}">Setuju</button>
+                                                @elseif($req->track_approver != $approver)
+                                                    Menunggu persetujuan dari
+                                                    {{ \Illuminate\Support\Facades\Auth::user()->getAtasan($req->track_approver, $req->division_id) }}
+                                                @endif
+                                            @elseif($req->status == 'approved')
+                                                <form action="{{ route('takenBooking') }}" method="post">
                                                     @csrf
-                                                    <button type="submit" class="btn btn-primary" name="request_id" value="{{$req->id}}">Lihat form kembali</button>
+                                                    <button type="submit" class="btn btn-primary"
+                                                        name="request_taken_id" value="{{ $req->id }}">Barang sudah
+                                                        diambil</button>
                                                 </form>
+                                            @elseif($req->status == 'taken')
+                                                Menunggu konfirmasi
+                                            @elseif($req->status == 'on use')
+                                                {{--                                        DONE: ini tampilin receiptnya --}}
+                                                <form action="{{ route('download') }}" target="_blank" method="post">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-primary" name="request_id"
+                                                        value="{{ $req->id }}"><span
+                                                            class="material-symbols-outlined">file_download</span></button>
+                                                </form>
+
+                                                @if ($req->flag_return == 1)
+                                                    <form action="{{ route('admin.formKembali') }}" method="post">
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-primary" name="request_id"
+                                                            value="{{ $req->id }}">Lihat form kembali</button>
+                                                    </form>
+                                                @endif
                                             @endif
-                                        @endif
-                                    </td>
-                                </tr>
-                            @endforeach
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

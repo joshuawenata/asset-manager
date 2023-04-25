@@ -395,7 +395,6 @@ class RequestController extends Controller
                 $pesan = 'Ada request peminjaman alat lab baru dari ' . $req->User->name . ' ' . $req->User->email;
                 $receiver = DB::table('users')
                     ->select('email')
-                    ->where('division_id', '=', Auth::user()->division_id)
                     ->where('role_id', '=', 4)
                     ->get();
                 $receiver = $receiver[0]->email;

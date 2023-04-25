@@ -78,7 +78,7 @@
 
                 <button type="button" class="btn btn-small btn-success mb-3" data-bs-toggle="modal"
                     data-bs-target="#exampleModal">
-                    <span class="material-symbols-outlined">add</span>Tambah Lokasi Baru
+                    Tambah Lokasi Baru
                 </button>
 
                 <div class="card">

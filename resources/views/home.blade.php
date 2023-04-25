@@ -201,7 +201,7 @@
                                                 @if ($req->status == 'on use')
                                                     <form action="{{ route('kembali') }}" method="post">
                                                         @csrf
-                                                        <button type="submit" class="btn btn-primary"
+                                                        <button type="submit" class="btn btn-primary mt-2"
                                                             name="request_return_id" value="{{ $req->id }}">
                                                             @if ($req->flag_return == null || $req->flag_return == 0)
                                                                 Kembalikan

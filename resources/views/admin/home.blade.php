@@ -210,7 +210,7 @@
                                         <td>
                                             @if ($req->status == 'waiting approval')
                                                 @if ($req->track_approver == 0)
-                                                    <button type="button" class="btn btn-danger rejectBtn"
+                                                    <button type="button" class="btn btn-danger rejectBtn mb-2"
                                                         value="{{ $req->id }}">Tolak</button>
                                                     <button type="button" class="btn btn-success approveBtn"
                                                         value="{{ $req->id }}">Setuju</button>
@@ -239,8 +239,9 @@
                                                 @if ($req->flag_return == 1)
                                                     <form action="{{ route('admin.formKembali') }}" method="post">
                                                         @csrf
-                                                        <button type="submit" class="btn btn-primary" name="request_id"
-                                                            value="{{ $req->id }}">Lihat form kembali</button>
+                                                        <button type="submit" class="btn btn-primary mt-2"
+                                                            name="request_id" value="{{ $req->id }}">Lihat form
+                                                            kembali</button>
                                                     </form>
                                                 @endif
                                             @endif

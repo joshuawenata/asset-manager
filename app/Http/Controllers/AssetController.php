@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\AssetExport;
 use App\Models\Asset;
+use App\Models\AssetLocation;
 use App\Models\AssetCategory;
 use App\Models\DeletedAsset;
 use App\Models\Location;
@@ -193,9 +194,13 @@ class AssetController extends Controller
     public function destroy(Request $request)
     {
         $aset = Asset::find($request->asset_delete_id);
+        $asetloc = AssetLocation::where('asset_id',$request->asset_delete_id);
+        $bookingsloc = Booking::where('asset_id',$request->asset_delete_id);
         $d_aset = new DeletedAssetController();
         $d_aset->store($aset);
 
+        $asetloc->delete();
+        $bookingsloc->delete();
         $aset->delete();
         return redirect('search-asset/' . \Illuminate\Support\Facades\Auth::user()->division->id)->with('message', 'Aset Berhasil Dihapus');
 

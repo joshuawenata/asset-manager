@@ -62,9 +62,9 @@ Route::middleware(['auth', 'cekRole:student,staff'])->group(function(){
 //Admin Routes
 Route::middleware(['auth', 'cekRole:admin'])->group(function(){
     Route::get('/admin/dashboard', [\App\Http\Controllers\HomeController::class, 'adminDashboard'])->name('admin.dashboard');
-    Route::get('/admin/location', [\App\Http\Controllers\LocationController::class, 'index'])->name('admin.location');
-    Route::post('/delete-location-admin', [\App\Http\Controllers\LocationController::class, 'destroy']);
-    Route::post('/store-location-admin', [\App\Http\Controllers\LocationController::class, 'store'])->name('store-location-admin');
+    Route::get('/admin/location', [\App\Http\Controllers\LocationAdminController::class, 'index'])->name('admin.location');
+    Route::post('/delete-location-admin', [\App\Http\Controllers\LocationAdminController::class, 'destroy'])->name('delete-location-admin');
+    Route::post('/store-location-admin', [\App\Http\Controllers\LocationAdminController::class, 'store'])->name('store-location-admin');
 
     //ASSET
     //READ

@@ -82,7 +82,7 @@
                 </button>
 
                 <div class="card">
-                    <div class="card-header">{{ __('Dashboard Admin') }}</div>
+                    <div class="card-header">{{ __('Dashboard Super Admin') }}</div>
 
                     <div class="card-body">
 
@@ -108,14 +108,13 @@
                                         <td>
                                             <button type="button" class="btn btn-danger deleteLocationBtn"
                                                 value="{{ $item->id }}"><span
-                                                    class="material-symbols-outlined">delete</span></button>
+                                                    class="material-symbols-outlined">delete</span>
+                                            </button>
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
-
-
 
                     </div>
                 </div>

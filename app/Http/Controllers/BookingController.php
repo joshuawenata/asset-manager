@@ -64,14 +64,13 @@ class BookingController extends Controller
         $message ='REQUEST PEMINJAMAN ALAT LAB';
         $subyek = 'Ada request peminjaman alat lab baru dari ' . Auth::user()->name . ' ' . Auth::user()->email;
         // //admin divisi yg sama
-        // $receiver = DB::table('users')
-        //     ->select('email')
-        //     ->where('division_id', '==', $div_id)
-        //     ->where('role_id', '==', 3)
-        //     ->get();
-        // var_dump($receiver);
-        // $receiver = $receiver[0]->email;
-        // $email->index($receiver, $subyek, $message);
+        $receiver = DB::table('users')
+            ->select('email')
+            // ->where('division_id', $div_id)
+            ->where('role_id', 3)
+            ->get();
+        $receiver = $receiver[0]->email;
+        $email->index($receiver, $subyek, $message);
 
         return redirect('/dashboard')->with('message', "Request Berhasil Ditambahkan");
     }

@@ -65,4 +65,5 @@ class NotifyMail extends Mailable
     {
         return [];
     }
+
 }

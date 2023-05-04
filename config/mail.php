@@ -92,7 +92,7 @@ return [
     */
 
     'from' => [
-        'address' => 'assetmanager.binus@gmail.com',
+        'address' => 'joshua.sunarto@binus.edu',
         'name' => 'Asset Manager',
     ],
 

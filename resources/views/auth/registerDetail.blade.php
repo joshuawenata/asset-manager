@@ -99,9 +99,16 @@
                                         {{-- @foreach ($data as $index => $item)
                                             <option value="{{ $item->id }}">{{ $item->name }}</option>
                                         @endforeach --}}
-                                        <option value="1">IT</option>
-                                        <option value="2">DKV</option>
-                                        <option value="3">DI</option>
+                                        @if ($role_id == 1)
+                                            <option value="1">IT</option>
+                                            <option value="2">DKV</option>
+                                            <option value="3">DI</option>
+                                        @elseif($role_id == 2)
+                                            <option value="1">IT</option>
+                                            <option value="2">DKV</option>
+                                            <option value="3">DI</option>
+                                            <option value="4">BM</option>
+                                        @endif
                                     </select>
                                 </div>
                             </div>

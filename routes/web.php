@@ -23,6 +23,7 @@ Route::get('register-show', function (Request $request) {
     return view('auth.registerDetail')->with('role_id', $role_id);
 });
 Route::post('insert-account',function(Request $request){
+    $role_id = $request->input('role_id');
     DB::table('users')->insert([
         'name' => $request->input('name'),
         'binusianid' => $request->input('binusianid'),
@@ -31,7 +32,7 @@ Route::post('insert-account',function(Request $request){
         'division_id' => $request->input('division_id'),
         'email' => $request->input('email'),
         'password' => bcrypt($request->input('password')),
-        'role_id' => 1,
+        'role_id' => $role_id,
     ]);
     return view('auth.login');
 });

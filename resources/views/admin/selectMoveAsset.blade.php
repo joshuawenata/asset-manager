@@ -1,11 +1,12 @@
 @extends('layouts.app')
 
 @section('css')
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 @endsection
 
 @section('js')
-    <script defer src="{{ asset('js/datatable.js')}}"></script>
+    <script defer src="{{ asset('js/datatable.js') }}"></script>
 @endsection
 
 @section('content')
@@ -23,43 +24,44 @@
 
                             <table id="myTable" class="display table">
                                 <thead>
-                                <tr>
-                                    <th scope="col">No</th>
-                                    <th scope="col">Nomor Seri</th>
-                                    <th scope="col">Jenis</th>
-                                    <th scope="col">Spesifikasi</th>
-                                    <th scope="col">Lokasi</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Aksi</th>
-                                </tr>
+                                    <tr>
+                                        <th scope="col">No</th>
+                                        <th scope="col">Nomor Seri</th>
+                                        <th scope="col">Jenis</th>
+                                        <th scope="col">Spesifikasi</th>
+                                        <th scope="col">Lokasi</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Aksi</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($data as $index => $item)
-                                    <tr>
-                                        {{--                masukin kolom--}}
-                                        <th scope="row">{{$index+1}}</th>
-                                        <td>{{$item->serial_number}}</td>
-                                        <td>{{$item->assetCategory->name}}</td>
-                                        <td>{{$item->brand}}</td>
-                                        <td>{{$item->current_location}}</td>
-                                        <td>{{$item->status}}</td>
-                                        <td>
-                                            <input class="form-check-input mt-0 required_group" type="checkbox" value="{{$item->id}}" id="assets" name="assets[]">
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                    @foreach ($data as $index => $item)
+                                        <tr>
+                                            {{--                masukin kolom --}}
+                                            <th scope="row">{{ $index + 1 }}</th>
+                                            <td>{{ $item->serial_number }}</td>
+                                            <td>{{ $item->assetCategory->name }}</td>
+                                            <td>{{ $item->brand }}</td>
+                                            <td>{{ $item->current_location }}</td>
+                                            <td>{{ $item->status }}</td>
+                                            <td>
+                                                <input class="form-check-input mt-0 required_group" type="checkbox"
+                                                    value="{{ $item->id }}" id="assets" name="assets[]">
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
 
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-0">
-                                    <input class="form-check-input mt-0" type="checkbox" name="select-all" id="select-all">
+                                    <input class="form-check-input mt-1" type="checkbox" name="select-all" id="select-all">
                                     <label for="select-all">pilih semua</label>
                                 </div>
                             </div>
 
                             <div class="row mb-0">
-                                <div class="col-md-6 offset-md-0">
+                                <div class="col-md-6 offset-md-0 mt-2">
                                     <button type="submit" name="submit" class="btn btn-primary">
                                         {{ __('Next') }}
                                     </button>
@@ -75,17 +77,16 @@
     </div>
 
     <script>
-        function validateGroup(){
+        function validateGroup() {
             let things = document.querySelectorAll('.required_group');
             let checked = 0;
-            for(let thing of things){
+            for (let thing of things) {
                 thing.checked && checked++;
             }
-            if(checked){
+            if (checked) {
                 things[things.length - 1].setCustomValidity("");
                 document.getElementById('checkGroup').submit();
-            }
-            else{
+            } else {
                 things[things.length - 1].setCustomValidity("Please check at least one item");
                 things[things.length - 1].reportValidity();
             }
@@ -97,17 +98,16 @@
     </script>
 
     <script>
-        $('#select-all').click(function (event){
-           if(this.checked){
-               $(':checkbox').each(function (){
-                   this.checked = true;
-               });
-           }
-           else{
-               $(':checkbox').each(function(){
-                  this.checked = false;
-               });
-           }
+        $('#select-all').click(function(event) {
+            if (this.checked) {
+                $(':checkbox').each(function() {
+                    this.checked = true;
+                });
+            } else {
+                $(':checkbox').each(function() {
+                    this.checked = false;
+                });
+            }
         });
     </script>
 @endsection

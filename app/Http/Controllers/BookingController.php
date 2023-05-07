@@ -203,7 +203,9 @@ class BookingController extends Controller
                 ->where('asset_id', '=', $b->asset_id)
                 ->offset(1)->limit(1)
                 ->get();
-            foreach ($prev_pos as $p) $lok = $p->to_location;
+            foreach ($prev_pos as $p){
+                $lok = $p->to_location;
+            }
 
             $loc = new assetLocation();
             $loc->asset_id = $b->asset_id;

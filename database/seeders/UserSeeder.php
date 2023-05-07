@@ -15,8 +15,8 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::create([
-            'name' => 'Anthony Steven',
-            'email' => 'anthony.trimurti001@binus.ac.id',
+            'name' => 'Joshua Wenata Sunarto',
+            'email' => 'joshua.sunarto@binus.ac.id',
             'password' => bcrypt('12345'),
             'binusianid' => 'BN0014352432',
             'phone' => '082543356234',
@@ -26,8 +26,8 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'name' => 'LB001',
-            'email' => 'lb001@binus.edu',
+            'name' => 'LB003',
+            'email' => 'lb003@binus.edu',
             'password' => bcrypt('12345'),
             'binusianid' => 'BN8345345865',
             'phone' => '081345634543',
@@ -49,7 +49,7 @@ class UserSeeder extends Seeder
 
         User::create([
             'name' => 'Maria Auleria',
-            'email' => 'maria.auleria@gmail.com',
+            'email' => 'joshua.sunarto@binus.edu',
             'password' => bcrypt('12345'),
             'binusianid' => 'BN835638546',
             'phone' => '08145635438',

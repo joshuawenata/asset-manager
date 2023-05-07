@@ -120,8 +120,8 @@ class RequestController extends Controller
         $email = new SendEmailController();
         $receiver = DB::table('users')
             ->select('email')
-            ->where('division_id', '=', $req->division_id)
-            ->where('role_id', '=', 3)
+            // ->where('division_id', '=', $req->division_id)
+            ->where('role_id', 3)
             ->get();
         $receiver = $receiver[0]->email;
         $message = $req->User->name . ' mengajukan pengembalian barang.';;

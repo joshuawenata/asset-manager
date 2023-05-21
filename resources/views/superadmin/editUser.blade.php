@@ -1,21 +1,22 @@
 @extends('layouts.app')
 
 @section('css')
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 @endsection
 
 @section('js')
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script defer>
-        $(document).ready(function (){
-            $('.deleteUserBtn').click(function (e){
+        $(document).ready(function() {
+            $('.deleteUserBtn').click(function(e) {
                 e.preventDefault();
                 var user_id = $(this).val();
                 $('#user_id').val(user_id);
                 $('#deleteModal').modal('show');
             });
 
-            $('.ResetPassBtn').click(function (e){
+            $('.ResetPassBtn').click(function(e) {
                 e.preventDefault();
                 var user_id = $(this).val();
                 $('#user_reset_id').val(user_id);
@@ -91,82 +92,99 @@
                             @method('PUT')
 
                             <div class="row mb-3">
-                                <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Nama') }}</label>
+                                <label for="name"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Nama') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $data->name }}" required autocomplete="name" autofocus readonly>
+                                    <input id="name" type="text"
+                                        class="form-control @error('name') is-invalid @enderror" name="name"
+                                        value="{{ $data->name }}" required autocomplete="name" autofocus readonly>
 
                                     @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                     @enderror
                                 </div>
                             </div>
 
                             <div class="row mb-3">
-                                <label for="binusianid" class="col-md-4 col-form-label text-md-end">{{ __('Binusian ID') }}</label>
+                                <label for="binusianid"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Binusian ID') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="binusianid" type="text" class="form-control @error('binusianid') is-invalid @enderror" name="binusianid" value="{{ $data->binusianid }}" required autocomplete="binusianid" autofocus readonly>
+                                    <input id="binusianid" type="text"
+                                        class="form-control @error('binusianid') is-invalid @enderror" name="binusianid"
+                                        value="{{ $data->binusianid }}" required autocomplete="binusianid" autofocus
+                                        readonly>
 
                                     @error('binusianid')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                     @enderror
                                 </div>
                             </div>
 
                             <div class="row mb-3">
-                                <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email') }}</label>
+                                <label for="email"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Email') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $data->email }}" required autocomplete="email" autofocus readonly>
+                                    <input id="email" type="email"
+                                        class="form-control @error('email') is-invalid @enderror" name="email"
+                                        value="{{ $data->email }}" required autocomplete="email" autofocus readonly>
 
                                     @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                     @enderror
                                 </div>
                             </div>
 
                             <div class="row mb-3">
-                                <label for="phone" class="col-md-4 col-form-label text-md-end">{{ __('No HP') }}</label>
+                                <label for="phone"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('No HP') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ $data->phone }}" required autocomplete="phone" autofocus readonly>
+                                    <input id="phone" type="text"
+                                        class="form-control @error('phone') is-invalid @enderror" name="phone"
+                                        value="{{ $data->phone }}" required autocomplete="phone" autofocus readonly>
 
                                     @error('phone')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                     @enderror
                                 </div>
                             </div>
 
                             <div class="row mb-3">
-                                <label for="address" class="col-md-4 col-form-label text-md-end">{{ __('Alamat') }}</label>
+                                <label for="address"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Alamat') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ $data->address }}" required autocomplete="address" autofocus readonly>
+                                    <input id="address" type="text"
+                                        class="form-control @error('address') is-invalid @enderror" name="address"
+                                        value="{{ $data->address }}" required autocomplete="address" autofocus readonly>
 
                                     @error('address')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                     @enderror
                                 </div>
                             </div>
 
                             <div class="row mb-3">
-                                <label for="department" class="col-md-4 col-form-label text-md-end">{{ __('Departemen') }}</label>
+                                <label for="department"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Departemen') }}</label>
 
                                 <div class="col-md-6">
                                     <select class="form-select" name="department" id="department">
-                                        @foreach($dept as $index => $item)
-                                            @if($data->division_id == $item->id)
+                                        @foreach ($dept as $index => $item)
+                                            @if ($data->division_id == $item->id)
                                                 <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
                                             @else
                                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -177,12 +195,13 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="role" class="col-md-4 col-form-label text-md-end">{{ __('Role') }}</label>
+                                <label for="role"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Role') }}</label>
 
                                 <div class="col-md-6">
                                     <select class="form-select" name="role" id="role">
-                                        @foreach($roles as $index => $item)
-                                            @if($data->role_id == $item->id)
+                                        @foreach ($roles as $index => $item)
+                                            @if ($data->role_id == $item->id)
                                                 <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
                                             @else
                                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -197,9 +216,11 @@
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
 
-                                    <button type="button" class="btn btn-danger ResetPassBtn" value="{{ $data->id }}">Reset Password</button>
+                                    <button type="button" class="btn btn-danger ResetPassBtn"
+                                        value="{{ $data->id }}">Reset Password</button>
 
-                                    <button type="button" class="btn btn-danger deleteUserBtn" value="{{ $data->id }}"><span class="material-symbols-outlined">delete</span>Hapus User</button>
+                                    <button type="button" class="btn btn-danger deleteUserBtn"
+                                        value="{{ $data->id }}">Hapus User</button>
 
                                     <button type="submit" class="btn btn-primary">
                                         {{ __('Perbarui Data') }}

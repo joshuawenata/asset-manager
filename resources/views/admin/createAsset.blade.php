@@ -52,15 +52,15 @@
                             </div>
 
                             {{-- fitur baru pic asset --}}
-                            {{-- <div class="row mb-3">
-                                <label for="picasset"
+                            <div class="row mb-3">
+                                <label for="pic"
                                     class="col-md-4 col-form-label text-md-end">{{ __('PIC Asset') }}</label>
                                 <div class="col-md-6">
-                                    <input id="picasset" type="text"
-                                        class="form-control @error('picasset') is-invalid @enderror" name="picasset"
-                                        value="{{ old('picasset') }}" required autocomplete="picasset" autofocus>
+                                    <input id="pic" type="text"
+                                        class="form-control @error('pic') is-invalid @enderror" name="pic"
+                                        value="{{ old('pic') }}" required autocomplete="pic" autofocus>
                                 </div>
-                            </div> --}}
+                            </div>
 
                             <div class="row mb-3">
                                 <label for="brand"

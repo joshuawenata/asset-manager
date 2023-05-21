@@ -18,8 +18,9 @@
 
                                 <div class="col-md-6">
                                     <select class="form-select" name="role_id" id="role_id">
-                                        <option value="1">Mahasiswa</option>
                                         <option value="2">Staff/Karyawan</option>
+                                        <option value="3">Admin</option>
+                                        <option value="4">Approver</option>
                                     </select>
                                 </div>
                             </div>

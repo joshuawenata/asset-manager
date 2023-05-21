@@ -34,7 +34,7 @@ Route::post('insert-account',function(Request $request){
         'password' => bcrypt($request->input('password')),
         'role_id' => $role_id,
     ]);
-    return view('auth.login');
+    return redirect()->route('superadmin.dashboard');
 });
 Route::get('/see/{user}/dashboard/{id}', [\App\Http\Controllers\BookingController::class, 'show'])->name('bookings.show')->middleware(['auth', 'cekRole:student,staff,admin,approver']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -118,6 +118,9 @@ Route::middleware(['auth', 'cekRole:superadmin'])->group(function(){
     Route::post('/store-division', [\App\Http\Controllers\DivisionController::class, 'store'])->name('storeDivision');
     //READ
     Route::get('/division', [\App\Http\Controllers\DivisionController::class, 'index'])->name('superadmin.division');
+    Route::get('/register', function(){
+        return view('auth.register');
+    })->name('superadmin.register');
     //DELETE
     Route::post('/delete-division', [\App\Http\Controllers\DivisionController::class, 'destroy']);
     //USER

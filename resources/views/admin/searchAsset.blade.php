@@ -50,6 +50,9 @@
                                     <th scope="col">Spesifikasi</th>
                                     @if ($mode == 'current')
                                         <th scope="col">Lokasi</th>
+                                    @endif
+                                    <th scope="col">PIC</th>
+                                    @if ($mode == 'current')
                                         <th scope="col">Status</th>
                                         <th scope="col">Aksi</th>
                                     @endif
@@ -65,11 +68,15 @@
                                         <td>{{ $item->brand }}</td>
                                         @if ($mode == 'current')
                                             <td>{{ $item->current_location }}</td>
+                                        @endif
+                                        <td>{{ $item->pic }}</td>
+                                        @if ($mode == 'current')
                                             @if ($item->status == 'dipinjam')
                                                 <td>{{ $item->status . ' oleh ' . $item->getNamaPeminjam($item->id) }}</td>
                                             @else
                                                 <td>{{ $item->status }}</td>
                                             @endif
+
                                             <td>
                                                 <a title="edit barang" class="btn btn-small btn-info"
                                                     href="{{ URL::to('/edit-asset/' . $item->id) }}"><span

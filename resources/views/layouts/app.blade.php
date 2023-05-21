@@ -86,6 +86,8 @@
                             @elseif(auth()->user()->role->name == 'superadmin')
                                 <a class="nav-link active" href="{{ route('superadmin.division') }}">Lihat Departemen</a>
                                 <a class="nav-link active" href="{{ route('superadmin.location') }}">Kelola Lokasi</a>
+                                <a class="nav-link active"
+                                    href="{{ route('superadmin.register') }}">{{ __('Daftarkan akun') }}</a>
                             @endif
                         @endguest
                     </ul>
@@ -95,15 +97,15 @@
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Masuk') }}</a>
-                                </li>
+                                </li> --}}
                             @endif
 
                             @if (Route::has('register'))
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Daftar') }}</a>
-                                </li>
+                                </li> --}}
                             @endif
                         @else
                             <li class="nav-item dropdown">

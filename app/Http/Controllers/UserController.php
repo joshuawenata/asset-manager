@@ -92,7 +92,7 @@ class UserController extends Controller
     public function reset(Request $request)
     {
         $user = User::find($request->user_reset_id);
-        $user->password = Hash::make('B1nu$-' . Auth::user()->binusianid);
+        $user->password = Hash::make('B1nu$-' . $user->binusianid);
         $user->update();
         return redirect('superadmin/dashboard')->with('message', 'Data User Berhasil Diperbaharui');
     }

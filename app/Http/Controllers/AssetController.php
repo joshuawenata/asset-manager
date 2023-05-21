@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\AssetExport;
 use App\Models\Asset;
 use App\Models\AssetLocation;
+use App\Models\Booking;
 use App\Models\AssetCategory;
 use App\Models\DeletedAsset;
 use App\Models\Location;
@@ -91,6 +92,7 @@ class AssetController extends Controller
             $aset->serial_number = $data['serialnumber'];
             $aset->brand = $data['brand'];
             $aset->current_location = $data['location'];
+            $aset->pic = $data['pic'];
 
             if($data['asset-status'] == 'tersedia'){
                 $aset->status = $data['asset-status'];
@@ -162,6 +164,7 @@ class AssetController extends Controller
         $validator = Validator::make($request->all(), [
             'serialnumber' => 'required',
             'brand' => 'required',
+            'pic' => 'required',
             'asset_category' => 'required'
         ]);
 
@@ -174,6 +177,7 @@ class AssetController extends Controller
             $aset = Asset::find($id);
             $aset->serial_number = $request->input('serialnumber');
             $aset->brand = $request->input('brand');
+            $aset->pic = $request->input('pic');
             $aset->asset_category_id = $request->input('asset_category');
 
             if($request->input('asset-status')){

@@ -19,6 +19,7 @@ class CreateAssetsTable extends Migration
             $table->string('status')->default('tidak tersedia');
             $table->string('brand');
             $table->string('current_location');
+            $table->string('pic');
             $table->unsignedBigInteger('division_id');
             $table->unsignedBigInteger('asset_category_id');
             $table->foreign('asset_category_id')->references('id')->on('asset_categories');

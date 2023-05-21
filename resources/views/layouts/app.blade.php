@@ -74,15 +74,17 @@
                     <ul class="navbar-nav me-auto">
                         @guest
                         @else
-                            @if (auth()->user()->role->name == 'student' || auth()->user()->role->name == 'staff')
+                            @if (auth()->user()->role->name == 'staff')
                                 <a class="nav-link active" href="{{ route('checkRequest') }}">Pinjam Aset</a>
+                                <a class="nav-link active" href="{{ route('staff.createAsset') }}">Tambah Barang</a>
                             @elseif(auth()->user()->role->name == 'admin')
                                 <a class="nav-link active"
                                     href="{{ url('/search-asset/' . \Illuminate\Support\Facades\Auth::user()->division->id) }}">Lihat
                                     Inventory</a>
                                 <a class="nav-link active" href="{{ route('admin.historiRequest') }}">Riwayat Peminjaman</a>
                             @elseif(auth()->user()->role->name == 'approver')
-                                <a class="nav-link active" href="{{ route('admin.historiRequest') }}">Riwayat Peminjaman</a>
+                                <a class="nav-link active" href="{{ route('admin.historiRequest') }}">Riwayat
+                                    Peminjaman</a>
                             @elseif(auth()->user()->role->name == 'superadmin')
                                 <a class="nav-link active" href="{{ route('superadmin.division') }}">Lihat Departemen</a>
                                 <a class="nav-link active" href="{{ route('superadmin.location') }}">Kelola Lokasi</a>

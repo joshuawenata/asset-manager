@@ -40,8 +40,8 @@ Route::get('/see/{user}/dashboard/{id}', [\App\Http\Controllers\BookingControlle
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/update-request', [\App\Http\Controllers\RequestController::class, 'update'])->name('updateRequest')->middleware(['auth', 'cekRole:admin,approver']);
 
-//Student & Staff Routes
-Route::middleware(['auth', 'cekRole:student,staff'])->group(function(){
+// Staff Routes
+Route::middleware(['auth', 'cekRole:staff'])->group(function(){
     Route::get('/dashboard', [\App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
     //CHECK TGL
     Route::get('/check-request', [\App\Http\Controllers\RequestController::class, 'check'])->name('checkRequest');
@@ -49,6 +49,8 @@ Route::middleware(['auth', 'cekRole:student,staff'])->group(function(){
     //CREATE
     Route::post('/create-request', [\App\Http\Controllers\RequestController::class, 'createRequest'])->name('createRequest');
     Route::post('/create-request-detail', [\App\Http\Controllers\RequestController::class, 'create'])->name('createRequestDetail');
+    Route::get('/create-asset-staff', [\App\Http\Controllers\AssetController::class, 'createForStaff'])->name('staff.createAsset');
+    Route::post('/store-new-asset-staff', [\App\Http\Controllers\AssetController::class, 'storeForStaff'])->name('staff.storeAsset');
     //CONFIRM
     Route::post('/confirm-request', [\App\Http\Controllers\RequestController::class, 'confirm'])->name('confirmRequest');
     Route::post('/save-request', [\App\Http\Controllers\BookingController::class, 'store'])->name('storeRequest');

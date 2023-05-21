@@ -65,6 +65,16 @@ class AssetController extends Controller
         ]);
     }
 
+    public function createForStaff()
+    {
+        $data = Location::all();
+        $show = AssetCategory::all();
+        return View::make('createAsset', [
+            'show' => $show,
+            'data' => $data
+        ]);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -114,6 +124,52 @@ class AssetController extends Controller
             $this->storeLoc();
 
             return redirect('search-asset/' . $data['division_id'])->with('message', "Aset Berhasil Ditambahkan");
+        }
+    }
+
+    public function storeForStaff(Request $request)
+    {
+        //validasi usernya apakah boleh nyimpen ato ga
+        $validator = Validator::make($request->all(), [
+            'serialnumber' => 'required',
+            'location' => 'required',
+            'brand' => 'required'
+        ]);
+
+        if($validator->fails()){
+            return redirect('admin/createAsset')
+                ->withErrors($validator)
+                ->withInput();
+        }
+        else{
+            //store
+            $data = $request->input();
+            $aset = new Asset;
+            $aset->serial_number = $data['serialnumber'];
+            $aset->brand = $data['brand'];
+            $aset->current_location = $data['location'];
+            $aset->pic = $data['pic'];
+
+            if($data['asset-status'] == 'tersedia'){
+                $aset->status = $data['asset-status'];
+            }
+
+            if($data['asset-category'] != null){
+                $aset->asset_category_id = $data['asset-category'];
+            }
+            else if ($data['new-asset-category'] != null){
+                $new_category = new AssetCategoryController();
+                $new_cat_id = $new_category->store($data['new-asset-category']);
+
+                $aset->asset_category_id = $new_cat_id;
+            }
+
+            $aset->division_id = $data['division_id'];
+            $aset->save();
+
+            $this->storeLoc();
+
+            return redirect('dashboard')->with('message', "Aset Berhasil Ditambahkan");
         }
     }
 

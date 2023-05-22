@@ -20,7 +20,9 @@ class RequestSeeder extends Seeder
             'purpose' => 'Tugas LAB',
             'lokasi' => 'Jl. Everywhere No.110',
             'user_id' => 1,
-            'division_id' => 3
+            'division_id' => 3,
+            'binusian_id_peminjam' => 'BN123',
+            'approver' => 'maria'
         ]);
     }
 }

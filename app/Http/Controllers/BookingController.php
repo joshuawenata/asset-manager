@@ -66,7 +66,7 @@ class BookingController extends Controller
         // //admin divisi yg sama
         $receiver = DB::table('users')
             ->select('email')
-            // ->where('division_id', $div_id)
+            ->where('division_id', $div_id)
             ->where('role_id', 3)
             ->get();
         $receiver = $receiver[0]->email;

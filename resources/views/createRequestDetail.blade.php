@@ -24,6 +24,27 @@
                             @csrf
 
                             <div class="mb-3">
+                                <label for="binusianid_peminjam"
+                                    class="col-form-label text-md-end">{{ __('Binusian ID Peminjam') }}</label>
+
+                                <div>
+                                    <input id="binusian_id_peminjam" type="text" class="form-control"
+                                        name="binusian_id_peminjam" required>
+                                </div>
+
+                                <label for="purpose"
+                                    class="col-form-label text-md-end">{{ __('Approver tujuan peminjaman') }}</label>
+
+                                <div>
+                                    <select class="form-select" name="approver" id="approver">
+                                        @foreach ($approver as $index => $item)
+                                            <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
                                 <label for="purpose"
                                     class="col-form-label text-md-end">{{ __('Tujuan Peminjaman') }}</label>
 

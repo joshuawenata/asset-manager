@@ -41,6 +41,8 @@ class CreateRequestsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('division_id');
             $table->foreign('division_id')->references('id')->on('divisions');
+            $table->text('binusian_id_peminjam');
+            $table->text('approver');
             $table->timestamps();
         });
     }

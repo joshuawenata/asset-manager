@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Location;
+use App\Models\User;
 use DateTime;
 use DateTimeZone;
 use Illuminate\Http\Request;
@@ -239,7 +240,7 @@ class RequestController extends Controller
             'book_date' => $book_date,
             'return_date' => $return_date,
             'assets' => $avail_items,
-            'division_id' => $div_id
+            'division_id' => $div_id,
         ]);
     }
 
@@ -250,13 +251,15 @@ class RequestController extends Controller
         $book_date = $request->input('book_date');
         $assets = $request->input('assets');
         $division_id = $request->input('division_id');
+        $approver = User::all()->where('role_id', 4);
 
         return view('createRequestDetail', [
             'assets' => $assets,
             'book_date' => $book_date,
             'return_date' => $return_date,
             'data' => $data,
-            'division_id' => $division_id
+            'division_id' => $division_id,
+            'approver' => $approver
         ]);
     }
 
@@ -286,6 +289,8 @@ class RequestController extends Controller
         $return_date = $request->input('return_date');
         $book_date = $request->input('book_date');
         $division_id = $request->input('division_id');
+        $binusian_id_peminjam = $request->input('binusian_id_peminjam');
+        $approver = $request->input('approver');
 
         return view('confirmRequest', [
             'assets' => $bookings,
@@ -293,7 +298,9 @@ class RequestController extends Controller
             'return_date' => $return_date,
             'purpose' => $purpose,
             'lokasi' => $lokasi,
-            'division_id' => $division_id
+            'division_id' => $division_id,
+            'binusian_id_peminjam' => $binusian_id_peminjam,
+            'approver' => $approver
         ]);
     }
 
@@ -312,6 +319,8 @@ class RequestController extends Controller
         $request->lokasi = $data['lokasi'];
         $request->user_id = Auth::user()->id;
         $request->division_id = $data['division_id'];
+        $request->binusian_id_peminjam = $data['binusian_id_peminjam'];
+        $request->approver = $data['approver'];
 
         $request->book_date = date("Y-m-d H:i:s", strtotime($data['book_date']));
         $request->return_date = date("Y-m-d H:i:s", strtotime($data['return_date']));
@@ -445,8 +454,6 @@ class RequestController extends Controller
     public function approvePengembalian(Request $request){
         $id = $request->input('request_return_id');
         $req = \App\Models\Request::find($id);
-
-//        $req->return_notice = $request->input('pesan') . "\n";
 
         $req->return_notice = $request->input('isu_rusak');
         $req->status = 'done';

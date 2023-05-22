@@ -26,10 +26,12 @@ class DivisionController extends Controller
     public function index2(Request $request){
         $data = Division::all();
         $datetimes = $request->input('datetimes');
+        $binusian_id_peminjam = $request->input('binusian_id_peminjam');
 
         return Redirect::to('/check-request#see')->with([
             'datetimes' => $datetimes,
-            'data' => $data
+            'data' => $data,
+            'binusian_id_peminjam' => $binusian_id_peminjam
         ]);
     }
 

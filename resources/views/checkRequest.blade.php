@@ -71,6 +71,7 @@
                             @csrf
 
                             <div class="row mb-3">
+
                                 <label for="datetimes"
                                     class="col-md-4 col-form-label text-md-end">{{ __('Tanggal Peminjaman') }}</label>
 

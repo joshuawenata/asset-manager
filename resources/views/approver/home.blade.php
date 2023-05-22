@@ -228,15 +228,6 @@
                                                         value="{{ $req->id }}"><span
                                                             class="material-symbols-outlined">file_download</span></button>
                                                 </form>
-
-                                                @if ($req->flag_return == 1)
-                                                    <form action="{{ route('admin.formKembali') }}" method="post">
-                                                        @csrf
-                                                        <button type="submit" class="btn btn-primary mt-2"
-                                                            name="request_id" value="{{ $req->id }}">Lihat form
-                                                            kembali</button>
-                                                    </form>
-                                                @endif
                                             @endif
                                         </td>
                                     </tr>

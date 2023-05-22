@@ -190,12 +190,9 @@ class RequestController extends Controller
         $book_date = strtotime($res[0]);
         $return_date = strtotime($res[1]);
 
-        $div_id = $request->input('division_id');
-
         $assets = DB::table('assets')
             ->join('asset_categories', 'assets.asset_category_id', '=', 'asset_categories.id')
             ->select('assets.*', 'asset_categories.name')
-            ->where('division_id', '=', $div_id)
             ->where('status', 'tersedia')
             ->orWhere('status', 'dipinjam')
             ->get();
@@ -239,7 +236,6 @@ class RequestController extends Controller
             'book_date' => $book_date,
             'return_date' => $return_date,
             'assets' => $avail_items,
-            'division_id' => $div_id
         ]);
     }
 
@@ -249,14 +245,12 @@ class RequestController extends Controller
         $return_date = $request->input('return_date');
         $book_date = $request->input('book_date');
         $assets = $request->input('assets');
-        $division_id = $request->input('division_id');
 
         return view('createRequestDetail', [
             'assets' => $assets,
             'book_date' => $book_date,
             'return_date' => $return_date,
             'data' => $data,
-            'division_id' => $division_id
         ]);
     }
 

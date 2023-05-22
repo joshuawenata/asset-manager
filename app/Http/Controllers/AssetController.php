@@ -9,6 +9,7 @@ use App\Models\Booking;
 use App\Models\AssetCategory;
 use App\Models\DeletedAsset;
 use App\Models\Location;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -59,8 +60,10 @@ class AssetController extends Controller
     {
         $data = Location::all();
         $show = AssetCategory::all();
+        $pic = User::where([['role_id', 3],['active_status',1]])->get();
         return View::make('admin.createAsset', [
             'show' => $show,
+            'pic' => $pic,
             'data' => $data
         ]);
     }
@@ -69,8 +72,11 @@ class AssetController extends Controller
     {
         $data = Location::all();
         $show = AssetCategory::all();
+        $pic = User::where([['role_id', 3],['active_status',1]])->get();
+
         return View::make('createAsset', [
             'show' => $show,
+            'pic' => $pic,
             'data' => $data
         ]);
     }

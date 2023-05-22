@@ -56,9 +56,11 @@
                                 <label for="pic"
                                     class="col-md-4 col-form-label text-md-end">{{ __('PIC Asset') }}</label>
                                 <div class="col-md-6">
-                                    <input id="pic" type="text"
-                                        class="form-control @error('pic') is-invalid @enderror" name="pic"
-                                        value="{{ old('pic') }}" required autocomplete="pic" autofocus>
+                                    <select class="form-select" name="pic" id="pic">
+                                        @foreach ($pic as $index => $item)
+                                            <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
 

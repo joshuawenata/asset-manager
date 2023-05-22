@@ -15,7 +15,7 @@
             <div class="col-md-12">
 
                 <div class="card">
-                    <div class="card-header">{{ __('Pinjam Aset') }}</div>
+                    <div class="card-header">{{ __('Pinjam Barang') }}</div>
 
                     <div class="card-body">
 

@@ -14,7 +14,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        {{ __('Tambahkan Aset') }}
+                        {{ __('Tambahkan Barang') }}
                     </div>
 
                     <div class="card-body">
@@ -98,7 +98,7 @@
 
                             <div class="row mb-3">
                                 <label for="asset-category"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Kategori Aset') }}</label>
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Kategori Barang') }}</label>
 
                                 <div class="col-md-6">
                                     @if ($show)
@@ -113,7 +113,7 @@
                                     <div class="mt-2">
                                         <input class="form-check-input mt-1" type="radio" id="show"
                                             name="asset-category" value="" />
-                                        <label for="show">Tambah Kategori Aset Baru</label>
+                                        <label for="show">Tambah Kategori Barang Baru</label>
                                     </div>
                                     <div id="box" style="display: none;">
                                         <input id="new-asset-category" type="text"

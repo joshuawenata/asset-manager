@@ -27,12 +27,12 @@
                 <form action="{{ url('delete-asset') }}" method="post">
                     @csrf
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Hapus Aset</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Hapus Barang</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <input type="hidden" name="asset_delete_id" id="asset_id">
-                        <h5>Apakah anda yakin ingin menghapus aset?</h5>
+                        <h5>Apakah anda yakin ingin menghapus barang?</h5>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
@@ -49,7 +49,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        {{ __('Edit Data Aset') }}
+                        {{ __('Edit Data Barang') }}
                     </div>
 
                     <div class="card-body">
@@ -79,7 +79,7 @@
 
                             <div class="row mb-3">
                                 <label for="asset_category"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Jenis Aset') }}</label>
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Jenis Barang') }}</label>
 
                                 <div class="col-md-6">
                                     <select class="form-select" name="asset_category" id="asset_category">
@@ -97,7 +97,7 @@
                             @if ($data->status != 'dipinjam' and $data->status != 'rusak')
                                 <div class="row mb-3">
                                     <label for="asset-status"
-                                        class="col-md-4 col-form-label text-md-end">{{ __('Status Aset') }}</label>
+                                        class="col-md-4 col-form-label text-md-end">{{ __('Status Barang') }}</label>
 
                                     <div class="col-md-6">
                                         <select class="form-select" name="asset-status" id="asset-status">
@@ -166,7 +166,7 @@
                                     @if ($data->status != 'dipinjam')
                                         <button type="button" class="btn btn-danger deleteAssetBtn"
                                             value="{{ $data->id }}">
-                                            Hapus Aset
+                                            Hapus Barang
                                         </button>
                                     @endif
                                     <button type="submit" class="btn btn-primary">

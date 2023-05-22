@@ -45,7 +45,7 @@
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title">Aset</h5>
+                    <h5 class="modal-title">Inventory</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -180,7 +180,7 @@
                                     <th scope="col">Tanggal Pinjam</th>
                                     <th scope="col">Tanggal Kembali</th>
                                     <th scope="col">Lokasi</th>
-                                    <th scope="col">Lihat aset</th>
+                                    <th scope="col">Lihat Barang</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Aksi</th>
                                 </tr>

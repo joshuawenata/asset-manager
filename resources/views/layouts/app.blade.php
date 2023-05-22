@@ -75,7 +75,7 @@
                         @guest
                         @else
                             @if (auth()->user()->role->name == 'staff')
-                                <a class="nav-link active" href="{{ route('checkRequest') }}">Pinjam Aset</a>
+                                <a class="nav-link active" href="{{ route('checkRequest') }}">Pinjam Inventory</a>
                                 <a class="nav-link active" href="{{ route('staff.createAsset') }}">Tambah Barang</a>
                             @elseif(auth()->user()->role->name == 'admin')
                                 <a class="nav-link active"

@@ -22,7 +22,7 @@
                     <a class="btn btn-small btn-success mb-3" href="{{ url('/deleted-asset/') }}">Pemusnahan Barang</a>
                     <a class="btn btn-small btn-success mb-3"
                         href="{{ url('/move-asset/' . \Illuminate\Support\Facades\Auth::user()->division->id) }}">Pemindahan
-                        Aset</a>
+                        Barang</a>
                     <a class="btn btn-small btn-success mb-3" href="{{ route('admin.location') }}">Kelola
                         Lokasi</a>
                     {{--                @elseif($mode == 'deleted') --}}
@@ -30,7 +30,7 @@
                 @endif
 
                 <div class="card">
-                    <div class="card-header">{{ __('Kelola Aset') }}</div>
+                    <div class="card-header">{{ __('Kelola Barang') }}</div>
 
                     <div class="card-body">
 

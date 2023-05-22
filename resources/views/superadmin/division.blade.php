@@ -63,7 +63,7 @@
                                 autocomplete="division-name" autofocus>
                         </div>
                         <div class="mb-3">
-                            <label for="division-name" class="col-form-label">{{ __('Pengelola Aset') }}</label>
+                            <label for="division-name" class="col-form-label">{{ __('Pengelola Barang') }}</label>
                             <div class="mt-2">
                                 <input class="form-check-input mt-1" type="checkbox" value="1" id="approver"
                                     name="approver" checked onclick="return false" />

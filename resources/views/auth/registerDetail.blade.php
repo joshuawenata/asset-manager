@@ -53,24 +53,6 @@
                                 </div>
                             </div>
 
-                            {{--                        2. ADDRESS --}}
-                            <div class="row mb-3">
-                                <label for="address"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Alamat') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="address" type="text"
-                                        class="form-control @error('address') is-invalid @enderror" name="address"
-                                        value="{{ old('address') }}" required autocomplete="address" autofocus>
-
-                                    @error('address')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
                             {{--                        3. PHONE NUMBER --}}
                             <div class="row mb-3">
                                 <label for="phone"
@@ -96,20 +78,9 @@
 
                                 <div class="col-md-6">
                                     <select class="form-select" name="division_id" id="division_id">
-                                        {{-- @foreach ($data as $index => $item)
+                                        @foreach ($data as $index => $item)
                                             <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                        @endforeach --}}
-                                        @if ($role_id == 1)
-                                            <option value="1">IT</option>
-                                            <option value="2">DKV</option>
-                                            <option value="3">DI</option>
-                                        @elseif($role_id == 2 || $role_id == 3 || $role_id == 4)
-                                            <option value="1">IT</option>
-                                            <option value="2">DKV</option>
-                                            <option value="3">DI</option>
-                                            <option value="4">CP</option>
-                                            <option value="5">BM</option>
-                                        @endif
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>

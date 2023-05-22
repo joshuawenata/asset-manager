@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
@@ -20,19 +21,22 @@ Route::post('download', [\App\Http\Controllers\PdfController::class, 'index'])->
 //TEST THIS
 Route::get('register-show', function (Request $request) {
     $role_id = $request->input('role_id');
-    return view('auth.registerDetail')->with('role_id', $role_id);
+    $data = DB::table('divisions')->get();
+    return view('auth.registerDetail', [
+        'data' => $data,
+    ])->with('role_id', $role_id);
 });
 Route::post('insert-account',function(Request $request){
     $role_id = $request->input('role_id');
     DB::table('users')->insert([
         'name' => $request->input('name'),
         'binusianid' => $request->input('binusianid'),
-        'address' => $request->input('address'),
         'phone' => $request->input('phone'),
         'division_id' => $request->input('division_id'),
         'email' => $request->input('email'),
         'password' => bcrypt($request->input('password')),
         'role_id' => $role_id,
+        'active_status' => 1
     ]);
     return redirect()->route('superadmin.dashboard');
 });
@@ -127,6 +131,7 @@ Route::middleware(['auth', 'cekRole:superadmin'])->group(function(){
     //USER
     //UPDATE
     Route::get('/edit-user/{id}', [\App\Http\Controllers\UserController::class, 'edit']);
+    Route::get('/edit-user-active-status/{id}', [\App\Http\Controllers\UserController::class, 'editActive']);
     Route::put('/update-user/{id}', [\App\Http\Controllers\UserController::class, 'update']);
     Route::post('/reset-password', [\App\Http\Controllers\UserController::class, 'reset']);
     //DELETE

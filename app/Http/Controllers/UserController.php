@@ -73,6 +73,19 @@ class UserController extends Controller
         ]);
     }
 
+    public function editActive($id)
+    {
+        $user = User::find($id);
+        if($user->active_status==1){
+            $user->active_status = 2;
+        }else{
+            $user->active_status = 1;
+        }
+        $user->update();
+
+        return redirect('superadmin/dashboard');
+    }
+
     /**
      * Update the specified resource in storage.
      *

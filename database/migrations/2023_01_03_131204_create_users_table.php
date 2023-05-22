@@ -20,7 +20,6 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('binusianid')->unique()->nullable();
             $table->string('phone')->nullable();
-            $table->string('address')->nullable();
             // active_status 1 = active, 2 = not active
             $table->integer('active_status');
             $table->unsignedBigInteger('division_id')->nullable();

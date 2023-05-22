@@ -39,6 +39,8 @@
                                     <select class="form-select" name="approver" id="approver">
                                         @foreach ($approver as $index => $item)
                                             <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                            <input type="hidden" name="approver_division_id" id="approver_division_id"
+                                                value="{{ $item->division_id }}">
                                         @endforeach
                                     </select>
                                 </div>

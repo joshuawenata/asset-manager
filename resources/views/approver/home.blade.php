@@ -197,7 +197,6 @@
                                         <td>{{ date('d M Y H:i', strtotime($req->return_date)) }}</td>
                                         <td>{{ $req->lokasi }}</td>
                                         <td>
-                                            {{--                                        DONE: ini masi error --}}
                                             <form
                                                 action="{{ route('bookings.show', ['user' => 'approver', 'id' => $req->id]) }}"
                                                 method="GET">
@@ -210,10 +209,17 @@
                                         <td>{{ $req->status }}</td>
                                         <td>
                                             @if ($req->status == 'waiting approval')
-                                                <button type="button" class="btn btn-danger rejectBtn mb-2"
-                                                    value="{{ $req->id }}">Tolak</button>
-                                                <button type="button" class="btn btn-success approveBtn"
-                                                    value="{{ $req->id }}">Setuju</button>
+                                                @if ($req->track_approver == 0)
+                                                    <button type="button" class="btn btn-danger rejectBtn mb-2"
+                                                        value="{{ $req->id }}">Tolak</button>
+                                                    <button type="button" class="btn btn-success approveBtn"
+                                                        value="{{ $req->id }}">Setuju</button>
+                                                @elseif($req->track_approver != $approver)
+                                                    Menunggu persetujuan dari
+                                                    {{ \Illuminate\Support\Facades\Auth::user()->getAtasan($req->track_approver, $req->division_id) }}
+                                                @endif
+                                            @elseif($req->status == 'taken')
+                                                Menunggu konfirmasi
                                             @elseif($req->status == 'on use')
                                                 {{--                                        DONE: ini tampilin receiptnya --}}
                                                 <form action="{{ route('download') }}" target="_blank" method="post">
@@ -222,6 +228,15 @@
                                                         value="{{ $req->id }}"><span
                                                             class="material-symbols-outlined">file_download</span></button>
                                                 </form>
+
+                                                @if ($req->flag_return == 1)
+                                                    <form action="{{ route('admin.formKembali') }}" method="post">
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-primary mt-2"
+                                                            name="request_id" value="{{ $req->id }}">Lihat form
+                                                            kembali</button>
+                                                    </form>
+                                                @endif
                                             @endif
                                         </td>
                                     </tr>

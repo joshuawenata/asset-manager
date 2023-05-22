@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Asset;
 use App\Models\assetLocation;
 use App\Models\Booking;
+use App\Models\User;
 use DateTime;
 use DateTimeZone;
 use Illuminate\Http\Request;
@@ -58,7 +59,7 @@ class BookingController extends Controller
             $booking->save();
         }
 
-        $div_id = $data['division_id'];
+        $div_id = $data['approver_division_id'];
 
         $email = new SendEmailController();
         $message ='REQUEST PEMINJAMAN ALAT LAB';
@@ -67,7 +68,7 @@ class BookingController extends Controller
         $receiver = DB::table('users')
             ->select('email')
             ->where('division_id', $div_id)
-            ->where('role_id', 3)
+            ->where('role_id', 4)
             ->get();
         $receiver = $receiver[0]->email;
         $email->index($receiver, $subyek, $message);
@@ -150,7 +151,7 @@ class BookingController extends Controller
             ->get();
 
         $request = \App\Models\Request::find($req_id);
-        $request->status = 'taken';
+        $request->status = 'on use';
         $request->update();
 
         foreach ($bookings as $b){

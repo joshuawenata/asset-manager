@@ -181,14 +181,6 @@
                                                     value="{{ $req->id }}">Cancel</button>
                                             @elseif($req->status == 'approved')
                                                 {{ 'Silahkan ambil barang sesuai jadwal pinjam.' }}
-                                            @elseif($req->status == 'taken')
-                                                <form action="{{ route('updateStatus') }}" method="post">
-                                                    @csrf
-                                                    <input type="hidden" name="status" value="on use">
-                                                    <input type="hidden" name="user" value="student">
-                                                    <button type="submit" class="btn btn-primary" name="request_id"
-                                                        value="{{ $req->id }}">Barang sudah diterima</button>
-                                                </form>
                                             @elseif($req->status == 'on use' || $req->status == 'done')
                                                 {{--                                        DONE: upgrade laravel biar bisa generate receipt DOMPDF --}}
                                                 <form action="{{ route('download') }}" target="_blank" method="post">

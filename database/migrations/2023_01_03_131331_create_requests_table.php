@@ -43,6 +43,7 @@ class CreateRequestsTable extends Migration
             $table->foreign('division_id')->references('id')->on('divisions');
             $table->text('binusian_id_peminjam');
             $table->text('approver');
+            $table->integer('approver_division_id');
             $table->timestamps();
         });
     }

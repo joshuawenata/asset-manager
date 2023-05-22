@@ -42,6 +42,7 @@ class RequestController extends Controller
             $user_div_id = \Illuminate\Support\Facades\Auth::user()->division->id;
             $data = DB::table('requests')
                 ->orderBy('id', 'asc')
+                ->where('requests.track_approver', '>', 0)
                 ->where('status', '=', 'waiting approval')
                 ->orWhere('status', '=', 'approved')
                 ->orWhere('status', '=', 'on use')
@@ -56,7 +57,6 @@ class RequestController extends Controller
             $user_div_id = \Illuminate\Support\Facades\Auth::user()->division->id;
             $data = DB::table('requests')
                 ->orderBy('id', 'asc')
-                ->where('requests.track_approver', '>', 0)
                 ->where('status', '=', 'waiting approval')
                 ->orWhere('status', '=', 'approved')
                 ->orWhere('status', '=', 'on use')
@@ -172,7 +172,7 @@ class RequestController extends Controller
 
             $email = new SendEmailController();
             $subjek = 'BARANG SUDAH DIAMBIL';
-            $message = 'Pemberitahuan bahwa barang sudah anda ambil, silahkan konfirmasi pengambilan barang melalui website.';
+            $message = 'Pemberitahuan bahwa barang sudah anda ambil!';
             $receiver = \App\Models\Request::find($req_id);
             $receiver = $receiver->User->email;
             $email->index($receiver, $message, $subjek);
@@ -291,6 +291,7 @@ class RequestController extends Controller
         $division_id = $request->input('division_id');
         $binusian_id_peminjam = $request->input('binusian_id_peminjam');
         $approver = $request->input('approver');
+        $approver_division_id = $request->input('approver_division_id');
 
         return view('confirmRequest', [
             'assets' => $bookings,
@@ -300,7 +301,8 @@ class RequestController extends Controller
             'lokasi' => $lokasi,
             'division_id' => $division_id,
             'binusian_id_peminjam' => $binusian_id_peminjam,
-            'approver' => $approver
+            'approver' => $approver,
+            'approver_division_id' => $approver_division_id
         ]);
     }
 
@@ -321,6 +323,7 @@ class RequestController extends Controller
         $request->division_id = $data['division_id'];
         $request->binusian_id_peminjam = $data['binusian_id_peminjam'];
         $request->approver = $data['approver'];
+        $request->approver_division_id = $data['approver_division_id'];
 
         $request->book_date = date("Y-m-d H:i:s", strtotime($data['book_date']));
         $request->return_date = date("Y-m-d H:i:s", strtotime($data['return_date']));
@@ -399,12 +402,13 @@ class RequestController extends Controller
                 $receiver = $req->User->email;
             }
             else{
-                //kirim email ke approver
+                //kirim email ke admin
                 $subyek = 'REQUEST PEMINJAMAN ALAT LAB';
                 $pesan = 'Ada request peminjaman alat lab baru dari ' . $req->User->name . ' ' . $req->User->email;
                 $receiver = DB::table('users')
                     ->select('email')
-                    ->where('role_id', '=', 4)
+                    ->where('division_id', $req->division_id)
+                    ->where('role_id', '=', 3)
                     ->get();
                 $receiver = $receiver[0]->email;
             }
@@ -417,14 +421,6 @@ class RequestController extends Controller
 
         //DONE: ini kembali ke dashboard/approvernya gimana
         return redirect('/'. $user . '/dashboard')->with('message', $message);
-    }
-
-    public function updateStatus(Request $request){
-        $req = \App\Models\Request::find($request->input('request_id'));
-        $req->status = $request->input('status');
-        $req->update();
-        $user = $request->input('user');
-        return redirect('/dashboard')->with('message', 'Peminjaman berhasil diperbaharui');
     }
 
     /**

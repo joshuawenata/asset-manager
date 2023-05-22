@@ -22,7 +22,8 @@ class RequestSeeder extends Seeder
             'user_id' => 1,
             'division_id' => 3,
             'binusian_id_peminjam' => 'BN123',
-            'approver' => 'maria'
+            'approver' => 'Maria Auleria',
+            'approver_division_id' => 3
         ]);
     }
 }

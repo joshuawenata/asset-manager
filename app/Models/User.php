@@ -70,17 +70,17 @@ class User extends Authenticatable
 
     public function getAtasan($track_approver, $atasan){
 
-// //        $divisi = Booking::where('request_id', $req_id)->first();
-// //        $atasan = $divisi->asset->division->id;
+//        $divisi = Booking::where('request_id', $req_id)->first();
+//        $atasan = $divisi->asset->division->id;
 
-        // if($track_approver == 1){
-        //     $atasan = User::where('division_id', $atasan)->where('role_id', '4')->first()->name;
-        // }
-        // else if ($track_approver == 0){
-        //     $atasan = User::where('division_id', $atasan)->where('role_id', '3')->first()->name;
-        // }
+        if($track_approver == 1){
+            $atasan = User::where('division_id', $atasan)->where('role_id', '3')->first()->name;
+        }
+        else if ($track_approver == 0){
+            $atasan = User::where('division_id', $atasan)->where('role_id', '4')->first()->name;
+        }
 
-        // return $atasan;
+        return $atasan;
     }
 
     public static function getRolePage(){

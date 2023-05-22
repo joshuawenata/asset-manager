@@ -108,6 +108,7 @@
                                     <input type="hidden" name="division_id" value="{{ $division_id }}">
                                     <input type="hidden" name="binusian_id_peminjam" value="{{ $binusian_id_peminjam }}">
                                     <input type="hidden" name="approver" value="{{ $approver }}">
+                                    <input type="hidden" name="approver_division_id" value="{{ $approver_division_id }}">
                                     <button type="submit" class="btn btn-primary">
                                         {{ __('Konfirmasi') }}
                                     </button>

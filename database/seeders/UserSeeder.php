@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
             'phone' => '082543356234',
             'address' => 'Jl. Everywhere No.110',
             'division_id' => '3',
-            'role_id' => '1',
+            'role_id' => '2',
             'active_status' => 1,
         ]);
 

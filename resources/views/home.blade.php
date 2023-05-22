@@ -140,6 +140,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col">No</th>
+                                    <th scope="col">Binusian ID Peminjam</th>
                                     <th scope="col">Tujuan Peminjaman</th>
                                     <th scope="col">Tanggal Pinjam</th>
                                     <th scope="col">Tanggal Kembali</th>
@@ -154,6 +155,7 @@
                                     <tr>
                                         {{--                masukin kolom --}}
                                         <th scope="row">{{ $index + 1 }}</th>
+                                        <td>{{ $req->binusian_id_peminjam }}</td>
                                         <td>{{ $req->purpose }}</td>
                                         <td>{{ date('d M Y H:i', strtotime($req->book_date)) }}</td>
                                         <td>{{ date('d M Y H:i', strtotime($req->return_date)) }}</td>

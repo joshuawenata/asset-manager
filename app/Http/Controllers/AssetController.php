@@ -61,7 +61,8 @@ class AssetController extends Controller
     {
         $data = Location::all();
         $show = AssetCategory::all();
-        $pemilik = PemilikBarang::all();
+        $pemilik = DB::table('pemilik_barangs')->select('nama')->where('division_id',\Illuminate\Support\Facades\Auth::user()->division->id)->get();
+
         return View::make('admin.createAsset', [
             'show' => $show,
             'pemilik' => $pemilik,
@@ -73,7 +74,7 @@ class AssetController extends Controller
     {
         $data = Location::all();
         $show = AssetCategory::all();
-        $pemilik = PemilikBarang::all();
+        $pemilik = DB::table('pemilik_barangs')->select('nama')->where('division_id',\Illuminate\Support\Facades\Auth::user()->division->id)->get();
 
         return View::make('createAsset', [
             'show' => $show,
@@ -114,10 +115,10 @@ class AssetController extends Controller
                 $aset->pemilik_barang = $data['pemilik-barang'];
             }
             else if ($data['new-pemilik-barang'] != null){
-                $new_category = new PemilikBarangController();
-                $new_cat_id = $new_category->store($data['new-pemilik-barang'], $data['division_id']);
+                $new_pemilik_barang = new PemilikBarangController();
+                $new_pemilik_barang = $new_pemilik_barang->store($data['new-pemilik-barang'], $data['division_id']);
 
-                $aset->pemilik_barang = $new_cat_id;
+                $aset->pemilik_barang = $new_pemilik_barang;
             }
 
             if($data['asset-status'] == 'tersedia'){

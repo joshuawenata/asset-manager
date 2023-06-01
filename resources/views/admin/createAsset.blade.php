@@ -54,12 +54,12 @@
 
                             {{-- fitur baru Pemilik Barang --}}
                             <div class="row mb-3">
-                                <label for="pemilik"
+                                <label for="pemilik-barang"
                                     class="col-md-4 col-form-label text-md-end">{{ __('Pemilik Barang') }}</label>
                                 <div class="col-md-6">
-                                    <select class="form-select" name="pemilik" id="pemilik">
+                                    <select class="form-select" name="pemilik-barang" id="pemilik-barang">
                                         @foreach ($pemilik as $index => $item)
-                                            <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                            <option value="{{ $item->nama }}">{{ $item->nama }}</option>
                                         @endforeach
                                     </select>
                                 </div>

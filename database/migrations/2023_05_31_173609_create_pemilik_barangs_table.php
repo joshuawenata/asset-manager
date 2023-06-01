@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('pemilik_barangs', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
+            $table->string('nama')->unique();
             $table->string('division_id');
             $table->timestamps();
         });

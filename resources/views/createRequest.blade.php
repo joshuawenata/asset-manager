@@ -58,6 +58,14 @@
 
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-0">
+                                    <input class="form-check-input mt-1 mb-3" type="checkbox" name="select-all"
+                                        id="select-all">
+                                    <label for="select-all">pilih semua</label>
+                                </div>
+                            </div>
+
+                            <div class="row mb-0">
+                                <div class="col-md-6 offset-md-0">
                                     <input type="hidden" name="return_date" value="{{ $return_date }}">
                                     <input type="hidden" name="book_date" value="{{ $book_date }}">
                                     <input type="hidden" name="division_id" value="{{ $division_id }}">
@@ -96,6 +104,20 @@
 
         document.querySelector('[name=submit]').addEventListener('click', () => {
             validateGroup();
+        });
+    </script>
+
+    <script>
+        $('#select-all').click(function(event) {
+            if (this.checked) {
+                $(':checkbox').each(function() {
+                    this.checked = true;
+                });
+            } else {
+                $(':checkbox').each(function() {
+                    this.checked = false;
+                });
+            }
         });
     </script>
 @endsection

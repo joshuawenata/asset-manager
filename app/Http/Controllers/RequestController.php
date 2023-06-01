@@ -292,6 +292,9 @@ class RequestController extends Controller
         $binusian_id_peminjam = $request->input('binusian_id_peminjam');
         $approver = $request->input('approver');
         $approver_division_id = $request->input('approver_division_id');
+        $nama_peminjam = $request->input('nama_peminjam');
+        $prodi_peminjam = $request->input('prodi_peminjam');
+        $email_peminjam = $request->input('email_peminjam');
 
         return view('confirmRequest', [
             'assets' => $bookings,
@@ -302,7 +305,10 @@ class RequestController extends Controller
             'division_id' => $division_id,
             'binusian_id_peminjam' => $binusian_id_peminjam,
             'approver' => $approver,
-            'approver_division_id' => $approver_division_id
+            'approver_division_id' => $approver_division_id,
+            'nama_peminjam' => $nama_peminjam,
+            'prodi_peminjam' => $prodi_peminjam,
+            'email_peminjam' => $email_peminjam,
         ]);
     }
 
@@ -324,6 +330,9 @@ class RequestController extends Controller
         $request->binusian_id_peminjam = $data['binusian_id_peminjam'];
         $request->approver = $data['approver'];
         $request->approver_division_id = $data['approver_division_id'];
+        $request->nama_peminjam = $data['nama_peminjam'];
+        $request->prodi_peminjam = $data['prodi_peminjam'];
+        $request->email_peminjam = $data['email_peminjam'];
 
         $request->book_date = date("Y-m-d H:i:s", strtotime($data['book_date']));
         $request->return_date = date("Y-m-d H:i:s", strtotime($data['return_date']));

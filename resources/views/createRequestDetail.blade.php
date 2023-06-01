@@ -32,6 +32,30 @@
                                         name="binusian_id_peminjam" required>
                                 </div>
 
+                                <label for="nama_peminjam"
+                                    class="col-form-label text-md-end">{{ __('Nama Peminjam') }}</label>
+
+                                <div>
+                                    <input id="nama_peminjam" type="text" class="form-control" name="nama_peminjam"
+                                        required>
+                                </div>
+
+                                <label for="prodi_peminjam"
+                                    class="col-form-label text-md-end">{{ __('Prodi/Unit Peminjam') }}</label>
+
+                                <div>
+                                    <input id="prodi_peminjam" type="text" class="form-control" name="prodi_peminjam"
+                                        required>
+                                </div>
+
+                                <label for="email_peminjam"
+                                    class="col-form-label text-md-end">{{ __('Email Peminjam') }}</label>
+
+                                <div>
+                                    <input id="email_peminjam" type="text" class="form-control" name="email_peminjam"
+                                        required>
+                                </div>
+
                                 <label for="purpose"
                                     class="col-form-label text-md-end">{{ __('Approver tujuan peminjaman') }}</label>
 

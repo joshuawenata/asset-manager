@@ -41,6 +41,9 @@ class CreateRequestsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('division_id');
             $table->foreign('division_id')->references('id')->on('divisions');
+            $table->string('nama_peminjam');
+            $table->string('prodi_peminjam');
+            $table->string('email_peminjam');
             $table->text('binusian_id_peminjam');
             $table->text('approver');
             $table->integer('approver_division_id');

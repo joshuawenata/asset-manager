@@ -52,11 +52,36 @@
                             </table>
 
                             <div class="mb-3">
-                                <label for="binusian_id_peminjam"
-                                    class="col-sm-5 col-md-6"><b>{{ __('Binusian ID Peminjam') }}</b></label>
+                                <div class="row">
+                                    <label for="binusian_id_peminjam"
+                                        class="col-sm-5 col-md-6"><b>{{ __('Binusian ID Peminjam') }}</b></label>
+                                    <label for="nama_peminjam"
+                                        class="col-sm-5 col-md-6"><b>{{ __('Nama Peminjam') }}</b></label>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-5 col-md-6"><input type="text" class="form-control mt-2" readonly
+                                            name="binusian_id_peminjam" value="{{ $binusian_id_peminjam }}" />
+                                    </div>
+                                    <div class="col-sm-5 col-md-6"><input type="text" class="form-control mt-2" readonly
+                                            name="nama_peminjam" value="{{ $nama_peminjam }}" />
+                                    </div>
+                                </div>
+                            </div>
 
-                                <div class="col-sm-5 col-md-6"><input type="text" class="form-control mt-2" readonly
-                                        name="binusian_id_peminjam" value="{{ $binusian_id_peminjam }}" />
+                            <div class="mb-3">
+                                <div class="row">
+                                    <label for="prodi_peminjam"
+                                        class="col-sm-5 col-md-6"><b>{{ __('Prodi/Unit Peminjam') }}</b></label>
+                                    <label for="email_peminjam"
+                                        class="col-sm-5 col-md-6"><b>{{ __('Email Peminjam') }}</b></label>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-5 col-md-6"><input type="text" class="form-control mt-2" readonly
+                                            name="prodi_peminjam" value="{{ $prodi_peminjam }}" />
+                                    </div>
+                                    <div class="col-sm-5 col-md-6"><input type="text" class="form-control mt-2" readonly
+                                            name="email_peminjam" value="{{ $email_peminjam }}" />
+                                    </div>
                                 </div>
                             </div>
 
@@ -106,9 +131,14 @@
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-0">
                                     <input type="hidden" name="division_id" value="{{ $division_id }}">
-                                    <input type="hidden" name="binusian_id_peminjam" value="{{ $binusian_id_peminjam }}">
+                                    <input type="hidden" name="binusian_id_peminjam"
+                                        value="{{ $binusian_id_peminjam }}">
                                     <input type="hidden" name="approver" value="{{ $approver }}">
-                                    <input type="hidden" name="approver_division_id" value="{{ $approver_division_id }}">
+                                    <input type="hidden" name="approver_division_id"
+                                        value="{{ $approver_division_id }}">
+                                    <input type="hidden" name="nama_peminjam" value="{{ $nama_peminjam }}">
+                                    <input type="hidden" name="prodi_peminjam" value="{{ $prodi_peminjam }}">
+                                    <input type="hidden" name="email_peminjam" value="{{ $email_peminjam }}">
                                     <button type="submit" class="btn btn-primary">
                                         {{ __('Konfirmasi') }}
                                     </button>

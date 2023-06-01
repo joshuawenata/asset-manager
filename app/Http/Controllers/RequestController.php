@@ -399,7 +399,7 @@ class RequestController extends Controller
 
             $subyek = 'PEMINJAMAN REJECTED';
             $pesan = 'Mohon maaf, peminjaman anda tidak disetujui oleh approver. Silahkan pilih tanggal lain untuk meminjam.';
-            $receiver = $req->User->email;
+            $receiver = $req->email_peminjam;
         }
         elseif ($request->request_update == 'approved'){
             $req->track_approver++;
@@ -411,7 +411,10 @@ class RequestController extends Controller
 
                 $subyek = 'PEMINJAMAN APPROVED';
                 $pesan = 'Selamat peminjaman anda berhasil di approve! silahkan ambil barang sesuai dengan tanggal peminjaman.';
-                $receiver = $req->User->email;
+                $pesan_bm = 'Peminjaman barang oleh ' . $req->email_peminjam . ' berhasil di approve.';
+                $receiver = $req->email_peminjam;
+                $email = new SendEmailController();
+                // $email->index("bmopr.bdg@binus.edu", $pesan_bm , $subyek);
             }
             else{
                 //kirim email ke admin

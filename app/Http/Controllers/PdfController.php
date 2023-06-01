@@ -21,9 +21,11 @@ class PdfController extends Controller
         $id = $request->input('request_id');
         $req = \App\Models\Request::find($id);
 
-        $username = $req->User->name;
-        $binusianid = $req->User->binusianid;
-        $phone = $req->User->phone;
+        $username_peminjam = $req->nama_peminjam;
+        $binusianid_peminjam = $req->binusian_id_peminjam;
+        $email_peminjam = $req->email_peminjam;
+        $nohp_peminjam = $req->nohp_peminjam;
+        $division_peminjam = $req->prodi_peminjam;
         $division = $req->User->division->name;
 
         $purpose = $req->purpose;
@@ -61,20 +63,22 @@ class PdfController extends Controller
 
         $titikdua = ': ';
 
-        $nama = $titikdua . $username;
-        $bid = $titikdua . $binusianid;
-        $prodiv = $titikdua . $division;
-        $hp = $titikdua . $phone;
+        $nama = $titikdua . $username_peminjam;
+        $bid = $titikdua . $binusianid_peminjam;
+        $prodiv = $titikdua . $division_peminjam;
+        $email = $titikdua . $email_peminjam;
+        $hp = $titikdua . $nohp_peminjam;
         $keperluan = $titikdua . $purpose;
-        $lok = $titikdua . $lokasi;
         $book = $titikdua . $book_date;
         $return = $return_date;
+        $lok = $titikdua . $lokasi;
+        $div = $titikdua . $division;
 
         $this->fpdf->SetFont('Arial', '', 11);
         $this->fpdf->Cell(70, 6, 'Binusian ID / Kode Dosen Peminjam', 0, 0); $this->fpdf->Cell(40, 6, $bid, 0, 1);
         $this->fpdf->Cell(70, 6, 'Nama Peminjam', 0, 0); $this->fpdf->Cell(15, 6, $nama, 0, 1);
         $this->fpdf->Cell(70, 6, 'Prodi/Unit Peminjam', 0, 0); $this->fpdf->Cell(15, 6, $prodiv, 0, 1);
-        $this->fpdf->Cell(70, 6, 'Email Peminjam', 0, 0); $this->fpdf->Cell(15, 6, $prodiv, 0, 1);
+        $this->fpdf->Cell(70, 6, 'Email Peminjam', 0, 0); $this->fpdf->Cell(15, 6, $email, 0, 1);
         $this->fpdf->Cell(70, 6, 'No. Handphone Peminjam', 0, 0); $this->fpdf->Cell(40, 6, $hp, 0, 1);
         $this->fpdf->Cell(70, 6, 'Keperluan / Kegiatan', 0, 0); $this->fpdf->Cell(40, 6, $keperluan, 0, 1);
         $this->fpdf->Cell(70, 6, 'Tanggal Peminjaman', 0, 0); $this->fpdf->Cell(40, 6, $book . ' WIB s/d. ' . $return . ' WIB', 0, 1);
@@ -83,7 +87,7 @@ class PdfController extends Controller
         $this->fpdf->Ln();
 
         $this->fpdf->SetFont('Arial', 'B', 11);
-        $this->fpdf->Cell(70, 6, 'Lokasi Asal Barang', 0, 0); $this->fpdf->Cell(40, 6, $lok, 0, 1);
+        $this->fpdf->Cell(70, 6, 'Lokasi Asal Barang', 0, 0); $this->fpdf->Cell(40, 6, $div, 0, 1);
 
         $this->fpdf->SetFont('Arial', 'B', 11);
         $this->fpdf->Cell(10, 6, 'No', 1, 0, 'C');

@@ -25,6 +25,8 @@
                         Barang</a>
                     <a class="btn btn-small btn-success mb-3" href="{{ route('admin.location') }}">Kelola
                         Lokasi</a>
+                    <a class="btn btn-small btn-success mb-3" href="{{ route('admin.pemilik-barang') }}">Kelola
+                        Pemilik Barang</a>
                     {{--                @elseif($mode == 'deleted') --}}
                     {{--                    <a class="btn btn-small btn-success mb-3" href="{{ route('downloadDeletedAsset') }}"><span class="material-symbols-outlined">download</span>Unduh Aset Musnah</a> --}}
                 @endif
@@ -69,7 +71,7 @@
                                         @if ($mode == 'current')
                                             <td>{{ $item->current_location }}</td>
                                         @endif
-                                        <td>{{ $item->pic }}</td>
+                                        <td>{{ $item->pemilik_barang }}</td>
                                         @if ($mode == 'current')
                                             @if ($item->status == 'dipinjam')
                                                 <td>{{ $item->status . ' oleh ' . $item->getNamaPeminjam($item->id) }}</td>

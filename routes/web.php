@@ -70,6 +70,7 @@ Route::middleware(['auth', 'cekRole:staff'])->group(function(){
 Route::middleware(['auth', 'cekRole:admin'])->group(function(){
     Route::get('/admin/dashboard', [\App\Http\Controllers\HomeController::class, 'adminDashboard'])->name('admin.dashboard');
     Route::get('/admin/location', [\App\Http\Controllers\LocationAdminController::class, 'index'])->name('admin.location');
+    Route::get('/admin/pemilikBarang', [\App\Http\Controllers\PemilikBarangController::class, 'index'])->name('admin.pemilik-barang');
     Route::post('/delete-location-admin', [\App\Http\Controllers\LocationAdminController::class, 'destroy'])->name('delete-location-admin');
     Route::post('/store-location-admin', [\App\Http\Controllers\LocationAdminController::class, 'store'])->name('store-location-admin');
 
@@ -90,6 +91,7 @@ Route::middleware(['auth', 'cekRole:admin'])->group(function(){
     //UPDATE
     Route::get('/edit-asset/{id}', [\App\Http\Controllers\AssetController::class, 'edit']);
     Route::get('/repair-asset-history/{id}', [\App\Http\Controllers\RepairAssetController::class, 'index']);
+    Route::get('/edit-pemilik-barang/{id}', [\App\Http\Controllers\PemilikBarangController::class, 'destroy']);
     Route::put('update-asset/{id}', [\App\Http\Controllers\AssetController::class, 'update']);
     Route::post('/update-asset', [\App\Http\Controllers\RepairAssetController::class, 'update'])->name('updateFixedAsset');
     //DELETE

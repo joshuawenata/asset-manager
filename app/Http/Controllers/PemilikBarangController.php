@@ -15,7 +15,10 @@ class PemilikBarangController extends Controller
      */
     public function index()
     {
-        //
+        $data = DB::table('pemilik_barangs')->where('division_id', \Illuminate\Support\Facades\Auth::user()->division->id )->get();
+        return view('admin.pemilikBarang', [
+           'data' => $data
+        ]);
     }
 
     /**
@@ -86,6 +89,8 @@ class PemilikBarangController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $pemilik_barang = PemilikBarang::find($id);
+        $pemilik_barang->delete();
+        return redirect('admin/dashboard')->with('message', 'Pemilik Barang Berhasil Dihapus');
     }
 }

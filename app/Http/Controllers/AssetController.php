@@ -246,7 +246,7 @@ class AssetController extends Controller
         $validator = Validator::make($request->all(), [
             'serialnumber' => 'required',
             'brand' => 'required',
-            'pic' => 'required',
+            'pemilik_barang' => 'required',
             'asset_category' => 'required'
         ]);
 
@@ -259,7 +259,7 @@ class AssetController extends Controller
             $aset = Asset::find($id);
             $aset->serial_number = $request->input('serialnumber');
             $aset->brand = $request->input('brand');
-            $aset->pic = $request->input('pic');
+            $aset->pemilik_barang = $request->input('pemilik_barang');
             $aset->asset_category_id = $request->input('asset_category');
 
             if($request->input('asset-status')){

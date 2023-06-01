@@ -145,15 +145,16 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="pic"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('PIC') }}</label>
+                                <label for="pemilik_barang"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Pemilik Barang') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="pic" type="text"
-                                        class="form-control @error('pic') is-invalid @enderror" name="pic"
-                                        value="{{ $data->pic }}" required autocomplete="pic" autofocus>
+                                    <input id="pemilik_barang" type="text"
+                                        class="form-control @error('pemilik_barang') is-invalid @enderror"
+                                        name="pemilik_barang" value="{{ $data->pemilik_barang }}" required
+                                        autocomplete="pemilik_barang" autofocus>
 
-                                    @error('pic')
+                                    @error('pemilik_barang')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

@@ -92,25 +92,28 @@ class PdfController extends Controller
         $this->fpdf->SetFont('Arial', 'B', 11);
         $this->fpdf->Cell(10, 6, 'No', 1, 0, 'C');
         $this->fpdf->Cell(30, 6, 'Nomor Seri', 1, 0, 'C');
-        $this->fpdf->Cell(70, 6, 'Jenis', 1, 0, 'C');
-        $this->fpdf->Cell(70, 6, 'Spesifikasi', 1, 1, 'C');
+        $this->fpdf->Cell(30, 6, 'Jenis', 1, 0, 'C');
+        $this->fpdf->Cell(70, 6, 'Spesifikasi', 1, 0, 'C');
+        $this->fpdf->Cell(40, 6, 'Pemilik Barang', 1, 1, 'C');
 
         $this->fpdf->SetFont('Arial', '', 11);
 
-        //masi error
         $bookings = DB::table('bookings')
             ->join('assets', 'bookings.asset_id', '=', 'assets.id')
             ->join('asset_categories', 'bookings.asset_category_id', '=', 'asset_categories.id')
-            ->select('assets.serial_number', 'assets.brand', 'asset_categories.name')
+            ->select('assets.serial_number', 'assets.brand', 'asset_categories.name', 'assets.pemilik_barang')
             ->where('bookings.request_id', '=', $id)
             ->get();
 
         $i = 1;
         foreach ($bookings as $b){
+            // $pemilik_barang = DB::table('assets')->where('id', $b->asset_id)->get('pemilik_barang');
+
             $this->fpdf->Cell(10, 6, $i, 1, 0, 'C');
             $this->fpdf->Cell(30, 6, $b->serial_number, 1, 0, 'C');
-            $this->fpdf->Cell(70, 6, $b->name, 1, 0, 'C');
-            $this->fpdf->Cell(70, 6, $b->brand, 1, 1, 'C');
+            $this->fpdf->Cell(30, 6, $b->name, 1, 0, 'C');
+            $this->fpdf->Cell(70, 6, $b->brand, 1, 0, 'C');
+            $this->fpdf->Cell(40, 6, $b->pemilik_barang, 1, 1, 'C');
             $i++;
         }
 

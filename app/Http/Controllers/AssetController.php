@@ -10,6 +10,7 @@ use App\Models\AssetCategory;
 use App\Models\DeletedAsset;
 use App\Models\Location;
 use App\Models\User;
+use App\Models\PemilikBarang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -60,10 +61,10 @@ class AssetController extends Controller
     {
         $data = Location::all();
         $show = AssetCategory::all();
-        $pic = User::where([['role_id', 3],['active_status',1]])->get();
+        $pemilik = PemilikBarang::all();
         return View::make('admin.createAsset', [
             'show' => $show,
-            'pic' => $pic,
+            'pemilik' => $pemilik,
             'data' => $data
         ]);
     }
@@ -72,11 +73,11 @@ class AssetController extends Controller
     {
         $data = Location::all();
         $show = AssetCategory::all();
-        $pic = User::where([['role_id', 3],['active_status',1]])->get();
+        $pemilik = PemilikBarang::all();
 
         return View::make('createAsset', [
             'show' => $show,
-            'pic' => $pic,
+            'pemilik' => $pemilik,
             'data' => $data
         ]);
     }
@@ -108,7 +109,16 @@ class AssetController extends Controller
             $aset->serial_number = $data['serialnumber'];
             $aset->brand = $data['brand'];
             $aset->current_location = $data['location'];
-            $aset->pic = $data['pic'];
+
+            if($data['pemilik-barang'] != null){
+                $aset->pemilik_barang = $data['pemilik-barang'];
+            }
+            else if ($data['new-pemilik-barang'] != null){
+                $new_category = new PemilikBarangController();
+                $new_cat_id = $new_category->store($data['new-pemilik-barang'], $data['division_id']);
+
+                $aset->pemilik_barang = $new_cat_id;
+            }
 
             if($data['asset-status'] == 'tersedia'){
                 $aset->status = $data['asset-status'];
@@ -154,7 +164,16 @@ class AssetController extends Controller
             $aset->serial_number = $data['serialnumber'];
             $aset->brand = $data['brand'];
             $aset->current_location = $data['location'];
-            $aset->pic = $data['pic'];
+
+            if($data['pemilik-barang'] != null){
+                $aset->pemilik_barang = $data['pemilik-barang'];
+            }
+            else if ($data['new-pemilik-barang'] != null){
+                $new_pemilik_barang = new PemilikBarangController();
+                $new_pemilik_barang = $new_pemilik_barang->store($data['new-pemilik-barang'], $data['division_id']);
+
+                $aset->pemilik_barang = $new_pemilik_barang;
+            }
 
             if($data['asset-status'] == 'tersedia'){
                 $aset->status = $data['asset-status'];

@@ -72,7 +72,8 @@ class PdfController extends Controller
 
         $this->fpdf->SetFont('Arial', '', 11);
         $this->fpdf->Cell(50, 6, 'Nama Peminjam', 0, 0); $this->fpdf->Cell(15, 6, $nama, 0, 1);
-        $this->fpdf->Cell(50, 6, 'Binusian ID', 0, 0); $this->fpdf->Cell(40, 6, $bid, 0, 0); $this->fpdf->Cell(25, 6, 'Prodi/Unit', 0, 0); $this->fpdf->Cell(15, 6, $prodiv, 0, 1);
+        $this->fpdf->Cell(50, 6, 'Binusian ID', 0, 0); $this->fpdf->Cell(40, 6, $bid, 0, 1);
+        $this->fpdf->Cell(50, 6, 'Prodi/Unit', 0, 0); $this->fpdf->Cell(15, 6, $prodiv, 0, 1);
         $this->fpdf->Cell(50, 6, 'No. Handphone', 0, 0); $this->fpdf->Cell(40, 6, $hp, 0, 1);
         $this->fpdf->Ln();
         $this->fpdf->Cell(50, 6, 'Keperluan', 0, 0); $this->fpdf->Cell(40, 6, $keperluan, 0, 1);

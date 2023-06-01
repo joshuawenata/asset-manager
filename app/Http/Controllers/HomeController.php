@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Asset;
+use App\Models\User;
 use App\Models\RolePageMapping;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -64,6 +65,7 @@ class HomeController extends Controller
     {
         $view = new RequestController();
         list($data, $approver) = $view->index();
+
         return view('home', [
             'data' => $data,
             'approver' => $approver
@@ -73,6 +75,7 @@ class HomeController extends Controller
     public function adminDashboard(){
         $view = new RequestController();
         list($data, $approver) = $view->index();
+
         return view('admin.home', [
             'data' => $data,
             'approver' => $approver
@@ -82,6 +85,7 @@ class HomeController extends Controller
     public function approverDashboard(){
         $view = new RequestController();
         list($data, $approver) = $view->index();
+
         return view('approver.home', [
             'data' => $data,
             'approver' => $approver

@@ -6,6 +6,8 @@ use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Models\User;
 
 class RedirectIfAuthenticated
 {
@@ -28,5 +30,6 @@ class RedirectIfAuthenticated
         }
 
         return $next($request);
+
     }
 }

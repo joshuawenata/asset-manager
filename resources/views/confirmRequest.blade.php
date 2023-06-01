@@ -52,18 +52,26 @@
                             </table>
 
                             <div class="mb-3">
+                                <label for="binusian_id_peminjam"
+                                    class="col-sm-5 col-md-6"><b>{{ __('Binusian ID Peminjam') }}</b></label>
+                                <div class="col-sm-5 col-md-6"><input type="text" class="form-control mt-2" readonly
+                                        name="binusian_id_peminjam" value="{{ $binusian_id_peminjam }}" />
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
                                 <div class="row">
-                                    <label for="binusian_id_peminjam"
-                                        class="col-sm-5 col-md-6"><b>{{ __('Binusian ID Peminjam') }}</b></label>
                                     <label for="nama_peminjam"
                                         class="col-sm-5 col-md-6"><b>{{ __('Nama Peminjam') }}</b></label>
+                                    <label for="nohp_peminjam"
+                                        class="col-sm-5 col-md-6"><b>{{ __('No. Handphone Peminjam') }}</b></label>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-5 col-md-6"><input type="text" class="form-control mt-2" readonly
-                                            name="binusian_id_peminjam" value="{{ $binusian_id_peminjam }}" />
+                                            name="nama_peminjam" value="{{ $nama_peminjam }}" />
                                     </div>
                                     <div class="col-sm-5 col-md-6"><input type="text" class="form-control mt-2" readonly
-                                            name="nama_peminjam" value="{{ $nama_peminjam }}" />
+                                            name="nohp_peminjam" value="{{ $nohp_peminjam }}" />
                                     </div>
                                 </div>
                             </div>

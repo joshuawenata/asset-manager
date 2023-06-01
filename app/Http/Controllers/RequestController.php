@@ -295,6 +295,7 @@ class RequestController extends Controller
         $nama_peminjam = $request->input('nama_peminjam');
         $prodi_peminjam = $request->input('prodi_peminjam');
         $email_peminjam = $request->input('email_peminjam');
+        $nohp_peminjam = $request->input('nohp_peminjam');
 
         return view('confirmRequest', [
             'assets' => $bookings,
@@ -309,6 +310,7 @@ class RequestController extends Controller
             'nama_peminjam' => $nama_peminjam,
             'prodi_peminjam' => $prodi_peminjam,
             'email_peminjam' => $email_peminjam,
+            'nohp_peminjam' => $nohp_peminjam,
         ]);
     }
 
@@ -333,6 +335,7 @@ class RequestController extends Controller
         $request->nama_peminjam = $data['nama_peminjam'];
         $request->prodi_peminjam = $data['prodi_peminjam'];
         $request->email_peminjam = $data['email_peminjam'];
+        $request->nohp_peminjam = $data['nohp_peminjam'];
 
         $request->book_date = date("Y-m-d H:i:s", strtotime($data['book_date']));
         $request->return_date = date("Y-m-d H:i:s", strtotime($data['return_date']));

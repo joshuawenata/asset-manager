@@ -71,16 +71,19 @@ class PdfController extends Controller
         $return = $return_date;
 
         $this->fpdf->SetFont('Arial', '', 11);
-        $this->fpdf->Cell(50, 6, 'Nama Peminjam', 0, 0); $this->fpdf->Cell(15, 6, $nama, 0, 1);
-        $this->fpdf->Cell(50, 6, 'Binusian ID', 0, 0); $this->fpdf->Cell(40, 6, $bid, 0, 1);
-        $this->fpdf->Cell(50, 6, 'Prodi/Unit', 0, 0); $this->fpdf->Cell(15, 6, $prodiv, 0, 1);
-        $this->fpdf->Cell(50, 6, 'No. Handphone', 0, 0); $this->fpdf->Cell(40, 6, $hp, 0, 1);
-        $this->fpdf->Ln();
-        $this->fpdf->Cell(50, 6, 'Keperluan', 0, 0); $this->fpdf->Cell(40, 6, $keperluan, 0, 1);
-        $this->fpdf->Cell(50, 6, 'Peralatan dipakai di', 0, 0); $this->fpdf->Cell(40, 6, $lok, 0, 1);
-        $this->fpdf->Cell(50, 6, 'Tanggal Peminjaman', 0, 0); $this->fpdf->Cell(40, 6, $book . ' - ' . $return, 0, 1);
+        $this->fpdf->Cell(70, 6, 'Binusian ID / Kode Dosen Peminjam', 0, 0); $this->fpdf->Cell(40, 6, $bid, 0, 1);
+        $this->fpdf->Cell(70, 6, 'Nama Peminjam', 0, 0); $this->fpdf->Cell(15, 6, $nama, 0, 1);
+        $this->fpdf->Cell(70, 6, 'Prodi/Unit Peminjam', 0, 0); $this->fpdf->Cell(15, 6, $prodiv, 0, 1);
+        $this->fpdf->Cell(70, 6, 'Email Peminjam', 0, 0); $this->fpdf->Cell(15, 6, $prodiv, 0, 1);
+        $this->fpdf->Cell(70, 6, 'No. Handphone Peminjam', 0, 0); $this->fpdf->Cell(40, 6, $hp, 0, 1);
+        $this->fpdf->Cell(70, 6, 'Keperluan / Kegiatan', 0, 0); $this->fpdf->Cell(40, 6, $keperluan, 0, 1);
+        $this->fpdf->Cell(70, 6, 'Tanggal Peminjaman', 0, 0); $this->fpdf->Cell(40, 6, $book . ' WIB s/d. ' . $return . ' WIB', 0, 1);
+        $this->fpdf->Cell(70, 6, 'Lokasi Pemakaian', 0, 0); $this->fpdf->Cell(40, 6, $lok, 0, 1);
 
         $this->fpdf->Ln();
+
+        $this->fpdf->SetFont('Arial', 'B', 11);
+        $this->fpdf->Cell(70, 6, 'Lokasi Asal Barang', 0, 0); $this->fpdf->Cell(40, 6, $lok, 0, 1);
 
         $this->fpdf->SetFont('Arial', 'B', 11);
         $this->fpdf->Cell(10, 6, 'No', 1, 0, 'C');

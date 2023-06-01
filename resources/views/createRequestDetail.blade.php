@@ -56,6 +56,14 @@
                                         required>
                                 </div>
 
+                                <label for="nohp_peminjam"
+                                    class="col-form-label text-md-end">{{ __('No. Handphone Peminjam') }}</label>
+
+                                <div>
+                                    <input id="nohp_peminjam" type="text" class="form-control" name="nohp_peminjam"
+                                        required>
+                                </div>
+
                                 <label for="purpose"
                                     class="col-form-label text-md-end">{{ __('Approver tujuan peminjaman') }}</label>
 

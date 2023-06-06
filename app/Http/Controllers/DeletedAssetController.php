@@ -53,6 +53,7 @@ class DeletedAssetController extends Controller
         $d_aset->serial_number = $aset->serial_number;
         $d_aset->brand = $aset->brand;
         $d_aset->location = $aset->current_location;
+        $d_aset->pemilik_barang = $aset->pemilik_barang;
         $d_aset->division_id = $aset->division_id;
         $d_aset->asset_category_id = $aset->asset_category_id;
         $d_aset->save();

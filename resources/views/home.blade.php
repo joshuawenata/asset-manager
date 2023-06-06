@@ -172,8 +172,13 @@
                                             </form>
                                         </td>
                                         @if ($req->status == 'waiting approval')
-                                            <td>{{ $req->status . ' dari ' . \Illuminate\Support\Facades\Auth::user()->getAtasan($req->track_approver, $req->division_id) }}
-                                            </td>
+                                            @if ($req->track_approver == 0)
+                                                <td>{{ $req->status . ' dari ' . \Illuminate\Support\Facades\Auth::user()->getAtasan($req->track_approver, $req->approver_division_id) }}
+                                                </td>
+                                            @else
+                                                <td>{{ $req->status . ' dari ' . \Illuminate\Support\Facades\Auth::user()->getAtasan($req->track_approver, $req->division_id) }}
+                                                </td>
+                                            @endif
                                         @else
                                             <td>{{ $req->status }}</td>
                                         @endif

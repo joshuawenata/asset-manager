@@ -290,8 +290,8 @@ class RequestController extends Controller
         $book_date = $request->input('book_date');
         $division_id = $request->input('division_id');
         $binusian_id_peminjam = $request->input('binusian_id_peminjam');
-        $approver = $request->input('approver');
-        $approver_division_id = $request->input('approver_division_id');
+        $approver = explode('|', $request->input('approver'))[0];
+        $approver_division_id = explode('|', $request->input('approver'))[1];
         $nama_peminjam = $request->input('nama_peminjam');
         $prodi_peminjam = $request->input('prodi_peminjam');
         $email_peminjam = $request->input('email_peminjam');

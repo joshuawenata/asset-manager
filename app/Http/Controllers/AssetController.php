@@ -113,10 +113,9 @@ class AssetController extends Controller
 
             if($data['pemilik-barang'] != null){
                 $aset->pemilik_barang = $data['pemilik-barang'];
-            }
-            else if ($data['new-pemilik-barang'] != null){
+            }else if ($data['new-pemilik-barang'] != null){
                 $new_pemilik_barang = new PemilikBarangController();
-                $new_pemilik_barang = $new_pemilik_barang->store($data['new-pemilik-barang'], $data['division_id']);
+                $new_pemilik_barang = $new_pemilik_barang->store($data['new-pemilik-barang'], $data['division-id']);
 
                 $aset->pemilik_barang = $new_pemilik_barang;
             }
@@ -169,9 +168,9 @@ class AssetController extends Controller
             if($data['pemilik-barang'] != null){
                 $aset->pemilik_barang = $data['pemilik-barang'];
             }
-            else if ($data['new-pemilik-barang'] != null){
+            else if ($request->input('new-pemilik-barang') != null){
                 $new_pemilik_barang = new PemilikBarangController();
-                $new_pemilik_barang = $new_pemilik_barang->store($data['new-pemilik-barang'], $data['division_id']);
+                $new_pemilik_barang = $new_pemilik_barang->store($request->input('new-pemilik-barang'), $data['division_id']);
 
                 $aset->pemilik_barang = $new_pemilik_barang;
             }
@@ -228,9 +227,12 @@ class AssetController extends Controller
     {
         $data = Asset::find($id);
         $show = AssetCategory::all();
+        $pemilik = DB::table('pemilik_barangs')->select('nama')->where('division_id',\Illuminate\Support\Facades\Auth::user()->division->id)->get();
+
         return View::make('admin.editAsset', [
             'data' => $data,
-            'show' => $show
+            'show' => $show,
+            'pemilik' => $pemilik
         ]);
     }
 
@@ -246,20 +248,27 @@ class AssetController extends Controller
         $validator = Validator::make($request->all(), [
             'serialnumber' => 'required',
             'brand' => 'required',
-            'pemilik_barang' => 'required',
             'asset_category' => 'required'
         ]);
 
         if($validator->fails()){
-            return redirect('admin/editAsset/' . $id)
+            return redirect('edit-asset/' . $id)
                 ->withErrors($validator)
                 ->withInput();
-        }
-        else {
+        }else {
             $aset = Asset::find($id);
             $aset->serial_number = $request->input('serialnumber');
             $aset->brand = $request->input('brand');
-            $aset->pemilik_barang = $request->input('pemilik_barang');
+
+            if($request->input('pemilik-barang') != null){
+                $aset->pemilik_barang = $request->input('pemilik-barang');
+            }else if ($request->input('new-pemilik-barang') != null){
+                $new_pemilik_barang = new PemilikBarangController();
+                $new_pemilik_barang = $new_pemilik_barang->store($request->input('new-pemilik-barang'), \Illuminate\Support\Facades\Auth::user()->division_id);
+
+                $aset->pemilik_barang = $new_pemilik_barang;
+            }
+
             $aset->asset_category_id = $request->input('asset_category');
 
             if($request->input('asset-status')){

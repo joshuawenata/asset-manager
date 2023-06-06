@@ -19,7 +19,8 @@
                         href="{{ route('admin.createAsset') }}"><span style="display: flex"
                             class="material-symbols-outlined">add</span></a>
                     {{--                    <a class="btn btn-small btn-success mb-3" href="{{ route('downloadAsset') }}"><span class="material-symbols-outlined">download</span>Unduh Rekap Aset</a> --}}
-                    <a class="btn btn-small btn-success mb-3" href="{{ url('/deleted-asset/') }}">Pemusnahan Barang</a>
+                    <a class="btn btn-small btn-success mb-3" href="{{ url('/deleted-asset/') }}">Riwayat Pemusnahan
+                        Barang</a>
                     <a class="btn btn-small btn-success mb-3"
                         href="{{ url('/move-asset/' . \Illuminate\Support\Facades\Auth::user()->division->id) }}">Pemindahan
                         Barang</a>
@@ -53,7 +54,7 @@
                                     @if ($mode == 'current')
                                         <th scope="col">Lokasi</th>
                                     @endif
-                                    <th scope="col">PIC</th>
+                                    <th scope="col">Pemilik Barang</th>
                                     @if ($mode == 'current')
                                         <th scope="col">Status</th>
                                         <th scope="col">Aksi</th>

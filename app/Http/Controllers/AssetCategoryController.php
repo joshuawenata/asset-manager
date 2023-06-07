@@ -15,7 +15,10 @@ class AssetCategoryController extends Controller
      */
     public function index()
     {
-        //
+        $data = DB::table('asset_categories')->get();
+        return view('admin.kategoriBarang', [
+           'data' => $data
+        ]);
     }
 
     /**
@@ -85,6 +88,8 @@ class AssetCategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $Kategori_barang = AssetCategory::find($id);
+        $Kategori_barang->delete();
+        return redirect('admin/dashboard')->with('message', 'Kategori Barang Berhasil Dihapus');
     }
 }

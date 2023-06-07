@@ -63,14 +63,9 @@
                                 autocomplete="division-name" autofocus>
                         </div>
                         <div class="mb-3">
-                            <label for="division-name" class="col-form-label">{{ __('Pengelola Barang') }}</label>
                             <div class="mt-2">
-                                <input class="form-check-input mt-1" type="checkbox" value="1" id="approver"
+                                <input hidden class="form-check-input mt-1" type="checkbox" value="1" id="approver"
                                     name="approver" checked onclick="return false" />
-                                <label class="form-check-label" for="approver">Admin</label>
-                                <input class="form-check-input mt-1 ms-2" type="checkbox" value="2" id="approver"
-                                    name="approver" />
-                                <label class="form-check-label" for="approver">Approver</label>
                             </div>
                         </div>
                     </div>

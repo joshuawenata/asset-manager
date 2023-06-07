@@ -28,8 +28,8 @@
                         Lokasi</a>
                     <a class="btn btn-small btn-success mb-3" href="{{ route('admin.pemilik-barang') }}">Kelola
                         Pemilik Barang</a>
-                    {{--                @elseif($mode == 'deleted') --}}
-                    {{--                    <a class="btn btn-small btn-success mb-3" href="{{ route('downloadDeletedAsset') }}"><span class="material-symbols-outlined">download</span>Unduh Aset Musnah</a> --}}
+                    {{-- <a class="btn btn-small btn-success mb-3" href="{{ route('admin.kategori-barang') }}">Kelola
+                        Kategori Barang</a> --}}
                 @endif
 
                 <div class="card">

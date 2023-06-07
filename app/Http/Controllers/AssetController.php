@@ -115,7 +115,7 @@ class AssetController extends Controller
                 $aset->pemilik_barang = $data['pemilik-barang'];
             }else if ($data['new-pemilik-barang'] != null){
                 $new_pemilik_barang = new PemilikBarangController();
-                $new_pemilik_barang = $new_pemilik_barang->store($data['new-pemilik-barang'], $data['division-id']);
+                $new_pemilik_barang = $new_pemilik_barang->store($data['new-pemilik-barang'], $data['division_id']);
 
                 $aset->pemilik_barang = $new_pemilik_barang;
             }

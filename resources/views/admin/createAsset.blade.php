@@ -135,22 +135,6 @@
                                             </div>
                                         @endforeach
                                     @endif
-                                    <div class="mt-2">
-                                        <input class="form-check-input mt-1" type="radio" id="show"
-                                            name="asset-category" value="" />
-                                        <label for="show">Tambah Kategori Barang Baru</label>
-                                    </div>
-                                    <div id="box" style="display: none;">
-                                        <input id="new-asset-category" type="text"
-                                            class="form-control mt-2 @error('new-asset-category') is-invalid @enderror"
-                                            name="new-asset-category" value="{{ old('new-asset-category') }}" />
-
-                                        @error('new-asset-category')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
                                 </div>
                             </div>
 

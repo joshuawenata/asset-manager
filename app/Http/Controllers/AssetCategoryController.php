@@ -15,8 +15,15 @@ class AssetCategoryController extends Controller
      */
     public function index()
     {
-        $data = DB::table('asset_categories')->get();
+        $data = DB::table('asset_categories')->where('status',1)->get();
         return view('admin.kategoriBarang', [
+           'data' => $data
+        ]);
+    }
+
+    public function superadminKategori(){
+        $data = DB::table('asset_categories')->where('status',1)->get();
+        return view('superadmin.kategori', [
            'data' => $data
         ]);
     }
@@ -31,6 +38,16 @@ class AssetCategoryController extends Controller
         //
     }
 
+    public function createNewAssetCategory(Request $request)
+    {
+        $new_category = new AssetCategoryController();
+        $new_cat_id = $new_category->store($request->input('new-asset-category'));
+        $data = DB::table('asset_categories')->where('status',1)->get();
+        return view('superadmin.kategori', [
+           'data' => $data
+        ]);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -41,6 +58,7 @@ class AssetCategoryController extends Controller
     {
         $cat = new AssetCategory;
         $cat->name = $new_category;
+        $cat->status = 1;
         $cat->save();
 
         return DB::table('asset_categories')->max('id');
@@ -75,9 +93,16 @@ class AssetCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
         //
+        $Kategori_barang = AssetCategory::find($id);
+        $Kategori_barang->status = 0;
+        $Kategori_barang->update();
+        $data = DB::table('asset_categories')->where('status',1)->get();
+        return view('superadmin.kategori', [
+            'data' => $data
+         ]);
     }
 
     /**
@@ -88,8 +113,5 @@ class AssetCategoryController extends Controller
      */
     public function destroy($id)
     {
-        $Kategori_barang = AssetCategory::find($id);
-        $Kategori_barang->delete();
-        return redirect('admin/dashboard')->with('message', 'Kategori Barang Berhasil Dihapus');
     }
 }

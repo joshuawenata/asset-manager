@@ -96,7 +96,6 @@ Route::middleware(['auth', 'cekRole:admin'])->group(function(){
     Route::post('/update-asset', [\App\Http\Controllers\RepairAssetController::class, 'update'])->name('updateFixedAsset');
     //DELETE
     Route::get('/edit-pemilik-barang/{id}', [\App\Http\Controllers\PemilikBarangController::class, 'destroy']);
-    Route::get('/edit-kategori-barang', [\App\Http\Controllers\AssetCategoryController::class, 'destroy']);
     Route::post('/delete-asset', [\App\Http\Controllers\AssetController::class, 'destroy']);
     //DOWNLOAD XLSX
     Route::get('export-asset', [\App\Http\Controllers\AssetController::class, 'export'])->name('downloadAsset');
@@ -119,7 +118,10 @@ Route::middleware(['auth', 'cekRole:approver'])->group(function(){
 //Superadmin Routes
 Route::middleware(['auth', 'cekRole:superadmin'])->group(function(){
     Route::get('/superadmin/dashboard', [\App\Http\Controllers\HomeController::class, 'superadminDashboard'] )->name('superadmin.dashboard');
+    Route::get('/superadmin/kategori', [\App\Http\Controllers\AssetCategoryController::class, 'superadminKategori'] )->name('superadmin.kategori');
+    Route::get('/edit-kategori-barang/{id}', [\App\Http\Controllers\AssetCategoryController::class, 'update']);
     //LOCATION
+    Route::post('/create-new-asset-category', [\App\Http\Controllers\AssetCategoryController::class, 'createNewAssetCategory'])->name('createNewAssetCategory');
     Route::post('/store-location', [\App\Http\Controllers\LocationController::class, 'store'])->name('store-location');
     Route::get('/location', [\App\Http\Controllers\LocationController::class, 'index'])->name('superadmin.location');
     Route::post('/delete-location', [\App\Http\Controllers\LocationController::class, 'destroy']);

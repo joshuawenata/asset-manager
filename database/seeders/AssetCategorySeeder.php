@@ -15,13 +15,16 @@ class AssetCategorySeeder extends Seeder
     public function run()
     {
         AssetCategory::create([
-            'name' => 'Kamera'
+            'name' => 'Kamera',
+            'status' => 1,
         ]);
         AssetCategory::create([
-            'name' => 'Printer'
+            'name' => 'Printer',
+            'status' => 1,
         ]);
         AssetCategory::create([
-            'name' => 'Mic'
+            'name' => 'Mic',
+            'status' => 1,
         ]);
     }
 }

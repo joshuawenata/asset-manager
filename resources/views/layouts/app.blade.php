@@ -90,6 +90,8 @@
                                 <a class="nav-link active" href="{{ route('superadmin.location') }}">Kelola Lokasi</a>
                                 <a class="nav-link active"
                                     href="{{ route('superadmin.register') }}">{{ __('Daftarkan akun') }}</a>
+                                <a class="nav-link active"
+                                    href="{{ route('superadmin.kategori') }}">{{ __('Kelola Kategori Barang') }}</a>
                             @endif
                         @endguest
                     </ul>

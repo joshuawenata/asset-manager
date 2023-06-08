@@ -60,7 +60,7 @@ class AssetController extends Controller
     public function create()
     {
         $data = Location::all();
-        $show = AssetCategory::all();
+        $show = DB::table('asset_categories')->where('status',1)->get();
         $pemilik = DB::table('pemilik_barangs')->select('nama')->where('division_id',\Illuminate\Support\Facades\Auth::user()->division->id)->get();
 
         return View::make('admin.createAsset', [
@@ -73,7 +73,7 @@ class AssetController extends Controller
     public function createForStaff()
     {
         $data = Location::all();
-        $show = AssetCategory::all();
+        $show = DB::table('asset_categories')->where('status',1)->get();
         $pemilik = DB::table('pemilik_barangs')->select('nama')->where('division_id',\Illuminate\Support\Facades\Auth::user()->division->id)->get();
 
         return View::make('createAsset', [

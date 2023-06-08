@@ -16,6 +16,8 @@ class CreateAssetCategoriesTable extends Migration
         Schema::create('asset_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            // status 1 = active and 0 = not active
+            $table->string('status');
             $table->timestamps();
         });
     }

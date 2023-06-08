@@ -78,7 +78,7 @@
 
                             <div class="row mb-3">
                                 <label for="asset_category"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Jenis Barang') }}</label>
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Kategori Barang') }}</label>
 
                                 <div class="col-md-6">
                                     <select class="form-select" name="asset_category" id="asset_category">

@@ -25,6 +25,7 @@ class User extends Authenticatable
         'binusianid',
         'address',
         'phone',
+        'active_status',
         'division_id',
         'password',
         'role_id'

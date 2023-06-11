@@ -36,8 +36,8 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nomor Seri</th>
-                                <th>Jenis</th>
+                                <th>Kode Barang</th>
+                                <th>Kategori Barang</th>
                                 <th>Spesifikasi</th>
                             </tr>
                         </thead>

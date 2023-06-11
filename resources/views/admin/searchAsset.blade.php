@@ -48,8 +48,8 @@
                             <thead>
                                 <tr>
                                     <th scope="col">No</th>
-                                    <th scope="col">Nomor Seri</th>
-                                    <th scope="col">Jenis</th>
+                                    <th scope="col">Kode Barang</th>
+                                    <th scope="col">Kategori Barang</th>
                                     <th scope="col">Spesifikasi</th>
                                     @if ($mode == 'current')
                                         <th scope="col">Lokasi</th>

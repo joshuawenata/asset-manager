@@ -47,8 +47,8 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nomor Seri</th>
-                                <th>Jenis</th>
+                                <th>Kode Barang</th>
+                                <th>Kategori Barang</th>
                                 <th>Spesifikasi</th>
                                 @if (\Illuminate\Support\Facades\Auth::user()->role->name == 'staff')
                                     <th>Milik</th>

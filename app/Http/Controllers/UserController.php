@@ -98,6 +98,7 @@ class UserController extends Controller
         $user = User::find($id);
         $user->division_id = $request->input('department');
         $user->role_id = $request->input('role');
+        $user->email = $request->input('email');
         $user->update();
         return redirect('superadmin/dashboard')->with('message', 'Data User Berhasil Diperbaharui');
     }

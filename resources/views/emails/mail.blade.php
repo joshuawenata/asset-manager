@@ -9,10 +9,10 @@
 
 <body>
 
-    <h3>ASSET MANAGEMENT - {{ $subjek }}</h3>
+    <h3>INVENTORY MANAGEMENT BINUS @BANDUNG - {{ $subjek }}</h3>
     <p>{{ $pesan }}</p>
     <p>No-Reply Email</p>
-    <p>Email Sent By Asset Management System</p>
+    <p>Email Sent By Inventory Management Binus @Bandung System</p>
 
 </body>
 

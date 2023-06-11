@@ -197,8 +197,8 @@ class RequestController extends Controller
             ->join('asset_categories', 'assets.asset_category_id', '=', 'asset_categories.id')
             ->select('assets.*', 'asset_categories.name')
             ->where('division_id', '=', $div_id)
-            ->where('status', 'tersedia')
-            ->orWhere('status', 'dipinjam')
+            ->where('assets.status', 'tersedia')
+            ->orWhere('assets.status', 'dipinjam')
             ->get();
 
         $avail_items = array();

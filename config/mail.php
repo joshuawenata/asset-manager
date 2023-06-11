@@ -92,8 +92,8 @@ return [
     */
 
     'from' => [
-        'address' => 'joshua.sunarto@binus.edu',
-        'name' => 'Asset Manager',
+        'address' => 'inventory.bdg@binus.edu',
+        'name' => 'Inventory Management Bandung',
     ],
 
     /*

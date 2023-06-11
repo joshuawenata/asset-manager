@@ -6,7 +6,7 @@
 
 @section('js')
     <script defer src="{{ asset('js/newassetcategory.js') }}"></script>
-    <script defer src="{{ asset('js/newpemilikbarang.js') }}"></script>
+    <script defer src="{{ asset('js/newpemilikbarang2.js') }}"></script>
 @endsection
 
 @section('content')

@@ -26,9 +26,26 @@ class PemilikBarangController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+
+    public function superadminPemilikBarang(){
+        $data = DB::table('pemilik_barangs')->get();
+        $divisi = DB::table('divisions')->get();
+        return view('superadmin.pemilikbarang', [
+           'data' => $data,
+           'divisi' => $divisi
+        ]);
+    }
+
+    public function createNewPemilikBarang(Request $request)
     {
-        //
+        $new_pemilik_barang = new PemilikBarangController();
+        $new_cat_id = $new_pemilik_barang->store($request->input('new-pemilik-barang'), $request->input('division-id'));
+        $data = DB::table('pemilik_barangs')->get();
+        $divisi = DB::table('divisions')->get();
+        return view('superadmin.pemilikbarang', [
+           'data' => $data,
+           'divisi' => $divisi,
+        ])->with('message', 'Pemilik Barang Berhasil Ditambahkan');
     }
 
     /**
@@ -91,6 +108,6 @@ class PemilikBarangController extends Controller
     {
         $pemilik_barang = PemilikBarang::find($id);
         $pemilik_barang->delete();
-        return redirect('admin/dashboard')->with('message', 'Pemilik Barang Berhasil Dihapus');
+        return redirect('superadmin/pemilik-barang')->with('message', 'Pemilik Barang Berhasil Dihapus');
     }
 }

@@ -11,8 +11,9 @@
 
     <h3>INVENTORY MANAGEMENT BINUS @BANDUNG - {{ $subjek }}</h3>
     <p>{{ $pesan }}</p>
-    <p>No-Reply Email</p>
-    <p>Email Sent By Inventory Management Binus @Bandung System</p>
+
+    <p>No-Reply Email <br> Email Sent By Inventory Management Binus @Bandung System <br> to see detail please visit:
+        www.inventorybdg.apps.binus.edu</p>
 
 </body>
 

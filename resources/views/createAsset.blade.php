@@ -6,7 +6,6 @@
 
 @section('js')
     <script defer src="{{ asset('js/newassetcategory.js') }}"></script>
-    <script defer src="{{ asset('js/newpemilikbarang2.js') }}"></script>
 @endsection
 
 @section('content')
@@ -25,7 +24,7 @@
 
                             <div class="row mb-3">
                                 <label for="serialnumber"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Nomor Seri') }}</label>
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Kode Barang') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="serialnumber" type="text"
@@ -65,7 +64,7 @@
                                 </div>
                             </div>
 
-                            <div class="row mb-3">
+                            {{-- <div class="row mb-3">
                                 <label for="asset-category"
                                     class="col-md-4 col-form-label text-md-end">{{ __('') }}</label>
 
@@ -87,7 +86,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="row mb-3">
                                 <label for="brand"

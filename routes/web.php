@@ -95,7 +95,6 @@ Route::middleware(['auth', 'cekRole:admin'])->group(function(){
     Route::put('update-asset/{id}', [\App\Http\Controllers\AssetController::class, 'update']);
     Route::post('/update-asset', [\App\Http\Controllers\RepairAssetController::class, 'update'])->name('updateFixedAsset');
     //DELETE
-    Route::get('/edit-pemilik-barang/{id}', [\App\Http\Controllers\PemilikBarangController::class, 'destroy']);
     Route::post('/delete-asset', [\App\Http\Controllers\AssetController::class, 'destroy']);
     //DOWNLOAD XLSX
     Route::get('export-asset', [\App\Http\Controllers\AssetController::class, 'export'])->name('downloadAsset');
@@ -119,9 +118,12 @@ Route::middleware(['auth', 'cekRole:approver'])->group(function(){
 Route::middleware(['auth', 'cekRole:superadmin'])->group(function(){
     Route::get('/superadmin/dashboard', [\App\Http\Controllers\HomeController::class, 'superadminDashboard'] )->name('superadmin.dashboard');
     Route::get('/superadmin/kategori', [\App\Http\Controllers\AssetCategoryController::class, 'superadminKategori'] )->name('superadmin.kategori');
+    Route::get('/superadmin/pemilik-barang', [\App\Http\Controllers\PemilikBarangController::class, 'superadminPemilikBarang'] )->name('superadmin.pemilikbarang');
+    Route::get('/edit-pemilik-barang/{id}', [\App\Http\Controllers\PemilikBarangController::class, 'destroy']);
     Route::get('/edit-kategori-barang/{id}', [\App\Http\Controllers\AssetCategoryController::class, 'update']);
     //LOCATION
     Route::post('/create-new-asset-category', [\App\Http\Controllers\AssetCategoryController::class, 'createNewAssetCategory'])->name('createNewAssetCategory');
+    Route::post('/create-new-pemilik-barang', [\App\Http\Controllers\PemilikBarangController::class, 'createNewPemilikBarang'])->name('createNewPemilikBarang');
     Route::post('/store-location', [\App\Http\Controllers\LocationController::class, 'store'])->name('store-location');
     Route::get('/location', [\App\Http\Controllers\LocationController::class, 'index'])->name('superadmin.location');
     Route::post('/delete-location', [\App\Http\Controllers\LocationController::class, 'destroy']);

@@ -26,7 +26,7 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">No</th>
-                                        <th scope="col">Nomor Seri</th>
+                                        <th scope="col">Kode Barang</th>
                                         <th scope="col">Jenis</th>
                                         <th scope="col">Spesifikasi</th>
                                         @if (\Illuminate\Support\Facades\Auth::user()->role->name == 'staff')

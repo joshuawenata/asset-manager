@@ -120,7 +120,6 @@ Route::middleware(['auth', 'cekRole:superadmin'])->group(function(){
     Route::get('/superadmin/kategori', [\App\Http\Controllers\AssetCategoryController::class, 'superadminKategori'] )->name('superadmin.kategori');
     Route::get('/superadmin/pemilik-barang', [\App\Http\Controllers\PemilikBarangController::class, 'superadminPemilikBarang'] )->name('superadmin.pemilikbarang');
     Route::get('/edit-pemilik-barang/{id}', [\App\Http\Controllers\PemilikBarangController::class, 'destroy']);
-    Route::get('/edit-kategori-barang/{id}', [\App\Http\Controllers\AssetCategoryController::class, 'update']);
     //LOCATION
     Route::post('/create-new-asset-category', [\App\Http\Controllers\AssetCategoryController::class, 'createNewAssetCategory'])->name('createNewAssetCategory');
     Route::post('/create-new-pemilik-barang', [\App\Http\Controllers\PemilikBarangController::class, 'createNewPemilikBarang'])->name('createNewPemilikBarang');
@@ -136,9 +135,11 @@ Route::middleware(['auth', 'cekRole:superadmin'])->group(function(){
         return view('auth.register');
     })->name('superadmin.register');
     //DELETE
+    Route::get('/delete-kategori-barang/{id}', [\App\Http\Controllers\AssetCategoryController::class, 'destroy']);
     Route::post('/delete-division', [\App\Http\Controllers\DivisionController::class, 'destroy']);
     //USER
     //UPDATE
+    Route::post('/edit-kategori-barang/{id}', [\App\Http\Controllers\AssetCategoryController::class, 'update'])->name('updateKategoriBarang');
     Route::get('/edit-user/{id}', [\App\Http\Controllers\UserController::class, 'edit']);
     Route::get('/edit-user-active-status/{id}', [\App\Http\Controllers\UserController::class, 'editActive']);
     Route::put('/update-user/{id}', [\App\Http\Controllers\UserController::class, 'update']);

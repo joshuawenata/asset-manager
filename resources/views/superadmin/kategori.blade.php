@@ -55,7 +55,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col">No</th>
-                                    <th scope="col">Nama</th>
+                                    <th scope="col">Kategori Barang</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
@@ -66,9 +66,16 @@
                                         <th scope="row">{{ $index + 1 }}</th>
                                         <td>{{ $item->name }}</td>
                                         <td>
-                                            <a class="btn btn-small btn-danger"
-                                                href="{{ URL::to('edit-kategori-barang/' . $item->id) }}"><span
-                                                    class="material-symbols-outlined">delete</span></a>
+                                            <form action="{{ route('updateKategoriBarang', $item->id) }}" method="POST">
+                                                @csrf
+                                                <input class="form-control mb-2" type="text" name="name"
+                                                    id="name">
+                                                <button class="btn btn-small btn-info" type="submit"><span
+                                                        class="material-symbols-outlined">edit_square</span></button>
+                                                <a class="btn btn-small btn-danger"
+                                                    href="{{ URL::to('delete-kategori-barang/' . $item->id) }}"><span
+                                                        class="material-symbols-outlined">delete</span></a>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

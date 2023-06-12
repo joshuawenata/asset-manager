@@ -85,8 +85,6 @@
 
                     <div class="card-body">
 
-
-
                         <form method="POST" action="{{ url('update-user/' . $data->id) }}">
                             @csrf
                             @method('PUT')

@@ -55,6 +55,8 @@ Route::middleware(['auth', 'cekRole:staff'])->group(function(){
     Route::post('/create-request', [\App\Http\Controllers\RequestController::class, 'createRequest'])->name('createRequest');
     Route::post('/create-request-detail', [\App\Http\Controllers\RequestController::class, 'create'])->name('createRequestDetail');
     Route::get('/create-asset-staff', [\App\Http\Controllers\AssetController::class, 'createForStaff'])->name('staff.createAsset');
+    Route::get('/create-asset-excel-staff', [\App\Http\Controllers\AssetController::class, 'createAssetExcelForStaff'])->name('staff.createAssetExcel');
+    Route::post('/store-asset-excel-staff', [\App\Http\Controllers\AssetController::class, 'storeAssetExcelForStaff'])->name('staff.storeAssetExcel');
     Route::post('/store-new-asset-staff', [\App\Http\Controllers\AssetController::class, 'storeForStaff'])->name('staff.storeAsset');
     //CONFIRM
     Route::post('/confirm-request', [\App\Http\Controllers\RequestController::class, 'confirm'])->name('confirmRequest');
@@ -83,6 +85,8 @@ Route::middleware(['auth', 'cekRole:admin'])->group(function(){
     Route::get('/move-asset-history/{id}', [\App\Http\Controllers\AssetLocationController::class, 'show']);
     //CREATE
     Route::get('/create-asset', [\App\Http\Controllers\AssetController::class, 'create'])->name('admin.createAsset');
+    Route::get('/create-asset-excel', [\App\Http\Controllers\AssetController::class, 'createAssetExcel'])->name('admin.createAssetExcel');
+    Route::post('/store-asset-excel', [\App\Http\Controllers\AssetController::class, 'storeAssetExcel'])->name('admin.storeAssetExcel');
     Route::get('/create-repair-asset/{id}', [\App\Http\Controllers\RepairAssetController::class, 'create']);
     Route::post('/store-new-asset', [\App\Http\Controllers\AssetController::class, 'store'])->name('storeAsset');
     Route::post('/store-repair-asset', [\App\Http\Controllers\RepairAssetController::class, 'store'])->name('storeRepairAsset');

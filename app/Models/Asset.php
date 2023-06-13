@@ -9,6 +9,16 @@ class Asset extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'serial_number',
+        'status',
+        'brand',
+        'current_location',
+        'pemilik_barang',
+        'division_id',
+        'asset_category_id'
+    ];
+
     public function assetcategory(){
         return $this->belongsTo(AssetCategory::class, 'asset_category_id');
     }

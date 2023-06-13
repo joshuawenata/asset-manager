@@ -11,11 +11,13 @@ use App\Models\DeletedAsset;
 use App\Models\Location;
 use App\Models\User;
 use App\Models\PemilikBarang;
+use App\Imports\AssetsImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Excel as ExcelExcel;
 
 class AssetController extends Controller
 {
@@ -69,6 +71,55 @@ class AssetController extends Controller
             'data' => $data
         ]);
     }
+
+    public function createAssetExcelForStaff(Request $request){
+        return View::make('createAssetExcel');
+    }
+
+    public function createAssetExcel(Request $request){
+        return View::make('admin.createAssetExcel');
+    }
+
+    public function storeAssetExcelForStaff(Request $request){
+        request()->validate([
+            'excel' => 'required|mimes:xlsx'
+        ]);
+        if($request->file('excel')){
+            $import =  Excel::import(new AssetsImport, request()->file('excel'));
+            $msg_success = "Data Uploaded Succesfully! ";
+            $msg_danger = "Data Uploaded failed!";
+            if ($import) {
+                return redirect('/create-asset-excel')->with('message',$msg_success);
+            }else{
+                return redirect('/create-asset-excel')->with('message',$msg_danger);
+            }
+        }
+        else{
+            $msge = "please choose your file! ";
+            return redirect('/create-asset-excel')->with('message',$msge);
+        }
+    }
+
+    public function storeAssetExcel(Request $request){
+        request()->validate([
+            'excel' => 'required|mimes:xlsx'
+        ]);
+        if($request->file('excel')){
+            $import =  Excel::import(new AssetsImport, request()->file('excel'));
+            $msg_success = "Data Uploaded Succesfully! ";
+            $msg_danger = "Data Uploaded failed!";
+            if ($import) {
+                return redirect('/create-asset-excel')->with('message',$msg_success);
+            }else{
+                return redirect('/create-asset-excel')->with('message',$msg_danger);
+            }
+        }
+        else{
+            $msge = "please choose your file! ";
+            return redirect('/create-asset-excel')->with('message',$msge);
+        }
+    }
+
 
     public function createForStaff()
     {

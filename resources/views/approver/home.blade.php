@@ -107,7 +107,7 @@
                         <h5>Apakah anda yakin ingin me-reject request peminjaman?</h5>
                         <div class="mb-3">
                             <label for="pesan" class="col-form-label">Pesan:</label>
-                            <textarea class="form-control" id="pesan" name="pesan" autofocus>{{ ' ' }}</textarea>
+                            <textarea class="form-control" id="pesan" name="pesan" autofocus required>{{ '' }}</textarea>
                         </div>
                     </div>
                     <div class="modal-footer">

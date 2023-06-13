@@ -77,11 +77,18 @@
                             @if (auth()->user()->role->name == 'staff')
                                 <a class="nav-link active" href="{{ route('checkRequest') }}">Pinjam Inventory</a>
                                 <a class="nav-link active" href="{{ route('staff.createAsset') }}">Tambah Barang</a>
+                                <a class="nav-link active" href="{{ route('staff.createAssetExcel') }}">Tambah Barang
+                                    Melalui
+                                    Excel</a>
                             @elseif(auth()->user()->role->name == 'admin')
                                 <a class="nav-link active"
                                     href="{{ url('/search-asset/' . \Illuminate\Support\Facades\Auth::user()->division->id) }}">Lihat
                                     Inventory</a>
-                                <a class="nav-link active" href="{{ route('admin.historiRequest') }}">Riwayat Peminjaman</a>
+                                <a class="nav-link active" href="{{ route('admin.historiRequest') }}">Riwayat
+                                    Peminjaman</a>
+                                <a class="nav-link active" href="{{ route('admin.createAssetExcel') }}">Tambah Barang
+                                    Melalui
+                                    Excel</a>
                             @elseif(auth()->user()->role->name == 'approver')
                                 <a class="nav-link active" href="{{ route('admin.historiRequest') }}">Riwayat
                                     Peminjaman</a>

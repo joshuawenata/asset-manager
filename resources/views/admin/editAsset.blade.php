@@ -61,7 +61,7 @@
 
                             <div class="row mb-3">
                                 <label for="serialnumber"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Nomor Seri') }}</label>
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Kode Barang') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="serialnumber" type="text"
@@ -148,29 +148,7 @@
                                     @enderror
 
                                 </div>
-                                <div class="row mb-3">
-                                    <label for="pemilik-barang"
-                                        class="col-md-4 col-form-label text-md-end">{{ __('') }}</label>
 
-                                    <div class="col-md-6">
-                                        <div class="mt-2">
-                                            <input class="form-check-input mt-1" type="checkbox" id="show2"
-                                                name="pemilik-barang" value="" />
-                                            <label for="pemilik-barang">Tambah Pemilik Barang Baru</label>
-                                        </div>
-                                        <div id="box2" style="display: none;">
-                                            <input id="new-pemilik-barang" type="text"
-                                                class="form-control mt-2 @error('new-pemilik-barang') is-invalid @enderror"
-                                                name="new-pemilik-barang" value="{{ old('new-pemilik-barang') }}" />
-
-                                            @error('new-pemilik-barang')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
 
                             <div class="row mb-0">

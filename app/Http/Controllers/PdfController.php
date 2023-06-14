@@ -101,16 +101,17 @@ class PdfController extends Controller
         $bookings = DB::table('bookings')
             ->join('assets', 'bookings.asset_id', '=', 'assets.id')
             ->join('asset_categories', 'bookings.asset_category_id', '=', 'asset_categories.id')
-            ->select('assets.serial_number', 'assets.brand', 'asset_categories.name', 'assets.pemilik_barang')
+            ->select('bookings.asset_id','assets.serial_number', 'assets.brand', 'asset_categories.name', 'assets.pemilik_barang')
             ->where('bookings.request_id', '=', $id)
             ->get();
 
         $i = 1;
         foreach ($bookings as $b){
-            // $pemilik_barang = DB::table('assets')->where('id', $b->asset_id)->get('pemilik_barang');
+            $division_asset_id = DB::table('assets')->where('id', $b->asset_id)->value('division_id');
+            $division_asset = DB::table('divisions')->where('id', $division_asset_id)->value('name');
 
             $this->fpdf->Cell(10, 6, $i, 1, 0, 'C');
-            $this->fpdf->Cell(40, 6, $div, 1, 0, 'C');
+            $this->fpdf->Cell(40, 6, $division_asset, 1, 0, 'C');
             $this->fpdf->Cell(30, 6, $b->serial_number, 1, 0, 'C');
             $this->fpdf->Cell(30, 6, $b->name, 1, 0, 'C');
             $this->fpdf->Cell(30, 6, $b->brand, 1, 0, 'C');

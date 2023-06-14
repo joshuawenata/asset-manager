@@ -18,6 +18,8 @@ Route::get('/requests-history', [\App\Http\Controllers\RequestController::class,
 Route::get('/requests-history/{id}', [\App\Http\Controllers\BookingController::class, 'show2'])->name('rejectedbookings.show')->middleware(['auth', 'cekRole:admin,approver']);
 //GENERATE PDF
 Route::post('download', [\App\Http\Controllers\PdfController::class, 'index'])->name('download')->middleware(['auth', 'cekRole:student,staff,admin,approver']);
+Route::get('download-excel', [\App\Http\Controllers\ExcelController::class, 'index'])->name('downloadExcel')->middleware(['auth', 'cekRole:student,staff,admin,approver']);
+
 
 //TEST THIS
 Route::get('register-show', function (Request $request) {

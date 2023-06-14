@@ -72,7 +72,7 @@ class PdfController extends Controller
         $book = $titikdua . $book_date;
         $return = $return_date;
         $lok = $titikdua . $lokasi;
-        $div = $titikdua . $division;
+        $div = $division;
 
         $this->fpdf->SetFont('Arial', '', 11);
         $this->fpdf->Cell(70, 6, 'Binusian ID / Kode Dosen Peminjam', 0, 0); $this->fpdf->Cell(40, 6, $bid, 0, 1);
@@ -87,13 +87,13 @@ class PdfController extends Controller
         $this->fpdf->Ln();
 
         $this->fpdf->SetFont('Arial', 'B', 11);
-        $this->fpdf->Cell(70, 6, 'Lokasi Asal Barang', 0, 0); $this->fpdf->Cell(40, 6, $div, 0, 1);
 
         $this->fpdf->SetFont('Arial', 'B', 11);
         $this->fpdf->Cell(10, 6, 'No', 1, 0, 'C');
+        $this->fpdf->Cell(40, 6, 'Lokasi Asal Barang', 1, 0, 'C');
         $this->fpdf->Cell(30, 6, 'Nomor Seri', 1, 0, 'C');
         $this->fpdf->Cell(30, 6, 'Jenis', 1, 0, 'C');
-        $this->fpdf->Cell(70, 6, 'Spesifikasi', 1, 0, 'C');
+        $this->fpdf->Cell(30, 6, 'Spesifikasi', 1, 0, 'C');
         $this->fpdf->Cell(40, 6, 'Pemilik Barang', 1, 1, 'C');
 
         $this->fpdf->SetFont('Arial', '', 11);
@@ -110,9 +110,10 @@ class PdfController extends Controller
             // $pemilik_barang = DB::table('assets')->where('id', $b->asset_id)->get('pemilik_barang');
 
             $this->fpdf->Cell(10, 6, $i, 1, 0, 'C');
+            $this->fpdf->Cell(40, 6, $div, 1, 0, 'C');
             $this->fpdf->Cell(30, 6, $b->serial_number, 1, 0, 'C');
             $this->fpdf->Cell(30, 6, $b->name, 1, 0, 'C');
-            $this->fpdf->Cell(70, 6, $b->brand, 1, 0, 'C');
+            $this->fpdf->Cell(30, 6, $b->brand, 1, 0, 'C');
             $this->fpdf->Cell(40, 6, $b->pemilik_barang, 1, 1, 'C');
             $i++;
         }

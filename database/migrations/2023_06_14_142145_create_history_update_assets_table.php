@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('history_update_assets', function (Blueprint $table) {
             $table->id();
             $table->string("id_pengubah");
-            $table->string("nama_pengubah");
             $table->string("kode_barang");
             $table->string("kategori_barang");
             $table->string("status_barang");

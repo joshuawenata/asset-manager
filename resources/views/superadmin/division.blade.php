@@ -86,6 +86,11 @@
                     data-bs-target="#exampleModal">
                     Tambah Departemen Baru
                 </button>
+                <form action="{{ route('superadmin.historyDepartemen') }}">
+                    <button type="submit" class="btn btn-small btn-success mb-3" data-bs-toggle="modal">
+                        History Departemen
+                    </button>
+                </form>
 
                 <div class="card">
                     <div class="card-header">{{ __('Dashboard Super Admin') }}</div>

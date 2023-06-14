@@ -78,6 +78,7 @@ Route::middleware(['auth', 'cekRole:admin'])->group(function(){
     Route::get('/admin/kategoriBarang', [\App\Http\Controllers\AssetCategoryController::class, 'index'])->name('admin.kategori-barang');
     Route::post('/delete-location-admin', [\App\Http\Controllers\LocationAdminController::class, 'destroy'])->name('delete-location-admin');
     Route::post('/store-location-admin', [\App\Http\Controllers\LocationAdminController::class, 'store'])->name('store-location-admin');
+    Route::get('/admin/riwayat-update', [\App\Http\Controllers\AssetController::class, 'riwayat'])->name('admin.riwayat-update');
 
     //ASSET
     //READ
@@ -126,6 +127,13 @@ Route::middleware(['auth', 'cekRole:superadmin'])->group(function(){
     Route::get('/superadmin/kategori', [\App\Http\Controllers\AssetCategoryController::class, 'superadminKategori'] )->name('superadmin.kategori');
     Route::get('/superadmin/pemilik-barang', [\App\Http\Controllers\PemilikBarangController::class, 'superadminPemilikBarang'] )->name('superadmin.pemilikbarang');
     Route::get('/edit-pemilik-barang/{id}', [\App\Http\Controllers\PemilikBarangController::class, 'destroy']);
+    //HISTORY
+    Route::get('/superadmin/history-departemen', [\App\Http\Controllers\DivisionController::class, 'historySuperadmin'])->name('superadmin.historyDepartemen');
+    Route::get('/superadmin/history-lokasi', [\App\Http\Controllers\LocationController::class, 'historySuperadmin'])->name('superadmin.historyLocation');
+    Route::get('/superadmin/history-kategori-barang', [\App\Http\Controllers\AssetCategoryController::class, 'historySuperadmin'])->name('superadmin.historyAssetCategory');
+    Route::get('/superadmin/history-pemilik-barang', [\App\Http\Controllers\PemilikBarangController::class, 'historySuperadmin'])->name('superadmin.historyPemilikBarang');
+    Route::get('/superadmin/history-akun', [\App\Http\Controllers\UserController::class, 'historyAkunSuperadmin'])->name('superadmin.historyAkun');
+
     //LOCATION
     Route::post('/create-new-asset-category', [\App\Http\Controllers\AssetCategoryController::class, 'createNewAssetCategory'])->name('createNewAssetCategory');
     Route::post('/create-new-pemilik-barang', [\App\Http\Controllers\PemilikBarangController::class, 'createNewPemilikBarang'])->name('createNewPemilikBarang');

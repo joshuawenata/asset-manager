@@ -11,6 +11,7 @@ use App\Models\DeletedAsset;
 use App\Models\Location;
 use App\Models\User;
 use App\Models\PemilikBarang;
+use App\Models\HistoryUpdateAsset;
 use App\Imports\AssetsImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -308,14 +309,27 @@ class AssetController extends Controller
                 ->withInput();
         }else {
             $aset = Asset::find($id);
+            $history_update = new HistoryUpdateAsset;
+            $history_update->id_pengubah = \Illuminate\Support\Facades\Auth::id();
+            $history_update->kode_barang = $aset->serial_number;
+            $history_update->kategori_barang = AssetCategory::where('id',$aset->asset_category_id)->pluck('name')[0];
+            $history_update->status_barang = $aset->status;
+            $history_update->spesifikasi_barang = $aset->brand;
+            $history_update->pemilik_barang = $aset->pemilik_barang;
+            $history_update->new_kode_barang = $request->input('serialnumber');
+            $history_update->new_kategori_barang = $request->input('asset_category');
+            $history_update->new_status_barang = $request->input('asset-status');
+            $history_update->new_spesifikasi_barang = $request->input('brand');
             $aset->serial_number = $request->input('serialnumber');
             $aset->brand = $request->input('brand');
 
             if($request->input('pemilik-barang') != null){
                 $aset->pemilik_barang = $request->input('pemilik-barang');
+                $history_update->new_pemilik_barang = $request->input('pemilik-barang');
             }else if ($request->input('new-pemilik-barang') != null){
                 $new_pemilik_barang = new PemilikBarangController();
                 $new_pemilik_barang = $new_pemilik_barang->store($request->input('new-pemilik-barang'), \Illuminate\Support\Facades\Auth::user()->division_id);
+                $history_update->new_pemilik_barang = $request->input('new-pemilik-barang');
 
                 $aset->pemilik_barang = $new_pemilik_barang;
             }
@@ -326,8 +340,9 @@ class AssetController extends Controller
                 $aset->status = $request->input('asset-status');
             }
 
+            $history_update->save();
             $aset->update();
-            return redirect('search-asset/' . \Illuminate\Support\Facades\Auth::user()->division->id)->with('message', 'Aset Berhasil Diperbaharui');
+            return redirect('search-asset/' . \Illuminate\Support\Facades\Auth::id())->with('message', 'Aset Berhasil Diperbaharui');
         }
     }
 
@@ -367,5 +382,12 @@ class AssetController extends Controller
             ->get();
 
         return Excel::download(new AssetExport($aset), 'rekap_aset.xlsx');
+    }
+
+    public function riwayat(){
+        $data = HistoryUpdateAsset::where('id_pengubah',\Illuminate\Support\Facades\Auth::id())->get();
+        return View::make('admin.historyUpdate', [
+            'data' => $data
+        ]);
     }
 }

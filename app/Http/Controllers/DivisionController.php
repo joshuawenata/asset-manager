@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 
-
 class DivisionController extends Controller
 {
     /**
@@ -43,6 +42,14 @@ class DivisionController extends Controller
     public function create()
     {
         //
+    }
+
+    public function historySuperadmin()
+    {
+        $data = HistoryDepartement::all();
+        return View::make('superadmin.historyDepartement', [
+            'data' => $data
+        ]);
     }
 
     /**

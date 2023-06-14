@@ -20,6 +20,14 @@ class LocationController extends Controller
         ]);
     }
 
+    public function historySuperadmin()
+    {
+        $data = HistoryDepartement::all();
+        return View::make('superadmin.historyDepartement', [
+            'data' => $data
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

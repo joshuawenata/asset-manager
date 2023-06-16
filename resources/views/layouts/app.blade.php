@@ -102,7 +102,7 @@
                                 <a class="nav-link active"
                                     href="{{ route('superadmin.pemilikbarang') }}">{{ __('Kelola Pemilik Barang') }}</a>
                                 <a class="nav-link active"
-                                    href="{{ route('superadmin.pemilikbarang') }}">{{ __('History Akun') }}</a>
+                                    href="{{ route('superadmin.historyAkun') }}">{{ __('History Akun') }}</a>
                             @endif
                         @endguest
                     </ul>

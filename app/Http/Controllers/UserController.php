@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Division;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\HistoryAkun;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -25,8 +26,8 @@ class UserController extends Controller
 
     public function historySuperadmin()
     {
-        $data = HistoryDepartement::all();
-        return View::make('superadmin.historyDepartement', [
+        $data = HistoryAkun::all();
+        return view('superadmin.historyAkun', [
             'data' => $data
         ]);
     }
@@ -86,8 +87,14 @@ class UserController extends Controller
         $user = User::find($id);
         if($user->active_status==1){
             $user->active_status = 2;
+            $history = new HistoryAkun;
+            $history->aksi = 'superadmin menonaktifkan akun '.Role::where('id',$user->role_id)->pluck('name')[0].' dengan data nama: '.$user->name.', binusian_id: '.$user->binusianid.', phone: '.$user->phone.', departemen: '.Division::where('id',$user->division_id)->pluck('name')[0].', email: '.$user->email;
+            $history->save();
         }else{
             $user->active_status = 1;
+            $history = new HistoryAkun;
+            $history->aksi = 'superadmin mengaktifkan akun '.Role::where('id',$user->role_id)->pluck('name')[0].' dengan data nama: '.$user->name.', binusian_id: '.$user->binusianid.', phone: '.$user->phone.', departemen: '.Division::where('id',$user->division_id)->pluck('name')[0].', email: '.$user->email;
+            $history->save();
         }
         $user->update();
 
@@ -104,6 +111,9 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::find($id);
+        $history = new HistoryAkun;
+        $history->aksi = 'superadmin mengupdate akun '.Role::where('id',$user->role_id)->pluck('name')[0].' dengan data nama: '.$user->name.', binusian_id: '.$user->binusianid.', phone: '.$user->phone.', departemen: '.Division::where('id',$user->division_id)->pluck('name')[0].', email: '.$user->email.' menjadi '.'departemen baru: '.Division::where('id',$request->input('department'))->pluck('name')[0].', '.'role baru: '.Role::where('id',$request->input('role'))->pluck('name')[0].', '.'email baru: '.$request->input('email');
+        $history->save();
         $user->division_id = $request->input('department');
         $user->role_id = $request->input('role');
         $user->email = $request->input('email');
@@ -115,6 +125,9 @@ class UserController extends Controller
     {
         $user = User::find($request->user_reset_id);
         $user->password = Hash::make('B1nu$-' . $user->binusianid);
+        $history = new HistoryAkun;
+        $history->aksi = 'superadmin mereset password akun '.Role::where('id',$user->role_id)->pluck('name')[0].' dengan data nama: '.$user->name.', binusian_id: '.$user->binusianid.', phone: '.$user->phone.', departemen: '.Division::where('id',$user->division_id)->pluck('name')[0].', email: '.$user->email;
+        $history->save();
         $user->update();
         return redirect('superadmin/dashboard')->with('message', 'Data User Berhasil Diperbaharui');
     }
@@ -128,6 +141,9 @@ class UserController extends Controller
     public function destroy(Request $request)
     {
         $user = User::find($request->user_delete_id);
+        $history = new HistoryAkun;
+        $history->aksi = 'superadmin menghapus akun '.Role::where('id',$user->role_id)->pluck('name')[0].' dengan data nama: '.$user->name.', binusian_id: '.$user->binusianid.', phone: '.$user->phone.', departemen: '.Division::where('id',$user->division_id)->pluck('name')[0].', email: '.$user->email;
+        $history->save();
         $user->delete();
         return redirect('superadmin/dashboard')->with('message', 'User Berhasil Dihapus');
     }

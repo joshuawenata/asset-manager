@@ -207,12 +207,10 @@
                                         {{ __('Perbarui Data') }}
                                     </button>
                                 </div>
+                                <div class="col-md-6 offset-md-4">Format password default : B1nu$-[Binusian ID]</div>
                             </div>
 
                         </form>
-
-
-
 
                     </div>
                 </div>

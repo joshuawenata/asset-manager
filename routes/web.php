@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use App\Models\User;
+use App\Models\Role;
+use App\Models\Division;
 
 // TODO: ini klo udh login gabisa ke dashboard page / nya malah ke login mesti cek user session
 Route::get('/', function () {
@@ -39,8 +41,18 @@ Route::post('insert-account',function(Request $request){
         'email' => $request->input('email'),
         'password' => bcrypt($request->input('password')),
         'role_id' => $role_id,
-        'active_status' => 1
+        'active_status' => 1,
+        'created_at' => now(),
+        'updated_at' => now()
     ]);
+    $role = Role::where('id',$role_id)->pluck('name')[0];
+    $division = Division::where('id',$request->input('division_id'))->pluck('name')[0];
+    DB::table('history_akuns')->insert([
+        'aksi' => 'superadmin menambahkan akun '.$role.' dengan data nama: '.$request->input('name').', binusian_id: '.$request->input('binusianid').', phone: '.$request->input('phone').', departemen: '.$division.', email: '.$request->input('email'),
+        'created_at' => now(),
+        'updated_at' => now()
+    ]);
+
     return redirect()->route('superadmin.dashboard');
 });
 Route::get('/see/{user}/dashboard/{id}', [\App\Http\Controllers\BookingController::class, 'show'])->name('bookings.show')->middleware(['auth', 'cekRole:student,staff,admin,approver']);
@@ -132,7 +144,7 @@ Route::middleware(['auth', 'cekRole:superadmin'])->group(function(){
     Route::get('/superadmin/history-lokasi', [\App\Http\Controllers\LocationController::class, 'historySuperadmin'])->name('superadmin.historyLocation');
     Route::get('/superadmin/history-kategori-barang', [\App\Http\Controllers\AssetCategoryController::class, 'historySuperadmin'])->name('superadmin.historyAssetCategory');
     Route::get('/superadmin/history-pemilik-barang', [\App\Http\Controllers\PemilikBarangController::class, 'historySuperadmin'])->name('superadmin.historyPemilikBarang');
-    Route::get('/superadmin/history-akun', [\App\Http\Controllers\UserController::class, 'historyAkunSuperadmin'])->name('superadmin.historyAkun');
+    Route::get('/superadmin/history-akun', [\App\Http\Controllers\UserController::class, 'historySuperadmin'])->name('superadmin.historyAkun');
 
     //LOCATION
     Route::post('/create-new-asset-category', [\App\Http\Controllers\AssetCategoryController::class, 'createNewAssetCategory'])->name('createNewAssetCategory');

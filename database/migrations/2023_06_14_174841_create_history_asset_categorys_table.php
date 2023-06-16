@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('history_asset_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('aksi');
+            $table->longText('aksi');
             $table->timestamps();
         });
     }

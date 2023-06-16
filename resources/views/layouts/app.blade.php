@@ -101,6 +101,8 @@
                                     href="{{ route('superadmin.kategori') }}">{{ __('Kelola Kategori Barang') }}</a>
                                 <a class="nav-link active"
                                     href="{{ route('superadmin.pemilikbarang') }}">{{ __('Kelola Pemilik Barang') }}</a>
+                                <a class="nav-link active"
+                                    href="{{ route('superadmin.pemilikbarang') }}">{{ __('History Akun') }}</a>
                             @endif
                         @endguest
                     </ul>

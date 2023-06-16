@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\PemilikBarang;
+use App\Models\Division;
+use App\Models\HistoryPemilikBarang;
 
 class PemilikBarangController extends Controller
 {
@@ -23,8 +25,8 @@ class PemilikBarangController extends Controller
 
     public function historySuperadmin()
     {
-        $data = HistoryDepartement::all();
-        return View::make('superadmin.historyDepartement', [
+        $data = HistoryPemilikBarang::all();
+        return view('superadmin.historyPemilikBarang', [
             'data' => $data
         ]);
     }
@@ -67,6 +69,10 @@ class PemilikBarangController extends Controller
         $cat->nama = $new_nama;
         $cat->division_id = $new_division_id;
         $cat->save();
+        $division_new_pemilik_barang = Division::where('id',$new_division_id)->pluck('name')[0];
+        $history = new HistoryPemilikBarang;
+        $history->aksi = "Superadmin menambahkan pemilik barang baru ".$new_nama." pada departemen ".$division_new_pemilik_barang;
+        $history->save();
 
         return $new_nama;
     }
@@ -114,6 +120,10 @@ class PemilikBarangController extends Controller
     public function destroy($id)
     {
         $pemilik_barang = PemilikBarang::find($id);
+        $divisi_pemilik_barang = Division::where('id',$pemilik_barang->division_id)->pluck('name')[0];
+        $history = new HistoryPemilikBarang;
+        $history->aksi = "Superadmin menghapus pemilik barang ".$pemilik_barang->pluck('nama')[0]." pada departemen ".$divisi_pemilik_barang;
+        $history->save();
         $pemilik_barang->delete();
         return redirect('superadmin/pemilik-barang')->with('message', 'Pemilik Barang Berhasil Dihapus');
     }

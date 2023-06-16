@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AssetCategory;
+use App\Models\HistoryAssetCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -30,8 +31,8 @@ class AssetCategoryController extends Controller
 
     public function historySuperadmin()
     {
-        $data = HistoryDepartement::all();
-        return View::make('superadmin.historyDepartement', [
+        $data = HistoryAssetCategory::all();
+        return view('superadmin.historyAssetCategory', [
             'data' => $data
         ]);
     }
@@ -68,6 +69,9 @@ class AssetCategoryController extends Controller
         $cat->name = $new_category;
         $cat->status = 1;
         $cat->save();
+        $history = new HistoryAssetCategory;
+        $history->aksi = "Superadmin menambahkan kategori barang ".$new_category;
+        $history->save();
 
         return DB::table('asset_categories')->max('id');
     }
@@ -123,6 +127,9 @@ class AssetCategoryController extends Controller
         $Kategori_barang = AssetCategory::find($id);
         $Kategori_barang->status = 0;
         $Kategori_barang->update();
+        $history = new HistoryAssetCategory;
+        $history->aksi = "Superadmin menghapus kategori barang ".$Kategori_barang->name;
+        $history->save();
         $data = DB::table('asset_categories')->where('status',1)->get();
         return view('superadmin.kategori', [
             'data' => $data

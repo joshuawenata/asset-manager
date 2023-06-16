@@ -14,7 +14,11 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-
+                <form action="{{ route('superadmin.historyAssetCategory') }}">
+                    <button type="submit" class="btn btn-small btn-success mb-3" data-bs-toggle="modal">
+                        History Kategori Barang
+                    </button>
+                </form>
                 <div class="card">
                     <div class="card-header">{{ __('Kelola Kategori Barang') }}</div>
 
@@ -81,8 +85,6 @@
                                 @endforeach
                             </tbody>
                         </table>
-
-
 
                     </div>
                 </div>

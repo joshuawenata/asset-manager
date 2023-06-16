@@ -7,7 +7,7 @@
             <div class="col-md-12">
 
                 <div class="card">
-                    <div class="card-header">{{ __('Riwayat Update Data Barang') }}</div>
+                    <div class="card-header">{{ __('Riwayat Akun Superadmin') }}</div>
 
                     <div class="card-body">
                         @if (session('message'))
@@ -21,6 +21,7 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Aksi</th>
+                                    <th>Timestamp</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -29,6 +30,7 @@
                                         {{--                masukin kolom --}}
                                         <th scope="row">{{ $index + 1 }}</th>
                                         <td>{{ $req->aksi }}</td>
+                                        <td>{{ $req->created_at }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

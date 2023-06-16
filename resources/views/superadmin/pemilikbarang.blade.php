@@ -14,9 +14,13 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-
+                <form action="{{ route('superadmin.historyPemilikBarang') }}">
+                    <button type="submit" class="btn btn-small btn-success mb-3" data-bs-toggle="modal">
+                        History Pemilik Barang
+                    </button>
+                </form>
                 <div class="card">
-                    <div class="card-header">{{ __('Kelola Kategori Barang') }}</div>
+                    <div class="card-header">{{ __('Kelola Pemilik Barang') }}</div>
 
                     <div class="card-body">
 

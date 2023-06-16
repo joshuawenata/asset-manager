@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('history_asset_categorys', function (Blueprint $table) {
+        Schema::create('history_asset_categories', function (Blueprint $table) {
             $table->id();
             $table->string('aksi');
             $table->timestamps();

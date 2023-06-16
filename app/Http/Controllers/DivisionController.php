@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Division;
+use App\Models\HistoryDepartemen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
@@ -46,8 +47,8 @@ class DivisionController extends Controller
 
     public function historySuperadmin()
     {
-        $data = HistoryDepartement::all();
-        return View::make('superadmin.historyDepartement', [
+        $data = HistoryDepartemen::all();
+        return view('superadmin.historyDepartemen', [
             'data' => $data
         ]);
     }
@@ -63,6 +64,9 @@ class DivisionController extends Controller
         $division = new Division;
         $division->name = $request->input('division-name');
         $division->approver = $request->input('approver');
+        $history = new HistoryDepartemen;
+        $history->aksi = "Superadmin menambahkan departemen ".$request->input('division-name');
+        $history->save();
         $division->save();
         return redirect('division')->with('message', 'Departemen Baru Berhasil Ditambahkan');
     }
@@ -111,6 +115,9 @@ class DivisionController extends Controller
     public function destroy(Request $id)
     {
         $dept = Division::find($id->asset_division_id);
+        $history = new HistoryDepartemen;
+        $history->aksi = "Superadmin menghapus departemen ".$dept->name;
+        $history->save();
         $dept->delete();
         return redirect('division')->with('message', 'Departemen Berhasil Dihapus');
     }

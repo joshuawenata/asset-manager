@@ -81,6 +81,12 @@
                     Tambah Lokasi Baru
                 </button>
 
+                <form action="{{ route('superadmin.historyLocation') }}">
+                    <button type="submit" class="btn btn-small btn-success mb-3" data-bs-toggle="modal">
+                        History Lokasi
+                    </button>
+                </form>
+
                 <div class="card">
                     <div class="card-header">{{ __('Dashboard Super Admin') }}</div>
 

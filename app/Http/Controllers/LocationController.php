@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Location;
+use App\Models\HistoryLocation;
 use Illuminate\Http\Request;
 
 class LocationController extends Controller
@@ -22,8 +23,8 @@ class LocationController extends Controller
 
     public function historySuperadmin()
     {
-        $data = HistoryDepartement::all();
-        return View::make('superadmin.historyDepartement', [
+        $data = HistoryLocation::all();
+        return view('superadmin.historyLokasi', [
             'data' => $data
         ]);
     }
@@ -48,6 +49,9 @@ class LocationController extends Controller
     {
         $location = new Location();
         $location->name = $request->input('location-name');
+        $history = new HistoryLocation;
+        $history->aksi = "Superadmin menambahkan lokasi ".$request->input('location-name');
+        $history->save();
         $location->save();
         return redirect('location')->with('message', 'Lokasi baru berhasil ditambahkan');
     }
@@ -95,6 +99,9 @@ class LocationController extends Controller
     public function destroy(Request $request)
     {
         $loct = Location::find($request->location_id);
+        $history = new HistoryLocation;
+        $history->aksi = "Superadmin menghapus lokasi ".$loct->name;
+        $history->save();
         $loct->delete();
         return redirect('location')->with('message', 'Lokasi berhasil dihapus');
     }

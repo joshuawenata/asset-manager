@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 use Maatwebsite\Excel\Facades\Excel;
 use Maatwebsite\Excel\Excel as ExcelExcel;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class AssetController extends Controller
 {
@@ -85,19 +86,22 @@ class AssetController extends Controller
         request()->validate([
             'excel' => 'required|mimes:xlsx'
         ]);
-        if($request->file('excel')){
-            $import =  Excel::import(new AssetsImport, request()->file('excel'));
-            $msg_success = "Data Uploaded Succesfully! ";
+
+        if ($request->file('excel')) {
+            $temp = new AssetsImport();
+            $import = Excel::import($temp, $request->file('excel'));
+
+            $msg_success = "Data Uploaded Succesfully!";
             $msg_danger = "Data Uploaded failed!";
+
             if ($import) {
-                return redirect('/create-asset-excel')->with('message',$msg_success);
-            }else{
-                return redirect('/create-asset-excel')->with('message',$msg_danger);
+                return redirect('/create-asset-excel')->with('message', $msg_success);
+            } else {
+                return redirect('/create-asset-excel')->with('message', $msg_danger);
             }
-        }
-        else{
-            $msge = "please choose your file! ";
-            return redirect('/create-asset-excel')->with('message',$msge);
+        } else {
+            $msge = "Please choose your file!";
+            return redirect('/create-asset-excel')->with('message', $msge);
         }
     }
 
@@ -105,19 +109,32 @@ class AssetController extends Controller
         request()->validate([
             'excel' => 'required|mimes:xlsx'
         ]);
-        if($request->file('excel')){
-            $import =  Excel::import(new AssetsImport, request()->file('excel'));
-            $msg_success = "Data Uploaded Succesfully! ";
+
+        if ($request->file('excel')) {
+            $file = $request->file('excel');
+
+            $reader = IOFactory::createReader('Xlsx');
+            $reader->setReadDataOnly(true);
+
+            $spreadsheet = $reader->load($file);
+
+            // Mengabaikan sheet kedua
+            $spreadsheet->setActiveSheetIndex(0);
+
+            // Mengimpor data ke dalam kelas AssetsImport
+            $import = (new AssetsImport)->import($spreadsheet);
+
+            $msg_success = "Data Uploaded Succesfully!";
             $msg_danger = "Data Uploaded failed!";
+
             if ($import) {
-                return redirect('/create-asset-excel')->with('message',$msg_success);
-            }else{
-                return redirect('/create-asset-excel')->with('message',$msg_danger);
+                return redirect('/create-asset-excel')->with('message', $msg_success);
+            } else {
+                return redirect('/create-asset-excel')->with('message', $msg_danger);
             }
-        }
-        else{
-            $msge = "please choose your file! ";
-            return redirect('/create-asset-excel')->with('message',$msge);
+        } else {
+            $msge = "Please choose your file!";
+            return redirect('/create-asset-excel')->with('message', $msge);
         }
     }
 

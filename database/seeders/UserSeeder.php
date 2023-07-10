@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
             'binusianid' => 'BN0014352432',
             'phone' => '082543356234',
             'division_id' => '3',
-            'role_id' => '2',
+            'role_id' => '1',
             'active_status' => 1,
         ]);
 
@@ -32,7 +32,7 @@ class UserSeeder extends Seeder
             'binusianid' => 'BN8345345865',
             'phone' => '081345634543',
             'division_id' => '3',
-            'role_id' => '3',
+            'role_id' => '2',
             'active_status' => 1,
         ]);
 
@@ -43,7 +43,7 @@ class UserSeeder extends Seeder
             'binusianid' => 'BN83453451865',
             'phone' => '081345634543',
             'division_id' => '4',
-            'role_id' => '3',
+            'role_id' => '2',
             'active_status' => 1,
         ]);
 
@@ -54,7 +54,7 @@ class UserSeeder extends Seeder
             'binusianid' => 'BN835638546',
             'phone' => '08145635438',
             'division_id' => '3',
-            'role_id' => '4',
+            'role_id' => '3',
             'active_status' => 1,
         ]);
 
@@ -65,7 +65,7 @@ class UserSeeder extends Seeder
             'binusianid' => 'BNDUMMY',
             'phone' => '08111111',
             'division_id' => '3',
-            'role_id' => '2',
+            'role_id' => '1',
             'active_status' => 1,
         ]);
 
@@ -76,7 +76,7 @@ class UserSeeder extends Seeder
             'binusianid' => null,
             'phone' => null,
             'division_id' => null,
-            'role_id' => '5',
+            'role_id' => '4',
             'active_status' => 1,
         ]);
 

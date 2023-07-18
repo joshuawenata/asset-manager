@@ -68,6 +68,19 @@
                                                     <span class="material-symbols-outlined">cancel</span>
                                                 </a>
                                             @endif
+                                            @if ($item->role->name == 'staff')
+                                                <a class="btn btn-small btn-warning"
+                                                    href="{{ URL::to('superadmin/history-akun-staff') }}">
+                                                    <span class="material-symbols-outlined">history</span></a>
+                                            @elseif ($item->role->name == 'admin')
+                                                <a class="btn btn-small btn-warning"
+                                                    href="{{ URL::to('superadmin/history-akun-admin') }}">
+                                                    <span class="material-symbols-outlined">history</span></a>
+                                            @elseif ($item->role->name == 'approver')
+                                                <a class="btn btn-small btn-warning"
+                                                    href="{{ URL::to('superadmin/history-akun-approver') }}">
+                                                    <span class="material-symbols-outlined">history</span></a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

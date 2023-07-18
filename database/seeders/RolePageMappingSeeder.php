@@ -21,23 +21,19 @@ class RolePageMappingSeeder extends Seeder
         ]);
 
         RolePageMapping::create([
-            'role_id' => '3',
+            'role_id' => '2',
             'page_id' => '2'
         ]);
 
         RolePageMapping::create([
-            'role_id' => '5',
+            'role_id' => '4',
             'page_id' => '3'
         ]);
 
         RolePageMapping::create([
-            'role_id' => '4',
+            'role_id' => '3',
             'page_id' => '4'
         ]);
 
-        RolePageMapping::create([
-            'role_id' => '2',
-            'page_id' => '1'
-        ]);
     }
 }

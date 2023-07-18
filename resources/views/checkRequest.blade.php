@@ -20,21 +20,57 @@
 @endsection
 
 @section('content')
+
+    {{--    modal divs --}}
+    <div class="modal fade" id="see" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Divisi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="post" action="{{ route('createRequest') }}">
+                    <div class="modal-body">
+                        @csrf
+                        @if (session('datetimes'))
+                            <input type="hidden" name="datetimes" value="{{ session('datetimes') }}">
+                        @else
+                        @endif
+                        @if (session('data'))
+                            <select class="form-select" name="division_id" id="division_id">
+                                @foreach (session('data') as $index => $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                        @endif
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">OK</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        {{ __('Pinjam Barang') }}
+                        {{ __('Pinjam Aset') }}
                     </div>
 
                     <div class="card-body">
 
-                        <form method="POST" action="{{ route('createRequest') }}">
+
+
+                        <form method="POST" action="{{ route(\App\Models\User::getRolePage()) }}">
                             @csrf
 
                             <div class="row mb-3">
-
                                 <label for="datetimes"
                                     class="col-md-4 col-form-label text-md-end">{{ __('Tanggal Peminjaman') }}</label>
 
@@ -76,4 +112,5 @@
             </div>
         </div>
     </div>
+
 @endsection

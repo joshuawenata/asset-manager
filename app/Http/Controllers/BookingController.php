@@ -68,7 +68,7 @@ class BookingController extends Controller
         $receiver = DB::table('users')
             ->select('email')
             ->where('division_id', $div_id)
-            ->where('role_id', 4)
+            ->where('role_id', 3)
             ->get();
         $receiver = $receiver[0]->email;
         $email->index($receiver, $subyek, $message);

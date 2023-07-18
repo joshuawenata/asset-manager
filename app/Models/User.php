@@ -61,24 +61,14 @@ class User extends Authenticatable
     public function requests(){
         return $this->hasMany(Request::class);
     }
-//    3 above dah bener
-
-//    protected function role_type(): Attribute{
-//        return new Attribute(
-//            get: fn ($value) => ["student", "staff", "admin", "approver", "superadmin"][$value],
-//        );
-//    }
 
     public function getAtasan($track_approver, $atasan){
 
-//        $divisi = Booking::where('request_id', $req_id)->first();
-//        $atasan = $divisi->asset->division->id;
-
         if($track_approver == 1){
-            $atasan = User::where('division_id', $atasan)->where('role_id', '3')->first()->name;
+            $atasan = User::where('division_id', $atasan)->where('role_id', '2')->first()->name;
         }
         else if ($track_approver == 0){
-            $atasan = User::where('division_id', $atasan)->where('role_id', '4')->first()->name;
+            $atasan = User::where('division_id', $atasan)->where('role_id', '3')->first()->name;
         }
 
         return $atasan;

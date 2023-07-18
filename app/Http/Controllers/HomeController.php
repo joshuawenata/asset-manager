@@ -30,7 +30,7 @@ class HomeController extends Controller
 
     public function index(){
 
-        for($i = 1; $i <= 5; $i++){
+        for($i = 1; $i <= 4; $i++){
             $res = $this->validateUser($i);
             if($res->count()){
                 foreach ($res as $r){

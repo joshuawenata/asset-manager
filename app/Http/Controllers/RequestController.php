@@ -197,6 +197,7 @@ class RequestController extends Controller
             ->join('asset_categories', 'assets.asset_category_id', '=', 'asset_categories.id')
             ->select('assets.*', 'asset_categories.name')
             ->where('assets.status', 'tersedia')
+            ->where('assets.division_id', '=', $div_id)
             ->orWhere('assets.status', 'dipinjam')
             ->get();
 
@@ -250,7 +251,7 @@ class RequestController extends Controller
         $book_date = $request->input('book_date');
         $assets = $request->input('assets');
         $division_id = $request->input('division_id');
-        $approver = User::all()->where('role_id', 4);
+        $approver = User::all()->where('role_id', 3);
 
         return view('createRequestDetail', [
             'assets' => $assets,

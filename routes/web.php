@@ -145,6 +145,9 @@ Route::middleware(['auth', 'cekRole:superadmin'])->group(function(){
     Route::get('/superadmin/history-kategori-barang', [\App\Http\Controllers\AssetCategoryController::class, 'historySuperadmin'])->name('superadmin.historyAssetCategory');
     Route::get('/superadmin/history-pemilik-barang', [\App\Http\Controllers\PemilikBarangController::class, 'historySuperadmin'])->name('superadmin.historyPemilikBarang');
     Route::get('/superadmin/history-akun', [\App\Http\Controllers\UserController::class, 'historySuperadmin'])->name('superadmin.historyAkun');
+    Route::get('/superadmin/history-akun-staff', [\App\Http\Controllers\UserController::class, 'historyStaff'])->name('superadmin.historyAkunStaff');
+    Route::get('/superadmin/history-akun-admin', [\App\Http\Controllers\UserController::class, 'historyAdmin'])->name('superadmin.historyAkunAdmin');
+    Route::get('/superadmin/history-akun-approver', [\App\Http\Controllers\UserController::class, 'historyApprover'])->name('superadmin.historyAkunApprover');
 
     //LOCATION
     Route::post('/create-new-asset-category', [\App\Http\Controllers\AssetCategoryController::class, 'createNewAssetCategory'])->name('createNewAssetCategory');

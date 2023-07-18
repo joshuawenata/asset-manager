@@ -20,7 +20,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $data = User::all()->diff(User::whereIn('role_id', [1, 5])->get());
+        $data = User::all()->diff(User::whereIn('role_id', [1, 4])->get());
         return $data;
     }
 
@@ -28,6 +28,30 @@ class UserController extends Controller
     {
         $data = HistoryAkun::all();
         return view('superadmin.historyAkun', [
+            'data' => $data
+        ]);
+    }
+
+    public function historyStaff()
+    {
+        $data = HistoryAkun::all();
+        return view('superadmin.historyAkunStaff', [
+            'data' => $data
+        ]);
+    }
+
+    public function historyAdmin()
+    {
+        $data = HistoryAkun::all();
+        return view('superadmin.historyAkunAdmin', [
+            'data' => $data
+        ]);
+    }
+
+    public function historyApprover()
+    {
+        $data = HistoryAkun::all();
+        return view('superadmin.historyAkunApprover', [
             'data' => $data
         ]);
     }

@@ -7,6 +7,7 @@ use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 use Illuminate\Support\Facades\DB;
 use App\Models\AssetCategory;
+use App\Models\HistoryAddAsset;
 
 class AssetsImport implements ToModel, WithStartRow
 {
@@ -18,6 +19,11 @@ class AssetsImport implements ToModel, WithStartRow
     public function model(array $row)
     {
         $asset_category = DB::table('asset_categories')->where('name', $row[4])->first();
+
+        $history = new HistoryAddAsset();
+        $history->user_id = \Illuminate\Support\Facades\Auth::user()->id;
+        $history->aksi = \Illuminate\Support\Facades\Auth::user()->name." menambahkan barang dengan nomor seri ".$row[0];
+        $history->save();
 
         return new Asset([
             'serial_number'      => $row[0],

@@ -79,6 +79,8 @@ Route::middleware(['auth', 'cekRole:staff'])->group(function(){
     Route::post('/cancel-request', [\App\Http\Controllers\RequestController::class, 'destroy'])->name('deleteRequest');
     Route::post('/return', [\App\Http\Controllers\RequestController::class, 'kembali'])->name('kembali');
     Route::post('/update-return', [\App\Http\Controllers\RequestController::class, 'updateReturn'])->name('storeReturn');
+    //HISTORY
+    Route::get('/history-add-asset', [\App\Http\Controllers\HomeController::class, 'historyAddAsset'])->name('historyAddAsset');
 });
 
 

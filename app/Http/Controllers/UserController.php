@@ -20,7 +20,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $data = User::all()->diff(User::whereIn('role_id', [1, 4])->get());
+        $data = User::whereIn('role_id', [1, 2, 3])->get();
         return $data;
     }
 

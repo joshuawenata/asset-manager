@@ -12,6 +12,7 @@ use App\Models\Location;
 use App\Models\User;
 use App\Models\PemilikBarang;
 use App\Models\HistoryUpdateAsset;
+use App\Models\HistoryAddAsset;
 use App\Imports\AssetsImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -88,8 +89,7 @@ class AssetController extends Controller
         ]);
 
         if ($request->file('excel')) {
-            $temp = new AssetsImport();
-            $import = Excel::import($temp, $request->file('excel'));
+            $import =  Excel::import(new AssetsImport, request()->file('excel'));
 
             $msg_success = "Data Uploaded Succesfully!";
             $msg_danger = "Data Uploaded failed!";
@@ -111,18 +111,7 @@ class AssetController extends Controller
         ]);
 
         if ($request->file('excel')) {
-            $file = $request->file('excel');
-
-            $reader = IOFactory::createReader('Xlsx');
-            $reader->setReadDataOnly(true);
-
-            $spreadsheet = $reader->load($file);
-
-            // Mengabaikan sheet kedua
-            $spreadsheet->setActiveSheetIndex(0);
-
-            // Mengimpor data ke dalam kelas AssetsImport
-            $import = (new AssetsImport)->import($spreadsheet);
+            $import = Excel::import(new AssetsImport, request()->file('excel'));
 
             $msg_success = "Data Uploaded Succesfully!";
             $msg_danger = "Data Uploaded failed!";
@@ -260,6 +249,11 @@ class AssetController extends Controller
 
             $aset->division_id = $data['division_id'];
             $aset->save();
+
+            $history = new HistoryAddAsset;
+            $history->user_id = \Illuminate\Support\Facades\Auth::user()->id;
+            $history->aksi = \Illuminate\Support\Facades\Auth::user()->name." menambahkan barang dengan nomor seri ".$data['serialnumber'];
+            $history->save();
 
             $this->storeLoc();
 

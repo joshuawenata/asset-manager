@@ -91,6 +91,8 @@
                                 <a class="nav-link active" href="{{ route('admin.createAssetExcel') }}">Tambah Barang
                                     Melalui
                                     Excel</a>
+                                <a class="nav-link active" href="{{ route('historyAddAsset') }}">Riwayat Tambah
+                                    Barang</a>
                             @elseif(auth()->user()->role->name == 'approver')
                                 <a class="nav-link active" href="{{ route('admin.historiRequest') }}">Riwayat
                                     Peminjaman</a>

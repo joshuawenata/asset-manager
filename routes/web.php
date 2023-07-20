@@ -60,6 +60,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::post('/update-request', [\App\Http\Controllers\RequestController::class, 'update'])->name('updateRequest')->middleware(['auth', 'cekRole:admin,approver']);
 
 // Staff Routes
+
+Route::middleware(['auth', 'cekRole:staff,admin'])->group(function(){
+    //HISTORY
+    Route::get('/history-add-asset', [\App\Http\Controllers\HomeController::class, 'historyAddAsset'])->name('historyAddAsset');
+});
+
 Route::middleware(['auth', 'cekRole:staff'])->group(function(){
     Route::get('/dashboard', [\App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
     //CHECK TGL
@@ -79,8 +85,6 @@ Route::middleware(['auth', 'cekRole:staff'])->group(function(){
     Route::post('/cancel-request', [\App\Http\Controllers\RequestController::class, 'destroy'])->name('deleteRequest');
     Route::post('/return', [\App\Http\Controllers\RequestController::class, 'kembali'])->name('kembali');
     Route::post('/update-return', [\App\Http\Controllers\RequestController::class, 'updateReturn'])->name('storeReturn');
-    //HISTORY
-    Route::get('/history-add-asset', [\App\Http\Controllers\HomeController::class, 'historyAddAsset'])->name('historyAddAsset');
 });
 
 

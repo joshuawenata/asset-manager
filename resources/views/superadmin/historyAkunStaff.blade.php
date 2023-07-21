@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+@endsection
+
+@section('js')
+    <script defer src="{{ asset('js/datatable.js') }}"></script>
+@endsection
+
 @section('content')
     {{-- content --}}
     <div class="container">
@@ -25,7 +33,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($data as $index => $req)
+                                @foreach ($dataHistoryAddAsset as $index => $req)
                                     <tr>
                                         {{--                masukin kolom --}}
                                         <th scope="row">{{ $index + 1 }}</th>

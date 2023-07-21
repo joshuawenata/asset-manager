@@ -6,6 +6,7 @@
 @endsection
 
 @section('css')
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 @endsection

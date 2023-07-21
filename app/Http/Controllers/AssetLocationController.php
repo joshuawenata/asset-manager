@@ -41,6 +41,7 @@ class AssetLocationController extends Controller
         $new->asset_id = $aset->id;
         $new->to_location = $aset->current_location;
         $new->responsible = Auth::user()->name;
+        $new->responsible_id = 0;
         $new->notes = "Aset baru masuk";
         $new->save();
     }
@@ -60,6 +61,7 @@ class AssetLocationController extends Controller
             $new = new assetLocation();
             $new->asset_id = $a;
             $new->responsible = $data['responsible'];
+            $new->responsible_id = Auth::user()->id;
             $new->to_location = $data['to_location'];
             $new->notes = $data['notes'];
 

@@ -1,12 +1,13 @@
 @extends('layouts.app')
 
+@section('js')
+    <script defer src="{{ asset('js/datatable.js') }}"></script>
+@endsection
+
 @section('css')
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-@endsection
-
-@section('js')
-    <script defer src="{{ asset('js/datatable.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 @endsection
 
 @section('content')
@@ -41,10 +42,7 @@
                             <div class="alert alert-success">{{ session('message') }}</div>
                         @endif
 
-                        <table class="display nowrap table"
-                            @if ($mode == 'current') id="exampleTable"
-                            @else
-                                id="justTable" @endif>
+                        <table class="display nowrap table" id="myTable">
                             <thead>
                                 <tr>
                                     <th scope="col">No</th>

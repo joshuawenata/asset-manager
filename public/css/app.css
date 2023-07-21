@@ -1,0 +1,48 @@
+/* Add your CSS styles here */
+#myTable {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+#myTable th,
+#myTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+/* Custom styles for DataTables buttons */
+.dt-buttons .dt-button {
+    /* Add your styles for the buttons here */
+    background-color: #009905;
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 15px;
+    width: 60px;
+    height: 35px;
+    margin-bottom: 30px;
+}
+
+.dt-buttons:hover{
+    /* Add your styles for the buttons here */
+    background-color: #045506;
+    border-radius: 4px;
+    margin-right: 15px;
+    margin-bottom: 30px;
+    width: 60px;
+    height: 35px;
+}
+
+/* Custom style for the filtering input */
+.dataTables_wrapper .dataTables_filter input[type="search"] {
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 6px 10px;
+    box-shadow: none; /* Remove any box shadow, adjust if needed */
+    width: 200px; /* Adjust the width as needed */
+    margin-left: 10px;
+}

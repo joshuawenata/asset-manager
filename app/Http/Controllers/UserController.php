@@ -6,6 +6,11 @@ use App\Models\Division;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\HistoryAkun;
+use App\Models\HistoryAddAsset;
+use App\Models\HistoryUpdateAsset;
+use App\Models\DeletedAsset;
+use App\Models\RepairAsset;
+use App\Models\AssetLocation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -32,23 +37,37 @@ class UserController extends Controller
         ]);
     }
 
-    public function historyStaff()
+    public function historyStaff($id)
     {
-        $data = HistoryAkun::all();
+        $dataHistoryAddAsset = HistoryAddAsset::where('user_id',$id)->get();
         return view('superadmin.historyAkunStaff', [
-            'data' => $data
+            'dataHistoryAddAsset' => $dataHistoryAddAsset
         ]);
     }
 
-    public function historyAdmin()
+    public function historyAdmin($id)
     {
-        $data = HistoryAkun::all();
+        $dataHistoryAddAsset = HistoryAddAsset::where('user_id',$id)->get();
+        $dataHistoryPemusnahanBarang = DeletedAsset::where('user_id',$id)->get();
+        $dataHistoryPembaharuanBarang = HistoryUpdateAsset::where('id_pengubah',$id)->get();
+        $dataHistoryPemindahanBarang = AssetLocation::where('responsible_id',$id)->get();
+        $dataHistoryBarangRusak = RepairAsset::where('reported_by_id',$id)->get();
+        $dataHistoryPerbaikanBarang = RepairAsset::where('reported_by_id',$id)->get();
+        $user = User::where('id',$id)->get();
+        $division = Division::where('id',$user[0]['division_id'])->get('name')[0]['name'];
         return view('superadmin.historyAkunAdmin', [
-            'data' => $data
+            'dataHistoryAddAsset' => $dataHistoryAddAsset,
+            'dataHistoryPemusnahanBarang' => $dataHistoryPemusnahanBarang,
+            'dataHistoryPembaharuanBarang' => $dataHistoryPembaharuanBarang,
+            'dataHistoryPemindahanBarang' => $dataHistoryPemindahanBarang,
+            'dataHistoryBarangRusak' => $dataHistoryBarangRusak,
+            'dataHistoryPerbaikanBarang' => $dataHistoryPerbaikanBarang,
+            'user' => $user,
+            'division' => $division
         ]);
     }
 
-    public function historyApprover()
+    public function historyApprover($id)
     {
         $data = HistoryAkun::all();
         return view('superadmin.historyAkunApprover', [

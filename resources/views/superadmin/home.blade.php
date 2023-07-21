@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('css')
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 @endsection
@@ -31,7 +32,6 @@
                                     <th scope="col">Binusian ID</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">No. HP</th>
-                                    <th scope="col">Alamat</th>
                                     <th scope="col">Departemen</th>
                                     <th scope="col">Role</th>
                                     <th scope="col">Aksi</th>
@@ -46,7 +46,6 @@
                                         <td>{{ $item->binusianid }}</td>
                                         <td>{{ $item->email }}</td>
                                         <td>{{ $item->phone }}</td>
-                                        <td>{{ $item->address }}</td>
                                         <td>{{ $item->division->name }}</td>
                                         <td>{{ $item->role->name }}</td>
                                         <td>
@@ -70,15 +69,15 @@
                                             @endif
                                             @if ($item->role->name == 'staff')
                                                 <a class="btn btn-small btn-warning"
-                                                    href="{{ URL::to('superadmin/history-akun-staff') }}">
+                                                    href="{{ URL::to('superadmin/history-akun-staff/' . $item->id) }}">
                                                     <span class="material-symbols-outlined">history</span></a>
                                             @elseif ($item->role->name == 'admin')
                                                 <a class="btn btn-small btn-warning"
-                                                    href="{{ URL::to('superadmin/history-akun-admin') }}">
+                                                    href="{{ URL::to('superadmin/history-akun-admin/' . $item->id) }}">
                                                     <span class="material-symbols-outlined">history</span></a>
                                             @elseif ($item->role->name == 'approver')
                                                 <a class="btn btn-small btn-warning"
-                                                    href="{{ URL::to('superadmin/history-akun-approver') }}">
+                                                    href="{{ URL::to('superadmin/history-akun-approver/' . $item->id) }}">
                                                     <span class="material-symbols-outlined">history</span></a>
                                             @endif
                                         </td>

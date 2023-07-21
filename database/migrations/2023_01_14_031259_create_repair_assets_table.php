@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('asset_id');
             $table->foreign('asset_id')->references('id')->on('assets');
             $table->string('reported_by');
+            $table->integer('reported_by_id');
             $table->string('description');
             $table->string('pic_repair')->nullable();
             $table->string('repaired_by')->nullable();

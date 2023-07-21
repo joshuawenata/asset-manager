@@ -1,41 +1,24 @@
-$(document).ready( function () {
-    $('#myTable').DataTable();
-
-    $('#exampleTable').DataTable( {
-        dom: 'Bfrtip',
+$(document).ready(function () {
+    $("#myTable").DataTable({
+        dom: "Blfrtip",
         buttons: [
             {
-                extend: 'excelHtml5',
+                extend: "excelHtml5",
                 exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5]
-                }
-            }
-        ]
-    } );
+                    columns: [0, 1, 2, 3, 4, 5],
+                },
+            },
+        ],
+    });
 
-    $('#rusakTable').DataTable( {
-        dom: 'B<"clear">lfrtip',
-        buttons: [
-            {
-                extend: 'excelHtml5',
-                exportOptions: {
-                    columns: [0, 1, 2, 3]
-                }
-            }
-        ]
-    } );
+    // Function to wrap text in DataTable cells
+    function wrapTextInCells() {
+        $("#myTable td").each(function () {
+            $(this).css("white-space", "normal");
+        });
+    }
 
-    $('#justTable').DataTable( {
-        dom: 'Bfrtip',
-        buttons: [
-            'excel'
-        ]
-    } );
-
-    $('#moveTable').DataTable( {
-        dom: 'B<"clear">lfrtip',
-        buttons: [
-            'excel'
-        ]
-    } );
-} );
+    // Call the wrapTextInCells function on initial load and whenever the DataTable is redrawn
+    $("#myTable").on("draw.dt", wrapTextInCells);
+    wrapTextInCells();
+});

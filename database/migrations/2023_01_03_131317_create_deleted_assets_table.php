@@ -15,6 +15,7 @@ class CreateDeletedAssetsTable extends Migration
     {
         Schema::create('deleted_assets', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id');
             $table->string('serial_number')->unique();
             $table->string('brand');
             $table->string('location');

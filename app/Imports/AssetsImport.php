@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\Models\Asset;
+use App\Http\Controllers\AssetLocationController;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 use Illuminate\Support\Facades\DB;
@@ -22,10 +23,10 @@ class AssetsImport implements ToModel, WithStartRow
 
         $history = new HistoryAddAsset();
         $history->user_id = \Illuminate\Support\Facades\Auth::user()->id;
-        $history->aksi = \Illuminate\Support\Facades\Auth::user()->name." menambahkan barang dengan nomor seri ".$row[0];
+        $history->aksi = \Illuminate\Support\Facades\Auth::user()->name." menambahkan barang dengan nomor seri ".$row[0].", brand ".$row[1].", lokasi ".$row[2].", pemilik barang ".$row[3].", kategori barang ".$asset_category->name;
         $history->save();
 
-        return new Asset([
+        $aset = new Asset([
             'serial_number'      => $row[0],
             'status'             => 'tersedia',
             'brand'              => $row[1],
@@ -34,11 +35,25 @@ class AssetsImport implements ToModel, WithStartRow
             'division_id'        => \Illuminate\Support\Facades\Auth::user()->division->id,
             'asset_category_id'  => $asset_category ? $asset_category->id : null,
         ]);
+
+        $aset->save();
+
+        $this->storeLoc();
+
+        return null;
+
     }
 
     public function startRow(): int
     {
         return 2;
+    }
+
+    public function storeLoc(){
+        $aset = Asset::max('id');
+        $aset = Asset::find($aset);
+        $save_loc = new AssetLocationController();
+        $save_loc->initialize($aset);
     }
 
 }

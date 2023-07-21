@@ -262,7 +262,6 @@ class AssetController extends Controller
     }
 
     public function storeLoc(){
-
         $aset = Asset::max('id');
         $aset = Asset::find($aset);
         $save_loc = new AssetLocationController();
@@ -368,8 +367,15 @@ class AssetController extends Controller
         $aset = Asset::find($request->asset_delete_id);
         $asetloc = AssetLocation::where('asset_id',$request->asset_delete_id);
         $bookingsloc = Booking::where('asset_id',$request->asset_delete_id);
-        $d_aset = new DeletedAssetController();
-        $d_aset->store($aset);
+        $d_aset = new DeletedAsset;
+        $d_aset->user_id = \Illuminate\Support\Facades\Auth::user()->id;
+        $d_aset->serial_number = $aset->serial_number;
+        $d_aset->brand = $aset->brand;
+        $d_aset->location = $aset->current_location;
+        $d_aset->pemilik_barang = $aset->pemilik_barang;
+        $d_aset->division_id = $aset->division_id;
+        $d_aset->asset_category_id = $aset->asset_category_id;
+        $d_aset->save();
 
         $asetloc->delete();
         $bookingsloc->delete();

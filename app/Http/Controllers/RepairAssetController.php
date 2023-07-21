@@ -61,6 +61,7 @@ class RepairAssetController extends Controller
         $new = new RepairAsset();
         $new->asset_id = $data['asset_id'];
         $new->reported_by = $data['pelapor'];
+        $new->reported_by_id = \Illuminate\Support\Facades\Auth::user()->id;
         $new->description = $data['description'];
         $new->flag_fixed = 0;
 

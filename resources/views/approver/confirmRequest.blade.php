@@ -20,7 +20,7 @@
 
                     <div class="card-body">
 
-                        <form method="POST" action="{{ route('storeRequest') }}">
+                        <form method="POST" action="{{ route('approver.storeRequest') }}">
                             @csrf
 
                             <table id="myTable" class="display table">

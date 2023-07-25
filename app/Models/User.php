@@ -75,10 +75,7 @@ class User extends Authenticatable
     }
 
     public static function getRolePage(){
-        if(Auth::user()->role->name == 'student'){
-            return 'createRequest';
-        }
-        elseif (Auth::user()->role->name == 'staff'){
+        if (Auth::user()->role->name == 'approver'){
             return 'chooseDivision';
         }
     }

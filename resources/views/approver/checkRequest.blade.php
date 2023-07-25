@@ -30,7 +30,7 @@
                     <h5 class="modal-title">Divisi</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form method="post" action="{{ route('createRequest') }}">
+                <form method="post" action="{{ route('approver.createRequest') }}">
                     <div class="modal-body">
                         @csrf
                         @if (session('datetimes'))
@@ -44,7 +44,6 @@
                                 @endforeach
                             </select>
                         @endif
-
 
                     </div>
                     <div class="modal-footer">
@@ -64,8 +63,6 @@
                     </div>
 
                     <div class="card-body">
-
-
 
                         <form method="POST" action="{{ route(\App\Models\User::getRolePage()) }}">
                             @csrf

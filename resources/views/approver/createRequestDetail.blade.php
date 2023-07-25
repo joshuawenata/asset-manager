@@ -21,7 +21,7 @@
 
                     <div class="card-body">
 
-                        <form method="POST" action="{{ route('confirmRequest') }}" id="checkGroup">
+                        <form method="POST" action="{{ route('approver.confirmRequest') }}" id="checkGroup">
                             @csrf
 
                             <div class="mb-3">
@@ -88,7 +88,6 @@
                                 </div>
                             </div>
 
-                            {{--                            TODO: tambahin 1 lagi input lokasi peminjaman --}}
                             <div class="mb-3">
                                 <label class="col-form-label text-md-end">{{ __('Lokasi Peminjaman') }}</label>
 

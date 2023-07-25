@@ -28,7 +28,7 @@ class DivisionController extends Controller
         $datetimes = $request->input('datetimes');
         $binusian_id_peminjam = $request->input('binusian_id_peminjam');
 
-        return Redirect::to('/check-request#see')->with([
+        return Redirect::to('/approver/check-request#see')->with([
             'datetimes' => $datetimes,
             'data' => $data,
             'binusian_id_peminjam' => $binusian_id_peminjam

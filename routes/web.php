@@ -69,18 +69,12 @@ Route::middleware(['auth', 'cekRole:staff,admin'])->group(function(){
 Route::middleware(['auth', 'cekRole:staff'])->group(function(){
     Route::get('/dashboard', [\App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
     //CHECK TGL
-    Route::get('/check-request', [\App\Http\Controllers\RequestController::class, 'check'])->name('checkRequest');
-    Route::post('/choose-division', [\App\Http\Controllers\DivisionController::class, 'index2'])->name('chooseDivision');
     //CREATE
-    Route::post('/create-request', [\App\Http\Controllers\RequestController::class, 'createRequest'])->name('createRequest');
-    Route::post('/create-request-detail', [\App\Http\Controllers\RequestController::class, 'create'])->name('createRequestDetail');
     Route::get('/create-asset-staff', [\App\Http\Controllers\AssetController::class, 'createForStaff'])->name('staff.createAsset');
     Route::get('/create-asset-excel-staff', [\App\Http\Controllers\AssetController::class, 'createAssetExcelForStaff'])->name('staff.createAssetExcel');
     Route::post('/store-asset-excel-staff', [\App\Http\Controllers\AssetController::class, 'storeAssetExcelForStaff'])->name('staff.storeAssetExcel');
     Route::post('/store-new-asset-staff', [\App\Http\Controllers\AssetController::class, 'storeForStaff'])->name('staff.storeAsset');
     //CONFIRM
-    Route::post('/confirm-request', [\App\Http\Controllers\RequestController::class, 'confirm'])->name('confirmRequest');
-    Route::post('/save-request', [\App\Http\Controllers\BookingController::class, 'store'])->name('storeRequest');
     //DELETE
     Route::post('/cancel-request', [\App\Http\Controllers\RequestController::class, 'destroy'])->name('deleteRequest');
     Route::post('/return', [\App\Http\Controllers\RequestController::class, 'kembali'])->name('kembali');
@@ -134,7 +128,13 @@ Route::middleware(['auth', 'cekRole:admin'])->group(function(){
 
 //Approver Routes
 Route::middleware(['auth', 'cekRole:approver'])->group(function(){
+    Route::post('/choose-division', [\App\Http\Controllers\DivisionController::class, 'index2'])->name('chooseDivision');
+    Route::get('/approver/check-request', [\App\Http\Controllers\RequestController::class, 'check'])->name('approver.checkRequest');
     Route::get('/approver/dashboard', [\App\Http\Controllers\HomeController::class, 'approverDashboard'])->name('approver.dashboard');
+    Route::post('/approver/create-request', [\App\Http\Controllers\RequestController::class, 'createRequest'])->name('approver.createRequest');
+    Route::post('/approver/create-request-detail', [\App\Http\Controllers\RequestController::class, 'create'])->name('approver.createRequestDetail');
+    Route::post('/approver/confirm-request', [\App\Http\Controllers\RequestController::class, 'confirm'])->name('approver.confirmRequest');
+    Route::post('/approver/save-request', [\App\Http\Controllers\BookingController::class, 'store'])->name('approver.storeRequest');
 });
 
 

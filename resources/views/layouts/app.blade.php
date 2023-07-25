@@ -75,7 +75,6 @@
                         @guest
                         @else
                             @if (auth()->user()->role->name == 'staff')
-                                <a class="nav-link active" href="{{ route('checkRequest') }}">Pinjam Inventory</a>
                                 <a class="nav-link active" href="{{ route('staff.createAsset') }}">Tambah Barang</a>
                                 <a class="nav-link active" href="{{ route('staff.createAssetExcel') }}">Tambah Barang
                                     Melalui
@@ -94,6 +93,7 @@
                                 <a class="nav-link active" href="{{ route('historyAddAsset') }}">Riwayat Tambah
                                     Barang</a>
                             @elseif(auth()->user()->role->name == 'approver')
+                                <a class="nav-link active" href="{{ route('approver.checkRequest') }}">Pinjam Inventory</a>
                                 <a class="nav-link active" href="{{ route('admin.historiRequest') }}">Riwayat
                                     Peminjaman</a>
                             @elseif(auth()->user()->role->name == 'superadmin')

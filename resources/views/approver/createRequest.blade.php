@@ -20,7 +20,7 @@
 
                     <div class="card-body">
 
-                        <form method="POST" action="{{ route('createRequestDetail') }}" id="checkGroup">
+                        <form method="POST" action="{{ route('approver.createRequestDetail') }}" id="checkGroup">
                             @csrf
 
                             <table id="myTable" class="display table">

@@ -77,7 +77,7 @@ class RequestController extends Controller
      */
     public function check()
     {
-        return view('checkRequest');
+        return view('approver/checkRequest');
     }
 
     public function kembali(Request $request){
@@ -236,7 +236,7 @@ class RequestController extends Controller
             }
         }
 
-        return view('createRequest', [
+        return view('approver/createRequest', [
             'book_date' => $book_date,
             'return_date' => $return_date,
             'assets' => $avail_items,
@@ -253,7 +253,7 @@ class RequestController extends Controller
         $division_id = $request->input('division_id');
         $approver = User::all()->where('role_id', 3);
 
-        return view('createRequestDetail', [
+        return view('approver.createRequestDetail', [
             'assets' => $assets,
             'book_date' => $book_date,
             'return_date' => $return_date,
@@ -297,7 +297,7 @@ class RequestController extends Controller
         $email_peminjam = $request->input('email_peminjam');
         $nohp_peminjam = $request->input('nohp_peminjam');
 
-        return view('confirmRequest', [
+        return view('approver.confirmRequest', [
             'assets' => $bookings,
             'book_date' => $book_date,
             'return_date' => $return_date,

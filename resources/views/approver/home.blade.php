@@ -173,13 +173,12 @@
                             <thead>
                                 <tr>
                                     <th scope="col">No</th>
-                                    <th scope="col">Nama Peminjam</th>
-                                    <th scope="col">Binusian ID</th>
+                                    <th scope="col">Binusian ID Peminjam</th>
                                     <th scope="col">Tujuan Peminjaman</th>
                                     <th scope="col">Tanggal Pinjam</th>
                                     <th scope="col">Tanggal Kembali</th>
                                     <th scope="col">Lokasi</th>
-                                    <th scope="col">Lihat Barang</th>
+                                    <th scope="col">Lihat Inventory</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Aksi</th>
                                 </tr>
@@ -189,15 +188,15 @@
                                     <tr>
                                         {{--                masukin kolom --}}
                                         <th scope="row">{{ $index + 1 }}</th>
-                                        <td>{{ $req->nama_peminjam }}</td>
                                         <td>{{ $req->binusian_id_peminjam }}</td>
                                         <td>{{ $req->purpose }}</td>
                                         <td>{{ date('d M Y H:i', strtotime($req->book_date)) }}</td>
                                         <td>{{ date('d M Y H:i', strtotime($req->return_date)) }}</td>
                                         <td>{{ $req->lokasi }}</td>
                                         <td>
+                                            {{--                                        DONE: ini kalo staff usernya gmn? --}}
                                             <form
-                                                action="{{ route('bookings.show', ['user' => 'approver', 'id' => $req->id]) }}"
+                                                action="{{ route('bookings.show', ['user' => \Illuminate\Support\Facades\Auth::user()->role->name, 'id' => $req->id]) }}"
                                                 method="GET">
                                                 @csrf
                                                 <button type="submit" class="btn btn-small btn-primary mb-3">
@@ -205,34 +204,52 @@
                                                 </button>
                                             </form>
                                         </td>
-                                        <td>{{ $req->status }}</td>
+                                        @if ($req->status == 'waiting approval')
+                                            @if ($req->track_approver == 0)
+                                                <td>{{ $req->status . ' dari ' . \Illuminate\Support\Facades\Auth::user()->getAtasan($req->track_approver, $req->approver_division_id) }}
+                                                </td>
+                                            @else
+                                                <td>{{ $req->status . ' dari ' . \Illuminate\Support\Facades\Auth::user()->getAtasan($req->track_approver, $req->division_id) }}
+                                                </td>
+                                            @endif
+                                        @else
+                                            <td>{{ $req->status }}</td>
+                                        @endif
                                         <td>
                                             @if ($req->status == 'waiting approval')
-                                                @if ($req->track_approver == 0)
-                                                    <button type="button" class="btn btn-danger rejectBtn mb-2"
-                                                        value="{{ $req->id }}">Tolak</button>
-                                                    <button type="button" class="btn btn-success approveBtn"
-                                                        value="{{ $req->id }}">Setuju</button>
-                                                @elseif($req->track_approver != $approver)
-                                                    Menunggu persetujuan dari
-                                                    {{ \Illuminate\Support\Facades\Auth::user()->getAtasan($req->track_approver, $req->division_id) }}
-                                                @endif
-                                            @elseif($req->status == 'taken')
-                                                Menunggu konfirmasi
-                                            @elseif($req->status == 'on use')
-                                                {{--                                        DONE: ini tampilin receiptnya --}}
+                                                <button type="button" class="btn btn-danger deleteRequestBtn"
+                                                    value="{{ $req->id }}">Cancel</button>
+                                            @elseif($req->status == 'approved')
+                                                {{ 'Silahkan ambil barang sesuai jadwal pinjam.' }}
+                                            @elseif($req->status == 'on use' || $req->status == 'done')
+                                                {{--                                        DONE: upgrade laravel biar bisa generate receipt DOMPDF --}}
                                                 <form action="{{ route('download') }}" target="_blank" method="post">
                                                     @csrf
                                                     <button type="submit" class="btn btn-primary" name="request_id"
                                                         value="{{ $req->id }}"><span
                                                             class="material-symbols-outlined">file_download</span></button>
                                                 </form>
+
+                                                @if ($req->status == 'on use')
+                                                    <form action="{{ route('kembali') }}" method="post">
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-primary mt-2"
+                                                            name="request_return_id" value="{{ $req->id }}">
+                                                            @if ($req->flag_return == null || $req->flag_return == 0)
+                                                                Kembalikan
+                                                            @elseif($req->flag_return == 1)
+                                                                <span class="material-symbols-outlined">visibility</span>
+                                                            @endif
+                                                        </button>
+                                                    </form>
+                                                @endif
                                             @endif
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
+
                     </div>
 
                 </div>

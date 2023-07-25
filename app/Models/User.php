@@ -64,11 +64,8 @@ class User extends Authenticatable
 
     public function getAtasan($track_approver, $atasan){
 
-        if($track_approver == 1){
+        if($track_approver == 0){
             $atasan = User::where('division_id', $atasan)->where('role_id', '2')->first()->name;
-        }
-        else if ($track_approver == 0){
-            $atasan = User::where('division_id', $atasan)->where('role_id', '3')->first()->name;
         }
 
         return $atasan;

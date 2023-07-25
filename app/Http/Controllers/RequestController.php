@@ -33,16 +33,28 @@ class RequestController extends Controller
 
         $p = Auth::user()->role->name;
 
-        if($p == 'student' || $p == 'staff'){
-            $user_id = \Illuminate\Support\Facades\Auth::user()->id;
-            $data = \App\Models\Request::orderBy('id', 'desc')->where('user_id', $user_id)->get();
-            $approver = null;
-        }
-        else if($p == 'admin'){
-            $user_div_id = \Illuminate\Support\Facades\Auth::user()->division->id;
+        if($p == 'staff'){
+            $user_div_id = \Illuminate\Support\Facades\Auth::user()->division_id;
             $data = DB::table('requests')
                 ->orderBy('id', 'asc')
-                ->where('requests.track_approver', '>', 0)
+                ->where('requests.track_approver', '=', 0)
+                ->where('requests.division_id', '=', $user_div_id)
+                ->where('status', '=', 'waiting approval')
+                ->orWhere('status', '=', 'approved')
+                ->orWhere('status', '=', 'on use')
+                ->orWhere('status', '=', 'taken')
+                ->join('users', 'requests.user_id', '=', 'users.id')
+                ->select('requests.*', 'users.id AS userid', 'users.name', 'users.binusianid')
+                ->where('requests.division_id', '=', $user_div_id)
+                ->get();
+            $approver = \Illuminate\Support\Facades\Auth::user()->division->approver;
+        }
+        else if($p == 'admin'){
+            $user_div_id = \Illuminate\Support\Facades\Auth::user()->division_id;
+            $data = DB::table('requests')
+                ->orderBy('id', 'asc')
+                ->where('requests.track_approver', '=', 0)
+                ->where('requests.division_id', '=', $user_div_id)
                 ->where('status', '=', 'waiting approval')
                 ->orWhere('status', '=', 'approved')
                 ->orWhere('status', '=', 'on use')
@@ -54,18 +66,9 @@ class RequestController extends Controller
             $approver = \Illuminate\Support\Facades\Auth::user()->division->approver;
         }
         else if($p == 'approver'){
-            $user_div_id = \Illuminate\Support\Facades\Auth::user()->division->id;
-            $data = DB::table('requests')
-                ->orderBy('id', 'asc')
-                ->where('status', '=', 'waiting approval')
-                ->orWhere('status', '=', 'approved')
-                ->orWhere('status', '=', 'on use')
-                ->orWhere('status', '=', 'taken')
-                ->join('users', 'requests.user_id', '=', 'users.id')
-                ->select('requests.*', 'users.id AS userid', 'users.name', 'users.binusianid')
-                ->where('requests.division_id', '=', $user_div_id)
-                ->get();
-            $approver = \Illuminate\Support\Facades\Auth::user()->division->approver;
+            $user_id = \Illuminate\Support\Facades\Auth::user()->id;
+            $data = \App\Models\Request::orderBy('id', 'desc')->where('user_id', $user_id)->get();
+            $approver = null;
         }
         return [$data, $approver];
     }

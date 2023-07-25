@@ -65,18 +65,8 @@
                                         required>
                                 </div>
 
-                                <label for="purpose"
-                                    class="col-form-label text-md-end">{{ __('Approver tujuan peminjaman') }}</label>
-
-                                <div>
-                                    <select class="form-select" name="approver" id="approver">
-                                        @foreach ($approver as $index => $item)
-                                            <option value='{{ $item->name }}|{{ $item->division_id }}'>
-                                                {{ $item->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                <input type="hidden" name="approver" id="approver"
+                                    value="{{ \Illuminate\Support\Facades\Auth::user()->name }}|{{ \Illuminate\Support\Facades\Auth::user()->division_id }}" />
                             </div>
 
                             <div class="mb-3">

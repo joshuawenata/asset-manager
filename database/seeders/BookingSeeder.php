@@ -18,12 +18,14 @@ class BookingSeeder extends Seeder
             'request_id' => 1,
             'asset_id' => 1,
             'asset_category_id' => 1,
+            'status' => NULL
         ]);
 
         Booking::create([
             'request_id' => 1,
             'asset_id' => 2,
             'asset_category_id' => 3,
+            'status' => NULL
         ]);
     }
 }

@@ -394,6 +394,7 @@ class RequestController extends Controller
     {
         $user = $request->input('user');
         $req = \App\Models\Request::find($request->request_update_id);
+
         if($request->request_update == 'rejected'){
             $req->status = $request->request_update;
             $req->notes = $request->input('pesan') . "\n";
@@ -405,27 +406,73 @@ class RequestController extends Controller
             $receiver = $req->email_peminjam;
         }
         else if ($request->request_update == 'approved'){
-            $req->track_approver++;
-            $req->notes = $req->notes . "\n" . $request->input('pesan');
-            $approver = $request->approver_num;
+            $bookingApproval = $request->input('booking_approval', []);
 
-            $req->status = $request->request_update;
+            // Check if at least one checkbox is checked
+            if (count($bookingApproval) === 0) {
+                return redirect()->back()->withErrors(['error' => 'Please select at least one item to approve.']);
+            }
 
-            $subyek = 'PEMINJAMAN APPROVED';
-            $pesan = 'Selamat peminjaman anda berhasil di approve! silahkan ambil barang sesuai dengan tanggal peminjaman.';
-            $pesan_bm = 'Peminjaman barang oleh ' . $req->email_peminjam . ' berhasil di approve.';
-            $receiver = $req->email_peminjam;
-            $email = new SendEmailController();
-            // $email->index("bmopr.bdg@binus.edu", $pesan_bm , $subyek);
-
-            $req->update();
+            $bookingApproval = $request->input('booking_approval');
+            $bookingIds = $request->input('booking_id', []);
             $message = 'Request berhasil diapprove.';
+
+            $counting = 0;
+            foreach ($bookingIds as $index => $bookingId) {
+                if (isset($bookingApproval[$index]) && $bookingApproval[$index] === "1") {
+                    // If the checkbox is checked, mark the booking as approved
+                    $booking = \App\Models\Booking::find($bookingId);
+                    $booking->status = 'approved';
+                    $booking->save();
+                } else {
+                    // If the checkbox is not checked, mark the booking as rejected
+                    $booking = \App\Models\Booking::find($bookingId);
+                    $booking->status = 'rejected';
+                    $booking->save();
+                    $counting++;
+                }
+            }
+
+            if($counting == 0) {
+                $req->track_approver = $req->track_approver++;
+                $req->notes = $req->notes . "\n" . $request->input('pesan');
+                $approver = $request->approver_num;
+
+                $req->status = $request->request_update;
+
+                $subyek = 'PEMINJAMAN APPROVED';
+                $pesan = 'Selamat peminjaman anda berhasil di approve! silahkan ambil barang sesuai dengan tanggal peminjaman.';
+                $pesan_bm = 'Peminjaman barang oleh ' . $req->email_peminjam . ' berhasil di approve.';
+                $receiver = $req->email_peminjam;
+                $email = new SendEmailController();
+                // $email->index("bmopr.bdg@binus.edu", $pesan_bm , $subyek);
+
+                $req->update();
+            }else{
+                $req->track_approver = $req->track_approver++;
+                $req->notes = $req->notes . "\n" . $request->input('pesan');
+                $approver = $request->approver_num;
+
+                $req->status = "waiting approval lanjutan";
+
+                $subyek = 'PEMINJAMAN PENDING';
+                $pesan = 'Selamat peminjaman anda di approve sebagian! apabila jadi melakukan peminjaman harap mengirimkan email lanjutan';
+                $receiver = $req->email_peminjam;
+                $email = new SendEmailController();
+                // $email->index("bmopr.bdg@binus.edu", $pesan_bm , $subyek);
+
+                $req->update();
+            }
+
         }
 
         $email = new SendEmailController();
         $email->index($receiver, $pesan, $subyek);
 
         //DONE: ini kembali ke dashboard/approvernya gimana
+        if(Auth::user()->role_id == 1){
+            return redirect('/dashboard')->with('message', $message);
+        }
         return redirect('/'. $user . '/dashboard')->with('message', $message);
     }
 

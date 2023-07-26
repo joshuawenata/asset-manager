@@ -18,6 +18,7 @@ class CreateBookingsTable extends Migration
             $table->unsignedBigInteger('request_id');
             $table->unsignedBigInteger('asset_id');
             $table->unsignedBigInteger('asset_category_id');
+            $table->string('status')->nullable();
             $table->foreign('request_id')->references('id')->on('requests');
             $table->foreign('asset_id')->references('id')->on('assets');
             $table->foreign('asset_category_id')->references('id')->on('asset_categories');

@@ -18,18 +18,13 @@
                 $('#rejectModal').modal('show');
             });
 
-            if (window.location.href.indexOf('#approveModal') != -1) {
-                var request_id = $(this).val();
-                $('#request_id2').val(request_id);
+            if (window.location.href.indexOf('#approve') != -1) {
                 $('#approveModal').modal('show');
             }
-        });
-        $(document).ready(function() {
 
             if (window.location.href.indexOf('#see') != -1) {
                 $('#see').modal('show');
             }
-
         });
     </script>
 @endsection
@@ -100,7 +95,7 @@
                     <div class="modal-body">
                         <input type="hidden" name="request_update_id" id="request_id">
                         <input type="hidden" name="request_update" value="rejected">
-                        <input type="hidden" name="user" value="admin">
+                        <input type="hidden" name="user" value="staff">
                         <h5>Apakah anda yakin ingin me-reject request peminjaman?</h5>
                         <div class="mb-3">
                             <label for="pesan" class="col-form-label">Pesan:</label>
@@ -129,9 +124,9 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <input type="hidden" name="request_update_id" id="request_id2">
+                        <input type="hidden" name="request_update_id" value="{{ session('request_id') }}">
                         <input type="hidden" name="request_update" value="approved">
-                        <input type="hidden" name="user" value="admin">
+                        <input type="hidden" name="user" value="staff">
                         <input type="hidden" name="approver_num"
                             value="{{ \Illuminate\Support\Facades\Auth::user()->division->approver }}">
                         <h5>Apakah anda yakin ingin meng-approve request peminjaman?</h5>
@@ -155,12 +150,22 @@
                                             <td>{{ $item->name }}</td>
                                             <td>{{ $item->brand }}</td>
                                             <td>{{ $item->status }}</td>
-                                            <td class="text-center"><input type="checkbox" /></td>
+                                            <!-- Add name attribute to the checkbox inputs -->
+                                            <td class="text-center"><input type="checkbox"
+                                                    name="booking_approval[{{ $index }}]" value="1" /></td>
+                                            <input type="hidden"
+                                                name="booking_id[{{ $index }}]"value="{{ $item->id }}">
                                         </tr>
                                     @endforeach
                                 @endif
                             </tbody>
                         </table>
+                        <div class="row mb-0">
+                            <div class="col-md-6 offset-md-0">
+                                <input class="form-check-input mt-1" type="checkbox" name="select-all" id="select-all">
+                                <label for="select-all">pilih semua</label>
+                            </div>
+                        </div>
                         <div class="mb-3">
                             <label for="pesan" class="col-form-label">Pesan:</label>
                             <textarea class="form-control" id="pesan" name="pesan" autofocus>{{ ' ' }}</textarea>
@@ -177,18 +182,24 @@
     </div>
 
     {{--   content --}}
-    <div class="container">
+    <div class="container" id="jadipinjam">
         <div class="row justify-content-center">
             <div class="col-md-12">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                {{ $error }}
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
                 <div class="card">
-                    @if (\Illuminate\Support\Facades\Auth::user()->role->name == 'student')
-                        <div class="card-header">{{ __('Dashboard Mahasiswa') }}</div>
-                    @elseif(\Illuminate\Support\Facades\Auth::user()->role->name == 'staff')
-                        <div class="card-header">{{ __('Dashboard Karyawan') }}</div>
-                    @endif
+                    <div class="card-header">{{ __('Dashboard Karyawan') }}</div>
 
                     <div class="card-body">
+
 
                         @if (session('message'))
                             @if (session('message') == 'Request peminjaman tidak bisa dicancel karena sudah diapprove admin.')
@@ -245,8 +256,22 @@
                                                     @csrf
                                                     <button type="button" class="btn btn-danger rejectBtn mb-2"
                                                         value="{{ $req->id }}">Tolak</button>
-                                                    <button type="submit" class="btn btn-success"
+                                                    <button type="submit" class="btn btn-success approveBtn"
                                                         value="{{ $req->id }}">Setuju</button>
+                                                </form>
+                                            @elseif ($req->status == 'waiting approval lanjutan')
+                                                <form action="{{ route('updateRequest') }}" method="GET">
+                                                    @csrf
+                                                    <input type="hidden" name="request_update_id"
+                                                        value="{{ $req->id }}">
+                                                    <input type="hidden" name="request_update" value="approved">
+                                                    <input type="hidden" name="user" value="staff">
+                                                    <input type="hidden" name="approver_num"
+                                                        value="{{ \Illuminate\Support\Facades\Auth::user()->division->approver }}">
+                                                    <button type="button" class="btn btn-danger rejectBtn mb-2"
+                                                        value="{{ $req->id }}">Tidak Jadi Pinjam</button>
+                                                    <button type="submit" class="btn btn-success approveBtn"
+                                                        value="{{ $req->id }}">Jadi Pinjam</button>
                                                 </form>
                                             @elseif($req->status == 'on use')
                                                 {{--                                        DONE: ini tampilin receiptnya --}}
@@ -284,4 +309,17 @@
             </div>
         </div>
     </div>
+    <script>
+        $('#select-all').click(function(event) {
+            if (this.checked) {
+                $(':checkbox').each(function() {
+                    this.checked = true;
+                });
+            } else {
+                $(':checkbox').each(function() {
+                    this.checked = false;
+                });
+            }
+        });
+    </script>
 @endsection

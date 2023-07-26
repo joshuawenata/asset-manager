@@ -56,6 +56,7 @@ class BookingController extends Controller
             $booking->request_id = $request_id;
             $booking->asset_id = $asset;
             $booking->asset_category_id = $as->asset_category_id;
+            $booking->status = NULL;
             $booking->save();
         }
 
@@ -87,7 +88,7 @@ class BookingController extends Controller
         $assets = DB::table('bookings')
             ->join('assets', 'bookings.asset_id', '=', 'assets.id')
             ->join('asset_categories', 'bookings.asset_category_id', '=', 'asset_categories.id')
-            ->select('assets.serial_number', 'assets.brand', 'asset_categories.name', 'assets.status', 'assets.division_id')
+            ->select('assets.id','assets.serial_number', 'assets.brand', 'asset_categories.name', 'assets.status', 'assets.division_id')
             ->where('bookings.request_id', '=', $id)
             ->get();
 
@@ -109,7 +110,7 @@ class BookingController extends Controller
         $assets = DB::table('bookings')
             ->join('assets', 'bookings.asset_id', '=', 'assets.id')
             ->join('asset_categories', 'bookings.asset_category_id', '=', 'asset_categories.id')
-            ->select('assets.serial_number', 'assets.brand', 'asset_categories.name', 'assets.status', 'assets.division_id')
+            ->select('assets.id','assets.serial_number', 'assets.brand', 'asset_categories.name', 'assets.status', 'assets.division_id')
             ->where('bookings.request_id', '=', $id)
             ->get();
 
@@ -118,10 +119,10 @@ class BookingController extends Controller
         $request = $request->notes;
 
         if($user == 'staff'){
-            return Redirect::to('/dashboard#approveModal')->with(['bookings'=> $assets, 'request' => $request, 'stat' => $stat]);
+            return Redirect::to('/dashboard#approve')->with(['bookings'=> $assets, 'request' => $request, 'stat' => $stat, 'request_id' => $id]);
         }
         else{
-            return Redirect::to($user . '/dashboard#approveModal')->with(['bookings'=> $assets, 'request' => $request, 'stat' => $stat]);
+            return Redirect::to($user . '/dashboard#approve')->with(['bookings'=> $assets, 'request' => $request, 'stat' => $stat, 'request_id' => $id]);
         }
     }
 

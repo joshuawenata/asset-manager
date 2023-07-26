@@ -404,32 +404,20 @@ class RequestController extends Controller
             $pesan = 'Mohon maaf, peminjaman anda tidak disetujui oleh approver. Silahkan pilih tanggal lain untuk meminjam.';
             $receiver = $req->email_peminjam;
         }
-        elseif ($request->request_update == 'approved'){
+        else if ($request->request_update == 'approved'){
             $req->track_approver++;
             $req->notes = $req->notes . "\n" . $request->input('pesan');
             $approver = $request->approver_num;
 
-            if($req->track_approver == $approver){
-                $req->status = $request->request_update;
+            $req->status = $request->request_update;
 
-                $subyek = 'PEMINJAMAN APPROVED';
-                $pesan = 'Selamat peminjaman anda berhasil di approve! silahkan ambil barang sesuai dengan tanggal peminjaman.';
-                $pesan_bm = 'Peminjaman barang oleh ' . $req->email_peminjam . ' berhasil di approve.';
-                $receiver = $req->email_peminjam;
-                $email = new SendEmailController();
-                // $email->index("bmopr.bdg@binus.edu", $pesan_bm , $subyek);
-            }
-            else{
-                //kirim email ke admin
-                $subyek = 'REQUEST PEMINJAMAN ALAT LAB';
-                $pesan = 'Ada request peminjaman alat lab baru dari ' . $req->User->name . ' ' . $req->User->email;
-                $receiver = DB::table('users')
-                    ->select('email')
-                    ->where('division_id', $req->division_id)
-                    ->where('role_id', '=', 3)
-                    ->get();
-                $receiver = $receiver[0]->email;
-            }
+            $subyek = 'PEMINJAMAN APPROVED';
+            $pesan = 'Selamat peminjaman anda berhasil di approve! silahkan ambil barang sesuai dengan tanggal peminjaman.';
+            $pesan_bm = 'Peminjaman barang oleh ' . $req->email_peminjam . ' berhasil di approve.';
+            $receiver = $req->email_peminjam;
+            $email = new SendEmailController();
+            // $email->index("bmopr.bdg@binus.edu", $pesan_bm , $subyek);
+
             $req->update();
             $message = 'Request berhasil diapprove.';
         }

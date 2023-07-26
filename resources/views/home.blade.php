@@ -11,16 +11,19 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script defer>
         $(document).ready(function() {
-            $('.deleteRequestBtn').click(function(e) {
+            $('.rejectBtn').click(function(e) {
                 e.preventDefault();
                 var request_id = $(this).val();
                 $('#request_id').val(request_id);
-                $('#deleteModal').modal('show');
+                $('#rejectModal').modal('show');
             });
-        });
-    </script>
 
-    <script defer>
+            if (window.location.href.indexOf('#approveModal') != -1) {
+                var request_id = $(this).val();
+                $('#request_id2').val(request_id);
+                $('#approveModal').modal('show');
+            }
+        });
         $(document).ready(function() {
 
             if (window.location.href.indexOf('#see') != -1) {
@@ -32,18 +35,17 @@
 @endsection
 
 @section('content')
-
     {{--    modal see --}}
     <div class="modal fade" id="see" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title">Inventory</h5>
+                    <h5 class="modal-title">Aset</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
 
+                <div class="modal-body">
                     <table class="display table">
                         <thead>
                             <tr>
@@ -51,9 +53,7 @@
                                 <th>Kode Barang</th>
                                 <th>Kategori Barang</th>
                                 <th>Spesifikasi</th>
-                                @if (\Illuminate\Support\Facades\Auth::user()->role->name == 'staff')
-                                    <th>Milik</th>
-                                @endif
+                                <th>Kondisi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -64,16 +64,14 @@
                                         <td>{{ $item->serial_number }}</td>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->brand }}</td>
-                                        @if (\Illuminate\Support\Facades\Auth::user()->role->name == 'staff')
-                                            <td>{{ \App\Models\Division::getName($item->division_id) }}</td>
-                                        @endif
+                                        <td>{{ $item->status }}</td>
                                     </tr>
                                 @endforeach
                             @endif
                         </tbody>
                     </table>
 
-                    @if (session('stat') != 'waiting approval')
+                    @if (session('request') != '')
                         <div class="mb-3">
                             <label for="pesan" class="col-form-label">Catatan Peminjaman:</label>
                             <textarea class="form-control" id="pesan" name="pesan" readonly autofocus>{{ session('request') }}</textarea>
@@ -84,29 +82,93 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    {{--    modal reject --}}
+    <div class="modal fade" id="rejectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <form action="{{ route('updateRequest') }}" method="post">
+                    @csrf
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Reject Request</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="request_update_id" id="request_id">
+                        <input type="hidden" name="request_update" value="rejected">
+                        <input type="hidden" name="user" value="admin">
+                        <h5>Apakah anda yakin ingin me-reject request peminjaman?</h5>
+                        <div class="mb-3">
+                            <label for="pesan" class="col-form-label">Pesan:</label>
+                            <textarea class="form-control" id="pesan" name="pesan" autofocus required>{{ '' }}</textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+                        <button type="submit" class="btn btn-danger">Ya</button>
+                    </div>
+                </form>
 
             </div>
         </div>
     </div>
 
-    {{--    modal delete --}}
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    {{--    modal approve --}}
+    <div class="modal fade" id="approveModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
 
-                <form action="{{ route('deleteRequest') }}" method="post">
+                <form action="{{ route('updateRequest') }}" method="post">
                     @csrf
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Cancel Request</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Approve Request</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <input type="hidden" name="request_delete_id" id="request_id">
-                        <h5>Apakah anda yakin ingin membatalkan request peminjaman?</h5>
+                        <input type="hidden" name="request_update_id" id="request_id2">
+                        <input type="hidden" name="request_update" value="approved">
+                        <input type="hidden" name="user" value="admin">
+                        <input type="hidden" name="approver_num"
+                            value="{{ \Illuminate\Support\Facades\Auth::user()->division->approver }}">
+                        <h5>Apakah anda yakin ingin meng-approve request peminjaman?</h5>
+                        <table class="display table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Kode Barang</th>
+                                    <th>Kategori Barang</th>
+                                    <th>Spesifikasi</th>
+                                    <th>Kondisi</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (session('bookings'))
+                                    @foreach (session('bookings') as $index => $item)
+                                        <tr>
+                                            <th scope="row">{{ $index + 1 }}</th>
+                                            <td>{{ $item->serial_number }}</td>
+                                            <td>{{ $item->name }}</td>
+                                            <td>{{ $item->brand }}</td>
+                                            <td>{{ $item->status }}</td>
+                                            <td class="text-center"><input type="checkbox" /></td>
+                                        </tr>
+                                    @endforeach
+                                @endif
+                            </tbody>
+                        </table>
+                        <div class="mb-3">
+                            <label for="pesan" class="col-form-label">Pesan:</label>
+                            <textarea class="form-control" id="pesan" name="pesan" autofocus>{{ ' ' }}</textarea>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
-                        <button type="submit" class="btn btn-danger">Ya</button>
+                        <button type="submit" class="btn btn-success">Ya</button>
                     </div>
                 </form>
 
@@ -166,7 +228,7 @@
                                         <td>
                                             {{--                                        DONE: ini masi error --}}
                                             <form
-                                                action="{{ route('bookings.show', ['user' => 'admin', 'id' => $req->id]) }}"
+                                                action="{{ route('bookings.show', ['user' => 'staff', 'id' => $req->id]) }}"
                                                 method="GET">
                                                 @csrf
                                                 <button type="submit" class="btn btn-small btn-primary mb-3">
@@ -177,10 +239,15 @@
                                         <td>{{ $req->status }}</td>
                                         <td>
                                             @if ($req->status == 'waiting approval')
-                                                <button type="button" class="btn btn-danger rejectBtn mb-2"
-                                                    value="{{ $req->id }}">Tolak</button>
-                                                <button type="button" class="btn btn-success approveBtn"
-                                                    value="{{ $req->id }}">Setuju</button>
+                                                <form
+                                                    action="{{ route('bookings.showApprove', ['user' => 'staff', 'id' => $req->id]) }}"
+                                                    method="GET">
+                                                    @csrf
+                                                    <button type="button" class="btn btn-danger rejectBtn mb-2"
+                                                        value="{{ $req->id }}">Tolak</button>
+                                                    <button type="submit" class="btn btn-success"
+                                                        value="{{ $req->id }}">Setuju</button>
+                                                </form>
                                             @elseif($req->status == 'on use')
                                                 {{--                                        DONE: ini tampilin receiptnya --}}
                                                 <form action="{{ route('download') }}" target="_blank" method="post">
@@ -193,7 +260,8 @@
                                                 <form action="{{ route('takenBooking') }}" method="post">
                                                     @csrf
                                                     <button type="submit" class="btn btn-primary"
-                                                        name="request_taken_id" value="{{ $req->id }}">Barang sudah
+                                                        name="request_taken_id" value="{{ $req->id }}">Barang
+                                                        sudah
                                                         diambil</button>
                                                 </form>
                                             @endif

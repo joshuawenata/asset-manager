@@ -68,7 +68,7 @@ class BookingController extends Controller
         $receiver = DB::table('users')
             ->select('email')
             ->where('division_id', $div_id)
-            ->where('role_id', 3)
+            ->where('role_id', 2)
             ->get();
         $receiver = $receiver[0]->email;
         $email->index($receiver, $subyek, $message);
@@ -95,11 +95,33 @@ class BookingController extends Controller
         $stat = $request->status;
         $request = $request->notes;
 
-        if($user == 'student' || $user == 'staff'){
+        if($user == 'staff'){
             return Redirect::to('/dashboard#see')->with(['bookings'=> $assets, 'request' => $request, 'stat' => $stat]);
         }
         else{
             return Redirect::to($user . '/dashboard#see')->with(['bookings'=> $assets, 'request' => $request, 'stat' => $stat]);
+        }
+    }
+
+    public function showApprove($user, $id)
+    {
+
+        $assets = DB::table('bookings')
+            ->join('assets', 'bookings.asset_id', '=', 'assets.id')
+            ->join('asset_categories', 'bookings.asset_category_id', '=', 'asset_categories.id')
+            ->select('assets.serial_number', 'assets.brand', 'asset_categories.name', 'assets.status', 'assets.division_id')
+            ->where('bookings.request_id', '=', $id)
+            ->get();
+
+        $request = \App\Models\Request::find($id);
+        $stat = $request->status;
+        $request = $request->notes;
+
+        if($user == 'staff'){
+            return Redirect::to('/dashboard#approveModal')->with(['bookings'=> $assets, 'request' => $request, 'stat' => $stat]);
+        }
+        else{
+            return Redirect::to($user . '/dashboard#approveModal')->with(['bookings'=> $assets, 'request' => $request, 'stat' => $stat]);
         }
     }
 
@@ -160,6 +182,7 @@ class BookingController extends Controller
             $loc = new assetLocation();
             $loc->asset_id = $b->asset_id;
             $loc->responsible = $request->User->name . " (" . Auth::user()->name . ")";
+            $loc->responsible_id = $request->User->id;
             $loc->to_location = $request->lokasi;
             $loc->notes = 'peminjaman';
             $loc->save();

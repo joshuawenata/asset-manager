@@ -293,8 +293,9 @@ class RequestController extends Controller
         $book_date = $request->input('book_date');
         $division_id = $request->input('division_id');
         $binusian_id_peminjam = $request->input('binusian_id_peminjam');
-        $approver = explode('|', $request->input('approver'))[0];
-        $approver_division_id = explode('|', $request->input('approver'))[1];
+        $approver_id = explode('|', $request->input('approver'))[0];
+        $approver = explode('|', $request->input('approver'))[1];
+        $approver_division_id = explode('|', $request->input('approver'))[2];
         $nama_peminjam = $request->input('nama_peminjam');
         $prodi_peminjam = $request->input('prodi_peminjam');
         $email_peminjam = $request->input('email_peminjam');
@@ -308,6 +309,7 @@ class RequestController extends Controller
             'lokasi' => $lokasi,
             'division_id' => $division_id,
             'binusian_id_peminjam' => $binusian_id_peminjam,
+            'approver_id' => $approver_id,
             'approver' => $approver,
             'approver_division_id' => $approver_division_id,
             'nama_peminjam' => $nama_peminjam,
@@ -333,6 +335,7 @@ class RequestController extends Controller
         $request->user_id = Auth::user()->id;
         $request->division_id = $data['division_id'];
         $request->binusian_id_peminjam = $data['binusian_id_peminjam'];
+        $request->approver_id = $data['approver_id'];
         $request->approver = $data['approver'];
         $request->approver_division_id = $data['approver_division_id'];
         $request->nama_peminjam = $data['nama_peminjam'];
@@ -456,13 +459,31 @@ class RequestController extends Controller
                 $req->status = "waiting approval lanjutan";
 
                 $subyek = 'PEMINJAMAN PENDING';
-                $pesan = 'Selamat peminjaman anda di approve sebagian! apabila jadi melakukan peminjaman harap mengirimkan email lanjutan';
+                $pesan = 'Peminjaman anda hanya di approve sebagian! apabila jadi melakukan peminjaman harap mengirimkan email lanjutan kepada ';
                 $receiver = $req->email_peminjam;
                 $email = new SendEmailController();
                 // $email->index("bmopr.bdg@binus.edu", $pesan_bm , $subyek);
 
                 $req->update();
             }
+
+        }else if ($request->request_update == 'approved all'){
+            $message = 'Request berhasil diapprove.';
+
+            $req->track_approver = $req->track_approver+1;
+            $req->notes = $req->notes . "\n" . $request->input('pesan');
+            $approver = $request->approver_num;
+
+            $req->status = $request->request_update;
+
+            $subyek = 'PEMINJAMAN APPROVED';
+            $pesan = 'Selamat peminjaman anda berhasil di approve! silahkan ambil barang sesuai dengan tanggal peminjaman.';
+            $pesan_bm = 'Peminjaman barang oleh ' . $req->email_peminjam . ' berhasil di approve.';
+            $receiver = $req->email_peminjam;
+            $email = new SendEmailController();
+            // $email->index("bmopr.bdg@binus.edu", $pesan_bm , $subyek);
+
+            $req->update();
 
         }
 

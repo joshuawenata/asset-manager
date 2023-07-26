@@ -59,7 +59,7 @@ Route::post('insert-account',function(Request $request){
 Route::get('/see/{user}/dashboard/{id}', [\App\Http\Controllers\BookingController::class, 'show'])->name('bookings.show')->middleware(['auth', 'cekRole:staff,admin,approver']);
 Route::get('/approve/{user}/dashboard/{id}', [\App\Http\Controllers\BookingController::class, 'showApprove'])->name('bookings.showApprove')->middleware(['auth', 'cekRole:staff,admin']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::post('/update-request', [\App\Http\Controllers\RequestController::class, 'update'])->name('updateRequest')->middleware(['auth', 'cekRole:admin,staff']);
+Route::post('/update-request', [\App\Http\Controllers\RequestController::class, 'update'])->name('updateRequest')->middleware(['auth', 'cekRole:admin,staff,approver']);
 
 // Staff Routes
 

@@ -26,6 +26,7 @@ class RequestSeeder extends Seeder
             'prodi_peminjam' => 'SLC',
             'email_peminjam' => 'joshua.sunarto@binus.edu',
             'nohp_peminjam' => '08123',
+            'approver_id' => 4,
             'approver' => 'Maria Auleria',
             'approver_division_id' => 3
         ]);

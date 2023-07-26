@@ -66,7 +66,7 @@
                                 </div>
 
                                 <input type="hidden" name="approver" id="approver"
-                                    value="{{ \Illuminate\Support\Facades\Auth::user()->name }}|{{ \Illuminate\Support\Facades\Auth::user()->division_id }}" />
+                                    value="{{ \Illuminate\Support\Facades\Auth::user()->id }}|{{ \Illuminate\Support\Facades\Auth::user()->name }}|{{ \Illuminate\Support\Facades\Auth::user()->division_id }}" />
                             </div>
 
                             <div class="mb-3">

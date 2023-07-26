@@ -182,7 +182,7 @@
     </div>
 
     {{--   content --}}
-    <div class="container" id="jadipinjam">
+    <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
                 @if ($errors->any())
@@ -258,20 +258,6 @@
                                                         value="{{ $req->id }}">Tolak</button>
                                                     <button type="submit" class="btn btn-success approveBtn"
                                                         value="{{ $req->id }}">Setuju</button>
-                                                </form>
-                                            @elseif ($req->status == 'waiting approval lanjutan')
-                                                <form action="{{ route('updateRequest') }}" method="GET">
-                                                    @csrf
-                                                    <input type="hidden" name="request_update_id"
-                                                        value="{{ $req->id }}">
-                                                    <input type="hidden" name="request_update" value="approved">
-                                                    <input type="hidden" name="user" value="staff">
-                                                    <input type="hidden" name="approver_num"
-                                                        value="{{ \Illuminate\Support\Facades\Auth::user()->division->approver }}">
-                                                    <button type="button" class="btn btn-danger rejectBtn mb-2"
-                                                        value="{{ $req->id }}">Tidak Jadi Pinjam</button>
-                                                    <button type="submit" class="btn btn-success approveBtn"
-                                                        value="{{ $req->id }}">Jadi Pinjam</button>
                                                 </form>
                                             @elseif($req->status == 'on use')
                                                 {{--                                        DONE: ini tampilin receiptnya --}}

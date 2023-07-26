@@ -46,6 +46,7 @@ class CreateRequestsTable extends Migration
             $table->string('prodi_peminjam');
             $table->string('email_peminjam');
             $table->string('nohp_peminjam');
+            $table->integer('approver_id');
             $table->text('approver');
             $table->integer('approver_division_id');
             $table->timestamps();

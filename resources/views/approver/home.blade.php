@@ -212,6 +212,10 @@
                                                 <td>{{ $req->status . ' dari ' . \Illuminate\Support\Facades\Auth::user()->getAtasan($req->track_approver, $req->division_id) }}
                                                 </td>
                                             @endif
+                                        @elseif ($req->status == 'waiting approval lanjutan')
+                                            <td>
+                                                waiting next approval
+                                            </td>
                                         @else
                                             <td>{{ $req->status }}</td>
                                         @endif
@@ -219,6 +223,20 @@
                                             @if ($req->status == 'waiting approval')
                                                 <button type="button" class="btn btn-danger deleteRequestBtn"
                                                     value="{{ $req->id }}">Cancel</button>
+                                            @elseif($req->status == 'waiting approval lanjutan')
+                                                <form action="{{ route('updateRequest') }}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="request_update_id"
+                                                        value="{{ $req->id }}">
+                                                    <input type="hidden" name="request_update" value="approved all">
+                                                    <input type="hidden" name="user" value="approver">
+                                                    <input type="hidden" name="approver_num"
+                                                        value="{{ \Illuminate\Support\Facades\Auth::user()->division->approver }}">
+                                                    <button type="button" class="btn btn-danger rejectBtn mb-2"
+                                                        value="{{ $req->id }}">Tidak Jadi Pinjam</button>
+                                                    <button type="submit" class="btn btn-success"
+                                                        value="{{ $req->id }}">Jadi Pinjam</button>
+                                                </form>
                                             @elseif($req->status == 'approved')
                                                 {{ 'Silahkan ambil barang sesuai jadwal pinjam.' }}
                                             @elseif($req->status == 'on use' || $req->status == 'done')

@@ -105,15 +105,19 @@ class AssetCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function perbaharui(Request $request, $id)
     {
-        $Kategori_barang = AssetCategory::find($id);
-        $Kategori_barang->name = $request->name;
-        $Kategori_barang->update();
+        if ($request->has('name') && $request->name !== null) {
+            $Kategori_barang->name = $request->name;
+            $Kategori_barang->update();
+        } else {
+            return back()->with('error', 'Name cannot be empty.'); // Redirect back with an error message
+        }
+
         $data = DB::table('asset_categories')->where('status',1)->get();
         return view('superadmin.kategori', [
             'data' => $data
-         ]);
+        ]);
     }
 
     /**

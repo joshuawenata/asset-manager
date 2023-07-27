@@ -20,6 +20,11 @@
                         History Kategori Barang
                     </button>
                 </form>
+                @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
                 <div class="card">
                     <div class="card-header">{{ __('Kelola Kategori Barang') }}</div>
 
@@ -71,7 +76,8 @@
                                         <th scope="row">{{ $index + 1 }}</th>
                                         <td>{{ $item->name }}</td>
                                         <td>
-                                            <form action="{{ route('perbaharuiKategoriBarang', $item->id) }}" method="POST">
+                                            <form action="{{ route('perbaharuiKategoriBarang', $item->id) }}"
+                                                method="POST">
                                                 @csrf
                                                 <input class="form-control mb-2" type="text" name="name"
                                                     id="name">

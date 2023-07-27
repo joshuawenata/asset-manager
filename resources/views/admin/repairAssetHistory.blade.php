@@ -24,11 +24,11 @@
 @section('content')
 
 
-    {{--    update perbaikan (pic, repaired by, fixed boolean) --}}
+    {{--    perbaharui perbaikan (pic, repaired by, fixed boolean) --}}
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <form method="POST" action="{{ route('updateFixedAsset') }}">
+                <form method="POST" action="{{ route('perbaharuiFixedAsset') }}">
                     @csrf
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Barang Diperbaiki</h1>
@@ -124,7 +124,7 @@
                                         </td>
                                         <td>
                                             @if ($item->flag_fixed)
-                                                {{ date('l, d M Y', $item->update_at) }}
+                                                {{ date('l, d M Y', $item->perbaharui_at) }}
                                             @else
                                                 {{ '-' }}
                                             @endif

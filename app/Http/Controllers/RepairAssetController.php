@@ -96,7 +96,7 @@ class RepairAssetController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id

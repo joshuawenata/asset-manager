@@ -103,7 +103,6 @@
                             <tbody>
                                 @foreach ($data as $index => $req)
                                     <tr>
-                                        {{--                masukin kolom --}}
                                         <th scope="row">{{ $index + 1 }}</th>
                                         <td>{{ $req->nama_peminjam }}</td>
                                         <td>{{ $req->binusianid }}</td>
@@ -112,7 +111,6 @@
                                         <td>{{ date('d M Y H:i', strtotime($req->return_date)) }}</td>
                                         <td>{{ $req->lokasi }}</td>
                                         <td>
-                                            {{--                                        DONE: ini masi error --}}
                                             <form action="{{ route('rejectedbookings.show', ['id' => $req->id]) }}"
                                                 method="GET">
                                                 @csrf
@@ -121,15 +119,10 @@
                                                 </button>
                                             </form>
                                         </td>
-                                        {{--                                    @if ($req->return_notice == 'isu_rusak') --}}
-                                        {{--                                        <td style="color: red">{{$req->status}}</td> --}}
-                                        {{--                                    @else --}}
                                         <td>{{ $req->status }}</td>
-                                        {{--                                    @endif --}}
                                         <td>
                                             @if ($req->status == 'done')
-                                                {{--                                        DONE: ini tampilin receiptnya --}}
-                                                <form action="{{ route('download') }}" target="_blank" method="post">
+                                                <form action="{{ route('unduh') }}" target="_blank" method="post">
                                                     @csrf
                                                     <button type="submit"
                                                         @if ($req->return_notice == 'isu_rusak') class="btn btn-danger"

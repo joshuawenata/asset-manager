@@ -85,7 +85,7 @@
 
                     <div class="card-body">
 
-                        <form method="POST" action="{{ url('update-user/' . $data->id) }}">
+                        <form method="POST" action="{{ url('perbaharui-user/' . $data->id) }}">
                             @csrf
                             @method('PUT')
 
@@ -204,7 +204,7 @@
                                         value="{{ $data->id }}">Hapus User</button>
 
                                     <button type="submit" class="btn btn-primary">
-                                        {{ __('Perbarui Data') }}
+                                        {{ __('perbaharui Data') }}
                                     </button>
                                 </div>
                                 <div class="col-md-6 offset-md-4">Format password default : B1nu$-[Binusian ID]</div>

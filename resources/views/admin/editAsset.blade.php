@@ -55,7 +55,7 @@
 
                     <div class="card-body">
 
-                        <form method="POST" action="{{ url('update-asset/' . $data->id) }}">
+                        <form method="POST" action="{{ url('perbaharui-asset/' . $data->id) }}">
                             @csrf
                             @method('PUT')
 
@@ -160,7 +160,7 @@
                                         </button>
                                     @endif
                                     <button type="submit" class="btn btn-primary">
-                                        {{ __('Perbarui Data') }}
+                                        {{ __('perbaharui Data') }}
                                     </button>
                                 </div>
                             </div>

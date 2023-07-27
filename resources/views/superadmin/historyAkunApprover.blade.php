@@ -47,11 +47,11 @@
                                         </td>
                                         <td>{{ $req->created_at }}</td>
                                         <td>
-                                            <form action="{{ route('download') }}" target="_blank" method="post">
+                                            <form action="{{ route('unduh') }}" target="_blank" method="post">
                                                 @csrf
                                                 <button type="submit" class="btn btn-primary" name="request_id"
                                                     value="{{ $req->id }}"><span
-                                                        class="material-symbols-outlined">file_download</span></button>
+                                                        class="material-symbols-outlined">file_unduh</span></button>
                                             </form>
                                         </td>
                                     </tr>

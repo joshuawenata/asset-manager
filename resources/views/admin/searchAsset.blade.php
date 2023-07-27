@@ -19,10 +19,11 @@
                     <a title="Penambahan Barang" class="btn btn-small btn-success mb-3"
                         href="{{ route('admin.createAsset') }}"><span style="display: flex"
                             class="material-symbols-outlined">add</span></a>
-                    {{--                    <a class="btn btn-small btn-success mb-3" href="{{ route('downloadAsset') }}"><span class="material-symbols-outlined">download</span>Unduh Rekap Aset</a> --}}
+                    {{--                    <a class="btn btn-small btn-success mb-3" href="{{ route('unduhAsset') }}"><span class="material-symbols-outlined">unduh</span>Unduh Rekap Aset</a> --}}
                     <a class="btn btn-small btn-success mb-3" href="{{ url('/deleted-asset/') }}">Riwayat Pemusnahan
                         Barang</a>
-                    <a class="btn btn-small btn-success mb-3" href="{{ route('admin.riwayat-update') }}">Riwayat Update
+                    <a class="btn btn-small btn-success mb-3" href="{{ route('admin.riwayat-perbaharui') }}">Riwayat
+                        Perbaharui
                         Barang</a>
                     <a class="btn btn-small btn-success mb-3"
                         href="{{ url('/move-asset/' . \Illuminate\Support\Facades\Auth::user()->division->id) }}">Pemindahan

@@ -89,7 +89,7 @@
                 </form>
 
                 <div class="card">
-                    <div class="card-header">{{ __('Dashboard Super Admin') }}</div>
+                    <div class="card-header">{{ __('Halaman Super Admin') }}</div>
 
                     <div class="card-body">
 

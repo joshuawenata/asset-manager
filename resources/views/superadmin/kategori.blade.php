@@ -71,7 +71,7 @@
                                         <th scope="row">{{ $index + 1 }}</th>
                                         <td>{{ $item->name }}</td>
                                         <td>
-                                            <form action="{{ route('updateKategoriBarang', $item->id) }}" method="POST">
+                                            <form action="{{ route('perbaharuiKategoriBarang', $item->id) }}" method="POST">
                                                 @csrf
                                                 <input class="form-control mb-2" type="text" name="name"
                                                     id="name">

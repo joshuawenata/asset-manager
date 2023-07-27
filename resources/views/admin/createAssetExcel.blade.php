@@ -56,12 +56,12 @@
 
                         </form>
 
-                        <form action="{{ route('downloadExcel') }}">
+                        <form action="{{ route('unduhExcel') }}">
                             @csrf
                             <div class="row mb-0 mt-2">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-success">
-                                        {{ __('Download Template Excel') }}
+                                        {{ __('Unduh Template Excel') }}
                                     </button>
                                 </div>
                             </div>

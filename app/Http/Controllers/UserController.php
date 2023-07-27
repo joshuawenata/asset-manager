@@ -7,7 +7,7 @@ use App\Models\Role;
 use App\Models\User;
 use App\Models\HistoryAkun;
 use App\Models\HistoryAddAsset;
-use App\Models\HistoryUpdateAsset;
+use App\Models\HistoryupdateAsset;
 use App\Models\DeletedAsset;
 use App\Models\RepairAsset;
 use App\Models\AssetLocation;
@@ -50,7 +50,7 @@ class UserController extends Controller
     {
         $dataHistoryAddAsset = HistoryAddAsset::where('user_id',$id)->get();
         $dataHistoryPemusnahanBarang = DeletedAsset::where('user_id',$id)->get();
-        $dataHistoryPembaharuanBarang = HistoryUpdateAsset::where('id_pengubah',$id)->get();
+        $dataHistoryPembaharuanBarang = HistoryupdateAsset::where('id_pengubah',$id)->get();
         $dataHistoryPemindahanBarang = AssetLocation::where('responsible_id',$id)->get();
         $dataHistoryBarangRusak = RepairAsset::where('reported_by_id',$id)->get();
         $dataHistoryPerbaikanBarang = RepairAsset::where('reported_by_id',$id)->get();
@@ -153,7 +153,7 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -169,7 +169,7 @@ class UserController extends Controller
         $user->role_id = $request->input('role');
         $user->email = $request->input('email');
         $user->update();
-        return redirect('superadmin/dashboard')->with('message', 'Data User Berhasil Diperbaharui');
+        return redirect('superadmin/dashboard')->with('message', 'Data User Berhasil Diupdate');
     }
 
     public function reset(Request $request)
@@ -180,7 +180,7 @@ class UserController extends Controller
         $history->aksi = 'superadmin mereset password akun '.Role::where('id',$user->role_id)->pluck('name')[0].' dengan data nama: '.$user->name.', binusian_id: '.$user->binusianid.', phone: '.$user->phone.', departemen: '.Division::where('id',$user->division_id)->pluck('name')[0].', email: '.$user->email;
         $history->save();
         $user->update();
-        return redirect('superadmin/dashboard')->with('message', 'Data User Berhasil Diperbaharui');
+        return redirect('superadmin/dashboard')->with('message', 'Data User Berhasil Diupdate');
     }
 
     /**

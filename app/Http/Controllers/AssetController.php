@@ -11,7 +11,7 @@ use App\Models\DeletedAsset;
 use App\Models\Location;
 use App\Models\User;
 use App\Models\PemilikBarang;
-use App\Models\HistoryUpdateAsset;
+use App\Models\HistoryupdateAsset;
 use App\Models\HistoryAddAsset;
 use App\Imports\AssetsImport;
 use Illuminate\Http\Request;
@@ -282,7 +282,7 @@ class AssetController extends Controller
 
             $this->storeLoc();
 
-            return redirect('dashboard')->with('message', "Aset Berhasil Ditambahkan");
+            return redirect('Halaman')->with('message', "Aset Berhasil Ditambahkan");
         }
     }
 
@@ -324,7 +324,7 @@ class AssetController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -344,7 +344,7 @@ class AssetController extends Controller
                 ->withInput();
         }else {
             $aset = Asset::find($id);
-            $history_update = new HistoryUpdateAsset;
+            $history_update = new HistoryupdateAsset;
             $history_update->id_pengubah = \Illuminate\Support\Facades\Auth::id();
             $history_update->kode_barang = $aset->serial_number;
             $history_update->kategori_barang = AssetCategory::where('id',$aset->asset_category_id)->pluck('name')[0];
@@ -377,7 +377,7 @@ class AssetController extends Controller
 
             $history_update->save();
             $aset->update();
-            return redirect('search-asset/' . \Illuminate\Support\Facades\Auth::id())->with('message', 'Aset Berhasil Diperbaharui');
+            return redirect('search-asset/' . \Illuminate\Support\Facades\Auth::id())->with('message', 'Aset Berhasil Diupdate');
         }
     }
 
@@ -428,7 +428,7 @@ class AssetController extends Controller
 
     public function riwayat(){
         $data = HistoryUpdateAsset::where('id_pengubah',\Illuminate\Support\Facades\Auth::id())->get();
-        return View::make('admin.historyUpdate', [
+        return View::make('admin.historyupdate', [
             'data' => $data
         ]);
     }

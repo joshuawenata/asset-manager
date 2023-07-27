@@ -83,7 +83,7 @@
                 </button>
 
                 <div class="card">
-                    <div class="card-header">{{ __('Dashboard Admin') }}</div>
+                    <div class="card-header">{{ __('Halaman Admin') }}</div>
 
                     <div class="card-body">
 

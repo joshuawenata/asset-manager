@@ -86,15 +86,15 @@
         <div class="modal-dialog">
             <div class="modal-content">
 
-                <form action="{{ route('updateRequest') }}" method="post">
+                <form action="{{ route('perbaharuiRequest') }}" method="post">
                     @csrf
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Reject Request</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <input type="hidden" name="request_update_id" id="request_id">
-                        <input type="hidden" name="request_update" value="rejected">
+                        <input type="hidden" name="request_perbaharui_id" id="request_id">
+                        <input type="hidden" name="request_perbaharui" value="rejected">
                         <input type="hidden" name="user" value="staff">
                         <h5>Apakah anda yakin ingin me-reject request peminjaman?</h5>
                         <div class="mb-3">
@@ -117,15 +117,15 @@
         <div class="modal-dialog">
             <div class="modal-content">
 
-                <form action="{{ route('updateRequest') }}" method="post">
+                <form action="{{ route('perbaharuiRequest') }}" method="post">
                     @csrf
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Approve Request</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <input type="hidden" name="request_update_id" value="{{ session('request_id') }}">
-                        <input type="hidden" name="request_update" value="approved">
+                        <input type="hidden" name="request_perbaharui_id" value="{{ session('request_id') }}">
+                        <input type="hidden" name="request_perbaharui" value="approved">
                         <input type="hidden" name="user" value="staff">
                         <input type="hidden" name="approver_num"
                             value="{{ \Illuminate\Support\Facades\Auth::user()->division->approver }}">
@@ -196,7 +196,7 @@
                 @endif
 
                 <div class="card">
-                    <div class="card-header">{{ __('Dashboard Karyawan') }}</div>
+                    <div class="card-header">{{ __('Halaman Karyawan') }}</div>
 
                     <div class="card-body">
 
@@ -261,11 +261,11 @@
                                                 </form>
                                             @elseif($req->status == 'on use')
                                                 {{--                                        DONE: ini tampilin receiptnya --}}
-                                                <form action="{{ route('download') }}" target="_blank" method="post">
+                                                <form action="{{ route('unduh') }}" target="_blank" method="post">
                                                     @csrf
                                                     <button type="submit" class="btn btn-primary" name="request_id"
                                                         value="{{ $req->id }}"><span
-                                                            class="material-symbols-outlined">file_download</span></button>
+                                                            class="material-symbols-outlined">file_unduh</span></button>
                                                 </form>
                                             @elseif($req->status == 'approved' || $req->status == 'approved sebagian')
                                                 <form action="{{ route('takenBooking') }}" method="post">

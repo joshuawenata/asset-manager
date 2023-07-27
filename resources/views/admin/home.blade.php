@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('css')
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 @endsection
 
 @section('js')
@@ -18,22 +18,13 @@
                 $('#rejectModal').modal('show');
             });
 
-            $('.approveBtn').click(function(e) {
-                e.preventDefault();
-                var request_id = $(this).val();
-                $('#request_id2').val(request_id);
+            if (window.location.href.indexOf('#approve') != -1) {
                 $('#approveModal').modal('show');
-            });
-        });
-    </script>
-
-    <script defer>
-        $(document).ready(function() {
+            }
 
             if (window.location.href.indexOf('#see') != -1) {
                 $('#see').modal('show');
             }
-
         });
     </script>
 @endsection
@@ -48,8 +39,8 @@
                     <h5 class="modal-title">Aset</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
 
+                <div class="modal-body">
                     <table class="display table">
                         <thead>
                             <tr>
@@ -86,7 +77,6 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
-
             </div>
         </div>
     </div>
@@ -105,7 +95,7 @@
                     <div class="modal-body">
                         <input type="hidden" name="request_update_id" id="request_id">
                         <input type="hidden" name="request_update" value="rejected">
-                        <input type="hidden" name="user" value="admin">
+                        <input type="hidden" name="user" value="staff">
                         <h5>Apakah anda yakin ingin me-reject request peminjaman?</h5>
                         <div class="mb-3">
                             <label for="pesan" class="col-form-label">Pesan:</label>
@@ -134,12 +124,48 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <input type="hidden" name="request_update_id" id="request_id2">
+                        <input type="hidden" name="request_update_id" value="{{ session('request_id') }}">
                         <input type="hidden" name="request_update" value="approved">
-                        <input type="hidden" name="user" value="admin">
+                        <input type="hidden" name="user" value="staff">
                         <input type="hidden" name="approver_num"
                             value="{{ \Illuminate\Support\Facades\Auth::user()->division->approver }}">
                         <h5>Apakah anda yakin ingin meng-approve request peminjaman?</h5>
+                        <table class="display table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Kode Barang</th>
+                                    <th>Kategori Barang</th>
+                                    <th>Spesifikasi</th>
+                                    <th>Kondisi</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (session('bookings'))
+                                    @foreach (session('bookings') as $index => $item)
+                                        <tr>
+                                            <th scope="row">{{ $index + 1 }}</th>
+                                            <td>{{ $item->serial_number }}</td>
+                                            <td>{{ $item->name }}</td>
+                                            <td>{{ $item->brand }}</td>
+                                            <td>{{ $item->status }}</td>
+                                            <!-- Add name attribute to the checkbox inputs -->
+                                            <td class="text-center"><input type="checkbox"
+                                                    name="booking_approval[{{ $index }}]" value="1" /></td>
+                                            <input type="hidden"
+                                                name="booking_id[{{ $index }}]"value="{{ $item->id }}">
+                                        </tr>
+                                    @endforeach
+                                @endif
+                            </tbody>
+                        </table>
+                        <div class="row mb-0">
+                            <div class="col-md-6 offset-md-0">
+                                <input class="form-check-input mt-1" type="checkbox" name="select-all" id="select-all">
+                                <label for="select-all">pilih semua</label>
+                            </div>
+                        </div>
                         <div class="mb-3">
                             <label for="pesan" class="col-form-label">Pesan:</label>
                             <textarea class="form-control" id="pesan" name="pesan" autofocus>{{ ' ' }}</textarea>
@@ -155,19 +181,33 @@
         </div>
     </div>
 
-    {{-- content --}}
+    {{--   content --}}
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                {{ $error }}
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
                 <div class="card">
                     <div class="card-header">{{ __('Dashboard Admin') }}</div>
 
                     <div class="card-body">
+
+
                         @if (session('message'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('message') }}
-                            </div>
+                            @if (session('message') == 'Request peminjaman tidak bisa dicancel karena sudah diapprove admin.')
+                                {{--                            DONE: kalo gaberhasil cancel warna merah, klo ga ya warna success ijo --}}
+                                <div class="alert alert-danger" role="alert">{{ session('message') }}</div>
+                            @else
+                                <div class="alert alert-success" role="alert">{{ session('message') }}</div>
+                            @endif
                         @endif
 
                         <table id="myTable" class="display table" width="100%">
@@ -199,7 +239,7 @@
                                         <td>
                                             {{--                                        DONE: ini masi error --}}
                                             <form
-                                                action="{{ route('bookings.show', ['user' => 'admin', 'id' => $req->id]) }}"
+                                                action="{{ route('bookings.show', ['user' => 'staff', 'id' => $req->id]) }}"
                                                 method="GET">
                                                 @csrf
                                                 <button type="submit" class="btn btn-small btn-primary mb-3">
@@ -210,10 +250,15 @@
                                         <td>{{ $req->status }}</td>
                                         <td>
                                             @if ($req->status == 'waiting approval')
-                                                <button type="button" class="btn btn-danger rejectBtn mb-2"
-                                                    value="{{ $req->id }}">Tolak</button>
-                                                <button type="button" class="btn btn-success approveBtn"
-                                                    value="{{ $req->id }}">Setuju</button>
+                                                <form
+                                                    action="{{ route('bookings.showApprove', ['user' => 'staff', 'id' => $req->id]) }}"
+                                                    method="GET">
+                                                    @csrf
+                                                    <button type="button" class="btn btn-danger rejectBtn mb-2"
+                                                        value="{{ $req->id }}">Tolak</button>
+                                                    <button type="submit" class="btn btn-success approveBtn"
+                                                        value="{{ $req->id }}">Setuju</button>
+                                                </form>
                                             @elseif($req->status == 'on use')
                                                 {{--                                        DONE: ini tampilin receiptnya --}}
                                                 <form action="{{ route('download') }}" target="_blank" method="post">
@@ -222,11 +267,12 @@
                                                         value="{{ $req->id }}"><span
                                                             class="material-symbols-outlined">file_download</span></button>
                                                 </form>
-                                            @elseif($req->status == 'approved')
+                                            @elseif($req->status == 'approved' || $req->status == 'approved sebagian')
                                                 <form action="{{ route('takenBooking') }}" method="post">
                                                     @csrf
                                                     <button type="submit" class="btn btn-primary"
-                                                        name="request_taken_id" value="{{ $req->id }}">Barang sudah
+                                                        name="request_taken_id" value="{{ $req->id }}">Barang
+                                                        sudah
                                                         diambil</button>
                                                 </form>
                                             @endif
@@ -243,10 +289,23 @@
                                 @endforeach
                             </tbody>
                         </table>
-                    </div>
 
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        $('#select-all').click(function(event) {
+            if (this.checked) {
+                $(':checkbox').each(function() {
+                    this.checked = true;
+                });
+            } else {
+                $(':checkbox').each(function() {
+                    this.checked = false;
+                });
+            }
+        });
+    </script>
 @endsection

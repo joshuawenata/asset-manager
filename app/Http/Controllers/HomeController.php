@@ -6,6 +6,7 @@ use App\Models\Asset;
 use App\Models\User;
 use App\Models\RolePageMapping;
 use App\Models\HistoryAddAsset;
+use App\Models\HistoryDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -105,6 +106,13 @@ class HomeController extends Controller
         $data = historyAddAsset::where('user_id',auth()->user()->id)->get();
         return view('historyAddAsset', [
             'data' => $data
+        ]);
+    }
+
+    public function historyDetail(){
+        $data = HistoryDetail::all();
+        return view('historyDetail', [
+            'data' => $data,
         ]);
     }
 }

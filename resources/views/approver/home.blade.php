@@ -212,7 +212,7 @@
                                                 <td>{{ $req->status . ' dari ' . \Illuminate\Support\Facades\Auth::user()->getAtasan($req->track_approver, $req->division_id) }}
                                                 </td>
                                             @endif
-                                        @elseif ($req->status == 'waiting approval lanjutan')
+                                        @elseif ($req->status == 'waiting next approval')
                                             <td>
                                                 waiting next approval
                                             </td>
@@ -223,12 +223,13 @@
                                             @if ($req->status == 'waiting approval')
                                                 <button type="button" class="btn btn-danger deleteRequestBtn"
                                                     value="{{ $req->id }}">Cancel</button>
-                                            @elseif($req->status == 'waiting approval lanjutan')
+                                            @elseif($req->status == 'waiting next approval')
                                                 <form action="{{ route('updateRequest') }}" method="post">
                                                     @csrf
                                                     <input type="hidden" name="request_update_id"
                                                         value="{{ $req->id }}">
-                                                    <input type="hidden" name="request_update" value="approved all">
+                                                    <input type="hidden" name="request_update"
+                                                        value="approved sebagian">
                                                     <input type="hidden" name="user" value="approver">
                                                     <input type="hidden" name="approver_num"
                                                         value="{{ \Illuminate\Support\Facades\Auth::user()->division->approver }}">

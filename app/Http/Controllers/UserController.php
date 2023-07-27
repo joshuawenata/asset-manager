@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -69,7 +70,14 @@ class UserController extends Controller
 
     public function historyApprover($id)
     {
-        $data = HistoryAkun::all();
+        $data = DB::table('requests')
+            ->orderBy('id', 'desc')
+            ->where('status', '=', 'done')
+            ->orWhere('status', '=', 'rejected')
+            ->join('users', 'requests.user_id', '=', 'users.id')
+            ->select('requests.*', 'users.id AS userid', 'users.name', 'users.binusianid')
+            ->where('requests.approver_id', '=', $id)
+            ->get();
         return view('superadmin.historyAkunApprover', [
             'data' => $data
         ]);

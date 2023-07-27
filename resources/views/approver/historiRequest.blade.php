@@ -105,7 +105,7 @@
                                     <tr>
                                         {{--                masukin kolom --}}
                                         <th scope="row">{{ $index + 1 }}</th>
-                                        <td>{{ $req->name }}</td>
+                                        <td>{{ $req->nama_peminjam }}</td>
                                         <td>{{ $req->binusianid }}</td>
                                         <td>{{ $req->purpose }}</td>
                                         <td>{{ date('d M Y H:i', strtotime($req->book_date)) }}</td>

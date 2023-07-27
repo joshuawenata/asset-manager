@@ -16,11 +16,12 @@ Route::get('/', function () {
 Auth::routes();
 
 //HISTORI REQUEST
-Route::get('/requests-history', [\App\Http\Controllers\RequestController::class, 'show'])->name('admin.historiRequest')->middleware(['auth', 'cekRole:admin,approver']);
+Route::get('/requests-history', [\App\Http\Controllers\RequestController::class, 'show'])->name('approver.historiRequest')->middleware(['auth', 'cekRole:approver']);
+Route::get('/requests-history-pengembalian', [\App\Http\Controllers\RequestController::class, 'showDetail'])->name('approver.historiDetail')->middleware(['auth', 'cekRole:approver']);
 Route::get('/requests-history/{id}', [\App\Http\Controllers\BookingController::class, 'show2'])->name('rejectedbookings.show')->middleware(['auth', 'cekRole:admin,approver']);
 //GENERATE PDF
-Route::post('download', [\App\Http\Controllers\PdfController::class, 'index'])->name('download')->middleware(['auth', 'cekRole:student,staff,admin,approver']);
-Route::get('download-excel', [\App\Http\Controllers\ExcelController::class, 'index'])->name('downloadExcel')->middleware(['auth', 'cekRole:student,staff,admin,approver']);
+Route::post('download', [\App\Http\Controllers\PdfController::class, 'index'])->name('download')->middleware(['auth', 'cekRole:staff,admin,approver,superadmin']);
+Route::get('download-excel', [\App\Http\Controllers\ExcelController::class, 'index'])->name('downloadExcel')->middleware(['auth', 'cekRole:staff,admin,approver']);
 
 
 //TEST THIS
@@ -64,23 +65,22 @@ Route::post('/update-request', [\App\Http\Controllers\RequestController::class, 
 // Staff Routes
 
 Route::middleware(['auth', 'cekRole:staff,admin'])->group(function(){
+    Route::post('/approve-return', [\App\Http\Controllers\RequestController::class, 'approvePengembalian'])->name('approve-return');
+    Route::post('/reject-return', [\App\Http\Controllers\RequestController::class, 'rejectPengembalian'])->name('reject-return');
+    Route::post('/return-form', [\App\Http\Controllers\RequestController::class, 'cekPengembalian'])->name('admin.formKembali');
+    Route::post('/check-date', [\App\Http\Controllers\RequestController::class, 'checkTanggal'])->name('takenBooking');
     //HISTORY
     Route::get('/history-add-asset', [\App\Http\Controllers\HomeController::class, 'historyAddAsset'])->name('historyAddAsset');
+    Route::get('/history-detail', [\App\Http\Controllers\HomeController::class, 'historyDetail'])->name('historyDetail');
 });
 
 Route::middleware(['auth', 'cekRole:staff'])->group(function(){
     Route::get('/dashboard', [\App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
-    //CHECK TGL
     //CREATE
     Route::get('/create-asset-staff', [\App\Http\Controllers\AssetController::class, 'createForStaff'])->name('staff.createAsset');
     Route::get('/create-asset-excel-staff', [\App\Http\Controllers\AssetController::class, 'createAssetExcelForStaff'])->name('staff.createAssetExcel');
     Route::post('/store-asset-excel-staff', [\App\Http\Controllers\AssetController::class, 'storeAssetExcelForStaff'])->name('staff.storeAssetExcel');
     Route::post('/store-new-asset-staff', [\App\Http\Controllers\AssetController::class, 'storeForStaff'])->name('staff.storeAsset');
-    //CONFIRM
-    //DELETE
-    Route::post('/cancel-request', [\App\Http\Controllers\RequestController::class, 'destroy'])->name('deleteRequest');
-    Route::post('/return', [\App\Http\Controllers\RequestController::class, 'kembali'])->name('kembali');
-    Route::post('/update-return', [\App\Http\Controllers\RequestController::class, 'updateReturn'])->name('storeReturn');
 });
 
 //Admin Routes
@@ -120,16 +120,15 @@ Route::middleware(['auth', 'cekRole:admin'])->group(function(){
     Route::get('export-asset', [\App\Http\Controllers\AssetController::class, 'export'])->name('downloadAsset');
     Route::get('export-deleted-asset', [\App\Http\Controllers\DeletedAssetController::class, 'export'])->name('downloadDeletedAsset');
 
-    Route::post('/approve-return', [\App\Http\Controllers\RequestController::class, 'approvePengembalian'])->name('approve-return');
-    Route::post('/reject-return', [\App\Http\Controllers\RequestController::class, 'rejectPengembalian'])->name('reject-return');
-    Route::post('/return-form', [\App\Http\Controllers\RequestController::class, 'cekPengembalian'])->name('admin.formKembali');
 
-    Route::post('/check-date', [\App\Http\Controllers\RequestController::class, 'checkTanggal'])->name('takenBooking');
 });
 
 
 //Approver Routes
 Route::middleware(['auth', 'cekRole:approver'])->group(function(){
+    Route::post('/cancel-request', [\App\Http\Controllers\RequestController::class, 'destroy'])->name('deleteRequest');
+    Route::post('/update-return', [\App\Http\Controllers\RequestController::class, 'updateReturn'])->name('storeReturn');
+    Route::post('/return', [\App\Http\Controllers\RequestController::class, 'kembali'])->name('kembali');
     Route::post('/choose-division', [\App\Http\Controllers\DivisionController::class, 'index2'])->name('chooseDivision');
     Route::get('/approver/check-request', [\App\Http\Controllers\RequestController::class, 'check'])->name('approver.checkRequest');
     Route::get('/approver/dashboard', [\App\Http\Controllers\HomeController::class, 'approverDashboard'])->name('approver.dashboard');

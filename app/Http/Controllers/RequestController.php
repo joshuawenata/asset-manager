@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Location;
 use App\Models\User;
+use App\Models\historyDetail;
 use DateTime;
 use DateTimeZone;
 use Illuminate\Http\Request;
@@ -40,6 +41,7 @@ class RequestController extends Controller
                 ->where('requests.track_approver', '=', 0)
                 ->where('requests.division_id', '=', $user_div_id)
                 ->where('status', '=', 'waiting approval')
+                ->orWhere('status', '=', 'approved sebagian')
                 ->orWhere('status', '=', 'approved')
                 ->orWhere('status', '=', 'on use')
                 ->orWhere('status', '=', 'taken')
@@ -128,9 +130,13 @@ class RequestController extends Controller
             ->where('role_id', 3)
             ->get();
         $receiver = $receiver[0]->email;
-        $message = $req->User->name . ' mengajukan pengembalian barang.';;
+        $message = $req->User->name . ' mengajukan pengembalian barang.';
         $subjek = 'PENGAJUAN PENGEMBALIAN BARANG';
         $email->index($receiver, $message, $subjek);
+
+        $history = new historyDetail();
+        $history->aksi = \Illuminate\Support\Facades\Auth::user()->name . ' mengajukan pengembalian barang dari '.$req->nama_peminjam.'['.$req->prodi_peminjam.']'.' dengan kondisi '.$request->input('kondisi_aset').' dengan deskripsi '.$request->input('return_condition');
+        $history->save();
 
         return redirect('/dashboard')->with('message', 'Berhasil mengajukan pengembalian.');
     }
@@ -169,6 +175,8 @@ class RequestController extends Controller
         }
 
         if($id != null){
+
+            $req = \App\Models\Request::find($request->request_taken_id);
             //barang bisa diambil = update bookings
             $bookings = new BookingController();
             $bookings->update($req_id);
@@ -180,6 +188,13 @@ class RequestController extends Controller
             $receiver = $receiver->User->email;
             $email->index($receiver, $message, $subjek);
 
+            $history = new historyDetail();
+            $history->aksi = \Illuminate\Support\Facades\Auth::user()->name . ' memberikan barang kepada '.$req->nama_peminjam.'['.$req->prodi_peminjam.']'.' dengan tujuan '.$req->purpose;
+            $history->save();
+
+            if(\Illuminate\Support\Facades\Auth::user()->role_id == 1){
+                return redirect('/dashboard')->with('message', "Barang berhasil diambil.");
+            }
             return redirect('/admin/dashboard')->with('message', "Barang berhasil diambil.");
         }
         else{
@@ -367,10 +382,18 @@ class RequestController extends Controller
             ->where('status', '=', 'done')
             ->orWhere('status', '=', 'rejected')
             ->join('users', 'requests.user_id', '=', 'users.id')
-            ->select('requests.*', 'users.id AS userid', 'users.name', 'users.binusianid')
+            ->select('requests.*', 'users.id AS userid', 'users.binusianid')
             ->where('requests.division_id', '=', $user_div_id)
             ->get();
-        return view('admin.historiRequest', [
+        return view('approver.historiRequest', [
+            'data' => $data
+        ]);
+    }
+
+    public function showDetail()
+    {
+        $data = HistoryDetail::all();
+        return view('approver.historiDetail', [
             'data' => $data
         ]);
     }
@@ -407,6 +430,9 @@ class RequestController extends Controller
             $subyek = 'PEMINJAMAN REJECTED';
             $pesan = 'Mohon maaf, peminjaman anda tidak disetujui oleh approver. Silahkan pilih tanggal lain untuk meminjam.';
             $receiver = $req->email_peminjam;
+            $history = new historyDetail();
+            $history->aksi = \Illuminate\Support\Facades\Auth::user()->name . ' menolak peminjaman dari '.$req->nama_peminjam.'['.$req->prodi_peminjam.']'.' dengan tujuan '.$req->purpose.' dengan alasan '.$request->input('pesan');
+            $history->save();
         }
         else if ($request->request_update == 'approved'){
             $bookingApproval = $request->input('booking_approval', []);
@@ -451,12 +477,16 @@ class RequestController extends Controller
                 // $email->index("bmopr.bdg@binus.edu", $pesan_bm , $subyek);
 
                 $req->update();
+
+                $history = new historyDetail();
+                $history->aksi = \Illuminate\Support\Facades\Auth::user()->name . ' menyetujui peminjaman dari '.$req->nama_peminjam.'['.$req->prodi_peminjam.']'.' dengan tujuan '.$req->purpose.' dengan alasan '.$request->input('pesan');
+                $history->save();
             }else{
                 $req->track_approver = $req->track_approver++;
                 $req->notes = $req->notes . "\n" . $request->input('pesan');
                 $approver = $request->approver_num;
 
-                $req->status = "waiting approval lanjutan";
+                $req->status = "waiting next approval";
 
                 $subyek = 'PEMINJAMAN PENDING';
                 $pesan = 'Peminjaman anda hanya di approve sebagian! apabila jadi melakukan peminjaman harap mengirimkan email lanjutan kepada ';
@@ -467,7 +497,7 @@ class RequestController extends Controller
                 $req->update();
             }
 
-        }else if ($request->request_update == 'approved all'){
+        }else if ($request->request_update == 'approved sebagian'){
             $message = 'Request berhasil diapprove.';
 
             $req->track_approver = $req->track_approver+1;
@@ -525,6 +555,10 @@ class RequestController extends Controller
         $id = $request->input('request_return_id');
         $req = \App\Models\Request::find($id);
 
+        $history = new historyDetail();
+        $history->aksi = \Illuminate\Support\Facades\Auth::user()->name . ' mengapprove pengembalian dari '.$req->nama_peminjam.'['.$req->prodi_peminjam.']'.' dengan pesan '.$request->input('pesan');
+        $history->save();
+
         $req->return_notice = $request->input('isu_rusak');
         $req->status = 'done';
         $bookings = new BookingController();
@@ -537,6 +571,7 @@ class RequestController extends Controller
         $subjek = 'PENGEMBALIAN DI APPROVE';
         $receiver = $req->User->email;
         $email->index($receiver, $message, $subjek);
+
 
         return redirect('requests-history')->with('message', 'Peminjaman berhasil dikembalikan.');
     }
@@ -555,6 +590,10 @@ class RequestController extends Controller
         $subjek = 'PENGEMBALIAN DI REJECT';
         $receiver = $req->User->email;
         $email->index($receiver, $message, $subjek);
+
+        $history = new historyDetail();
+        $history->aksi = \Illuminate\Support\Facades\Auth::user()->name . ' menolak pengembalian dari '.$req->nama_peminjam.'['.$req->prodi_peminjam.']';
+        $history->save();
 
         return redirect('admin/dashboard')->with('message', 'Pengembalian berhasil ditolak.');
     }

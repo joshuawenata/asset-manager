@@ -81,12 +81,11 @@
                                     Excel</a>
                                 <a class="nav-link active" href="{{ route('historyAddAsset') }}">Riwayat Tambah
                                     Barang</a>
+                                <a class="nav-link active" href="{{ route('historyDetail') }}">Detil Riwayat</a>
                             @elseif(auth()->user()->role->name == 'admin')
                                 <a class="nav-link active"
                                     href="{{ url('/search-asset/' . \Illuminate\Support\Facades\Auth::user()->division->id) }}">Lihat
                                     Inventory</a>
-                                <a class="nav-link active" href="{{ route('admin.historiRequest') }}">Riwayat
-                                    Peminjaman</a>
                                 <a class="nav-link active" href="{{ route('admin.createAssetExcel') }}">Tambah Barang
                                     Melalui
                                     Excel</a>
@@ -94,8 +93,10 @@
                                     Barang</a>
                             @elseif(auth()->user()->role->name == 'approver')
                                 <a class="nav-link active" href="{{ route('approver.checkRequest') }}">Pinjam Inventory</a>
-                                <a class="nav-link active" href="{{ route('admin.historiRequest') }}">Riwayat
+                                <a class="nav-link active" href="{{ route('approver.historiRequest') }}">Riwayat
                                     Peminjaman</a>
+                                <a class="nav-link active" href="{{ route('approver.historiDetail') }}">Detil
+                                    Riwayat</a>
                             @elseif(auth()->user()->role->name == 'superadmin')
                                 <a class="nav-link active" href="{{ route('superadmin.division') }}">Lihat Departemen</a>
                                 <a class="nav-link active" href="{{ route('superadmin.location') }}">Kelola Lokasi</a>

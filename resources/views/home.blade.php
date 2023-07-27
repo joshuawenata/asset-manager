@@ -267,7 +267,7 @@
                                                         value="{{ $req->id }}"><span
                                                             class="material-symbols-outlined">file_download</span></button>
                                                 </form>
-                                            @elseif($req->status == 'approved')
+                                            @elseif($req->status == 'approved' || $req->status == 'approved sebagian')
                                                 <form action="{{ route('takenBooking') }}" method="post">
                                                     @csrf
                                                     <button type="submit" class="btn btn-primary"

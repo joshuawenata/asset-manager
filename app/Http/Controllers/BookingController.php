@@ -85,16 +85,26 @@ class BookingController extends Controller
      */
     public function show($user, $id)
     {
-        $assets = DB::table('bookings')
-            ->join('assets', 'bookings.asset_id', '=', 'assets.id')
-            ->join('asset_categories', 'bookings.asset_category_id', '=', 'asset_categories.id')
-            ->select('bookings.id','assets.serial_number', 'assets.brand', 'asset_categories.name', 'assets.status', 'assets.division_id')
-            ->where('bookings.request_id', '=', $id)
-            ->get();
-
         $request = \App\Models\Request::find($id);
         $stat = $request->status;
         $request = $request->notes;
+
+        if($stat == 'waiting next approval'||$stat == 'approved sebagian'){
+            $assets = DB::table('bookings')
+            ->join('assets', 'bookings.asset_id', '=', 'assets.id')
+            ->join('asset_categories', 'bookings.asset_category_id', '=', 'asset_categories.id')
+            ->select('bookings.id','assets.serial_number', 'assets.brand', 'asset_categories.name', 'bookings.status', 'assets.division_id')
+            ->where('bookings.request_id', '=', $id)
+            ->get();
+        }else{
+            $assets = DB::table('bookings')
+                ->join('assets', 'bookings.asset_id', '=', 'assets.id')
+                ->join('asset_categories', 'bookings.asset_category_id', '=', 'asset_categories.id')
+                ->select('bookings.id','assets.serial_number', 'assets.brand', 'asset_categories.name', 'assets.status', 'assets.division_id')
+                ->where('bookings.request_id', '=', $id)
+                ->get();
+        }
+
 
         if($user == 'staff'){
             return Redirect::to('/dashboard#see')->with(['bookings'=> $assets, 'request' => $request, 'stat' => $stat]);
@@ -106,7 +116,6 @@ class BookingController extends Controller
 
     public function showApprove($user, $id)
     {
-
         $assets = DB::table('bookings')
             ->join('assets', 'bookings.asset_id', '=', 'assets.id')
             ->join('asset_categories', 'bookings.asset_category_id', '=', 'asset_categories.id')
@@ -216,14 +225,9 @@ class BookingController extends Controller
 
         $request = \App\Models\Request::find($id);
 
-
         foreach ($bookings as $b){
             $aset = Asset::find($b->asset_id);
 
-//            $prev_pos = DB::table('asset_locations')
-//                ->select(DB::raw('id ORDER BY id DESC LIMIT 1,1'))
-//                ->where('asset_id', '=', $b->asset_id)
-//                ->get();
             $prev_pos = assetLocation::orderBy('id', 'desc')
                 ->where('asset_id', '=', $b->asset_id)
                 ->offset(1)->limit(1)
@@ -235,6 +239,7 @@ class BookingController extends Controller
             $loc = new assetLocation();
             $loc->asset_id = $b->asset_id;
             $loc->responsible = $request->User->name . " (" . Auth::user()->name . ")";
+            $loc->responsible_id = $request->User->id;
             $loc->to_location = $lok;
             $loc->notes = 'pengembalian';
             $loc->save();

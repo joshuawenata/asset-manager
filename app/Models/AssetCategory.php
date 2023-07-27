@@ -20,5 +20,4 @@ class AssetCategory extends Model
     public function bookings(){
         return $this->hasMany(Booking::class);
     }
-//    3 diatas dah bener
 }

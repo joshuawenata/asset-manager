@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 use Maatwebsite\Excel\Facades\Excel;
 use Maatwebsite\Excel\Excel as ExcelExcel;
+use Maatwebsite\Excel\Exceptions\UnreadableFileException;
+use Maatwebsite\Excel\Exceptions\NoTypeDetectedException;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class AssetController extends Controller
@@ -88,20 +90,31 @@ class AssetController extends Controller
             'excel' => 'required|mimes:xlsx'
         ]);
 
-        if ($request->file('excel')) {
-            $import =  Excel::import(new AssetsImport, request()->file('excel'));
+        try {
+            if ($request->file('excel')) {
+                $import = Excel::import(new AssetsImport, request()->file('excel'));
 
-            $msg_success = "Data Uploaded Succesfully!";
-            $msg_danger = "Data Uploaded failed!";
+                $msg_success = "Data Uploaded Successfully!";
+                $msg_danger = "Data Upload Failed!";
 
-            if ($import) {
-                return redirect('/create-asset-excel')->with('message', $msg_success);
+                if ($import) {
+                    return redirect('/create-asset-excel-staff')->with('message', $msg_success);
+                } else {
+                    return redirect('/create-asset-excel-staff')->with('message', $msg_danger);
+                }
             } else {
-                return redirect('/create-asset-excel')->with('message', $msg_danger);
+                $msge = "Please choose your file!";
+                return redirect('/create-asset-excel-staff')->with('message', $msge);
             }
-        } else {
-            $msge = "Please choose your file!";
-            return redirect('/create-asset-excel')->with('message', $msge);
+        } catch (UnreadableFileException $e) {
+            $msg_error = "Error: The file is unreadable or corrupted. Please upload a valid Excel file.";
+            return redirect('/create-asset-excel-staff')->with('message', $msg_error);
+        } catch (NoTypeDetectedException $e) {
+            $msg_error = "Error: No file type detected. Please upload a valid Excel file with the .xlsx extension.";
+            return redirect('/create-asset-excel-staff')->with('message', $msg_error);
+        } catch (\Exception $e) {
+            $msg_error = "An error occurred while processing the file. Please try again.";
+            return redirect('/create-asset-excel-staff')->with('message', $msg_error);
         }
     }
 
@@ -110,20 +123,32 @@ class AssetController extends Controller
             'excel' => 'required|mimes:xlsx'
         ]);
 
-        if ($request->file('excel')) {
-            $import = Excel::import(new AssetsImport, request()->file('excel'));
+        try {
 
-            $msg_success = "Data Uploaded Succesfully!";
-            $msg_danger = "Data Uploaded failed!";
+            if ($request->file('excel')) {
+                $import = Excel::import(new AssetsImport, request()->file('excel'));
 
-            if ($import) {
-                return redirect('/create-asset-excel')->with('message', $msg_success);
+                $msg_success = "Data Uploaded Successfully!";
+                $msg_danger = "Data Upload Failed!";
+
+                if ($import) {
+                    return redirect('/create-asset-excel')->with('message', $msg_success);
+                } else {
+                    return redirect('/create-asset-excel')->with('message', $msg_danger);
+                }
             } else {
-                return redirect('/create-asset-excel')->with('message', $msg_danger);
+                $msge = "Please choose your file!";
+                return redirect('/create-asset-excel')->with('message', $msge);
             }
-        } else {
-            $msge = "Please choose your file!";
-            return redirect('/create-asset-excel')->with('message', $msge);
+        } catch (UnreadableFileException $e) {
+            $msg_error = "Error: The file is unreadable or corrupted. Please upload a valid Excel file.";
+            return redirect('/create-asset-excel')->with('message', $msg_error);
+        } catch (NoTypeDetectedException $e) {
+            $msg_error = "Error: No file type detected. Please upload a valid Excel file with the .xlsx extension.";
+            return redirect('/create-asset-excel')->with('message', $msg_error);
+        } catch (\Exception $e) {
+            $msg_error = "An error occurred while processing the file. Please try again.";
+            return redirect('/create-asset-excel')->with('message', $msg_error);
         }
     }
 

@@ -33,10 +33,24 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                    $counting = 0;
+                                @endphp
                                 @foreach ($dataHistoryAddAsset as $index => $req)
                                     <tr>
                                         {{--                masukin kolom --}}
                                         <th scope="row">{{ $index + 1 }}</th>
+                                        <td>{{ $req->aksi }}</td>
+                                        <td>{{ $req->created_at }}</td>
+                                    </tr>
+                                    @php
+                                        $counting++;
+                                    @endphp
+                                @endforeach
+                                @foreach ($data as $index => $req)
+                                    <tr>
+                                        {{--                masukin kolom --}}
+                                        <th scope="row">{{ $index + $counting + 1 }}</th>
                                         <td>{{ $req->aksi }}</td>
                                         <td>{{ $req->created_at }}</td>
                                     </tr>

@@ -282,7 +282,7 @@ class AssetController extends Controller
 
             $this->storeLoc();
 
-            return redirect('Halaman')->with('message', "Aset Berhasil Ditambahkan");
+            return redirect('dashboard')->with('message', "Aset Berhasil Ditambahkan");
         }
     }
 

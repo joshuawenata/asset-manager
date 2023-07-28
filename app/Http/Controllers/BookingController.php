@@ -91,11 +91,11 @@ class BookingController extends Controller
 
         if($stat == 'waiting next approval'||$stat == 'approved sebagian'){
             $assets = DB::table('bookings')
-            ->join('assets', 'bookings.asset_id', '=', 'assets.id')
-            ->join('asset_categories', 'bookings.asset_category_id', '=', 'asset_categories.id')
-            ->select('bookings.id','assets.serial_number', 'assets.brand', 'asset_categories.name', 'bookings.status', 'assets.division_id')
-            ->where('bookings.request_id', '=', $id)
-            ->get();
+                ->join('assets', 'bookings.asset_id', '=', 'assets.id')
+                ->join('asset_categories', 'bookings.asset_category_id', '=', 'asset_categories.id')
+                ->select('bookings.id','assets.serial_number', 'assets.brand', 'asset_categories.name', 'bookings.status', 'assets.division_id')
+                ->where('bookings.request_id', '=', $id)
+                ->get();
         }else{
             $assets = DB::table('bookings')
                 ->join('assets', 'bookings.asset_id', '=', 'assets.id')

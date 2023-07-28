@@ -25,7 +25,7 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application Halaman.
+     * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
@@ -63,7 +63,7 @@ class HomeController extends Controller
         return $role;
     }
 
-    public function Halaman()
+    public function dashboard()
     {
         $view = new RequestController();
         list($data, $approver) = $view->index();
@@ -74,7 +74,7 @@ class HomeController extends Controller
         ]);
     }
 
-    public function adminHalaman(){
+    public function admindashboard(){
         $view = new RequestController();
         list($data, $approver) = $view->index();
 
@@ -84,7 +84,7 @@ class HomeController extends Controller
         ]);
     }
 
-    public function approverHalaman(){
+    public function approverdashboard(){
         $view = new RequestController();
         list($data, $approver) = $view->index();
 
@@ -94,7 +94,7 @@ class HomeController extends Controller
         ]);
     }
 
-    public function superadminHalaman(){
+    public function superadmindashboard(){
         $view = new UserController();
         $data = $view->index();
         return view('superadmin.home', [
@@ -110,7 +110,7 @@ class HomeController extends Controller
     }
 
     public function historyDetail(){
-        $data = HistoryDetail::all();
+        $data = HistoryDetail::where('user_id',auth()->user()->id)->get();
         return view('historyDetail', [
             'data' => $data,
         ]);

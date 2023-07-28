@@ -95,7 +95,7 @@
                     <div class="modal-body">
                         <input type="hidden" name="request_perbaharui_id" id="request_id">
                         <input type="hidden" name="request_perbaharui" value="rejected">
-                        <input type="hidden" name="user" value="staff">
+                        <input type="hidden" name="user" value="admin">
                         <h5>Apakah anda yakin ingin me-reject request peminjaman?</h5>
                         <div class="mb-3">
                             <label for="pesan" class="col-form-label">Pesan:</label>
@@ -126,7 +126,7 @@
                     <div class="modal-body">
                         <input type="hidden" name="request_perbaharui_id" value="{{ session('request_id') }}">
                         <input type="hidden" name="request_perbaharui" value="approved">
-                        <input type="hidden" name="user" value="staff">
+                        <input type="hidden" name="user" value="admin">
                         <input type="hidden" name="approver_num"
                             value="{{ \Illuminate\Support\Facades\Auth::user()->division->approver }}">
                         <h5>Apakah anda yakin ingin meng-approve request peminjaman?</h5>
@@ -196,7 +196,7 @@
                 @endif
 
                 <div class="card">
-                    <div class="card-header">{{ __('Halaman Admin') }}</div>
+                    <div class="card-header">{{ __('dashboard Admin') }}</div>
 
                     <div class="card-body">
 
@@ -239,7 +239,7 @@
                                         <td>
                                             {{--                                        DONE: ini masi error --}}
                                             <form
-                                                action="{{ route('bookings.show', ['user' => 'staff', 'id' => $req->id]) }}"
+                                                action="{{ route('bookings.show', ['user' => 'admin', 'id' => $req->id]) }}"
                                                 method="GET">
                                                 @csrf
                                                 <button type="submit" class="btn btn-small btn-primary mb-3">
@@ -251,7 +251,7 @@
                                         <td>
                                             @if ($req->status == 'waiting approval')
                                                 <form
-                                                    action="{{ route('bookings.showApprove', ['user' => 'staff', 'id' => $req->id]) }}"
+                                                    action="{{ route('bookings.showApprove', ['user' => 'admin', 'id' => $req->id]) }}"
                                                     method="GET">
                                                     @csrf
                                                     <button type="button" class="btn btn-danger rejectBtn mb-2"
@@ -265,7 +265,7 @@
                                                     @csrf
                                                     <button type="submit" class="btn btn-primary" name="request_id"
                                                         value="{{ $req->id }}"><span
-                                                            class="material-symbols-outlined">file_unduh</span></button>
+                                                            class="material-symbols-outlined">file_download</span></button>
                                                 </form>
                                             @elseif($req->status == 'approved' || $req->status == 'approved sebagian')
                                                 <form action="{{ route('takenBooking') }}" method="post">

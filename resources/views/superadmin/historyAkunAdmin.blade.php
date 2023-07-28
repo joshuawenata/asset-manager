@@ -143,6 +143,21 @@
                                         $counting4++;
                                     @endphp
                                 @endforeach
+                                @php
+                                    $counting5 = 0;
+                                @endphp
+                                @foreach ($data as $index => $req)
+                                    <tr>
+                                        <th scope="row">
+                                            {{ $index + 1 + $counting + $counting1 + $counting2 + $counting3 + $counting4 }}
+                                        </th>
+                                        <td>{{ $req->aksi }}</td>
+                                        <td>{{ $req->created_at }}</td>
+                                    </tr>
+                                    @php
+                                        $counting5++;
+                                    @endphp
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

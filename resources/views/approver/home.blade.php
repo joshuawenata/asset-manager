@@ -160,7 +160,7 @@
             <div class="col-md-12">
 
                 <div class="card">
-                    <div class="card-header">{{ __('Halaman Approver') }}</div>
+                    <div class="card-header">{{ __('dashboard Approver') }}</div>
 
                     <div class="card-body">
                         @if (session('message'))

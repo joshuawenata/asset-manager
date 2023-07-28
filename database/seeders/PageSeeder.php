@@ -16,7 +16,7 @@ class PageSeeder extends Seeder
     public function run()
     {
         Page::create([
-            'name' => 'Halaman'
+            'name' => 'dashboard'
         ]);
 
         Page::create([

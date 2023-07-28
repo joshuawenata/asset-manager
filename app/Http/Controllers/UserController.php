@@ -6,6 +6,7 @@ use App\Models\Division;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\HistoryAkun;
+use App\Models\HistoryDetail;
 use App\Models\HistoryAddAsset;
 use App\Models\HistoryupdateAsset;
 use App\Models\DeletedAsset;
@@ -41,8 +42,10 @@ class UserController extends Controller
     public function historyStaff($id)
     {
         $dataHistoryAddAsset = HistoryAddAsset::where('user_id',$id)->get();
+        $data = HistoryDetail::where('user_id',$id)->get();
         return view('superadmin.historyAkunStaff', [
-            'dataHistoryAddAsset' => $dataHistoryAddAsset
+            'dataHistoryAddAsset' => $dataHistoryAddAsset,
+            'data' => $data
         ]);
     }
 
@@ -54,6 +57,7 @@ class UserController extends Controller
         $dataHistoryPemindahanBarang = AssetLocation::where('responsible_id',$id)->get();
         $dataHistoryBarangRusak = RepairAsset::where('reported_by_id',$id)->get();
         $dataHistoryPerbaikanBarang = RepairAsset::where('reported_by_id',$id)->get();
+        $data = HistoryDetail::where('user_id',$id)->get();
         $user = User::where('id',$id)->get();
         $division = Division::where('id',$user[0]['division_id'])->get('name')[0]['name'];
         return view('superadmin.historyAkunAdmin', [
@@ -63,6 +67,7 @@ class UserController extends Controller
             'dataHistoryPemindahanBarang' => $dataHistoryPemindahanBarang,
             'dataHistoryBarangRusak' => $dataHistoryBarangRusak,
             'dataHistoryPerbaikanBarang' => $dataHistoryPerbaikanBarang,
+            'data' => $data,
             'user' => $user,
             'division' => $division
         ]);

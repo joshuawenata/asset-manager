@@ -196,7 +196,7 @@
                 @endif
 
                 <div class="card">
-                    <div class="card-header">{{ __('Halaman Karyawan') }}</div>
+                    <div class="card-header">{{ __('dashboard Karyawan') }}</div>
 
                     <div class="card-body">
 
@@ -265,7 +265,7 @@
                                                     @csrf
                                                     <button type="submit" class="btn btn-primary" name="request_id"
                                                         value="{{ $req->id }}"><span
-                                                            class="material-symbols-outlined">file_unduh</span></button>
+                                                            class="material-symbols-outlined">file_download</span></button>
                                                 </form>
                                             @elseif($req->status == 'approved' || $req->status == 'approved sebagian')
                                                 <form action="{{ route('takenBooking') }}" method="post">

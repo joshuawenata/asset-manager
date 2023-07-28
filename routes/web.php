@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Models\Role;
 use App\Models\Division;
 
-// TODO: ini klo udh login gabisa ke Halaman page / nya malah ke login mesti cek user session
+// TODO: ini klo udh login gabisa ke dashboard page / nya malah ke login mesti cek user session
 Route::get('/', function () {
     return view('auth.login');
 })->name('login')->middleware('guest');
@@ -43,17 +43,17 @@ Route::post('insert-account',function(Request $request){
         'role_id' => $role_id,
         'active_status' => 1,
         'created_at' => now(),
-        'perbaharuid_at' => now()
+        'updated_at' => now()
     ]);
     $role = Role::where('id',$role_id)->pluck('name')[0];
     $division = Division::where('id',$request->input('division_id'))->pluck('name')[0];
     DB::table('history_akuns')->insert([
         'aksi' => 'superadmin menambahkan akun '.$role.' dengan data nama: '.$request->input('name').', binusian_id: '.$request->input('binusianid').', phone: '.$request->input('phone').', departemen: '.$division.', email: '.$request->input('email'),
         'created_at' => now(),
-        'perbaharuid_at' => now()
+        'updated_at' => now()
     ]);
 
-    return redirect()->route('superadmin.Halaman');
+    return redirect()->route('superadmin.dashboard');
 });
 
 Route::get('/see/{user}/dashboard/{id}', [\App\Http\Controllers\BookingController::class, 'show'])->name('bookings.show')->middleware(['auth', 'cekRole:staff,admin,approver']);
@@ -64,6 +64,7 @@ Route::post('/perbaharui-request', [\App\Http\Controllers\RequestController::cla
 // Staff Routes
 
 Route::middleware(['auth', 'cekRole:staff,admin'])->group(function(){
+    Route::redirect('/Halaman', '/dashboard');
     Route::post('/approve-return', [\App\Http\Controllers\RequestController::class, 'approvePengembalian'])->name('approve-return');
     Route::post('/reject-return', [\App\Http\Controllers\RequestController::class, 'rejectPengembalian'])->name('reject-return');
     Route::post('/return-form', [\App\Http\Controllers\RequestController::class, 'cekPengembalian'])->name('admin.formKembali');
@@ -74,7 +75,7 @@ Route::middleware(['auth', 'cekRole:staff,admin'])->group(function(){
 });
 
 Route::middleware(['auth', 'cekRole:staff'])->group(function(){
-    Route::get('/dashboard', [\App\Http\Controllers\HomeController::class, 'Halaman'])->name('Halaman');
+    Route::get('/dashboard', [\App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
     //CREATE
     Route::get('/create-asset-staff', [\App\Http\Controllers\AssetController::class, 'createForStaff'])->name('staff.createAsset');
     Route::get('/create-asset-excel-staff', [\App\Http\Controllers\AssetController::class, 'createAssetExcelForStaff'])->name('staff.createAssetExcel');
@@ -84,7 +85,7 @@ Route::middleware(['auth', 'cekRole:staff'])->group(function(){
 
 //Admin Routes
 Route::middleware(['auth', 'cekRole:admin'])->group(function(){
-    Route::get('/admin/dashboard', [\App\Http\Controllers\HomeController::class, 'adminHalaman'])->name('admin.Halaman');
+    Route::get('/admin/dashboard', [\App\Http\Controllers\HomeController::class, 'admindashboard'])->name('admin.dashboard');
     Route::get('/admin/location', [\App\Http\Controllers\LocationAdminController::class, 'index'])->name('admin.location');
     Route::get('/admin/pemilikBarang', [\App\Http\Controllers\PemilikBarangController::class, 'index'])->name('admin.pemilik-barang');
     Route::get('/admin/kategoriBarang', [\App\Http\Controllers\AssetCategoryController::class, 'index'])->name('admin.kategori-barang');
@@ -130,7 +131,7 @@ Route::middleware(['auth', 'cekRole:approver'])->group(function(){
     Route::post('/return', [\App\Http\Controllers\RequestController::class, 'kembali'])->name('kembali');
     Route::post('/choose-division', [\App\Http\Controllers\DivisionController::class, 'index2'])->name('chooseDivision');
     Route::get('/approver/check-request', [\App\Http\Controllers\RequestController::class, 'check'])->name('approver.checkRequest');
-    Route::get('/approver/dashboard', [\App\Http\Controllers\HomeController::class, 'approverHalaman'])->name('approver.Halaman');
+    Route::get('/approver/dashboard', [\App\Http\Controllers\HomeController::class, 'approverdashboard'])->name('approver.dashboard');
     Route::post('/approver/create-request', [\App\Http\Controllers\RequestController::class, 'createRequest'])->name('approver.createRequest');
     Route::post('/approver/create-request-detail', [\App\Http\Controllers\RequestController::class, 'create'])->name('approver.createRequestDetail');
     Route::post('/approver/confirm-request', [\App\Http\Controllers\RequestController::class, 'confirm'])->name('approver.confirmRequest');
@@ -140,7 +141,7 @@ Route::middleware(['auth', 'cekRole:approver'])->group(function(){
 
 //Superadmin Routes
 Route::middleware(['auth', 'cekRole:superadmin'])->group(function(){
-    Route::get('/superadmin/dashboard', [\App\Http\Controllers\HomeController::class, 'superadminHalaman'] )->name('superadmin.Halaman');
+    Route::get('/superadmin/dashboard', [\App\Http\Controllers\HomeController::class, 'superadmindashboard'] )->name('superadmin.dashboard');
     Route::get('/superadmin/kategori', [\App\Http\Controllers\AssetCategoryController::class, 'superadminKategori'] )->name('superadmin.kategori');
     Route::get('/superadmin/pemilik-barang', [\App\Http\Controllers\PemilikBarangController::class, 'superadminPemilikBarang'] )->name('superadmin.pemilikbarang');
     Route::get('/edit-pemilik-barang/{id}', [\App\Http\Controllers\PemilikBarangController::class, 'destroy']);

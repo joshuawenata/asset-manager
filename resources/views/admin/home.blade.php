@@ -261,11 +261,16 @@
                                                 </form>
                                             @elseif($req->status == 'on use')
                                                 {{--                                        DONE: ini tampilin receiptnya --}}
-                                                <form action="{{ route('unduh') }}" target="_blank" method="post">
+                                                <form action="{{ route('kembali') }}" method="post">
                                                     @csrf
-                                                    <button type="submit" class="btn btn-primary" name="request_id"
-                                                        value="{{ $req->id }}"><span
-                                                            class="material-symbols-outlined">file_download</span></button>
+                                                    <button type="submit" class="btn btn-primary mt-2"
+                                                        name="request_return_id" value="{{ $req->id }}">
+                                                        @if ($req->flag_return == null || $req->flag_return == 0)
+                                                            Kembalikan
+                                                        @elseif($req->flag_return == 1)
+                                                            <span class="material-symbols-outlined">visibility</span>
+                                                        @endif
+                                                    </button>
                                                 </form>
                                             @elseif($req->status == 'approved' || $req->status == 'approved sebagian')
                                                 <form action="{{ route('takenBooking') }}" method="post">
@@ -274,14 +279,6 @@
                                                         name="request_taken_id" value="{{ $req->id }}">Barang
                                                         sudah
                                                         diambil</button>
-                                                </form>
-                                            @endif
-                                            @if ($req->flag_return == 1)
-                                                <form action="{{ route('admin.formKembali') }}" method="post">
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-primary mt-2" name="request_id"
-                                                        value="{{ $req->id }}">Lihat form
-                                                        kembali</button>
                                                 </form>
                                             @endif
                                         </td>

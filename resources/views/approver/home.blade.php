@@ -275,16 +275,11 @@
                                                 </form>
 
                                                 @if ($req->status == 'on use')
-                                                    <form action="{{ route('kembali') }}" method="post">
+                                                    <form action="{{ route('unduh') }}" target="_blank" method="post">
                                                         @csrf
-                                                        <button type="submit" class="btn btn-primary mt-2"
-                                                            name="request_return_id" value="{{ $req->id }}">
-                                                            @if ($req->flag_return == null || $req->flag_return == 0)
-                                                                Kembalikan
-                                                            @elseif($req->flag_return == 1)
-                                                                <span class="material-symbols-outlined">visibility</span>
-                                                            @endif
-                                                        </button>
+                                                        <button type="submit" class="btn btn-primary" name="request_id"
+                                                            value="{{ $req->id }}"><span
+                                                                class="material-symbols-outlined">file_download</span></button>
                                                     </form>
                                                 @endif
                                             @endif

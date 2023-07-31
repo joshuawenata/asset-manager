@@ -116,6 +116,7 @@ class RequestController extends Controller
     }
 
     public function perbaharuiReturn(Request $request){
+        $id = $request->input('request_id');
         $req = \App\Models\Request::find($request->input('request_id'));
         $req->return_status = $request->input('kondisi_aset');
         $req->return_notes = $request->input('return_condition');
@@ -139,7 +140,29 @@ class RequestController extends Controller
         $history->aksi = \Illuminate\Support\Facades\Auth::user()->name . ' mengajukan pengembalian barang dari '.$req->nama_peminjam.'['.$req->prodi_peminjam.']'.' dengan kondisi '.$request->input('kondisi_aset').' dengan deskripsi '.$request->input('return_condition');
         $history->save();
 
-        return redirect('/dashboard')->with('message', 'Berhasil mengajukan pengembalian.');
+        $history = new historyDetail();
+        $history->user_id = \Illuminate\Support\Facades\Auth::user()->id;
+        $history->aksi = \Illuminate\Support\Facades\Auth::user()->name . ' mengapprove pengembalian dari '.$req->nama_peminjam.'['.$req->prodi_peminjam.']'.' dengan pesan '.$request->input('pesan');
+        $history->save();
+
+        $req->return_notice = $request->input('isu_rusak');
+        $req->status = 'done';
+        $bookings = new BookingController();
+        $bookings->updateReturn($id, $req->realize_return_date);
+
+        $req->update();
+
+        $email = new SendEmailController();
+        $message = 'Selamat pengembalian anda di approve!';
+        $subjek = 'PENGEMBALIAN DI APPROVE';
+        $receiver = $req->email_peminjam;
+        $email->index($receiver, $message, $subjek);
+
+        if(\Illuminate\Support\Facades\Auth::user()->role_id == 1){
+            return redirect('dashboard')->with('message', 'Peminjaman berhasil dikembalikan.');
+        }else if(\Illuminate\Support\Facades\Auth::user()->role_id == 2){
+            return redirect('/admin/dashboard')->with('message', 'Peminjaman berhasil dikembalikan.');
+        }
     }
 
     public function cekPengembalian(Request $request){
@@ -568,60 +591,6 @@ class RequestController extends Controller
         return redirect('/dashboard')->with('message', $message);
     }
 
-    public function approvePengembalian(Request $request){
-        $id = $request->input('request_return_id');
-        $req = \App\Models\Request::find($id);
 
-        $history = new historyDetail();
-        $history->user_id = \Illuminate\Support\Facades\Auth::user()->id;
-        $history->aksi = \Illuminate\Support\Facades\Auth::user()->name . ' mengapprove pengembalian dari '.$req->nama_peminjam.'['.$req->prodi_peminjam.']'.' dengan pesan '.$request->input('pesan');
-        $history->save();
 
-        $req->return_notice = $request->input('isu_rusak');
-        $req->status = 'done';
-        $bookings = new BookingController();
-        $bookings->updateReturn($id, $req->realize_return_date);
-
-        $req->update();
-
-        $email = new SendEmailController();
-        $message = 'Selamat pengembalian anda di approve!';
-        $subjek = 'PENGEMBALIAN DI APPROVE';
-        $receiver = $req->User->email;
-        $email->index($receiver, $message, $subjek);
-        $receiver = $req->email_peminjam;
-        $email->index($receiver, $message, $subjek);
-
-        if(\Illuminate\Support\Facades\Auth::user()->role_id == 1){
-            return redirect('dashboard')->with('message', 'Peminjaman berhasil dikembalikan.');
-        }else if(\Illuminate\Support\Facades\Auth::user()->role_id == 2){
-            return redirect('/admin/dashboard')->with('message', 'Peminjaman berhasil dikembalikan.');
-        }
-
-    }
-
-    public function rejectPengembalian(Request $request){
-        $id = $request->input('request_return_id');
-        $req = \App\Models\Request::find($id);
-
-        $req->return_notice = $request->input('pesan') . "\n";
-        $req->flag_return = null;
-        $req->realize_return_date = null;
-        $req->update();
-
-        $email = new SendEmailController();
-        $message = 'Mohon maaf pengembalian anda di reject silahkan isi kembali!';
-        $subjek = 'PENGEMBALIAN DI REJECT';
-        $receiver = $req->User->email;
-        $email->index($receiver, $message, $subjek);
-        $receiver = $req->email_peminjam;
-        $email->index($receiver, $message, $subjek);
-
-        $history = new historyDetail();
-        $history->user_id = \Illuminate\Support\Facades\Auth::user()->id;
-        $history->aksi = \Illuminate\Support\Facades\Auth::user()->name . ' menolak pengembalian dari '.$req->nama_peminjam.'['.$req->prodi_peminjam.']';
-        $history->save();
-
-        return redirect('admin/dashboard')->with('message', 'Pengembalian berhasil ditolak.');
-    }
 }

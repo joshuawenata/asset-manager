@@ -72,6 +72,8 @@ Route::middleware(['auth', 'cekRole:staff,admin'])->group(function(){
     //HISTORY
     Route::get('/history-add-asset', [\App\Http\Controllers\HomeController::class, 'historyAddAsset'])->name('historyAddAsset');
     Route::get('/history-detail', [\App\Http\Controllers\HomeController::class, 'historyDetail'])->name('historyDetail');
+    Route::post('/return', [\App\Http\Controllers\RequestController::class, 'kembali'])->name('kembali');
+    Route::post('/perbaharui-return', [\App\Http\Controllers\RequestController::class, 'perbaharuiReturn'])->name('storeReturn');
 });
 
 Route::middleware(['auth', 'cekRole:staff'])->group(function(){
@@ -127,8 +129,6 @@ Route::middleware(['auth', 'cekRole:admin'])->group(function(){
 //Approver Routes
 Route::middleware(['auth', 'cekRole:approver'])->group(function(){
     Route::post('/cancel-request', [\App\Http\Controllers\RequestController::class, 'destroy'])->name('deleteRequest');
-    Route::post('/perbaharui-return', [\App\Http\Controllers\RequestController::class, 'perbaharuiReturn'])->name('storeReturn');
-    Route::post('/return', [\App\Http\Controllers\RequestController::class, 'kembali'])->name('kembali');
     Route::post('/choose-division', [\App\Http\Controllers\DivisionController::class, 'index2'])->name('chooseDivision');
     Route::get('/approver/check-request', [\App\Http\Controllers\RequestController::class, 'check'])->name('approver.checkRequest');
     Route::get('/approver/dashboard', [\App\Http\Controllers\HomeController::class, 'approverdashboard'])->name('approver.dashboard');

@@ -147,7 +147,7 @@
                                         class="col-form-label text-md-end">{{ __('Deskripsi Kondisi Barang') }}</label>
 
                                     <div>
-                                        <textarea class="form-control" id="return_condition" name="return_condition" autofocus>{{ $request->return_notes }}</textarea>
+                                        <textarea class="form-control" id="return_condition" name="return_condition" required></textarea>
                                     </div>
                                 </div>
 

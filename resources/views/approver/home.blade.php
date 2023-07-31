@@ -25,6 +25,12 @@
                 $('#request_id2').val(request_id);
                 $('#approveModal').modal('show');
             });
+            $('.deleteRequestBtn').click(function(e) {
+                e.preventDefault();
+                var request_id = $(this).val();
+                $('#request_id').val(request_id);
+                $('#deleteModal').modal('show');
+            });
         });
     </script>
 
@@ -40,6 +46,30 @@
 @endsection
 
 @section('content')
+    {{--    modal delete --}}
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <form action="{{ route('deleteRequest') }}" method="post">
+                    @csrf
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Cancel Request</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="request_delete_id" id="request_id">
+                        <h5>Apakah anda yakin ingin membatalkan request peminjaman?</h5>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+                        <button type="submit" class="btn btn-danger">Ya</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
     {{--    modal see --}}
     <div class="modal fade" id="see" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -205,13 +235,8 @@
                                             </form>
                                         </td>
                                         @if ($req->status == 'waiting approval')
-                                            @if ($req->track_approver == 0)
-                                                <td>{{ $req->status . ' dari ' . \Illuminate\Support\Facades\Auth::user()->getAtasan($req->track_approver, $req->approver_division_id) }}
-                                                </td>
-                                            @else
-                                                <td>{{ $req->status . ' dari ' . \Illuminate\Support\Facades\Auth::user()->getAtasan($req->track_approver, $req->division_id) }}
-                                                </td>
-                                            @endif
+                                            <td>{{ $req->status . ' dari admin ' . \App\Models\Division::find($req->division_id)->name }}
+                                            </td>
                                         @elseif ($req->status == 'waiting next approval')
                                             <td>
                                                 waiting next approval

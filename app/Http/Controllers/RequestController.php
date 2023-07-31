@@ -494,7 +494,19 @@ class RequestController extends Controller
                 $req->status = "waiting next approval";
 
                 $subyek = 'PEMINJAMAN PENDING';
-                $pesan = 'Peminjaman anda hanya di approve sebagian! apabila jadi melakukan peminjaman harap mengirimkan email lanjutan kepada ';
+                $pesan = 'Peminjaman anda hanya di approve sebagian! \r\n Berikut rincian barang: \r\n';
+                foreach ($bookingIds as $index => $bookingId) {
+                    if (isset($bookingApproval[$index]) && $bookingApproval[$index] === "1") {
+                        // If the checkbox is checked, mark the booking as approved
+                        $booking = \App\Models\Booking::find($bookingId);
+                        $barang = \App\Models\Asset::find($booking->asset_id);
+                        // Concatenate the rincian barang to the message
+                        $pesan .= "- " . $barang->nama_barang . ' dengan status ' . $booking->status . "\r\n";
+                    }
+                }
+
+                // Continue with the rest of the message
+                $pesan .= '\r\n' . 'Apabila jadi melakukan peminjaman harap mengirimkan email lanjutan kepada ' . $req->approver;
                 $receiver = $req->email_peminjam;
                 $email = new SendEmailController();
                 // $email->index("bmopr.bdg@binus.edu", $pesan_bm , $subyek);
@@ -523,7 +535,7 @@ class RequestController extends Controller
         }
 
         $email = new SendEmailController();
-        $email->index($receiver, $pesan, $subyek);
+        $email->indexPeminjam($receiver, $pesan, $subyek);
 
         //DONE: ini kembali ke dashboard/approvernya gimana
         if(Auth::user()->role_id == 1){
@@ -577,6 +589,8 @@ class RequestController extends Controller
         $subjek = 'PENGEMBALIAN DI APPROVE';
         $receiver = $req->User->email;
         $email->index($receiver, $message, $subjek);
+        $receiver = $req->email_peminjam;
+        $email->index($receiver, $message, $subjek);
 
         if(\Illuminate\Support\Facades\Auth::user()->role_id == 1){
             return redirect('dashboard')->with('message', 'Peminjaman berhasil dikembalikan.');
@@ -599,6 +613,8 @@ class RequestController extends Controller
         $message = 'Mohon maaf pengembalian anda di reject silahkan isi kembali!';
         $subjek = 'PENGEMBALIAN DI REJECT';
         $receiver = $req->User->email;
+        $email->index($receiver, $message, $subjek);
+        $receiver = $req->email_peminjam;
         $email->index($receiver, $message, $subjek);
 
         $history = new historyDetail();

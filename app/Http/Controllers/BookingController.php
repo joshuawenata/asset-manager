@@ -65,14 +65,36 @@ class BookingController extends Controller
         $email = new SendEmailController();
         $message ='REQUEST PEMINJAMAN ALAT LAB';
         $subyek = 'Ada request peminjaman alat lab baru dari ' . Auth::user()->name . ' ' . Auth::user()->email;
-        // //admin divisi yg sama
-        $receiver = DB::table('users')
-            ->select('email')
-            ->where('division_id', $div_id)
-            ->where('role_id', 2)
-            ->get();
-        $receiver = $receiver[0]->email;
-        $email->index($receiver, $subyek, $message);
+
+        // Retrieve users with role_id = 1
+        $receiversRole1 = DB::table('users')
+        ->select('email')
+        ->where('division_id', $div_id)
+        ->where('role_id', 1)
+        ->get();
+
+        // Extract email addresses from the result and store them in an array
+        $receiverEmailsRole1 = [];
+        foreach ($receiversRole1 as $receiverRole1) {
+            $receiverEmailsRole1[] = $receiverRole1->email;
+        }
+
+        // Send emails to users with role_id = 2
+        $receiverRole2 = DB::table('users')
+        ->select('email')
+        ->where('division_id', $div_id)
+        ->where('role_id', 2)
+        ->get();
+
+        $receiverEmailRole2 = $receiverRole2[0]->email;
+
+        // Send emails to users with role_id = 2
+        $email->index($receiverEmailRole2, $subyek, $message);
+
+        // Send emails to users with role_id = 1
+        foreach ($receiverEmailsRole1 as $receiverEmailRole1) {
+            $email->index($receiverEmailRole1, $subyek, $message);
+        }
 
         return redirect('/dashboard')->with('message', "Request Berhasil Ditambahkan");
     }

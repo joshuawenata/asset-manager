@@ -16,22 +16,9 @@
             <div class="col-md-12">
 
                 @if ($mode == 'current')
-                    <a title="Penambahan Barang" class="btn btn-small btn-success mb-3"
+                    <a title="Penambahan Barang" class="btn btn-outline-success mb-3"
                         href="{{ route('admin.createAsset') }}"><span style="display: flex"
                             class="material-symbols-outlined">add</span></a>
-                    {{--                    <a class="btn btn-small btn-success mb-3" href="{{ route('unduhAsset') }}"><span class="material-symbols-outlined">unduh</span>Unduh Rekap Aset</a> --}}
-                    <a class="btn btn-small btn-success mb-3" href="{{ url('/deleted-asset/') }}">Riwayat Pemusnahan
-                        Barang</a>
-                    <a class="btn btn-small btn-success mb-3" href="{{ route('admin.riwayat-perbaharui') }}">Riwayat
-                        Perbaharui
-                        Barang</a>
-                    <a class="btn btn-small btn-success mb-3"
-                        href="{{ url('/move-asset/' . \Illuminate\Support\Facades\Auth::user()->division->id) }}">Pemindahan
-                        Barang</a>
-                    {{-- <a class="btn btn-small btn-success mb-3" href="{{ route('admin.location') }}">Kelola
-                        Lokasi</a>
-                    <a class="btn btn-small btn-success mb-3" href="{{ route('admin.pemilik-barang') }}">Kelola
-                        Pemilik Barang</a> --}}
                 @endif
 
                 <div class="card">

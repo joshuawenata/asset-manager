@@ -10,10 +10,12 @@
 <body>
 
     <h3>INVENTORY MANAGEMENT BINUS @BANDUNG - {{ $subjek }}</h3>
-    <p>{{ $pesan }}</p>
+    <p>{!! $pesan !!}</p>
 
-    <p>No-Reply Email <br> Email Sent By Inventory Management Binus @Bandung System <br> to see detail please visit:
-        www.inventorybdg.apps.binus.edu</p>
+    <b>
+        <p>No-Reply Email <br> Email Sent By Inventory Management Binus @Bandung System <br> to see detail please visit:
+            www.inventorybdg.apps.binus.edu</p>
+    </b>
 
 </body>
 

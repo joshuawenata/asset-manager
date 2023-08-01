@@ -21,14 +21,15 @@
 
             $('.approveBtn').click(function(e) {
                 e.preventDefault();
-                var request_id = $(this).val();
-                $('#request_id2').val(request_id);
+                var request_id2 = $(this).val();
+                $('#request_id2').val(request_id2);
                 $('#approveModal').modal('show');
             });
+
             $('.deleteRequestBtn').click(function(e) {
                 e.preventDefault();
-                var request_id = $(this).val();
-                $('#request_id').val(request_id);
+                var request_id3 = $(this).val();
+                $('#request_id3').val(request_id3);
                 $('#deleteModal').modal('show');
             });
         });
@@ -58,7 +59,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <input type="hidden" name="request_delete_id" id="request_id">
+                        <input type="hidden" name="request_delete_id" id="request_id3">
                         <h5>Apakah anda yakin ingin membatalkan request peminjaman?</h5>
                     </div>
                     <div class="modal-footer">
@@ -99,7 +100,7 @@
                                         <td>{{ $item->serial_number }}</td>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->brand }}</td>
-                                        <td>{{ $item->status }}</td>
+                                        <td>{{ $item->status == 'tidak tersedia' ? 'tersedia' : $item->status }}</td>
                                     </tr>
                                 @endforeach
                             @endif
@@ -135,6 +136,8 @@
                         <input type="hidden" name="request_perbaharui_id" id="request_id">
                         <input type="hidden" name="request_perbaharui" value="rejected">
                         <input type="hidden" name="user" value="approver">
+                        <input type="hidden" name="approver_num"
+                            value="{{ \Illuminate\Support\Facades\Auth::user()->division->approver }}">
                         <h5>Apakah anda yakin ingin me-reject request peminjaman?</h5>
                         <div class="mb-3">
                             <label for="pesan" class="col-form-label">Pesan:</label>
@@ -164,7 +167,7 @@
                     </div>
                     <div class="modal-body">
                         <input type="hidden" name="request_perbaharui_id" id="request_id2">
-                        <input type="hidden" name="request_perbaharui" value="approved">
+                        <input type="hidden" name="request_perbaharui" value="approved sebagian">
                         <input type="hidden" name="user" value="approver">
                         <input type="hidden" name="approver_num"
                             value="{{ \Illuminate\Support\Facades\Auth::user()->division->approver }}">
@@ -235,7 +238,7 @@
                                             </form>
                                         </td>
                                         @if ($req->status == 'waiting approval')
-                                            <td>{{ $req->status . ' dari admin ' . \App\Models\Division::find($req->division_id)->name }}
+                                            <td>{{ $req->status . ' dari divisi ' . \App\Models\Division::find($req->division_id)->name }}
                                             </td>
                                         @elseif ($req->status == 'waiting next approval')
                                             <td>
@@ -249,20 +252,10 @@
                                                 <button type="button" class="btn btn-danger deleteRequestBtn"
                                                     value="{{ $req->id }}">Cancel</button>
                                             @elseif($req->status == 'waiting next approval')
-                                                <form action="{{ route('perbaharuiRequest') }}" method="post">
-                                                    @csrf
-                                                    <input type="hidden" name="request_perbaharui_id"
-                                                        value="{{ $req->id }}">
-                                                    <input type="hidden" name="request_perbaharui"
-                                                        value="approved sebagian">
-                                                    <input type="hidden" name="user" value="approver">
-                                                    <input type="hidden" name="approver_num"
-                                                        value="{{ \Illuminate\Support\Facades\Auth::user()->division->approver }}">
-                                                    <button type="button" class="btn btn-danger rejectBtn mb-2"
-                                                        value="{{ $req->id }}">Tidak Jadi Pinjam</button>
-                                                    <button type="submit" class="btn btn-success"
-                                                        value="{{ $req->id }}">Jadi Pinjam</button>
-                                                </form>
+                                                <button type="button" class="btn btn-danger rejectBtn mb-2"
+                                                    value="{{ $req->id }}">Tidak Jadi Pinjam</button>
+                                                <button type="button" class="btn btn-success approveBtn"
+                                                    value="{{ $req->id }}">Jadi Pinjam</button>
                                             @elseif($req->status == 'approved')
                                                 {{ 'Silahkan ambil barang sesuai jadwal pinjam.' }}
                                             @elseif($req->status == 'on use' || $req->status == 'done')
@@ -273,15 +266,6 @@
                                                         value="{{ $req->id }}"><span
                                                             class="material-symbols-outlined">file_download</span></button>
                                                 </form>
-
-                                                @if ($req->status == 'on use')
-                                                    <form action="{{ route('unduh') }}" target="_blank" method="post">
-                                                        @csrf
-                                                        <button type="submit" class="btn btn-primary" name="request_id"
-                                                            value="{{ $req->id }}"><span
-                                                                class="material-symbols-outlined">file_download</span></button>
-                                                    </form>
-                                                @endif
                                             @endif
                                         </td>
                                     </tr>

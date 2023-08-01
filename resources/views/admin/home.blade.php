@@ -59,7 +59,7 @@
                                         <td>{{ $item->serial_number }}</td>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->brand }}</td>
-                                        <td>{{ $item->status }}</td>
+                                        <td>{{ $item->status == 'tidak tersedia' ? 'tersedia' : $item->status }}</td>
                                     </tr>
                                 @endforeach
                             @endif
@@ -149,7 +149,7 @@
                                             <td>{{ $item->serial_number }}</td>
                                             <td>{{ $item->name }}</td>
                                             <td>{{ $item->brand }}</td>
-                                            <td>{{ $item->status }}</td>
+                                            <td>{{ $item->status == 'tidak tersedia' ? 'tersedia' : $item->status }}</td>
                                             <!-- Add name attribute to the checkbox inputs -->
                                             <td class="text-center"><input type="checkbox"
                                                     name="booking_approval[{{ $index }}]" value="1" /></td>

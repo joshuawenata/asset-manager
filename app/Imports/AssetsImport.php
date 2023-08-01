@@ -23,12 +23,12 @@ class AssetsImport implements ToModel, WithStartRow
 
         $history = new HistoryAddAsset();
         $history->user_id = \Illuminate\Support\Facades\Auth::user()->id;
-        $history->aksi = \Illuminate\Support\Facades\Auth::user()->name." menambahkan barang dengan nomor seri ".$row[0].", brand ".$row[1].", lokasi ".$row[2].", pemilik barang ".$row[3].", kategori barang ".$asset_category->name;
+        $history->aksi = \Illuminate\Support\Facades\Auth::user()->name." menambahkan barang dengan nomor seri ".$row[0].", brand ".$row[1].", lokasi ".$row[2].", pemilik barang ".$row[3].", kategori barang ".$asset_category->name.", status barang ".$row[5];
         $history->save();
 
         $aset = new Asset([
             'serial_number'      => $row[0],
-            'status'             => 'tersedia',
+            'status'             => $row[5],
             'brand'              => $row[1],
             'current_location'   => $row[2],
             'pemilik_barang'     => $row[3],

@@ -16,7 +16,7 @@ Route::get('/', function () {
 Auth::routes();
 
 //HISTORI REQUEST
-Route::get('/requests-history', [\App\Http\Controllers\RequestController::class, 'show'])->name('approver.historiRequest')->middleware(['auth', 'cekRole:approver']);
+Route::get('/requests-history', [\App\Http\Controllers\RequestController::class, 'show'])->name('historiRequest')->middleware(['auth', 'cekRole:approver,staff,admin']);
 Route::get('/requests-history-pengembalian', [\App\Http\Controllers\RequestController::class, 'showDetail'])->name('approver.historiDetail')->middleware(['auth', 'cekRole:approver']);
 Route::get('/requests-history/{id}', [\App\Http\Controllers\BookingController::class, 'show2'])->name('rejectedbookings.show')->middleware(['auth', 'cekRole:admin,approver']);
 //GENERATE PDF

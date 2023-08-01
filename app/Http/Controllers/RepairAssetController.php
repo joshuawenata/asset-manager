@@ -102,7 +102,7 @@ class RepairAssetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function perbaharui(Request $request)
     {
         $data = $request->input();
         $repair = RepairAsset::find($data['repair_id']);

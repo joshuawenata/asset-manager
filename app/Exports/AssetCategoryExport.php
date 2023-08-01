@@ -22,9 +22,9 @@ class AssetCategoryExport implements FromCollection, WithHeadings, WithStyles, W
     public function collection()
     {
         return new Collection([
-            ['B001', 'barang1', 'SLSC', 'admin', 'Kamera'],
-            ['B002', 'barang2', 'SLC', 'admin', 'Kamera'],
-            ['B003', 'barang3', 'Lt. 6', 'admin', 'Kamera']
+            ['B001', 'barang1', 'SLSC', 'admin', 'Kamera', 'tersedia'],
+            ['B002', 'barang2', 'SLC', 'admin', 'Kamera', 'tersedia'],
+            ['B003', 'barang3', 'Lt. 6', 'admin', 'Kamera', 'tidak tersedia']
         ]);
     }
 
@@ -35,7 +35,8 @@ class AssetCategoryExport implements FromCollection, WithHeadings, WithStyles, W
             'Spesifikasi Barang',
             'Lokasi Barang',
             'Pemilik Barang',
-            'Kategori Barang'
+            'Kategori Barang',
+            'Status Barang'
         ];
     }
 
@@ -70,32 +71,57 @@ class AssetCategoryExport implements FromCollection, WithHeadings, WithStyles, W
             AfterSheet::class => function(AfterSheet $event) {
 
                 // get layout counts (add 1 to rows for heading row)
-                $row_count = 1000;
+                $row_count = 10000;
                 $column_count = 5;
 
-                // set dropdown column
-                $drop_column = 'E';
+                // set dropdown column for "Kategori Barang"
+                $kategori_barang_drop_column = 'E'; // 'E' is the column index for the "Kategori Barang" column
 
-                // set dropdown options
-                $options = AssetCategory::where('status', 1)->pluck('name')->toArray();
+                // set dropdown options for "Kategori Barang"
+                $kategori_barang_options = AssetCategory::where('status', 1)->pluck('name')->toArray();
 
-                // set dropdown list for first data row
-                $validation = $event->sheet->getCell("{$drop_column}2")->getDataValidation();
-                $validation->setType(DataValidation::TYPE_LIST );
-                $validation->setErrorStyle(DataValidation::STYLE_INFORMATION );
-                $validation->setAllowBlank(false);
-                $validation->setShowInputMessage(true);
-                $validation->setShowErrorMessage(true);
-                $validation->setShowDropDown(true);
-                $validation->setErrorTitle('Input error');
-                $validation->setError('Value is not in list.');
-                $validation->setPromptTitle('Pick from list');
-                $validation->setPrompt('Please pick a value from the drop-down list.');
-                $validation->setFormula1(sprintf('"%s"',implode(',',$options)));
+                // set dropdown list for first data row for "Kategori Barang"
+                $kategori_barang_validation = $event->sheet->getCell("{$kategori_barang_drop_column}2")->getDataValidation();
+                $kategori_barang_validation->setType(DataValidation::TYPE_LIST);
+                $kategori_barang_validation->setErrorStyle(DataValidation::STYLE_INFORMATION);
+                $kategori_barang_validation->setAllowBlank(false);
+                $kategori_barang_validation->setShowInputMessage(true);
+                $kategori_barang_validation->setShowErrorMessage(true);
+                $kategori_barang_validation->setShowDropDown(true);
+                $kategori_barang_validation->setErrorTitle('Input error');
+                $kategori_barang_validation->setError('Value is not in the list.');
+                $kategori_barang_validation->setPromptTitle('Pick from the list');
+                $kategori_barang_validation->setPrompt('Please pick a value from the drop-down list.');
+                $kategori_barang_validation->setFormula1(sprintf('"%s"', implode(',', $kategori_barang_options)));
 
-                // clone validation to remaining rows
+                // clone validation to remaining rows for "Kategori Barang"
                 for ($i = 3; $i <= $row_count; $i++) {
-                    $event->sheet->getCell("{$drop_column}{$i}")->setDataValidation(clone $validation);
+                    $event->sheet->getCell("{$kategori_barang_drop_column}{$i}")->setDataValidation(clone $kategori_barang_validation);
+                }
+
+                // set dropdown column for "Status Barang"
+                $status_barang_drop_column = 'F'; // 'F' is the column index for the "Status Barang" column
+
+                // set dropdown options for "Status Barang"
+                $status_barang_options = ['tersedia', 'tidak tersedia'];
+
+                // set dropdown list for first data row for "Status Barang"
+                $status_barang_validation = $event->sheet->getCell("{$status_barang_drop_column}2")->getDataValidation();
+                $status_barang_validation->setType(DataValidation::TYPE_LIST);
+                $status_barang_validation->setErrorStyle(DataValidation::STYLE_INFORMATION);
+                $status_barang_validation->setAllowBlank(false);
+                $status_barang_validation->setShowInputMessage(true);
+                $status_barang_validation->setShowErrorMessage(true);
+                $status_barang_validation->setShowDropDown(true);
+                $status_barang_validation->setErrorTitle('Input error');
+                $status_barang_validation->setError('Value is not in the list.');
+                $status_barang_validation->setPromptTitle('Pick from the list');
+                $status_barang_validation->setPrompt('Please pick a value from the drop-down list.');
+                $status_barang_validation->setFormula1(sprintf('"%s"', implode(',', $status_barang_options)));
+
+                // clone validation to remaining rows for "Status Barang"
+                for ($i = 3; $i <= $row_count; $i++) {
+                    $event->sheet->getCell("{$status_barang_drop_column}{$i}")->setDataValidation(clone $status_barang_validation);
                 }
 
                 // set columns to autosize

@@ -75,43 +75,106 @@
                         @guest
                         @else
                             @if (auth()->user()->role->name == 'staff')
-                                <a class="nav-link active"
-                                    href="{{ url('/search-asset-staff/' . \Illuminate\Support\Facades\Auth::user()->division->id) }}">Lihat
-                                    Inventory</a>
-                                <a class="nav-link active" href="{{ route('staff.createAsset') }}">Tambah Barang</a>
-                                <a class="nav-link active" href="{{ route('staff.createAssetExcel') }}">Tambah Barang
-                                    Melalui
-                                    Excel</a>
-                                <a class="nav-link active" href="{{ route('historyAddAsset') }}">Riwayat Tambah
-                                    Barang</a>
-                                <a class="nav-link active" href="{{ route('historyDetail') }}">Detil Riwayat</a>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Menu
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="nav-link active"
+                                                href="{{ url('/search-asset-staff/' . \Illuminate\Support\Facades\Auth::user()->division->id) }}">Lihat
+                                                Inventory</a></li>
+                                        <li><a class="nav-link active" href="{{ route('staff.createAsset') }}">Tambah
+                                                Barang</a>
+                                        </li>
+                                        <li>
+                                            <a class="nav-link active" href="{{ route('staff.createAssetExcel') }}">Tambah
+                                                Barang
+                                                Melalui
+                                                Excel</a>
+                                        </li>
+                                        <li><a class="nav-link active" href="{{ route('historyAddAsset') }}">Riwayat Tambah
+                                                Barang</a></li>
+                                        <li><a class="nav-link active" href="{{ route('historyDetail') }}">Detil
+                                                Riwayat</a>
+                                        </li>
+                                        <li><a class="nav-link active" href="{{ route('historiRequest') }}">Riwayat
+                                                Peminjaman</a></li>
+                                    </ul>
+                                </li>
                             @elseif(auth()->user()->role->name == 'admin')
-                                <a class="nav-link active"
-                                    href="{{ url('/search-asset/' . \Illuminate\Support\Facades\Auth::user()->division->id) }}">Lihat
-                                    Inventory</a>
-                                <a class="nav-link active" href="{{ route('admin.createAssetExcel') }}">Tambah Barang
-                                    Melalui
-                                    Excel</a>
-                                <a class="nav-link active" href="{{ route('historyAddAsset') }}">Riwayat Tambah
-                                    Barang</a>
-                                <a class="nav-link active" href="{{ route('historyDetail') }}">Detil Riwayat</a>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Menu
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="nav-link active"
+                                                href="{{ url('/search-asset/' . \Illuminate\Support\Facades\Auth::user()->division->id) }}">Lihat
+                                                Inventory</a></li>
+                                        <li><a class="nav-link active" href="{{ route('admin.createAssetExcel') }}">Tambah
+                                                Barang
+                                                Melalui
+                                                Excel</a></li>
+                                        <li><a class="nav-link active" href="{{ route('historyAddAsset') }}">Riwayat Tambah
+                                                Barang</a></li>
+                                        <li><a class="nav-link active" href="{{ route('historyDetail') }}">Detil
+                                                Riwayat</a>
+                                        </li>
+                                        <li><a class="nav-link active" href="{{ url('/deleted-asset/') }}">Riwayat
+                                                Pemusnahan
+                                                Barang</a></li>
+                                        <li><a class="nav-link active"
+                                                href="{{ route('admin.riwayat-perbaharui') }}">Riwayat
+                                                Perbaharui
+                                                Barang</a></li>
+                                        <li><a class="nav-link active"
+                                                href="{{ url('/move-asset/' . \Illuminate\Support\Facades\Auth::user()->division->id) }}">Pemindahan
+                                                Barang</a></li>
+                                        <li><a class="nav-link active" href="{{ route('historiRequest') }}">Riwayat
+                                                Peminjaman</a></li>
+                                    </ul>
+                                </li>
                             @elseif(auth()->user()->role->name == 'approver')
-                                <a class="nav-link active" href="{{ route('approver.checkRequest') }}">Pinjam Inventory</a>
-                                <a class="nav-link active" href="{{ route('approver.historiRequest') }}">Riwayat
-                                    Peminjaman</a>
-                                <a class="nav-link active" href="{{ route('approver.historiDetail') }}">Detil
-                                    Riwayat</a>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Menu
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="nav-link active" href="{{ route('approver.checkRequest') }}">Pinjam
+                                                Inventory</a></li>
+                                        <li><a class="nav-link active" href="{{ route('historiRequest') }}">Riwayat
+                                                Peminjaman</a></li>
+                                        <li><a class="nav-link active" href="{{ route('approver.historiDetail') }}">Detil
+                                                Riwayat</a></li>
+                                    </ul>
+                                </li>
                             @elseif(auth()->user()->role->name == 'superadmin')
-                                <a class="nav-link active" href="{{ route('superadmin.division') }}">Lihat Departemen</a>
-                                <a class="nav-link active" href="{{ route('superadmin.location') }}">Kelola Lokasi</a>
-                                <a class="nav-link active"
-                                    href="{{ route('superadmin.register') }}">{{ __('Daftarkan akun') }}</a>
-                                <a class="nav-link active"
-                                    href="{{ route('superadmin.kategori') }}">{{ __('Kelola Kategori Barang') }}</a>
-                                <a class="nav-link active"
-                                    href="{{ route('superadmin.pemilikbarang') }}">{{ __('Kelola Pemilik Barang') }}</a>
-                                <a class="nav-link active"
-                                    href="{{ route('superadmin.historyAkun') }}">{{ __('History Akun') }}</a>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Menu
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="nav-link active" href="{{ route('superadmin.division') }}">Lihat
+                                                Departemen</a></li>
+                                        <li><a class="nav-link active" href="{{ route('superadmin.location') }}">Kelola
+                                                Lokasi</a></li>
+                                        <li><a class="nav-link active"
+                                                href="{{ route('superadmin.register') }}">{{ __('Daftarkan akun') }}</a>
+                                        </li>
+                                        <li><a class="nav-link active"
+                                                href="{{ route('superadmin.kategori') }}">{{ __('Kelola Kategori Barang') }}</a>
+                                        </li>
+                                        <li><a class="nav-link active"
+                                                href="{{ route('superadmin.pemilikbarang') }}">{{ __('Kelola Pemilik Barang') }}</a>
+                                        </li>
+                                        <li><a class="nav-link active"
+                                                href="{{ route('superadmin.historyAkun') }}">{{ __('History Akun') }}</a>
+                                        </li>
+                                    </ul>
+                                </li>
                             @endif
                         @endguest
                     </ul>
@@ -134,7 +197,8 @@
                                         {{ __('Keluar') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        class="d-none">
                                         @csrf
                                     </form>
                                 </div>

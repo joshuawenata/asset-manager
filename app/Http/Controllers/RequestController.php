@@ -28,8 +28,11 @@ class RequestController extends Controller
 
 //        kalau tgl bookingnya dah lewat (return date < current) otomatis ke reject
         DB::table('requests')
-            ->where('status', '=', 'waiting approval')
-            ->where('requests.return_date', '<=', $current_date_time)
+            ->where(function ($query) {
+                $query->where('status', '=', 'waiting approval')
+                    ->orWhere('status', '=', 'waiting next approval');
+            })
+            ->where('return_date', '<=', $current_date_time)
             ->update(['status' => 'rejected']);
 
         $p = Auth::user()->role->name;
@@ -42,6 +45,7 @@ class RequestController extends Controller
                 ->where('requests.division_id', '=', $user_div_id)
                 ->where('status', '=', 'waiting approval')
                 ->orWhere('status', '=', 'approved sebagian')
+                ->orWhere('status', '=', 'waiting next approval')
                 ->orWhere('status', '=', 'approved')
                 ->orWhere('status', '=', 'on use')
                 ->orWhere('status', '=', 'taken')
@@ -59,6 +63,7 @@ class RequestController extends Controller
                 ->where('requests.division_id', '=', $user_div_id)
                 ->where('status', '=', 'waiting approval')
                 ->orWhere('status', '=', 'approved sebagian')
+                ->orWhere('status', '=', 'waiting next approval')
                 ->orWhere('status', '=', 'approved')
                 ->orWhere('status', '=', 'on use')
                 ->orWhere('status', '=', 'taken')
@@ -103,6 +108,7 @@ class RequestController extends Controller
             ->join('asset_categories', 'bookings.asset_category_id', '=', 'asset_categories.id')
             ->select('assets.serial_number', 'assets.brand', 'asset_categories.name')
             ->where('bookings.request_id', '=', $id)
+            ->where('bookings.status', '=', 'approved')
             ->get();
 
         $current_date_time = new DateTime("now", new DateTimeZone('Asia/Jakarta'));
@@ -157,7 +163,7 @@ class RequestController extends Controller
         $message = 'Selamat pengembalian anda di approve!';
         $subjek = 'PENGEMBALIAN DI APPROVE';
         $receiver = $req->email_peminjam;
-        $email->index($receiver, $message, $subjek);
+        $email->indexPeminjamApprove($receiver, $message, $subjek, $req->id);
 
         if(\Illuminate\Support\Facades\Auth::user()->role_id == 1){
             return redirect('dashboard')->with('message', 'Peminjaman berhasil dikembalikan.');
@@ -321,6 +327,7 @@ class RequestController extends Controller
                 ->get();
             foreach ($asset as $a){
                 array_push($bookings, $a);
+                DB::table('assets')->where('id', $a->id)->update(['status' => 'tidak tersedia']);
             }
         }
 
@@ -445,12 +452,13 @@ class RequestController extends Controller
      */
     public function perbaharui(Request $request)
     {
+        var_dump($request->request_perbaharui_id);
         $user = $request->input('user');
         $req = \App\Models\Request::find($request->request_perbaharui_id);
 
         if($request->request_perbaharui == 'rejected'){
             $req->status = $request->request_perbaharui;
-            $req->notes = $request->input('pesan') . "\n";
+            $req->notes = $request->input('pesan') . "<br>";
             $req->update();
             $message = 'Request berhasil ditolak.';
 
@@ -459,8 +467,11 @@ class RequestController extends Controller
             $receiver = $req->email_peminjam;
             $history = new historyDetail();
             $history->user_id = \Illuminate\Support\Facades\Auth::user()->id;
-            $history->aksi = \Illuminate\Support\Facades\Auth::user()->name . ' menolak peminjaman dari '.$req->nama_peminjam.'['.$req->prodi_peminjam.']'.' dengan tujuan '.$req->purpose.' dengan alasan '.$request->input('pesan');
+            $history->aksi = \Illuminate\Support\Facades\Auth::user()->name . ' menolak peminjaman dari <b>'.$req->nama_peminjam.'['.$req->prodi_peminjam.']'.'</b> dengan tujuan <b>'.$req->purpose.'</b> dengan alasan <b>'.$request->input('pesan').'</b>';
             $history->save();
+
+            $email = new SendEmailController();
+            $email->indexPeminjam($receiver, $pesan, $subyek);
         }
         else if ($request->request_perbaharui == 'approved'){
             $bookingApproval = $request->input('booking_approval', []);
@@ -492,17 +503,18 @@ class RequestController extends Controller
 
             if($counting == 0) {
                 $req->track_approver = $req->track_approver++;
-                $req->notes = $req->notes . "\n" . $request->input('pesan');
+                $req->notes = $req->notes . "<br>" . $request->input('pesan');
                 $approver = $request->approver_num;
 
                 $req->status = $request->request_perbaharui;
 
                 $subyek = 'PEMINJAMAN APPROVED';
-                $pesan = 'Selamat peminjaman anda berhasil di approve! silahkan ambil barang sesuai dengan tanggal peminjaman.';
-                $pesan_bm = 'Peminjaman barang oleh ' . $req->email_peminjam . ' berhasil di approve.';
+                $pesan = 'Selamat peminjaman anda berhasil di approve! silakan menghubungi staff ' . \App\Models\Division::find($req->division_id)->name .  ' untuk pengambilan barang sesuai dengan tanggal peminjaman';
+                $pesan_bm = 'Peminjaman barang oleh <b>' . $req->email_peminjam . '</b> berhasil di approve.';
                 $receiver = $req->email_peminjam;
                 $email = new SendEmailController();
                 // $email->index("bmopr.bdg@binus.edu", $pesan_bm , $subyek);
+                $email->indexPeminjamApprove($receiver, $pesan, $subyek, $req->id);
 
                 $req->update();
 
@@ -512,28 +524,25 @@ class RequestController extends Controller
                 $history->save();
             }else{
                 $req->track_approver = $req->track_approver++;
-                $req->notes = $req->notes . "\n" . $request->input('pesan');
+                $req->notes = $req->notes . "<br>" . $request->input('pesan');
                 $approver = $request->approver_num;
 
                 $req->status = "waiting next approval";
 
                 $subyek = 'PEMINJAMAN PENDING';
-                $pesan = 'Peminjaman anda hanya di approve sebagian! \r\n Berikut rincian barang: \r\n';
+                $pesan = "<b>Berikut approval rincian barang yang anda pinjam: </b><br><br>";
                 foreach ($bookingIds as $index => $bookingId) {
-                    if (isset($bookingApproval[$index]) && $bookingApproval[$index] === "1") {
-                        // If the checkbox is checked, mark the booking as approved
-                        $booking = \App\Models\Booking::find($bookingId);
-                        $barang = \App\Models\Asset::find($booking->asset_id);
-                        // Concatenate the rincian barang to the message
-                        $pesan .= "- " . $barang->nama_barang . ' dengan status ' . $booking->status . "\r\n";
-                    }
+                    $booking = \App\Models\Booking::find($bookingId);
+                    $barang = \App\Models\Asset::find($booking->asset_id);
+                    $pesan .= "- <b>" . $barang->serial_number . '</b> dengan spesifikasi <b>' . $barang->brand . '</b> dengan status <b>' . $booking->status . "</b><br>";
                 }
 
                 // Continue with the rest of the message
-                $pesan .= '\r\n' . 'Apabila jadi melakukan peminjaman harap mengirimkan email lanjutan kepada ' . $req->approver;
+                $pesan .= "<br>" . 'Apabila anda tetap akan melakukan peminjaman barang yang approve harap mengirimkan email lanjutan kepada approver <b>' . $req->approver . '</b> ('. \App\Models\User::find($req->approver_id)->email .')';
                 $receiver = $req->email_peminjam;
                 $email = new SendEmailController();
                 // $email->index("bmopr.bdg@binus.edu", $pesan_bm , $subyek);
+                $email->indexPeminjam($receiver, $pesan, $subyek);
 
                 $req->update();
             }
@@ -542,7 +551,7 @@ class RequestController extends Controller
             $message = 'Request berhasil diapprove.';
 
             $req->track_approver = $req->track_approver+1;
-            $req->notes = $req->notes . "\n" . $request->input('pesan');
+            $req->notes = $req->notes . "<br>" . $request->input('pesan');
             $approver = $request->approver_num;
 
             $req->status = $request->request_perbaharui;
@@ -553,15 +562,13 @@ class RequestController extends Controller
             $receiver = $req->email_peminjam;
             $email = new SendEmailController();
             // $email->index("bmopr.bdg@binus.edu", $pesan_bm , $subyek);
+            $email->indexPeminjamApprove($receiver, $pesan, $subyek, $req->id);
 
             $req->update();
 
         }
 
-        $email = new SendEmailController();
-        $email->indexPeminjam($receiver, $pesan, $subyek);
-
-        //DONE: ini kembali ke dashboard/approvernya gimana
+        // DONE: ini kembali ke dashboard/approvernya gimana
         if(Auth::user()->role_id == 1){
             return redirect('/dashboard')->with('message', $message);
         }

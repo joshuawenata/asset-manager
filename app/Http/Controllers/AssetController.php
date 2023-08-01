@@ -238,7 +238,7 @@ class AssetController extends Controller
 
             $history = new HistoryAddAsset;
             $history->user_id = \Illuminate\Support\Facades\Auth::user()->id;
-            $history->aksi = \Illuminate\Support\Facades\Auth::user()->name." menambahkan barang dengan nomor seri ".$data['serial_number'];
+            $history->aksi = \Illuminate\Support\Facades\Auth::user()->name." menambahkan barang dengan nomor seri ".$data['serial_number'].", brand ".$data['brand'].", lokasi ".$data['location'].", pemilik barang ".$data['pemilik-barang'].", kategori barang ".$data['asset-category'];
             $history->save();
 
             $this->storeLoc();
@@ -398,7 +398,7 @@ class AssetController extends Controller
 
             $history_update->save();
             $aset->update();
-            return redirect('search-asset/' . \Illuminate\Support\Facades\Auth::id())->with('message', 'Aset Berhasil Diperbaharui');
+            return redirect('search-asset/' . \Illuminate\Support\Facades\Auth::user()->division_id)->with('message', 'Aset Berhasil Diperbaharui');
         }
     }
 

@@ -60,11 +60,11 @@ class BookingController extends Controller
             $booking->save();
         }
 
-        $div_id = $data['approver_division_id'];
+        $div_id = $data['division_id'];
 
         $email = new SendEmailController();
-        $message ='REQUEST PEMINJAMAN ALAT LAB';
-        $subyek = 'Ada request peminjaman alat lab baru dari ' . Auth::user()->name . ' ' . Auth::user()->email;
+        $message ='REQUEST PEMINJAMAN ALAT';
+        $subyek = 'Ada request peminjaman alat baru dari ' . Auth::user()->name . ' ' . Auth::user()->email;
 
         // Retrieve users with role_id = 1
         $receiversRole1 = DB::table('users')

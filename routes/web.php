@@ -83,10 +83,12 @@ Route::middleware(['auth', 'cekRole:staff'])->group(function(){
     Route::get('/create-asset-excel-staff', [\App\Http\Controllers\AssetController::class, 'createAssetExcelForStaff'])->name('staff.createAssetExcel');
     Route::post('/store-asset-excel-staff', [\App\Http\Controllers\AssetController::class, 'storeAssetExcelForStaff'])->name('staff.storeAssetExcel');
     Route::post('/store-new-asset-staff', [\App\Http\Controllers\AssetController::class, 'storeForStaff'])->name('staff.storeAsset');
+    Route::get('/search-asset-staff/{id}', [\App\Http\Controllers\AssetController::class, 'search']);
 });
 
 //Admin Routes
 Route::middleware(['auth', 'cekRole:admin'])->group(function(){
+    Route::get('/search-asset/{id}', [\App\Http\Controllers\AssetController::class, 'index']);
     Route::get('/admin/dashboard', [\App\Http\Controllers\HomeController::class, 'admindashboard'])->name('admin.dashboard');
     Route::get('/admin/location', [\App\Http\Controllers\LocationAdminController::class, 'index'])->name('admin.location');
     Route::get('/admin/pemilikBarang', [\App\Http\Controllers\PemilikBarangController::class, 'index'])->name('admin.pemilik-barang');
@@ -97,7 +99,6 @@ Route::middleware(['auth', 'cekRole:admin'])->group(function(){
 
     //ASSET
     //READ
-    Route::get('/search-asset/{id}', [\App\Http\Controllers\AssetController::class, 'index']);
     Route::get('/move-asset/{id}', [\App\Http\Controllers\AssetController::class, 'pick']);
     Route::get('/deleted-asset/', [\App\Http\Controllers\DeletedAssetController::class, 'index']);
     Route::get('/move-asset-history/{id}', [\App\Http\Controllers\AssetLocationController::class, 'show']);

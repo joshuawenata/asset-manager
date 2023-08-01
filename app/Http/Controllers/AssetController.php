@@ -47,6 +47,22 @@ class AssetController extends Controller
         ]);
     }
 
+    public function search($id)
+    {
+        $data = Asset::orderBy('id', 'desc')
+            ->where('division_id', $id)
+            ->get();
+        //tarik user saat ini Auth::user
+        //tarik rolenya juga pake where role_id = id
+        //tarik data dari role_page_mappings kolom CRUDD (ditambahkan), tarik CRUDD pake where role_id, role_id = id
+        //lempar data ke viewnya
+        //di view tinggal selection
+        return view('searchAsset', [
+            'data' => $data,
+            'mode' => 'current'
+        ]);
+    }
+
     public function pick($id){
         $data = Asset::orderBy('id', 'desc')
             ->where('division_id', $id)
@@ -176,13 +192,13 @@ class AssetController extends Controller
     {
         //validasi usernya apakah boleh nyimpen ato ga
         $validator = Validator::make($request->all(), [
-            'serialnumber' => 'required',
+            'serial_number' => 'required|unique:assets',
             'location' => 'required',
             'brand' => 'required'
         ]);
 
         if($validator->fails()){
-            return redirect('admin/createAsset')
+            return redirect('create-asset')
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -190,7 +206,7 @@ class AssetController extends Controller
             //store
             $data = $request->input();
             $aset = new Asset;
-            $aset->serial_number = $data['serialnumber'];
+            $aset->serial_number = $data['serial_number'];
             $aset->brand = $data['brand'];
             $aset->current_location = $data['location'];
 
@@ -220,6 +236,11 @@ class AssetController extends Controller
             $aset->division_id = $data['division_id'];
             $aset->save();
 
+            $history = new HistoryAddAsset;
+            $history->user_id = \Illuminate\Support\Facades\Auth::user()->id;
+            $history->aksi = \Illuminate\Support\Facades\Auth::user()->name." menambahkan barang dengan nomor seri ".$data['serial_number'];
+            $history->save();
+
             $this->storeLoc();
 
             return redirect('search-asset/' . $data['division_id'])->with('message', "Aset Berhasil Ditambahkan");
@@ -230,13 +251,13 @@ class AssetController extends Controller
     {
         //validasi usernya apakah boleh nyimpen ato ga
         $validator = Validator::make($request->all(), [
-            'serialnumber' => 'required',
+            'serial_number' => 'required|unique:assets',
             'location' => 'required',
             'brand' => 'required'
         ]);
 
         if($validator->fails()){
-            return redirect('admin/createAsset')
+            return redirect('create-asset-staff')
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -244,7 +265,7 @@ class AssetController extends Controller
             //store
             $data = $request->input();
             $aset = new Asset;
-            $aset->serial_number = $data['serialnumber'];
+            $aset->serial_number = $data['serial_number'];
             $aset->brand = $data['brand'];
             $aset->current_location = $data['location'];
 
@@ -277,7 +298,7 @@ class AssetController extends Controller
 
             $history = new HistoryAddAsset;
             $history->user_id = \Illuminate\Support\Facades\Auth::user()->id;
-            $history->aksi = \Illuminate\Support\Facades\Auth::user()->name." menambahkan barang dengan nomor seri ".$data['serialnumber'];
+            $history->aksi = \Illuminate\Support\Facades\Auth::user()->name." menambahkan barang dengan nomor seri ".$data['serial_number'];
             $history->save();
 
             $this->storeLoc();
@@ -330,10 +351,10 @@ class AssetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function perbaharui(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'serialnumber' => 'required',
+            'serial_number' => 'required',
             'brand' => 'required',
             'asset_category' => 'required'
         ]);
@@ -351,11 +372,11 @@ class AssetController extends Controller
             $history_update->status_barang = $aset->status;
             $history_update->spesifikasi_barang = $aset->brand;
             $history_update->pemilik_barang = $aset->pemilik_barang;
-            $history_update->new_kode_barang = $request->input('serialnumber');
+            $history_update->new_kode_barang = $request->input('serial_number');
             $history_update->new_kategori_barang = $request->input('asset_category');
             $history_update->new_status_barang = $request->input('asset-status');
             $history_update->new_spesifikasi_barang = $request->input('brand');
-            $aset->serial_number = $request->input('serialnumber');
+            $aset->serial_number = $request->input('serial_number');
             $aset->brand = $request->input('brand');
 
             if($request->input('pemilik-barang') != null){
@@ -377,7 +398,7 @@ class AssetController extends Controller
 
             $history_update->save();
             $aset->update();
-            return redirect('search-asset/' . \Illuminate\Support\Facades\Auth::id())->with('message', 'Aset Berhasil Diupdate');
+            return redirect('search-asset/' . \Illuminate\Support\Facades\Auth::id())->with('message', 'Aset Berhasil Diperbaharui');
         }
     }
 

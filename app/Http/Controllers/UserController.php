@@ -129,7 +129,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $data = User::find($id);
-        $roles = Role::all()->except([1, 5]);
+        $roles = Role::all()->except(4);
         $dept = Division::all();
         return View::make('superadmin.editUser', [
             'data' => $data,
@@ -164,7 +164,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function perbaharui(Request $request, $id)
     {
         $user = User::find($id);
         $history = new HistoryAkun;

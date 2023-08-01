@@ -27,7 +27,7 @@
 @endsection
 
 @section('content')
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    {{-- <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
 
@@ -49,7 +49,7 @@
 
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <div class="modal fade" id="resetModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -200,8 +200,8 @@
                                     <button type="button" class="btn btn-danger ResetPassBtn"
                                         value="{{ $data->id }}">Reset Password</button>
 
-                                    <button type="button" class="btn btn-danger deleteUserBtn"
-                                        value="{{ $data->id }}">Hapus User</button>
+                                    {{-- <button type="button" class="btn btn-danger deleteUserBtn"
+                                        value="{{ $data->id }}">Hapus User</button> --}}
 
                                     <button type="submit" class="btn btn-primary">
                                         {{ __('perbaharui Data') }}

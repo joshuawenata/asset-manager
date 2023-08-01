@@ -24,15 +24,16 @@
                             @csrf
 
                             <div class="row mb-3">
-                                <label for="serialnumber"
+                                <label for="serial_number"
                                     class="col-md-4 col-form-label text-md-end">{{ __('Kode Barang') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="serialnumber" type="text"
-                                        class="form-control @error('serialnumber') is-invalid @enderror" name="serialnumber"
-                                        value="{{ old('serialnumber') }}" required autocomplete="serialnumber" autofocus>
+                                    <input id="serial_number" type="text"
+                                        class="form-control @error('serial_number') is-invalid @enderror"
+                                        name="serial_number" value="{{ old('serial_number') }}" required
+                                        autocomplete="serial_number" autofocus>
 
-                                    @error('serialnumber')
+                                    @error('serial_number')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

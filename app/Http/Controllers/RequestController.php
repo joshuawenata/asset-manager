@@ -58,6 +58,7 @@ class RequestController extends Controller
                 ->where('requests.track_approver', '=', 0)
                 ->where('requests.division_id', '=', $user_div_id)
                 ->where('status', '=', 'waiting approval')
+                ->orWhere('status', '=', 'approved sebagian')
                 ->orWhere('status', '=', 'approved')
                 ->orWhere('status', '=', 'on use')
                 ->orWhere('status', '=', 'taken')

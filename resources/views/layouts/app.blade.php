@@ -75,6 +75,9 @@
                         @guest
                         @else
                             @if (auth()->user()->role->name == 'staff')
+                                <a class="nav-link active"
+                                    href="{{ url('/search-asset-staff/' . \Illuminate\Support\Facades\Auth::user()->division->id) }}">Lihat
+                                    Inventory</a>
                                 <a class="nav-link active" href="{{ route('staff.createAsset') }}">Tambah Barang</a>
                                 <a class="nav-link active" href="{{ route('staff.createAssetExcel') }}">Tambah Barang
                                     Melalui

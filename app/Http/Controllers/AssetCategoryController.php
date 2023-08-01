@@ -107,6 +107,7 @@ class AssetCategoryController extends Controller
      */
     public function perbaharui(Request $request, $id)
     {
+        $Kategori_barang = AssetCategory::find($id);
         if ($request->has('name') && $request->name !== null) {
             $Kategori_barang->name = $request->name;
             $Kategori_barang->update();

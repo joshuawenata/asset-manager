@@ -53,9 +53,9 @@
                                             <a class="btn btn-small btn-info"
                                                 href="{{ URL::to('edit-user/' . $item->id) }}"><span
                                                     class="material-symbols-outlined">edit_square</span></a>
-                                            <a class="btn btn-small btn-danger"
+                                            {{-- <a class="btn btn-small btn-danger"
                                                 href="{{ URL::to('edit-user/' . $item->id) }}"><span
-                                                    class="material-symbols-outlined">delete</span></a>
+                                                    class="material-symbols-outlined">delete</span></a> --}}
                                             @if ($item->active_status == 1)
                                                 <a class="btn btn-small btn-success"
                                                     href="{{ URL::to('edit-user-active-status/' . $item->id) }}">

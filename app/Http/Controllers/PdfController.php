@@ -40,7 +40,7 @@ class PdfController extends Controller
             $desc = '';
         }
         else{
-            $status = $req->return_status;
+            $status = 'sudah dikembalikan';
             $desc = $req->return_notes;
         }
 
@@ -90,19 +90,21 @@ class PdfController extends Controller
 
         $this->fpdf->SetFont('Arial', 'B', 11);
         $this->fpdf->Cell(10, 6, 'No', 1, 0, 'C');
-        $this->fpdf->Cell(40, 6, 'Lokasi Asal Barang', 1, 0, 'C');
+        $this->fpdf->Cell(15, 6, 'Lokasi', 1, 0, 'C');
         $this->fpdf->Cell(30, 6, 'Nomor Seri', 1, 0, 'C');
-        $this->fpdf->Cell(30, 6, 'Jenis', 1, 0, 'C');
-        $this->fpdf->Cell(30, 6, 'Spesifikasi', 1, 0, 'C');
-        $this->fpdf->Cell(40, 6, 'Pemilik Barang', 1, 1, 'C');
+        $this->fpdf->Cell(20, 6, 'Jenis', 1, 0, 'C');
+        $this->fpdf->Cell(25, 6, 'Spesifikasi', 1, 0, 'C');
+        $this->fpdf->Cell(30, 6, 'Pemilik Barang', 1, 0, 'C');
+        $this->fpdf->Cell(50, 6, 'Kondisi Barang Kembali', 1, 1, 'C');
 
         $this->fpdf->SetFont('Arial', '', 11);
 
         $bookings = DB::table('bookings')
             ->join('assets', 'bookings.asset_id', '=', 'assets.id')
             ->join('asset_categories', 'bookings.asset_category_id', '=', 'asset_categories.id')
-            ->select('bookings.asset_id','assets.serial_number', 'assets.brand', 'asset_categories.name', 'assets.pemilik_barang')
+            ->select('bookings.return_conditions','bookings.asset_id','assets.serial_number', 'assets.brand', 'asset_categories.name', 'assets.pemilik_barang')
             ->where('bookings.request_id', '=', $id)
+            ->where('bookings.status', '!=', 'rejected')
             ->get();
 
         $i = 1;
@@ -111,11 +113,12 @@ class PdfController extends Controller
             $division_asset = DB::table('divisions')->where('id', $division_asset_id)->value('name');
 
             $this->fpdf->Cell(10, 6, $i, 1, 0, 'C');
-            $this->fpdf->Cell(40, 6, $division_asset, 1, 0, 'C');
+            $this->fpdf->Cell(15, 6, $division_asset, 1, 0, 'C');
             $this->fpdf->Cell(30, 6, $b->serial_number, 1, 0, 'C');
-            $this->fpdf->Cell(30, 6, $b->name, 1, 0, 'C');
-            $this->fpdf->Cell(30, 6, $b->brand, 1, 0, 'C');
-            $this->fpdf->Cell(40, 6, $b->pemilik_barang, 1, 1, 'C');
+            $this->fpdf->Cell(20, 6, $b->name, 1, 0, 'C');
+            $this->fpdf->Cell(25, 6, $b->brand, 1, 0, 'C');
+            $this->fpdf->Cell(30, 6, $b->pemilik_barang, 1, 0, 'C');
+            $this->fpdf->Cell(50, 6, $b->return_conditions, 1, 1, 'C');
             $i++;
         }
 

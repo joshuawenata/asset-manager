@@ -106,7 +106,7 @@ class RequestController extends Controller
         $aset = DB::table('bookings')
             ->join('assets', 'bookings.asset_id', '=', 'assets.id')
             ->join('asset_categories', 'bookings.asset_category_id', '=', 'asset_categories.id')
-            ->select('assets.serial_number', 'assets.brand', 'asset_categories.name')
+            ->select('bookings.id', 'assets.serial_number', 'assets.brand', 'asset_categories.name', 'bookings.return_conditions')
             ->where('bookings.request_id', '=', $id)
             ->where('bookings.status', '=', 'approved')
             ->get();
@@ -125,11 +125,30 @@ class RequestController extends Controller
     public function perbaharuiReturn(Request $request){
         $id = $request->input('request_id');
         $req = \App\Models\Request::find($request->input('request_id'));
-        $req->return_status = $request->input('kondisi_aset');
         $req->return_notes = $request->input('return_condition');
         $req->flag_return = 1;
         $req->realize_return_date = date("Y-m-d H:i:s", strtotime($request->input('realize_return_date')));
         $req->update();
+
+        $returnApproval = $request->input('return_approval');
+        $returnIds = $request->input('return_id', []);
+        $message = 'Request berhasil diapprove.';
+
+        $counting = 0;
+        foreach ($returnIds as $index => $returnId) {
+            if (isset($returnApproval[$index]) && $returnApproval[$index] === "1") {
+                // If the checkbox is checked, mark the return as approved
+                $return = \App\Models\Booking::find($returnId);
+                $return->return_conditions = 'baik';
+                $return->save();
+            } else {
+                // If the checkbox is not checked, mark the return as rejected
+                $return = \App\Models\Booking::find($returnId);
+                $return->return_conditions = 'tidak baik';
+                $return->save();
+                $counting++;
+            }
+        }
 
         $email = new SendEmailController();
         $receiver = DB::table('users')

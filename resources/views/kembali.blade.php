@@ -5,9 +5,6 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 @endsection
 
-@section('js')
-@endsection
-
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -85,6 +82,7 @@
                                                 <th>Nomor Seri</th>
                                                 <th>Jenis</th>
                                                 <th>Spesifikasi</th>
+                                                <th>Kondisi Barang Baik</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -94,6 +92,11 @@
                                                     <td>{{ $item->serial_number }}</td>
                                                     <td>{{ $item->name }}</td>
                                                     <td>{{ $item->brand }}</td>
+                                                    <td><input type="checkbox" name="return_approval[{{ $index }}]"
+                                                            value="1" />
+                                                    </td>
+                                                    <input type="hidden"
+                                                        name="return_id[{{ $index }}]"value="{{ $item->id }}">
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -102,13 +105,11 @@
                             </div>
 
                             @if ($returned)
-                                <div class="row mb-3">
-                                    <label for="return_status"
-                                        class="col-md-4 col-form-label text-md-end">{{ __('Kondisi Barang') }}</label>
-
-                                    <div class="col-md-6">
-                                        <input id="return_status" type="text" class="form-control mt-2"
-                                            name="return_status" value="{{ $request->return_status }}" readonly>
+                                <div class="row mb-0">
+                                    <div class="col-md-6 offset-md-0">
+                                        <input class="form-check-input mt-1" type="checkbox" name="select-all"
+                                            id="select-all">
+                                        <label for="select-all">pilih semua</label>
                                     </div>
                                 </div>
                                 <div class="mb-3">
@@ -123,22 +124,12 @@
 
                             @if (!$returned)
                                 <div class="mb-3">
-                                    <label
-                                        class="col-form-label text-md-end">{{ __('Kondisi barang saat pengembalian:') }}</label>
-
-                                    <div class="md-6">
-                                        <input class="form-check-input mt-1" type="radio" id="kondisi_aset"
-                                            name="kondisi_aset" value="baik"
-                                            @if ($request->return_status == 'baik' or !$request->return_status) checked @endif
-                                            onclick="document.getElementById('return_condition').removeAttribute('required')" />
-                                        <label for="kondisi_aset">Barang dalam kondisi baik</label>
-                                    </div>
-                                    <div class="md-6">
-                                        <input class="form-check-input mt-1" type="radio" id="kondisi_aset"
-                                            name="kondisi_aset" value="rusak"
-                                            @if ($request->return_status == 'rusak') checked @endif
-                                            onclick="document.getElementById('return_condition').setAttribute('required', 'required')" />
-                                        <label for="kondisi_aset">Barang rusak</label>
+                                    <div class="row mb-0">
+                                        <div class="col-md-6 offset-md-0">
+                                            <input class="form-check-input mt-1" type="checkbox" name="select-all"
+                                                id="select-all">
+                                            <label for="select-all">pilih semua</label>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -182,4 +173,17 @@
             </div>
         </div>
     </div>
+    <script>
+        $('#select-all').click(function(event) {
+            if (this.checked) {
+                $(':checkbox').each(function() {
+                    this.checked = true;
+                });
+            } else {
+                $(':checkbox').each(function() {
+                    this.checked = false;
+                });
+            }
+        });
+    </script>
 @endsection

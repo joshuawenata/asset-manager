@@ -36,7 +36,6 @@ class CreateRequestsTable extends Migration
             $table->boolean('flag_return')->nullable();
             $table->string('return_notice')->nullable();
             $table->dateTime('realize_return_date')->nullable();
-            $table->string('return_status')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('division_id');

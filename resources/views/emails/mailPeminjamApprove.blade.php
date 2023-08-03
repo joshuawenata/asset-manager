@@ -13,7 +13,6 @@
     <p>{!! $pesan !!}</p>
 
     <b>
-        <a href="{{ route('unduh', ['request_id' => $req_id]) }}">Download Form</a>
         <p>No-Reply Email <br> Email Sent By Inventory Management Binus @Bandung System</p>
     </b>
 

@@ -7,7 +7,7 @@
 <br>
 3. copy .env.example .env
 <br>
-4. composer require laravel/ui
+4. composer require laravel/ui --ignore-platform-req=ext-gd
 <br>
 5. php artisan ui:auth
 <br>

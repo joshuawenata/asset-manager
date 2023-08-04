@@ -1,22 +1,16 @@
 ### how to run
 
 <br>
-1. composer install --ignore-platform-reqs
+composer install --ignore-platform-reqs
 <br>
-2. php artisan serve
+copy .env.example .env
 <br>
-3. copy .env.example .env
+composer require laravel/ui --ignore-platform-req=ext-gd
 <br>
-4. composer require laravel/ui --ignore-platform-req=ext-gd
+php artisan key:generate
 <br>
-5. php artisan ui:auth
+php artisan config:cache
 <br>
-6. php artisan key:generate
+php artisan migrate:fresh --seed
 <br>
-7. php artisan config:cache
-<br>
-8. php artisan route:cache
-<br>
-9. php artisan migrate:fresh --seed
-<br>
-10. composer dump autoload
+php artisan serve

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Asset;
-use App\Models\assetLocation;
+use App\Models\AssetLocation;
 use App\Models\Booking;
 use App\Models\User;
 use DateTime;
@@ -211,7 +211,7 @@ class BookingController extends Controller
         foreach ($bookings as $b){
             $aset = Asset::find($b->asset_id);
 
-            $loc = new assetLocation();
+            $loc = new AssetLocation();
             $loc->asset_id = $b->asset_id;
             $loc->responsible = $request->User->name . " (" . Auth::user()->name . ")";
             $loc->responsible_id = $request->User->id;
@@ -250,7 +250,7 @@ class BookingController extends Controller
         foreach ($bookings as $b){
             $aset = Asset::find($b->asset_id);
 
-            $prev_pos = assetLocation::orderBy('id', 'desc')
+            $prev_pos = AssetLocation::orderBy('id', 'desc')
                 ->where('asset_id', '=', $b->asset_id)
                 ->offset(1)->limit(1)
                 ->get();
@@ -258,7 +258,7 @@ class BookingController extends Controller
                 $lok = $p->to_location;
             }
 
-            $loc = new assetLocation();
+            $loc = new AssetLocation();
             $loc->asset_id = $b->asset_id;
             $loc->responsible = $request->User->name . " (" . Auth::user()->name . ")";
             $loc->responsible_id = $request->User->id;

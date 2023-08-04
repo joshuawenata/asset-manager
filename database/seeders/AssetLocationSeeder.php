@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\assetLocation;
+use App\Models\AssetLocation;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 

@@ -13,6 +13,15 @@ Route::get('/', function () {
     return view('auth.login');
 })->name('login')->middleware('guest');
 
+// Import the necessary classes at the beginning of the file
+use App\Http\Controllers\Auth\ResetPasswordController;
+
+// Add the following lines to your routes file
+Route::get('password/reset', 'App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'App\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'App\Http\Controllers\Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/perbaharui', 'App\Http\Controllers\Auth\ResetPasswordController@reset')->name('password.perbaharui');
+
 Auth::routes();
 
 //HISTORI REQUEST

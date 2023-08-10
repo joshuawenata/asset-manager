@@ -1,14 +1,28 @@
 ### how to run
 
 <br>
-composer install --ignore-platform-reqs
+1. composer install --ignore-platform-reqs
 <br>
-copy .env.example .env
+2. php artisan serve
 <br>
-php artisan key:generate
+3. copy .env.example .env
 <br>
-php artisan config:cache
+4. add extension=gd in C:\xampp\php\php.ini
 <br>
-php artisan migrate:fresh --seed
+5. add extension=zip in C:\xampp\php\php.ini
 <br>
-php artisan serve
+6. composer require laravel/ui
+<br>
+7. php artisan key:generate
+<br>
+8. php artisan config:cache
+<br>
+9. php artisan route:cache 
+<br>
+10. php artisan migrate:fresh --seed
+<br>
+### optional
+<br>
+11. php artisan ui:auth
+<br>
+12. composer dump autoload

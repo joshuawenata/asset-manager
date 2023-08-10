@@ -21,7 +21,11 @@
 <br>
 10. php artisan migrate:fresh --seed
 <br>
-### optional
+========
+<br>
+optional
+<br>
+========
 <br>
 11. php artisan ui:auth
 <br>

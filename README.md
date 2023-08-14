@@ -7,16 +7,26 @@
 <br>
 3. copy .env.example .env
 <br>
-4. composer require laravel/ui
+4. add extension=gd in C:\xampp\php\php.ini
 <br>
-5. php artisan ui:auth
+5. add extension=zip in C:\xampp\php\php.ini
 <br>
-6. php artisan key:generate
+6. composer require laravel/ui
 <br>
-7. php artisan config:cache
+7. php artisan key:generate
 <br>
-8. php artisan route:cache
+8. php artisan config:cache
 <br>
 9. php artisan migrate:fresh --seed
 <br>
-10. composer dump autoload
+========
+<br>
+optional
+<br>
+========
+<br>
+10. php artisan route:cache 
+<br>
+11. php artisan ui:auth
+<br>
+12. composer dump autoload

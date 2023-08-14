@@ -36,7 +36,7 @@ class Asset extends Model
     }
 
     public function assetLocation(){
-        return$this->hasMany(assetLocation::class);
+        return$this->hasMany(AssetLocation::class);
     }
     //  5 diatas dah bener
 

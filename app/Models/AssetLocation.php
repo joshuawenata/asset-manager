@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class assetLocation extends Model
+class AssetLocation extends Model
 {
     use HasFactory;
 

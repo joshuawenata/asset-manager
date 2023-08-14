@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Asset;
-use App\Models\assetLocation;
+use App\Models\AssetLocation;
 use App\Models\Location;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -37,7 +37,7 @@ class AssetLocationController extends Controller
     }
 
     public function initialize($aset){
-        $new = new assetLocation();
+        $new = new AssetLocation();
         $new->asset_id = $aset->id;
         $new->to_location = $aset->current_location;
         $new->responsible = Auth::user()->name;
@@ -58,7 +58,7 @@ class AssetLocationController extends Controller
         $assets = unserialize($data['assets']);
 
         foreach ($assets as $a){
-            $new = new assetLocation();
+            $new = new AssetLocation();
             $new->asset_id = $a;
             $new->responsible = $data['responsible'];
             $new->responsible_id = Auth::user()->id;
@@ -82,7 +82,7 @@ class AssetLocationController extends Controller
      */
     public function show($id)
     {
-        $pemindahan = assetLocation::orderBy('id', 'desc')->where('asset_id', $id)->get();
+        $pemindahan = AssetLocation::orderBy('id', 'desc')->where('asset_id', $id)->get();
 
         return view('admin.moveAssetHistory', [
             'data' => $pemindahan

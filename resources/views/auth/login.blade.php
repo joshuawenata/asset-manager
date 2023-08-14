@@ -48,7 +48,9 @@
                                     <button type="submit" class="btn btn-primary">
                                         {{ __('Masuk') }}
                                     </button>
-
+                                    <a href="{{ route('password.request') }}">
+                                        {{ __('Forgot Your Password?') }}
+                                    </a>
                                 </div>
                             </div>
 

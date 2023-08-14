@@ -6,15 +6,10 @@
             <div class="col-md-12">
 
                 @if (session('message'))
-                    @if (session('message') == 'Data Uploaded failed!' ||
-                            session('message') == 'Please choose your file!' ||
-                            session('message') == 'Error: The file is unreadable or corrupted. Please upload a valid Excel file.' ||
-                            session('message') ==
-                                'Error: No file type detected. Please upload a valid Excel file with the .xlsx extension.' ||
-                            session('message') == 'An error occurred while processing the file. Please try again.')
-                        <div class="alert alert-danger" role="alert">{{ session('message') }}</div>
-                    @else
+                    @if (session('message') == 'Data Uploaded Successfully!')
                         <div class="alert alert-success" role="alert">{{ session('message') }}</div>
+                    @else
+                        <div class="alert alert-danger" role="alert">{{ session('message') }}</div>
                     @endif
                 @endif
 

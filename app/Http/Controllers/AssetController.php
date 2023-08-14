@@ -129,7 +129,7 @@ class AssetController extends Controller
             $msg_error = "Error: No file type detected. Please upload a valid Excel file with the .xlsx extension.";
             return redirect('/create-asset-excel-staff')->with('message', $msg_error);
         } catch (\Exception $e) {
-            $msg_error = "An error occurred while processing the file. Please try again.";
+            $msg_error = $e->getMessage();
             return redirect('/create-asset-excel-staff')->with('message', $msg_error);
         }
     }
@@ -163,7 +163,7 @@ class AssetController extends Controller
             $msg_error = "Error: No file type detected. Please upload a valid Excel file with the .xlsx extension.";
             return redirect('/create-asset-excel')->with('message', $msg_error);
         } catch (\Exception $e) {
-            $msg_error = "An error occurred while processing the file. Please try again.";
+            $msg_error = $e->getMessage();
             return redirect('/create-asset-excel')->with('message', $msg_error);
         }
     }

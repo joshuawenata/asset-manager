@@ -51,7 +51,7 @@
         </div>
     </div> --}}
 
-    <div class="modal fade" id="resetModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- <div class="modal fade" id="resetModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
 
@@ -73,7 +73,7 @@
 
             </div>
         </div>
-    </div>
+    </div> -->
 
     <div class="container">
         <div class="row justify-content-center">
@@ -197,17 +197,17 @@
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
 
-                                    <button type="button" class="btn btn-danger ResetPassBtn"
-                                        value="{{ $data->id }}">Reset Password</button>
+                                    <!-- <button type="button" class="btn btn-danger ResetPassBtn"
+                                        value="{{ $data->id }}">Reset Password</button> -->
 
-                                    {{-- <button type="button" class="btn btn-danger deleteUserBtn"
-                                        value="{{ $data->id }}">Hapus User</button> --}}
+                                    <!-- <button type="button" class="btn btn-danger deleteUserBtn"
+                                        value="{{ $data->id }}">Hapus User</button>  -->
 
                                     <button type="submit" class="btn btn-primary">
                                         {{ __('perbaharui Data') }}
                                     </button>
                                 </div>
-                                <div class="col-md-6 offset-md-4">Format password default : B1nu$-[Binusian ID]</div>
+                                <!-- <div class="col-md-6 offset-md-4">Format password default : B1nu$-[Binusian ID]</div> -->
                             </div>
 
                         </form>

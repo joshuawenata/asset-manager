@@ -35,6 +35,7 @@
                                         <th scope="col">Lokasi</th>
                                     @endif
                                     <th scope="col">Pemilik Barang</th>
+                                    <th scope="col">Waktu Hapus</th>
                                     @if ($mode == 'current')
                                         <th scope="col">Status</th>
                                     @endif

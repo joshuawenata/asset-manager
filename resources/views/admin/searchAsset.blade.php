@@ -41,6 +41,9 @@
                                         <th scope="col">Lokasi</th>
                                     @endif
                                     <th scope="col">Pemilik Barang</th>
+                                    @if ($mode == 'deleted')
+                                    <th scope="col">Timestamp</th>
+                                    @endif
                                     @if ($mode == 'current')
                                         <th scope="col">Status</th>
                                         <th scope="col">Aksi</th>
@@ -59,6 +62,9 @@
                                             <td>{{ $item->current_location }}</td>
                                         @endif
                                         <td>{{ $item->pemilik_barang }}</td>
+                                        @if ($mode == 'deleted')
+                                            <td>{{ $item->created_at }}</td>
+                                        @endif
                                         @if ($mode == 'current')
                                             @if ($item->status == 'dipinjam')
                                                 <td>{{ $item->status . ' oleh ' . $item->getNamaPeminjam($item->id) }}</td>

@@ -17,15 +17,15 @@
 <br>
 8. php artisan config:cache
 <br>
-9. php artisan route:cache 
-<br>
-10. php artisan migrate:fresh --seed
+9. php artisan migrate:fresh --seed
 <br>
 ========
 <br>
 optional
 <br>
 ========
+<br>
+10. php artisan route:cache 
 <br>
 11. php artisan ui:auth
 <br>

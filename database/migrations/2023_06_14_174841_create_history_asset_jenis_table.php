@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('history_asset_categories', function (Blueprint $table) {
+        Schema::create('history_asset_jenis', function (Blueprint $table) {
             $table->id();
             $table->longText('aksi');
             $table->timestamps();
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('history_asset_categorys');
+        Schema::dropIfExists('history_asset_jeniss');
     }
 };

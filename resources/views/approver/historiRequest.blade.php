@@ -38,8 +38,10 @@
                             <tr>
                                 <th>No</th>
                                 <th>Kode Barang</th>
+                                <th>Jenis Barang</th>
                                 <th>Kategori Barang</th>
-                                <th>Spesifikasi</th>
+                                <th>Brand</th>
+                                <th>Spesifikasi Barang</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -49,7 +51,9 @@
                                         <th scope="row">{{ $index + 1 }}</th>
                                         <td>{{ $item->serial_number }}</td>
                                         <td>{{ $item->name }}</td>
+                                        <td>{{ $item->kategori_barang }}</td>
                                         <td>{{ $item->brand }}</td>
+                                        <td>{{ $item->spesifikasi_barang }}</td>
                                     </tr>
                                 @endforeach
                             @endif

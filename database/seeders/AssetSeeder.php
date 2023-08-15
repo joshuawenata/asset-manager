@@ -14,44 +14,6 @@ class AssetSeeder extends Seeder
      */
     public function run()
     {
-        Asset::create([
-            'serial_number' => 'SN1234',
-            'status' => 'tersedia',
-            'brand' => 'Canon',
-            'current_location' => 'Prodi DI Lt.6',
-            'pemilik_barang' => 'joshua',
-            'division_id' => 3,
-            'asset_category_id' => 1
-        ]);
 
-        Asset::create([
-            'serial_number' => 'DF5754',
-            'status' => 'tersedia',
-            'brand' => 'Saramonic',
-            'current_location' => 'SLSC Lt.6',
-            'pemilik_barang' => 'joshua',
-            'division_id' => 3,
-            'asset_category_id' => 3
-        ]);
-
-        Asset::create([
-            'serial_number' => 'AB7869',
-            'status' => 'tersedia',
-            'brand' => 'Nikon',
-            'current_location' => 'Prodi DKV Lt.6',
-            'pemilik_barang' => 'joshua',
-            'division_id' => 2,
-            'asset_category_id' => 1
-        ]);
-
-        Asset::create([
-            'serial_number' => 'GF4363',
-            'status' => 'tersedia',
-            'brand' => 'HP',
-            'current_location' => 'Prodi DKV Lt.6',
-            'pemilik_barang' => 'joshua',
-            'division_id' => 2,
-            'asset_category_id' => 2
-        ]);
     }
 }

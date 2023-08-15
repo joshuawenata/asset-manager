@@ -5,7 +5,7 @@
 @endsection
 
 @section('js')
-    <script defer src="{{ asset('js/newassetcategory.js') }}"></script>
+    <script defer src="{{ asset('js/newassetJenis.js') }}"></script>
     <script defer src="{{ asset('js/newpemilikbarang2.js') }}"></script>
 @endsection
 
@@ -53,7 +53,7 @@
                                 </div>
                             </div>
 
-                            {{-- fitur baru Pemilik Barang --}}
+                            {{-- fitur baru pemilik barang --}}
                             <div class="row mb-3">
                                 <label for="pemilik-barang"
                                     class="col-md-4 col-form-label text-md-end">{{ __('Pemilik Barang') }}</label>
@@ -66,33 +66,60 @@
                                 </div>
                             </div>
 
-                            {{-- <div class="row mb-3">
-                                <label for="asset-category"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('') }}</label>
+                            <div class="row mb-3">
+                                <label for="asset-jenis"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Jenis Barang') }}</label>
 
                                 <div class="col-md-6">
-                                    <div class="mt-2">
-                                        <input class="form-check-input mt-1" type="checkbox" id="show2"
-                                            name="pemilik-barang" value="" />
-                                        <label for="pemilik-barang">Tambah Pemilik Barang Baru</label>
-                                    </div>
-                                    <div id="box2" style="display: none;">
-                                        <input id="new-pemilik-barang" type="text"
-                                            class="form-control mt-2 @error('new-pemilik-barang') is-invalid @enderror"
-                                            name="new-pemilik-barang" value="{{ old('new-pemilik-barang') }}" />
-
-                                        @error('new-pemilik-barang')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
+                                    @if ($show)
+                                        @foreach ($show as $index => $item)
+                                            <div class="mt-2">
+                                                <input class="form-check-input mt-1" type="radio" id="hide"
+                                                    name="asset-jenis" value="{{ $item->id }}" checked />
+                                                <label for="hide">{{ $item->name }}</label>
+                                            </div>
+                                        @endforeach
+                                    @endif
                                 </div>
-                            </div> --}}
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="kategori-barang"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Kategori Barang') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="kategori-barang" type="text"
+                                        class="form-control @error('kategori-barang') is-invalid @enderror" name="kategori-barang"
+                                        value="{{ old('kategori-barang') }}" required autocomplete="kategori-barang" autofocus>
+
+                                    @error('kategori-barang')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="spesifikasi-barang"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Spesifikasi Barang') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="spesifikasi-barang" type="text"
+                                        class="form-control @error('spesifikasi-barang') is-invalid @enderror" name="spesifikasi-barang"
+                                        value="{{ old('spesifikasi-barang') }}" required autocomplete="spesifikasi-barang" autofocus>
+
+                                    @error('spesifikasi-barang')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
 
                             <div class="row mb-3">
                                 <label for="brand"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Spesifikasi') }}</label>
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Brand') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="brand" type="text"
@@ -122,22 +149,6 @@
                             <input type="hidden" name="division_id" id="division_id"
                                 value="{{ \Illuminate\Support\Facades\Auth::user()->division->id }}">
 
-                            <div class="row mb-3">
-                                <label for="asset-category"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Kategori Barang') }}</label>
-
-                                <div class="col-md-6">
-                                    @if ($show)
-                                        @foreach ($show as $index => $item)
-                                            <div class="mt-2">
-                                                <input class="form-check-input mt-1" type="radio" id="hide"
-                                                    name="asset-category" value="{{ $item->id }}" checked />
-                                                <label for="hide">{{ $item->name }}</label>
-                                            </div>
-                                        @endforeach
-                                    @endif
-                                </div>
-                            </div>
 
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
@@ -146,7 +157,7 @@
                                     </button>
                                 </div>
                             </div>
-
+                            
                         </form>
 
                     </div>

@@ -9,8 +9,8 @@ class DeletedAsset extends Model
 {
     use HasFactory;
 
-    public function assetcategory(){
-        return $this->belongsTo(AssetCategory::class, 'asset_category_id');
+    public function assetJenis(){
+        return $this->belongsTo(AssetJenis::class, 'asset_jenis_id');
     }
 
     public function division(){

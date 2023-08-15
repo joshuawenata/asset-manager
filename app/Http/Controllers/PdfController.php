@@ -101,8 +101,8 @@ class PdfController extends Controller
 
         $bookings = DB::table('bookings')
             ->join('assets', 'bookings.asset_id', '=', 'assets.id')
-            ->join('asset_categories', 'bookings.asset_category_id', '=', 'asset_categories.id')
-            ->select('bookings.return_conditions','bookings.asset_id','assets.serial_number', 'assets.brand', 'asset_categories.name', 'assets.pemilik_barang')
+            ->join('asset_jenis', 'bookings.asset_jenis_id', '=', 'asset_jenis.id')
+            ->select('bookings.return_conditions','bookings.asset_id','assets.serial_number', 'assets.brand', 'asset_jenis.name', 'assets.pemilik_barang')
             ->where('bookings.request_id', '=', $id)
             ->where('bookings.status', '!=', 'rejected')
             ->get();

@@ -30,24 +30,26 @@
 @endsection
 
 @section('content')
-    {{--    modal see --}}
+    <!-- modal see -->
     <div class="modal fade" id="see" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered modal-lg"> <!-- Added the 'modal-lg' class for large size -->
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title">Aset</h5>
+                    <h5 class="modal-title">Inventory</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-
                 <div class="modal-body">
-                    <table class="display table">
+
+                <table class="display table">
                         <thead>
                             <tr>
                                 <th>No</th>
                                 <th>Kode Barang</th>
+                                <th>Jenis Barang</th>
                                 <th>Kategori Barang</th>
-                                <th>Spesifikasi</th>
+                                <th>Brand</th>
+                                <th>Spesifikasi Barang</th>
                                 <th>Kondisi</th>
                             </tr>
                         </thead>
@@ -55,10 +57,12 @@
                             @if (session('bookings'))
                                 @foreach (session('bookings') as $index => $item)
                                     <tr>
-                                        <th scope="row">{{ $index + 1 }}</th>
+                                    <th scope="row">{{ $index + 1 }}</th>
                                         <td>{{ $item->serial_number }}</td>
                                         <td>{{ $item->name }}</td>
+                                        <td>{{ $item->kategori_barang }}</td>
                                         <td>{{ $item->brand }}</td>
+                                        <td>{{ $item->spesifikasi_barang }}</td>
                                         <td>{{ $item->status == 'tidak tersedia' ? 'tersedia' : $item->status }}</td>
                                     </tr>
                                 @endforeach
@@ -66,17 +70,16 @@
                         </tbody>
                     </table>
 
-                    @if (session('request') != '')
-                        <div class="mb-3">
-                            <label for="pesan" class="col-form-label">Catatan Peminjaman:</label>
-                            <textarea class="form-control" id="pesan" name="pesan" readonly autofocus>{{ session('request') }}</textarea>
-                        </div>
-                    @endif
+                    <div class="mb-3">
+                        <label for="pesan" class="col-form-label">Catatan Peminjaman:</label>
+                        <textarea class="form-control" id="pesan" name="pesan" readonly autofocus>{{ session('request') }}</textarea>
+                    </div>
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
+
             </div>
         </div>
     </div>
@@ -114,7 +117,7 @@
 
     {{--    modal approve --}}
     <div class="modal fade" id="approveModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
 
                 <form action="{{ route('perbaharuiRequest') }}" method="post">
@@ -135,10 +138,11 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Kode Barang</th>
+                                    <th>Jenis Barang</th>
                                     <th>Kategori Barang</th>
-                                    <th>Spesifikasi</th>
+                                    <th>Brand</th>
+                                    <th>Spesifikasi Barang</th>
                                     <th>Kondisi</th>
-                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -148,7 +152,9 @@
                                             <th scope="row">{{ $index + 1 }}</th>
                                             <td>{{ $item->serial_number }}</td>
                                             <td>{{ $item->name }}</td>
+                                            <td>{{ $item->kategori_barang }}</td>
                                             <td>{{ $item->brand }}</td>
+                                            <td>{{ $item->spesifikasi_barang }}</td>
                                             <td>{{ $item->status == 'tidak tersedia' ? 'tersedia' : $item->status }}</td>
                                             <!-- Add name attribute to the checkbox inputs -->
                                             <td class="text-center"><input type="checkbox"

@@ -28,8 +28,10 @@
                                     <tr>
                                         <th scope="col">No</th>
                                         <th scope="col">Kode Barang</th>
+                                        <th scope="col">Jenis Barang</th>
                                         <th scope="col">Kategori Barang</th>
-                                        <th scope="col">Spesifikasi</th>
+                                        <th scope="col">Spesifikasi Barang</th>
+                                        <th scope="col">Brand</th>
                                         @if (\Illuminate\Support\Facades\Auth::user()->role->name == 'staff')
                                             <th scope="col">Milik</th>
                                         @endif
@@ -43,6 +45,8 @@
                                             <th scope="row">{{ $index + 1 }}</th>
                                             <td>{{ $item->serial_number }}</td>
                                             <td>{{ $item->name }}</td>
+                                            <td>{{ $item->kategori_barang }}</td>
+                                            <td>{{ $item->spesifikasi_barang }}</td>
                                             <td>{{ $item->brand }}</td>
                                             @if (\Illuminate\Support\Facades\Auth::user()->role->name == 'staff')
                                                 <td>{{ \App\Http\Controllers\DivisionController::show($item->division_id) }}

@@ -101,7 +101,7 @@ Route::middleware(['auth', 'cekRole:admin'])->group(function(){
     Route::get('/admin/dashboard', [\App\Http\Controllers\HomeController::class, 'admindashboard'])->name('admin.dashboard');
     Route::get('/admin/location', [\App\Http\Controllers\LocationAdminController::class, 'index'])->name('admin.location');
     Route::get('/admin/pemilikBarang', [\App\Http\Controllers\PemilikBarangController::class, 'index'])->name('admin.pemilik-barang');
-    Route::get('/admin/kategoriBarang', [\App\Http\Controllers\AssetCategoryController::class, 'index'])->name('admin.kategori-barang');
+    Route::get('/admin/kategoriBarang', [\App\Http\Controllers\AssetJenisController::class, 'index'])->name('admin.kategori-barang');
     Route::post('/delete-location-admin', [\App\Http\Controllers\LocationAdminController::class, 'destroy'])->name('delete-location-admin');
     Route::post('/store-location-admin', [\App\Http\Controllers\LocationAdminController::class, 'store'])->name('store-location-admin');
     Route::get('/admin/riwayat-perbaharui', [\App\Http\Controllers\AssetController::class, 'riwayat'])->name('admin.riwayat-perbaharui');
@@ -152,13 +152,13 @@ Route::middleware(['auth', 'cekRole:approver'])->group(function(){
 //Superadmin Routes
 Route::middleware(['auth', 'cekRole:superadmin'])->group(function(){
     Route::get('/superadmin/dashboard', [\App\Http\Controllers\HomeController::class, 'superadmindashboard'] )->name('superadmin.dashboard');
-    Route::get('/superadmin/kategori', [\App\Http\Controllers\AssetCategoryController::class, 'superadminKategori'] )->name('superadmin.kategori');
+    Route::get('/superadmin/kategori', [\App\Http\Controllers\AssetJenisController::class, 'superadminKategori'] )->name('superadmin.kategori');
     Route::get('/superadmin/pemilik-barang', [\App\Http\Controllers\PemilikBarangController::class, 'superadminPemilikBarang'] )->name('superadmin.pemilikbarang');
     Route::get('/edit-pemilik-barang/{id}', [\App\Http\Controllers\PemilikBarangController::class, 'destroy']);
     //HISTORY
     Route::get('/superadmin/history-departemen', [\App\Http\Controllers\DivisionController::class, 'historySuperadmin'])->name('superadmin.historyDepartemen');
     Route::get('/superadmin/history-lokasi', [\App\Http\Controllers\LocationController::class, 'historySuperadmin'])->name('superadmin.historyLocation');
-    Route::get('/superadmin/history-kategori-barang', [\App\Http\Controllers\AssetCategoryController::class, 'historySuperadmin'])->name('superadmin.historyAssetCategory');
+    Route::get('/superadmin/history-kategori-barang', [\App\Http\Controllers\AssetJenisController::class, 'historySuperadmin'])->name('superadmin.historyAssetJenis');
     Route::get('/superadmin/history-pemilik-barang', [\App\Http\Controllers\PemilikBarangController::class, 'historySuperadmin'])->name('superadmin.historyPemilikBarang');
     Route::get('/superadmin/history-akun', [\App\Http\Controllers\UserController::class, 'historySuperadmin'])->name('superadmin.historyAkun');
     Route::get('/superadmin/history-akun-staff/{id}', [\App\Http\Controllers\UserController::class, 'historyStaff'])->name('superadmin.historyAkunStaff');
@@ -166,7 +166,7 @@ Route::middleware(['auth', 'cekRole:superadmin'])->group(function(){
     Route::get('/superadmin/history-akun-approver/{id}', [\App\Http\Controllers\UserController::class, 'historyApprover'])->name('superadmin.historyAkunApprover');
 
     //LOCATION
-    Route::post('/create-new-asset-category', [\App\Http\Controllers\AssetCategoryController::class, 'createNewAssetCategory'])->name('createNewAssetCategory');
+    Route::post('/create-new-asset-Jenis', [\App\Http\Controllers\AssetJenisController::class, 'createNewAssetJenis'])->name('createNewAssetJenis');
     Route::post('/create-new-pemilik-barang', [\App\Http\Controllers\PemilikBarangController::class, 'createNewPemilikBarang'])->name('createNewPemilikBarang');
     Route::post('/store-location', [\App\Http\Controllers\LocationController::class, 'store'])->name('store-location');
     Route::get('/location', [\App\Http\Controllers\LocationController::class, 'index'])->name('superadmin.location');
@@ -180,11 +180,11 @@ Route::middleware(['auth', 'cekRole:superadmin'])->group(function(){
         return view('auth.register');
     })->name('superadmin.register');
     //DELETE
-    Route::get('/delete-kategori-barang/{id}', [\App\Http\Controllers\AssetCategoryController::class, 'destroy']);
+    Route::get('/delete-kategori-barang/{id}', [\App\Http\Controllers\AssetJenisController::class, 'destroy']);
     Route::post('/delete-division', [\App\Http\Controllers\DivisionController::class, 'destroy']);
     //USER
     //perbaharui
-    Route::post('/edit-kategori-barang/{id}', [\App\Http\Controllers\AssetCategoryController::class, 'perbaharui'])->name('perbaharuiKategoriBarang');
+    Route::post('/edit-kategori-barang/{id}', [\App\Http\Controllers\AssetJenisController::class, 'perbaharui'])->name('perbaharuiKategoriBarang');
     Route::get('/edit-user/{id}', [\App\Http\Controllers\UserController::class, 'edit']);
     Route::get('/edit-user-active-status/{id}', [\App\Http\Controllers\UserController::class, 'editActive']);
     Route::put('/perbaharui-user/{id}', [\App\Http\Controllers\UserController::class, 'perbaharui']);

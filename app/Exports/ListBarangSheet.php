@@ -16,7 +16,7 @@ use PhpOffice\PhpSpreadsheet\Cell\DataValidation;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithTitle;
-use App\Models\AssetCategory;
+use App\Models\AssetJenis;
 
 class ListBarangSheet implements FromCollection, WithHeadings, WithStyles, WithEvents, ShouldAutoSize, WithTitle, WithStrictNullComparison
 {
@@ -78,7 +78,7 @@ class ListBarangSheet implements FromCollection, WithHeadings, WithStyles, WithE
                 $drop_column = 'E';
 
                 // set dropdown options
-                $options = AssetCategory::where('status', 1)->pluck('name')->toArray();
+                $options = AssetJenis::where('status', 1)->pluck('name')->toArray();
 
                 // set dropdown list for first data row
                 $validation = $event->sheet->getCell("{$drop_column}2")->getDataValidation();

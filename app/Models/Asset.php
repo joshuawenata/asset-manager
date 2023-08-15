@@ -16,11 +16,11 @@ class Asset extends Model
         'current_location',
         'pemilik_barang',
         'division_id',
-        'asset_category_id'
+        'asset_jenis_id'
     ];
 
-    public function assetcategory(){
-        return $this->belongsTo(AssetCategory::class, 'asset_category_id');
+    public function assetJenis(){
+        return $this->belongsTo(AssetJenis::class, 'asset_jenis_id');
     }
 
     public function division(){

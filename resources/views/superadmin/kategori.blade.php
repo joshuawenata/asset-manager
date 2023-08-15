@@ -8,16 +8,16 @@
 
 @section('js')
     <script defer src="{{ asset('js/datatable.js') }}"></script>
-    <script defer src="{{ asset('js/newassetcategory.js') }}"></script>
+    <script defer src="{{ asset('js/newassetjenis.js') }}"></script>
 @endsection
 
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <form action="{{ route('superadmin.historyAssetCategory') }}">
+                <form action="{{ route('superadmin.historyAssetJenis') }}">
                     <button type="submit" class="btn btn-small btn-success mb-3" data-bs-toggle="modal">
-                        History Kategori Barang
+                        History Jenis Barang
                     </button>
                 </form>
                 @if (session('error'))
@@ -26,7 +26,7 @@
                     </div>
                 @endif
                 <div class="card">
-                    <div class="card-header">{{ __('Kelola Kategori Barang') }}</div>
+                    <div class="card-header">{{ __('Kelola Jenis Barang') }}</div>
 
                     <div class="card-body">
 
@@ -34,19 +34,19 @@
                             <div class="alert alert-success">{{ session('message') }}</div>
                         @endif
 
-                        <form method="POST" action="{{ route('createNewAssetCategory') }}">
+                        <form method="POST" action="{{ route('createNewAssetJenis') }}">
                             @csrf
                             <div class="mt-2">
                                 <input class="form-check-input mt-1 mb-3" type="checkbox" id="show"
-                                    name="asset-category" value="" />
-                                <label for="show">Tambah Kategori Barang Baru</label>
+                                    name="asset-Jenis" value="" />
+                                <label for="show">Tambah Jenis Barang Baru</label>
                             </div>
                             <div id="box" style="display: none;">
-                                <input id="new-asset-category" type="text"
-                                    class="form-control mt-2 mb-3 @error('new-asset-category') is-invalid @enderror"
-                                    name="new-asset-category" value="{{ old('new-asset-category') }}" />
+                                <input id="new-asset-Jenis" type="text"
+                                    class="form-control mt-2 mb-3 @error('new-asset-jenis') is-invalid @enderror"
+                                    name="new-asset-Jenis" value="{{ old('new-asset-jenis') }}" />
 
-                                @error('new-asset-category')
+                                @error('new-asset-jenis')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

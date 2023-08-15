@@ -71,9 +71,9 @@
             </div>
         </div>
     </div>
-    {{--    modal see --}}
+    <!-- modal see -->
     <div class="modal fade" id="see" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered modal-lg"> <!-- Added the 'modal-lg' class for large size -->
             <div class="modal-content">
 
                 <div class="modal-header">
@@ -82,13 +82,15 @@
                 </div>
                 <div class="modal-body">
 
-                    <table class="display table">
+                <table class="display table">
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nomor Seri</th>
-                                <th>Jenis</th>
-                                <th>Spesifikasi</th>
+                                <th>Kode Barang</th>
+                                <th>Jenis Barang</th>
+                                <th>Kategori Barang</th>
+                                <th>Brand</th>
+                                <th>Spesifikasi Barang</th>
                                 <th>Kondisi</th>
                             </tr>
                         </thead>
@@ -96,10 +98,12 @@
                             @if (session('bookings'))
                                 @foreach (session('bookings') as $index => $item)
                                     <tr>
-                                        <th scope="row">{{ $index + 1 }}</th>
+                                    <th scope="row">{{ $index + 1 }}</th>
                                         <td>{{ $item->serial_number }}</td>
                                         <td>{{ $item->name }}</td>
+                                        <td>{{ $item->kategori_barang }}</td>
                                         <td>{{ $item->brand }}</td>
+                                        <td>{{ $item->spesifikasi_barang }}</td>
                                         <td>{{ $item->status == 'tidak tersedia' ? 'tersedia' : $item->status }}</td>
                                     </tr>
                                 @endforeach

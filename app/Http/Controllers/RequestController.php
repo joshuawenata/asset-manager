@@ -105,8 +105,8 @@ class RequestController extends Controller
 
         $aset = DB::table('bookings')
             ->join('assets', 'bookings.asset_id', '=', 'assets.id')
-            ->join('asset_categories', 'bookings.asset_category_id', '=', 'asset_categories.id')
-            ->select('bookings.id', 'assets.serial_number', 'assets.brand', 'asset_categories.name', 'bookings.return_conditions')
+            ->join('asset_jenis', 'bookings.asset_jenis_id', '=', 'asset_jenis.id')
+            ->select('bookings.id', 'assets.serial_number', 'assets.brand', 'asset_jenis.name', 'bookings.return_conditions')
             ->where('bookings.request_id', '=', $id)
             ->where('bookings.status', '=', 'approved')
             ->get();
@@ -197,8 +197,8 @@ class RequestController extends Controller
 
         $assets = DB::table('bookings')
             ->join('assets', 'bookings.asset_id', '=', 'assets.id')
-            ->join('asset_categories', 'bookings.asset_category_id', '=', 'asset_categories.id')
-            ->select('assets.serial_number', 'assets.brand', 'asset_categories.name')
+            ->join('asset_jenis', 'bookings.asset_jenis_id', '=', 'asset_jenis.id')
+            ->select('assets.serial_number', 'assets.brand', 'asset_jenis.name')
             ->where('bookings.request_id', '=', $id)
             ->get();
 
@@ -263,8 +263,8 @@ class RequestController extends Controller
         $div_id = $request->input('division_id');
 
         $assets = DB::table('assets')
-            ->join('asset_categories', 'assets.asset_category_id', '=', 'asset_categories.id')
-            ->select('assets.*', 'asset_categories.name')
+            ->join('asset_jenis', 'assets.asset_jenis_id', '=', 'asset_jenis.id')
+            ->select('assets.*', 'asset_jenis.name')
             ->where('assets.status', 'tersedia')
             ->where('assets.division_id', '=', $div_id)
             ->orWhere('assets.status', 'dipinjam')
@@ -340,8 +340,8 @@ class RequestController extends Controller
 
         foreach ($assets as $i){
             $asset = DB::table('assets')
-                ->join('asset_categories', 'assets.asset_category_id', '=', 'asset_categories.id')
-                ->select('assets.*', 'asset_categories.name')
+                ->join('asset_jenis', 'assets.asset_jenis_id', '=', 'asset_jenis.id')
+                ->select('assets.*', 'asset_jenis.name')
                 ->where('assets.id', '=', $i)
                 ->get();
             foreach ($asset as $a){

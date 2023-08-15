@@ -16,18 +16,18 @@ use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithTitle;
 use Illuminate\Support\Facades\Auth;
-use App\Models\AssetCategory;
+use App\Models\AssetJenis;
 use App\Models\Location;
 use App\Models\PemilikBarang;
 
-class AssetCategoryExport implements FromCollection, WithHeadings, WithStyles, WithEvents, ShouldAutoSize, WithTitle, WithStrictNullComparison
+class AssetJenisExport implements FromCollection, WithHeadings, WithStyles, WithEvents, ShouldAutoSize, WithTitle, WithStrictNullComparison
 {
     public function collection()
     {
         return new Collection([
-            ['B001', 'barang1', 'SLSC', 'admin', 'Kamera', 'tersedia'],
-            ['B002', 'barang2', 'SLC', 'admin', 'Kamera', 'tersedia'],
-            ['B003', 'barang3', 'Lt. 6', 'admin', 'Kamera', 'tidak tersedia']
+            ['B001', 'SLSC', 'admin', 'Kamera', 'Kamera Digital', 'Canon', 'Canon ABC', 'tersedia'],
+            ['B002', 'SLC',  'admin', 'Kamera', 'Kamera Digital', 'Canon', 'Canon DEF', 'tersedia'],
+            ['B003', 'Lt. 6', 'admin', 'Kamera', 'Kamera Digital', 'Canon', 'Canon GHI', 'tidak tersedia']
         ]);
     }
 
@@ -35,10 +35,12 @@ class AssetCategoryExport implements FromCollection, WithHeadings, WithStyles, W
     {
         return [
             'Kode Barang',
-            'Spesifikasi Barang',
             'Lokasi Barang',
             'Pemilik Barang',
+            'Jenis Barang',
             'Kategori Barang',
+            'Spesifikasi Barang',
+            'Brand',
             'Status Barang'
         ];
     }
@@ -77,7 +79,7 @@ class AssetCategoryExport implements FromCollection, WithHeadings, WithStyles, W
                 $row_count = 10000;
                 $column_count = 5;
 
-                $location_drop_column = 'C'; // 'C' is the column index for the "Location" column
+                $location_drop_column = 'B'; // 'B' is the column index for the "Location" column
 
                 // Fetch dropdown options for "Location" from the "AssetLocation" table
                 $location_options = Location::pluck('name')->toArray();
@@ -101,7 +103,7 @@ class AssetCategoryExport implements FromCollection, WithHeadings, WithStyles, W
                     $event->sheet->getCell("{$location_drop_column}{$i}")->setDataValidation(clone $location_validation);
                 }
 
-                $pemilik_barang_drop_column = 'D'; // 'D' is the column index for the "Pemilik Barang" column
+                $pemilik_barang_drop_column = 'C'; // 'D' is the column index for the "Pemilik Barang" column
 
                 // Fetch dropdown options for "Pemilik Barang" based on the logged-in user's division ID
                 $userDivisionId = Auth::user()->division_id; // Assuming you have a user authentication system
@@ -127,10 +129,10 @@ class AssetCategoryExport implements FromCollection, WithHeadings, WithStyles, W
                 }
 
                 // set dropdown column for "Kategori Barang"
-                $kategori_barang_drop_column = 'E'; // 'E' is the column index for the "Kategori Barang" column
+                $kategori_barang_drop_column = 'D'; // 'E' is the column index for the "Kategori Barang" column
 
                 // set dropdown options for "Kategori Barang"
-                $kategori_barang_options = AssetCategory::where('status', 1)->pluck('name')->toArray();
+                $kategori_barang_options = AssetJenis::where('status', 1)->pluck('name')->toArray();
 
                 // set dropdown list for first data row for "Kategori Barang"
                 $kategori_barang_validation = $event->sheet->getCell("{$kategori_barang_drop_column}2")->getDataValidation();
@@ -152,7 +154,7 @@ class AssetCategoryExport implements FromCollection, WithHeadings, WithStyles, W
                 }
 
                 // set dropdown column for "Status Barang"
-                $status_barang_drop_column = 'F'; // 'F' is the column index for the "Status Barang" column
+                $status_barang_drop_column = 'H'; // 'F' is the column index for the "Status Barang" column
 
                 // set dropdown options for "Status Barang"
                 $status_barang_options = ['tersedia', 'tidak tersedia'];

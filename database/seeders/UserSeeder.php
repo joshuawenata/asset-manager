@@ -14,65 +14,11 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
-            'name' => 'Joshua Wenata Sunarto',
-            'email' => 'joshua.sunarto@binus.ac.id',
-            'password' => bcrypt('12345'),
-            'binusianid' => 'BN0014352432',
-            'phone' => '082543356234',
-            'division_id' => '3',
-            'role_id' => '1',
-            'active_status' => 1,
-        ]);
-
-        User::create([
-            'name' => 'LB003',
-            'email' => 'lb003@binus.edu',
-            'password' => bcrypt('12345'),
-            'binusianid' => 'BN8345345865',
-            'phone' => '081345634543',
-            'division_id' => '3',
-            'role_id' => '2',
-            'active_status' => 1,
-        ]);
-
-        User::create([
-            'name' => 'Siska',
-            'email' => 'siska.novianti@binus.edu',
-            'password' => bcrypt('12345'),
-            'binusianid' => 'BN83453451865',
-            'phone' => '081345634543',
-            'division_id' => '4',
-            'role_id' => '2',
-            'active_status' => 1,
-        ]);
-
-        User::create([
-            'name' => 'Maria Auleria',
-            'email' => 'joshua.sunarto@binus.edu',
-            'password' => bcrypt('12345'),
-            'binusianid' => 'BN835638546',
-            'phone' => '08145635438',
-            'division_id' => '3',
-            'role_id' => '3',
-            'active_status' => 1,
-        ]);
-
-        User::create([
-            'name' => 'Dummy Staff',
-            'email' => 'dummy.staff@binus.edu',
-            'password' => bcrypt('12345'),
-            'binusianid' => 'BNDUMMY',
-            'phone' => '08111111',
-            'division_id' => '3',
-            'role_id' => '1',
-            'active_status' => 1,
-        ]);
 
         User::create([
             'name' => 'superadmin',
-            'email' => 'superadmin@super.co',
-            'password' => bcrypt('12345'),
+            'email' => 'inventory.bdg@binus.edu',
+            'password' => bcrypt('C)5I*:xNGXmh'),
             'binusianid' => null,
             'phone' => null,
             'division_id' => null,

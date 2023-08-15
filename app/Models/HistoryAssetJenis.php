@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class HistoryAssetCategory extends Model
+class HistoryAssetJenis extends Model
 {
     use HasFactory;
 }

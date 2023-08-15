@@ -13,7 +13,7 @@ function handleRadioClick() {
     }
 }
 
-const radioButtons = document.querySelectorAll('input[name="asset-category"]');
+const radioButtons = document.querySelectorAll('input[name="asset-Jenis"]');
 radioButtons.forEach((radio) => {
     radio.addEventListener("click", handleRadioClick);
 });

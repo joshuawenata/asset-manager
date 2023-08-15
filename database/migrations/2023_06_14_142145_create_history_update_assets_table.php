@@ -17,14 +17,18 @@ return new class extends Migration
             $table->id();
             $table->string("id_pengubah");
             $table->string("kode_barang");
+            $table->string("jenis_barang");
             $table->string("kategori_barang");
             $table->string("status_barang");
             $table->string("spesifikasi_barang");
+            $table->string("brand");
             $table->string("pemilik_barang");
             $table->string("new_kode_barang");
+            $table->string("new_jenis_barang");
             $table->string("new_kategori_barang");
             $table->string("new_status_barang");
             $table->string("new_spesifikasi_barang");
+            $table->string("new_brand");
             $table->string("new_pemilik_barang");
             $table->timestamps();
         });

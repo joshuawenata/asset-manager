@@ -2,7 +2,7 @@
 
 @section('js')
     <script defer src="{{ asset('js/datatable.js') }}"></script>
-    <script defer src="{{ asset('js/newassetcategory.js') }}"></script>
+    <script defer src="{{ asset('js/newassetJenis.js') }}"></script>
 @endsection
 
 @section('css')

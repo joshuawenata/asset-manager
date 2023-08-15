@@ -26,8 +26,10 @@
                                 <tr>
                                     <th scope="col">No</th>
                                     <th scope="col">Kode Barang</th>
-                                    <th scope="col">Spesifikasi</th>
+                                    <th scope="col">Jenis Barang</th>
                                     <th scope="col">Kategori Barang</th>
+                                    <th scope="col">Brand</th>
+                                    <th scope="col">Spesifikasi Barang</th>
                                     <th scope="col">Lokasi pemindahan</th>
                                     <th scope="col">Oleh</th>
                                     <th scope="col">Tanggal</th>
@@ -40,8 +42,10 @@
                                         {{--                masukin kolom --}}
                                         <th scope="row">{{ $index + 1 }}</th>
                                         <td>{{ $rec->asset->serial_number }}</td>
+                                        <td>{{ $rec->asset->assetJenis->name }}</td>
+                                        <td>{{ $rec->asset->kategori_barang }}</td>
                                         <td>{{ $rec->asset->brand }}</td>
-                                        <td>{{ $rec->asset->assetcategory->name }}</td>
+                                        <td>{{ $rec->asset->spesifikasi_barang }}</td>
                                         <td>{{ $rec->to_location }}</td>
                                         <td>{{ $rec->responsible }}</td>
                                         <td>{{ date('d M Y ' . '\Pk' . ' H:i', strtotime($rec->created_at)) }}</td>

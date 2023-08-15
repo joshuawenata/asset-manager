@@ -17,12 +17,14 @@ class CreateAssetsTable extends Migration
             $table->id();
             $table->string('serial_number')->unique();
             $table->string('status')->default('tidak tersedia');
+            $table->string('kategori_barang');
+            $table->string('spesifikasi_barang');
             $table->string('brand');
             $table->string('current_location');
             $table->string('pemilik_barang');
             $table->unsignedBigInteger('division_id');
-            $table->unsignedBigInteger('asset_category_id');
-            $table->foreign('asset_category_id')->references('id')->on('asset_categories');
+            $table->unsignedBigInteger('asset_jenis_id');
+            $table->foreign('asset_jenis_id')->references('id')->on('asset_jenis');
             $table->foreign('division_id')->references('id')->on('divisions');
             $table->timestamps();
         });

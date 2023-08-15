@@ -25,13 +25,17 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Kode Barang </th>
+                                    <th>Jenis Barang</th>
                                     <th>Kategori Barang</th>
                                     <th>Status Barang</th>
+                                    <th>Brand</th>
                                     <th>Spesifikasi Barang</th>
                                     <th>Pemilik Barang</th>
                                     <th>New Kode Barang </th>
+                                    <th>New Jenis Barang</th>
                                     <th>New Kategori Barang</th>
                                     <th>New Status Barang</th>
+                                    <th>New Brand</th>
                                     <th>New Spesifikasi Barang</th>
                                     <th>New Pemilik Barang</th>
                                 </tr>
@@ -42,13 +46,17 @@
                                         {{--                masukin kolom --}}
                                         <th scope="row">{{ $index + 1 }}</th>
                                         <td>{{ $req->kode_barang }}</td>
+                                        <td>{{ $req->asset_jenis }}</td>
                                         <td>{{ $req->kategori_barang }}</td>
                                         <td>{{ $req->status_barang }}</td>
+                                        <td>{{ $req->brand }}</td>
                                         <td>{{ $req->spesifikasi_barang }}</td>
                                         <td>{{ $req->pemilik_barang }}</td>
                                         <td>{{ $req->new_kode_barang }}</td>
+                                        <td>{{ $req->new_asset_jenis }}</td>
                                         <td>{{ $req->new_kategori_barang }}</td>
                                         <td>{{ $req->new_status_barang }}</td>
+                                        <td>{{ $req->new_brand }}</td>
                                         <td>{{ $req->new_spesifikasi_barang }}</td>
                                         <td>{{ $req->new_pemilik_barang }}</td>
                                     </tr>

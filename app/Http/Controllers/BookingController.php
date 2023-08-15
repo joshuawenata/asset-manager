@@ -55,7 +55,7 @@ class BookingController extends Controller
             $booking = new Booking();
             $booking->request_id = $request_id;
             $booking->asset_id = $asset;
-            $booking->asset_category_id = $as->asset_category_id;
+            $booking->asset_jenis_id = $as->asset_jenis_id;
             $booking->status = NULL;
             $booking->save();
         }
@@ -114,15 +114,15 @@ class BookingController extends Controller
         if($stat == 'waiting next approval'||$stat == 'approved sebagian'){
             $assets = DB::table('bookings')
                 ->join('assets', 'bookings.asset_id', '=', 'assets.id')
-                ->join('asset_categories', 'bookings.asset_category_id', '=', 'asset_categories.id')
-                ->select('bookings.id','assets.serial_number', 'assets.brand', 'asset_categories.name', 'bookings.status', 'assets.division_id')
+                ->join('asset_jenis', 'bookings.asset_jenis_id', '=', 'asset_jenis.id')
+                ->select('bookings.id','assets.serial_number', 'assets.brand', 'asset_jenis.name', 'bookings.status', 'assets.division_id', 'assets.kategori_barang', 'assets.spesifikasi_barang')
                 ->where('bookings.request_id', '=', $id)
                 ->get();
         }else{
             $assets = DB::table('bookings')
                 ->join('assets', 'bookings.asset_id', '=', 'assets.id')
-                ->join('asset_categories', 'bookings.asset_category_id', '=', 'asset_categories.id')
-                ->select('bookings.id','assets.serial_number', 'assets.brand', 'asset_categories.name', 'assets.status', 'assets.division_id')
+                ->join('asset_jenis', 'bookings.asset_jenis_id', '=', 'asset_jenis.id')
+                ->select('bookings.id','assets.serial_number', 'assets.brand', 'asset_jenis.name', 'assets.status', 'assets.division_id', 'assets.kategori_barang', 'assets.spesifikasi_barang')
                 ->where('bookings.request_id', '=', $id)
                 ->get();
         }
@@ -140,8 +140,8 @@ class BookingController extends Controller
     {
         $assets = DB::table('bookings')
             ->join('assets', 'bookings.asset_id', '=', 'assets.id')
-            ->join('asset_categories', 'bookings.asset_category_id', '=', 'asset_categories.id')
-            ->select('bookings.id','assets.serial_number', 'assets.brand', 'asset_categories.name', 'assets.status', 'assets.division_id')
+            ->join('asset_jenis', 'bookings.asset_jenis_id', '=', 'asset_jenis.id')
+            ->select('bookings.id','assets.serial_number', 'assets.brand', 'asset_jenis.name', 'assets.status', 'assets.division_id')
             ->where('bookings.request_id', '=', $id)
             ->get();
 
@@ -161,8 +161,8 @@ class BookingController extends Controller
     {
         $assets = DB::table('bookings')
             ->join('assets', 'bookings.asset_id', '=', 'assets.id')
-            ->join('asset_categories', 'bookings.asset_category_id', '=', 'asset_categories.id')
-            ->select('assets.serial_number', 'assets.brand', 'asset_categories.name', 'assets.status')
+            ->join('asset_jenis', 'bookings.asset_jenis_id', '=', 'asset_jenis.id')
+            ->select('assets.serial_number', 'assets.brand', 'asset_jenis.name', 'assets.status')
             ->where('bookings.request_id', '=', $id)
             ->get();
         $request = \App\Models\Request::find($id);

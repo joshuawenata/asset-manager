@@ -68,8 +68,10 @@
                 <div class="card mb-3">
                     <div class="card-body">
                         <p><b>Kode Barang&emsp;&ensp;</b>: {{ $asset->serial_number }}</p>
-                        <p><b>Jenis Barang&emsp;&ensp;</b>: {{ $asset->assetcategory->name }}</p>
-                        <p><b>Spesifikasi&emsp;&emsp;&ensp;</b>: {{ $asset->brand }}</p>
+                        <p><b>Jenis Barang&emsp;&ensp;</b>: {{ $asset->assetJenis->name }}</p>
+                        <p><b>Kategori Barang&emsp;&emsp;&ensp;</b>: {{ $asset->kategori_barang }}</p>
+                        <p><b>Brand&emsp;&emsp;&ensp;</b>: {{ $asset->brand }}</p>
+                        <p><b>Spesifikasi Barang&emsp;&emsp;&ensp;</b>: {{ $asset->spesifikasi_barang }}</p>
                         <p><b>Lokasi&emsp;&emsp;&emsp;&emsp;&ensp;</b>: {{ $asset->current_location }}</p>
                         <p><b>Status Barang&emsp;</b>: {{ $asset->status }}</p>
                     </div>

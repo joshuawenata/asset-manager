@@ -33,11 +33,7 @@
                             {{--                        1. BINUSIAN ID --}}
                             <div class="row mb-3">
                                 <label for="binusianid" class="col-md-4 col-form-label text-md-end">
-                                    @if ($role_id == 2 || $role_id == 3 || $role_id == 4)
-                                        {{ __('Binusian ID') }}
-                                    @elseif($role_id == 1)
-                                        {{ __('NIM') }}
-                                    @endif
+                                    {{ __('Binusian ID') }}
                                 </label>
 
                                 <div class="col-md-6">
@@ -95,11 +91,7 @@
                                     <input id="email" type="text" class="form-control" name="email"
                                         value="{{ old('email') }}" required autocomplete="email" autofocus>
                                     <div class="input-group-append">
-                                        @if ($role_id == 2 || $role_id == 3 || $role_id == 4)
-                                            <span class="input-group-text" id="basic-addon2">@binus.edu</span>
-                                        @elseif($role_id == 1)
-                                            <span class="input-group-text" id="basic-addon2">@binus.ac.id</span>
-                                        @endif
+                                        <span class="input-group-text" id="basic-addon2">@binus.edu</span>
                                     </div>
                                 </div>
                             </div>

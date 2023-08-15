@@ -78,19 +78,36 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="asset_category"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Kategori Barang') }}</label>
+                                <label for="asset_jenis"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Jenis Barang') }}</label>
 
                                 <div class="col-md-6">
-                                    <select class="form-select" name="asset_category" id="asset_category">
+                                    <select class="form-select" name="asset_jenis" id="asset_jenis">
                                         @foreach ($show as $index => $item)
-                                            @if ($data->asset_category_id == $item->id)
+                                            @if ($data->asset_jenis_id == $item->id)
                                                 <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
                                             @else
                                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                                             @endif
                                         @endforeach
                                     </select>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="kategori_barang"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Kategori Barang') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="kategori_barang" type="text"
+                                        class="form-control @error('kategori_barang') is-invalid @enderror" name="kategori_barang"
+                                        value="{{ $data->kategori_barang }}" required autocomplete="kategori_barang" autofocus>
+
+                                    @error('brand')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -115,7 +132,7 @@
 
                             <div class="row mb-3">
                                 <label for="brand"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Spesifikasi') }}</label>
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Brand') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="brand" type="text"
@@ -123,6 +140,23 @@
                                         value="{{ $data->brand }}" required autocomplete="brand" autofocus>
 
                                     @error('brand')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="spesifikasi_barang"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Spesifikasi Barang') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="spesifikasi_barang" type="text"
+                                        class="form-control @error('spesifikasi_barang') is-invalid @enderror" name="spesifikasi_barang"
+                                        value="{{ $data->spesifikasi_barang }}" required autocomplete="spesifikasi_barang" autofocus>
+
+                                    @error('spesifikasi_barang')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

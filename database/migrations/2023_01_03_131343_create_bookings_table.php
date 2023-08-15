@@ -17,11 +17,11 @@ class CreateBookingsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('request_id');
             $table->unsignedBigInteger('asset_id');
-            $table->unsignedBigInteger('asset_category_id');
+            $table->unsignedBigInteger('asset_jenis_id');
             $table->string('status')->nullable();
             $table->foreign('request_id')->references('id')->on('requests');
             $table->foreign('asset_id')->references('id')->on('assets');
-            $table->foreign('asset_category_id')->references('id')->on('asset_categories');
+            $table->foreign('asset_jenis_id')->references('id')->on('asset_jenis');
             $table->dateTime('taken_date')->nullable();
             $table->dateTime('realize_return_date')->nullable();
             $table->string('return_conditions')->nullable();

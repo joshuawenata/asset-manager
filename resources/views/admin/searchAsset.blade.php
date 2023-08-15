@@ -35,8 +35,10 @@
                                 <tr>
                                     <th scope="col">No</th>
                                     <th scope="col">Kode Barang</th>
+                                    <th scope="col">Jenis Barang</th>
                                     <th scope="col">Kategori Barang</th>
-                                    <th scope="col">Spesifikasi</th>
+                                    <th scope="col">Brand</th>
+                                    <th scope="col">Spesifikasi Barang</th>
                                     @if ($mode == 'current')
                                         <th scope="col">Lokasi</th>
                                     @endif
@@ -56,8 +58,10 @@
                                         {{--                masukin kolom --}}
                                         <th scope="row">{{ $index + 1 }}</th>
                                         <td>{{ $item->serial_number }}</td>
-                                        <td>{{ $item->assetCategory->name }}</td>
+                                        <td>{{ $item->assetJenis->name }}</td>
+                                        <td>{{ $item->kategori_barang }}</td>
                                         <td>{{ $item->brand }}</td>
+                                        <td>{{ $item->spesifikasi_barang }}</td>
                                         @if ($mode == 'current')
                                             <td>{{ $item->current_location }}</td>
                                         @endif

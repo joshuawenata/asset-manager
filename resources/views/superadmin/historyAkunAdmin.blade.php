@@ -55,9 +55,9 @@
                                         <th scope="row">{{ $index + 1 + $counting }}</th>
                                         <td>{{ $user[0]['name'] . ' memusnahkan barang dengan nomor seri ' . $req->serial_number . ', brand ' . $req->brand . ', lokasi ' . $req->location . ', pemilik barang ' . $req->pemilik_barang . ', divisi ' . $division . ', kategori barang ' }}
                                             @php
-                                                $assetCategory = \App\Models\AssetCategory::find($req->asset_category_id);
+                                                $assetJenis = \App\Models\AssetJenis::find($req->asset_jenis_id);
                                             @endphp
-                                            {{ $assetCategory ? $assetCategory->name : 'Unknown' }}
+                                            {{ $assetJenis ? $assetJenis->name : 'Unknown' }}
                                         </td>
                                         <td>{{ $req->created_at }}</td>
                                     </tr>
@@ -74,14 +74,14 @@
                                         <th scope="row">{{ $index + 1 + $counting + $counting1 }}</th>
                                         <td>{{ $user[0]['name'] . ' memperbaharui barang dengan nomor seri ' . $req->kode_barang . ', kategori barang ' }}
                                             @php
-                                                $assetCategory = \App\Models\AssetCategory::find($req->kategori_barang);
+                                                $assetJenis = \App\Models\AssetJenis::find($req->kategori_barang);
                                             @endphp
-                                            {{ $assetCategory ? $assetCategory->name : 'Unknown' }}
+                                            {{ $assetJenis ? $assetJenis->name : 'Unknown' }}
                                             {{ ', status barang ' . $req->status_barang . ', spesifikasi barang ' . $req->spesifikasi_barang . ', pemilik barang ' . $req->pemilik_barang . ', divisi ' . $division . ', kategori barang menjadi nomor seri ' . $req->new_kode_barang . ', kategori barang ' }}
                                             @php
-                                                $newAssetCategory = \App\Models\AssetCategory::find($req->new_kategori_barang);
+                                                $newAssetJenis = \App\Models\AssetJenis::find($req->new_kategori_barang);
                                             @endphp
-                                            {{ $newAssetCategory ? $newAssetCategory->name : 'Unknown' }}
+                                            {{ $newAssetJenis ? $newAssetJenis->name : 'Unknown' }}
                                             {{ ', status barang ' . $req->new_status_barang . ', spesifikasi barang ' . $req->new_spesifikasi_barang . ', pemilik barang ' . $req->new_pemilik_barang }}
                                         </td>
                                         <td>{{ $req->created_at }}</td>

@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Models\HistoryAkun;
 use App\Models\HistoryDetail;
 use App\Models\HistoryAddAsset;
-use App\Models\HistoryupdateAsset;
+use App\Models\HistoryUpdateAsset;
 use App\Models\DeletedAsset;
 use App\Models\RepairAsset;
 use App\Models\AssetLocation;
@@ -53,7 +53,7 @@ class UserController extends Controller
     {
         $dataHistoryAddAsset = HistoryAddAsset::where('user_id',$id)->get();
         $dataHistoryPemusnahanBarang = DeletedAsset::where('user_id',$id)->get();
-        $dataHistoryPembaharuanBarang = HistoryupdateAsset::where('id_pengubah',$id)->get();
+        $dataHistoryPembaharuanBarang = HistoryUpdateAsset::where('id_pengubah',$id)->get();
         $dataHistoryPemindahanBarang = AssetLocation::where('responsible_id',$id)->get();
         $dataHistoryBarangRusak = RepairAsset::where('reported_by_id',$id)->get();
         $dataHistoryPerbaikanBarang = RepairAsset::where('reported_by_id',$id)->get();

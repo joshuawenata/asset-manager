@@ -11,7 +11,7 @@ use App\Models\DeletedAsset;
 use App\Models\Location;
 use App\Models\User;
 use App\Models\PemilikBarang;
-use App\Models\HistoryupdateAsset;
+use App\Models\HistoryUpdateAsset;
 use App\Models\HistoryAddAsset;
 use App\Imports\AssetsImport;
 use Illuminate\Http\Request;
@@ -362,7 +362,7 @@ class AssetController extends Controller
                 ->withInput();
         }else {
             $aset = Asset::find($id);
-            $history_update = new HistoryupdateAsset;
+            $history_update = new HistoryUpdateAsset;
             $history_update->id_pengubah = \Illuminate\Support\Facades\Auth::id();
             $history_update->kode_barang = $aset->serial_number;
             $history_update->jenis_barang = AssetJenis::where('id',$aset->asset_jenis_id)->pluck('name')[0];

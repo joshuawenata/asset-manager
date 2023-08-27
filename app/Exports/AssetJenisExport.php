@@ -25,9 +25,9 @@ class AssetJenisExport implements FromCollection, WithHeadings, WithStyles, With
     public function collection()
     {
         return new Collection([
-            ['B001', 'SLSC', 'admin', 'Kamera', 'Kamera Digital', 'Canon', 'Canon ABC', 'tersedia'],
-            ['B002', 'SLC',  'admin', 'Kamera', 'Kamera Digital', 'Canon', 'Canon DEF', 'tersedia'],
-            ['B003', 'Lt. 6', 'admin', 'Kamera', 'Kamera Digital', 'Canon', 'Canon GHI', 'tidak tersedia']
+            ['B001', '', '', '', 'Kamera Digital', 'Canon', 'Canon ABC', 'tersedia'],
+            ['B002', '',  '', '', 'Kamera Digital', 'Canon', 'Canon DEF', 'tersedia'],
+            ['B003', '', '', '', 'Kamera Digital', 'Canon', 'Canon GHI', 'tidak tersedia']
         ]);
     }
 

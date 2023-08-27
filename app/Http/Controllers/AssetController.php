@@ -140,10 +140,9 @@ class AssetController extends Controller
         ]);
 
         try {
-
             if ($request->file('excel')) {
                 $import = Excel::import(new AssetsImport, request()->file('excel'));
-
+                
                 $msg_success = "Data Uploaded Successfully!";
                 $msg_danger = "Data Upload Failed!";
 

@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'superadmin',
             'email' => 'inventory.bdg@binus.edu',
-            'password' => bcrypt('C)5I*:xNGXmh'),
+            'password' => bcrypt('ITb4ndung'),
             'binusianid' => null,
             'phone' => null,
             'division_id' => null,

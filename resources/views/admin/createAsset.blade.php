@@ -84,15 +84,15 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="kategori-barang"
+                                <label for="kategori_barang"
                                     class="col-md-4 col-form-label text-md-end">{{ __('Kategori Barang') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="kategori-barang" type="text"
-                                        class="form-control @error('kategori-barang') is-invalid @enderror" name="kategori-barang"
-                                        value="{{ old('kategori-barang') }}" required autocomplete="kategori-barang" autofocus>
+                                    <input id="kategori_barang" type="text"
+                                        class="form-control @error('kategori_barang') is-invalid @enderror" name="kategori_barang"
+                                        value="{{ old('kategori_barang') }}" required autocomplete="kategori_barang" autofocus>
 
-                                    @error('kategori-barang')
+                                    @error('kategori_barang')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -101,15 +101,15 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="spesifikasi-barang"
+                                <label for="spesifikasi_barang"
                                     class="col-md-4 col-form-label text-md-end">{{ __('Spesifikasi Barang') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="spesifikasi-barang" type="text"
-                                        class="form-control @error('spesifikasi-barang') is-invalid @enderror" name="spesifikasi-barang"
-                                        value="{{ old('spesifikasi-barang') }}" required autocomplete="spesifikasi-barang" autofocus>
+                                    <input id="spesifikasi_barang" type="text"
+                                        class="form-control @error('spesifikasi_barang') is-invalid @enderror" name="spesifikasi_barang"
+                                        value="{{ old('spesifikasi_barang') }}" required autocomplete="spesifikasi_barang" autofocus>
 
-                                    @error('spesifikasi-barang')
+                                    @error('spesifikasi_barang')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

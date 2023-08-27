@@ -198,7 +198,7 @@ class AssetController extends Controller
             'brand' => 'required',
             'spesifikasi_barang' => 'required',
         ]);
-
+        
         if($validator->fails()){
             return redirect('create-asset')
                 ->withErrors($validator)
@@ -224,12 +224,12 @@ class AssetController extends Controller
                 $aset->asset_jenis_id = $data['asset-jenis'];
             }
 
-            if($data['kategori-barang'] != null){
-                $aset->kategori_barang = $data['kategori-barang'];
+            if($data['kategori_barang'] != null){
+                $aset->kategori_barang = $data['kategori_barang'];
             }
 
-            if($data['spesifikasi-barang'] != null){
-                $aset->spesifikasi_barang = $data['spesifikasi-barang'];
+            if($data['spesifikasi_barang'] != null){
+                $aset->spesifikasi_barang = $data['spesifikasi_barang'];
             }
 
             $aset->division_id = $data['division_id'];
@@ -237,7 +237,7 @@ class AssetController extends Controller
 
             $history = new HistoryAddAsset;
             $history->user_id = \Illuminate\Support\Facades\Auth::user()->id;
-            $history->aksi = \Illuminate\Support\Facades\Auth::user()->name." menambahkan barang dengan nomor seri ".$data['serial_number'].", brand ".$data['brand'].", lokasi ".$data['location'].", pemilik barang ".$data['pemilik-barang'].", jenis barang ".$data['asset-jenis'].", kategori barang ".$data['kategori-barang'].", spesifikasi barang ".$data['spesifikasi-barang'];
+            $history->aksi = \Illuminate\Support\Facades\Auth::user()->name." menambahkan barang dengan nomor seri ".$data['serial_number'].", brand ".$data['brand'].", lokasi ".$data['location'].", pemilik barang ".$data['pemilik-barang'].", jenis barang ".$data['asset-jenis'].", kategori barang ".$data['kategori_barang'].", spesifikasi barang ".$data['spesifikasi_barang'];
             $history->save();
 
             $this->storeLoc();
@@ -372,7 +372,7 @@ class AssetController extends Controller
             $history_update->spesifikasi_barang = $aset->spesifikasi_barang;
             $history_update->pemilik_barang = $aset->pemilik_barang;
             $history_update->new_kode_barang = $request->input('serial_number');
-            $history_update->new_jenis_barang = $request->input('asset_jenis');
+            $history_update->new_jenis_barang = AssetJenis::where('id',$request->input('asset_jenis'))->pluck('name')[0];
             $history_update->new_kategori_barang = $request->input('kategori_barang');
             $history_update->new_status_barang = $request->input('asset-status');
             $history_update->new_spesifikasi_barang = $request->input('spesifikasi_barang');
@@ -424,6 +424,8 @@ class AssetController extends Controller
         $d_aset->pemilik_barang = $aset->pemilik_barang;
         $d_aset->division_id = $aset->division_id;
         $d_aset->asset_jenis_id = $aset->asset_jenis_id;
+        $d_aset->kategori_barang = $aset->kategori_barang;
+        $d_aset->spesifikasi_barang = $aset->spesifikasi_barang;
         $d_aset->save();
 
         $asetloc->delete();

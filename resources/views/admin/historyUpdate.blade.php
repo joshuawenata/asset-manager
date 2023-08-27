@@ -46,14 +46,14 @@
                                         {{--                masukin kolom --}}
                                         <th scope="row">{{ $index + 1 }}</th>
                                         <td>{{ $req->kode_barang }}</td>
-                                        <td>{{ $req->asset_jenis }}</td>
+                                        <td>{{ $req->jenis_barang }}</td>
                                         <td>{{ $req->kategori_barang }}</td>
                                         <td>{{ $req->status_barang }}</td>
                                         <td>{{ $req->brand }}</td>
                                         <td>{{ $req->spesifikasi_barang }}</td>
                                         <td>{{ $req->pemilik_barang }}</td>
                                         <td>{{ $req->new_kode_barang }}</td>
-                                        <td>{{ $req->new_asset_jenis }}</td>
+                                        <td>{{ $req->new_jenis_barang }}</td>
                                         <td>{{ $req->new_kategori_barang }}</td>
                                         <td>{{ $req->new_status_barang }}</td>
                                         <td>{{ $req->new_brand }}</td>

@@ -18,6 +18,8 @@ class CreateDeletedAssetsTable extends Migration
             $table->integer('user_id');
             $table->string('serial_number')->unique();
             $table->string('brand');
+            $table->string('kategori_barang');
+            $table->string('spesifikasi_barang');
             $table->string('location');
             $table->string('pemilik_barang');
             $table->unsignedBigInteger('division_id');

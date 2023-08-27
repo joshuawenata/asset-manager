@@ -26,7 +26,7 @@ class PdfController extends Controller
         $email_peminjam = $req->email_peminjam;
         $nohp_peminjam = $req->nohp_peminjam;
         $division_peminjam = $req->prodi_peminjam;
-        $division = $req->User->division->name;
+        $division = $req->User->division;
 
         $purpose = $req->purpose;
         $lokasi = $req->lokasi;

@@ -141,7 +141,7 @@ class BookingController extends Controller
         $assets = DB::table('bookings')
             ->join('assets', 'bookings.asset_id', '=', 'assets.id')
             ->join('asset_jenis', 'bookings.asset_jenis_id', '=', 'asset_jenis.id')
-            ->select('bookings.id','assets.serial_number', 'assets.brand', 'asset_jenis.name', 'assets.status', 'assets.division_id')
+            ->select('bookings.id','assets.serial_number', 'assets.brand', 'assets.spesifikasi_barang', 'assets.kategori_barang', 'asset_jenis.name', 'assets.status', 'assets.division_id')
             ->where('bookings.request_id', '=', $id)
             ->get();
 

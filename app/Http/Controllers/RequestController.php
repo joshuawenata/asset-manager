@@ -486,7 +486,7 @@ class RequestController extends Controller
             $receiver = $req->email_peminjam;
             $history = new HistoryDetail();
             $history->user_id = \Illuminate\Support\Facades\Auth::user()->id;
-            $history->aksi = \Illuminate\Support\Facades\Auth::user()->name . ' menolak peminjaman dari <b>'.$req->nama_peminjam.'['.$req->prodi_peminjam.']'.'</b> dengan tujuan <b>'.$req->purpose.'</b> dengan alasan <b>'.$request->input('pesan').'</b>';
+            $history->aksi = \Illuminate\Support\Facades\Auth::user()->name . ' menolak peminjaman dari '.$req->nama_peminjam.'['.$req->prodi_peminjam.']'.' dengan tujuan '.$req->purpose.' dengan alasan '.$request->input('pesan');
             $history->save();
 
             $email = new SendEmailController();

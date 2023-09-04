@@ -25,7 +25,7 @@ class AuthenticationController extends Controller
             $users->role_id = 3;
             $users->save();
             return redirect()->route('logindetail');
-        }else if ($role_id == 4) {
+        }else if ($role_id == 4 && $users->role_id == 4) {
             return redirect()->route('logindetail');
         }else {
             Auth::logout();

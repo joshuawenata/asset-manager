@@ -13,36 +13,18 @@ class AuthenticationController extends Controller
         $role_id = $request->input('role_id');
         $users = User::where('email', $request->input('email'))->first(); 
 
-        if ($role_id == 1) { 
-            if($users->isStaff){
-                $users->role_id = 1;
-                $users->save();
-                return redirect()->route('logindetail');
-            }else {
-                Auth::logout();
-                session()->flush();
-                return redirect('/')->with('error', 'Invalid credentials');
-            }
-        }else if ($role_id == 2) {
-            if($users->isAdmin){
-                $users->role_id = 2;
-                $users->save();
-                return redirect()->route('logindetail');
-            }else {
-                Auth::logout();
-                session()->flush();
-                return redirect('/')->with('error', 'Invalid credentials');
-            }
-        }else if ($role_id == 3) {
-            if($users->isApprover){
-                $users->role_id = 3;
-                $users->save();
-                return redirect()->route('logindetail');
-            }else {
-                Auth::logout();
-                session()->flush();
-                return redirect('/')->with('error', 'Invalid credentials');
-            }
+        if ($role_id == 1 && $users->isStaff) { 
+            $users->role_id = 1;
+            $users->save();
+            return redirect()->route('logindetail');
+        }else if ($role_id == 2 && $users->isAdmin) {
+            $users->role_id = 2;
+            $users->save();
+            return redirect()->route('logindetail');
+        }else if ($role_id == 3 && $users->isApprover) {
+            $users->role_id = 3;
+            $users->save();
+            return redirect()->route('logindetail');
         }else if ($role_id == 4) {
             return redirect()->route('logindetail');
         }else {
@@ -50,7 +32,6 @@ class AuthenticationController extends Controller
             session()->flush();
             return redirect('/')->with('error', 'Invalid credentials');
         }
-
     }
 
     public function logindetail(Request $request){
@@ -75,30 +56,12 @@ class AuthenticationController extends Controller
 
         if(Auth::attempt($credentials) && $role_id == 4){
             return redirect()->route('superadmin.dashboard');
-        }else if ($role_id == 1) { 
-            if(Auth::attempt($credentials)){
-                return redirect()->route('dashboard');
-            }else {
-                Auth::logout();
-                session()->flush();
-                return redirect('/')->with('error', 'Invalid credentials');
-            }
-        }else if ($role_id == 2) {
-            if(Auth::attempt($credentials)){
-                return redirect()->route('admin.dashboard');
-            }else {
-                Auth::logout();
-                session()->flush();
-                return redirect('/')->with('error', 'Invalid credentials');
-            }
-        }else if ($role_id == 3) {
-            if(Auth::attempt($credentials)){
-                return redirect()->route('approver.dashboard');
-            }else {
-                Auth::logout();
-                session()->flush();
-                return redirect('/')->with('error', 'Invalid credentials');
-            }
+        }else if (Auth::attempt($credentials) && $role_id == 1) { 
+            return redirect()->route('dashboard');
+        }else if (Auth::attempt($credentials) && $role_id == 2) {
+            return redirect()->route('admin.dashboard');
+        }else if (Auth::attempt($credentials) && $role_id == 3) {
+            return redirect()->route('approver.dashboard');
         }else {
             Auth::logout();
             session()->flush();

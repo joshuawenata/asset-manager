@@ -176,23 +176,24 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="role"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Role') }}</label>
-
-                                <div class="col-md-6">
-                                    <select class="form-select" name="role" id="role">
-                                        @foreach ($roles as $index => $item)
-                                            @if ($data->role_id == $item->id)
-                                                <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
-                                            @else
-                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                            @endif
-                                        @endforeach
-                                    </select>
+                                <div class="form-group row">
+                                    <label for="role_id" class="col-md-4 col-form-label text-md-end">{{ __('Role Anda') }}</label>
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input mt-2" name="role[]" type="checkbox" id="isStaff" name="isStaff" value="1" {{ $isStaff ? 'checked' : '' }}>
+                                            <label class="form-check-label mt-2" for="isStaff">Staff</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input mt-2" name="role[]" type="checkbox" id="isAdmin" name="isAdmin" value="2" {{ $isAdmin ? 'checked' : '' }}>
+                                            <label class="form-check-label mt-2" for="isAdmin">Admin</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input mt-2" name="role[]" type="checkbox" id="isApprover" name="isApprover" value="3" {{ $isApprover ? 'checked' : '' }}>
+                                            <label class="form-check-label mt-2" for="isApprover">Approver</label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
-
 
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">

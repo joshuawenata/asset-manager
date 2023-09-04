@@ -108,7 +108,7 @@
                                         data-bs-toggle="dropdown" aria-expanded="false">
                                         Menu
                                     </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">  
                                         <li><a class="nav-link active"
                                                 href="{{ url('/search-asset/' . \Illuminate\Support\Facades\Auth::user()->division->id) }}">Lihat
                                                 Inventory</a></li>
@@ -162,7 +162,7 @@
                                         <li><a class="nav-link active" href="{{ route('superadmin.location') }}">Kelola
                                                 Lokasi</a></li>
                                         <li><a class="nav-link active"
-                                                href="{{ route('superadmin.register') }}">{{ __('Daftarkan akun') }}</a>
+                                                href="{{ route('superadmin.register-show') }}">{{ __('Daftarkan akun') }}</a>
                                         </li>
                                         <li><a class="nav-link active"
                                                 href="{{ route('superadmin.kategori') }}">{{ __('Kelola Kategori Barang') }}</a>
@@ -191,16 +191,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Keluar') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                        class="d-none">
-                                        @csrf
-                                    </form>
+                                    <a class="dropdown-item" href="{{ route('logout') }}">Keluar</a>
                                 </div>
                             </li>
                         @endguest

@@ -7,10 +7,11 @@ use Illuminate\Support\Facades\Crypt;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\Division;
+use Illuminate\Support\Facades\Validator;
 
 // TODO: ini klo udh login gabisa ke dashboard page / nya malah ke login mesti cek user session
 Route::get('/', function () {
-    return view('auth.login');
+    return view('auth.pickrole');
 })->name('login')->middleware('guest');
 
 // Import the necessary classes at the beginning of the file
@@ -22,7 +23,11 @@ Route::post('password/email', 'App\Http\Controllers\Auth\ForgotPasswordControlle
 Route::get('password/reset/{token}', 'App\Http\Controllers\Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/perbaharui', 'App\Http\Controllers\Auth\ResetPasswordController@reset')->name('password.perbaharui');
 
-Auth::routes();
+Route::post('login', [App\Http\Controllers\AuthenticationController::class, 'login'])->name('logincheck');
+Route::get('login/detail', [App\Http\Controllers\AuthenticationController::class, 'logindetail'])->name('logindetail');
+Route::post('checkrole', [App\Http\Controllers\AuthenticationController::class, 'checkrole'])->name('checkrole');
+Route::get('logout', [App\Http\Controllers\AuthenticationController::class, 'logout'])->name('logout');
+
 
 //HISTORI REQUEST
 Route::get('/requests-history', [\App\Http\Controllers\RequestController::class, 'show'])->name('historiRequest')->middleware(['auth', 'cekRole:approver,staff,admin']);
@@ -39,9 +44,29 @@ Route::get('register-show', function (Request $request) {
     return view('auth.registerDetail', [
         'data' => $data,
     ])->with('role_id', $role_id);
-});
+})->name('superadmin.register-show');
 Route::post('insert-account',function(Request $request){
-    $role_id = $request->input('role_id');
+    $validator = Validator::make(
+        $request->all(),
+        [
+            'role' => 'array|min:1',
+        ],
+        [
+            'role.min' => 'At least one role must be selected.',
+        ]
+    );
+
+    if ($validator->fails()) {
+        return redirect()->route('superadmin.register-show')->with('errors', 'Please pick at least 1 role');
+    }    
+
+    $selectedRoles = $request->input('role', []); // Retrieve the selected roles as an array.
+
+    // You can then check which roles are selected by checking if their values are in the array.
+    $isStaffSelected = in_array('1', $selectedRoles);
+    $isAdminSelected = in_array('2', $selectedRoles);
+    $isApproverSelected = in_array('3', $selectedRoles);
+
     DB::table('users')->insert([
         'name' => $request->input('name'),
         'binusianid' => $request->input('binusianid'),
@@ -49,13 +74,18 @@ Route::post('insert-account',function(Request $request){
         'division_id' => $request->input('division_id'),
         'email' => $request->input('email'),
         'password' => bcrypt($request->input('password')),
-        'role_id' => $role_id,
+        'role_id' => $isStaffSelected ? 1 : ($isAdminSelected ? 2 : 3),
         'active_status' => 1,
         'created_at' => now(),
-        'updated_at' => now()
+        'updated_at' => now(),
+        'isStaff' => $isStaffSelected ? 1 : 0,
+        'isAdmin' => $isAdminSelected ? 1 : 0,
+        'isApprover' => $isApproverSelected ? 1 : 0,
     ]);
-    $role = Role::where('id',$role_id)->pluck('name')[0];
+
+    $role = Role::where('id',$isStaffSelected ? 1 : ($isAdminSelected ? 2 : 3))->pluck('name')[0];
     $division = Division::where('id',$request->input('division_id'))->pluck('name')[0];
+    
     DB::table('history_akuns')->insert([
         'aksi' => 'superadmin menambahkan akun '.$role.' dengan data nama: '.$request->input('name').', binusian_id: '.$request->input('binusianid').', phone: '.$request->input('phone').', departemen: '.$division.', email: '.$request->input('email'),
         'created_at' => now(),
@@ -135,7 +165,6 @@ Route::middleware(['auth', 'cekRole:admin'])->group(function(){
 
 });
 
-
 //Approver Routes
 Route::middleware(['auth', 'cekRole:approver'])->group(function(){
     Route::post('/cancel-request', [\App\Http\Controllers\RequestController::class, 'destroy'])->name('deleteRequest');
@@ -147,7 +176,6 @@ Route::middleware(['auth', 'cekRole:approver'])->group(function(){
     Route::post('/approver/confirm-request', [\App\Http\Controllers\RequestController::class, 'confirm'])->name('approver.confirmRequest');
     Route::post('/approver/save-request', [\App\Http\Controllers\BookingController::class, 'store'])->name('approver.storeRequest');
 });
-
 
 //Superadmin Routes
 Route::middleware(['auth', 'cekRole:superadmin'])->group(function(){
@@ -176,9 +204,6 @@ Route::middleware(['auth', 'cekRole:superadmin'])->group(function(){
     Route::post('/store-division', [\App\Http\Controllers\DivisionController::class, 'store'])->name('storeDivision');
     //READ
     Route::get('/division', [\App\Http\Controllers\DivisionController::class, 'index'])->name('superadmin.division');
-    Route::get('/register', function(){
-        return view('auth.register');
-    })->name('superadmin.register');
     //DELETE
     Route::get('/delete-kategori-barang/{id}', [\App\Http\Controllers\AssetJenisController::class, 'destroy']);
     Route::post('/delete-division', [\App\Http\Controllers\DivisionController::class, 'destroy']);

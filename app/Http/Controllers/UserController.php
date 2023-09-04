@@ -129,12 +129,17 @@ class UserController extends Controller
     public function edit($id)
     {
         $data = User::find($id);
-        $roles = Role::all()->except(4);
         $dept = Division::all();
+        $isStaff = $data->isStaff;
+        $isAdmin = $data->isAdmin;
+        $isApprover = $data->isApprover;
+
         return View::make('superadmin.editUser', [
             'data' => $data,
-            'roles' => $roles,
-            'dept' => $dept
+            'dept' => $dept,
+            'isStaff' => $isStaff,
+            'isAdmin' => $isAdmin,
+            'isApprover' => $isApprover,
         ]);
     }
 
@@ -166,13 +171,23 @@ class UserController extends Controller
      */
     public function perbaharui(Request $request, $id)
     {
+        $selectedRoles = $request->input('role', []); // Retrieve the selected roles as an array.
+
+        // You can then check which roles are selected by checking if their values are in the array.
+        $isStaffSelected = in_array('1', $selectedRoles);
+        $isAdminSelected = in_array('2', $selectedRoles);
+        $isApproverSelected = in_array('3', $selectedRoles);
+
         $user = User::find($id);
         $history = new HistoryAkun;
         $history->aksi = 'superadmin mengupdate akun '.Role::where('id',$user->role_id)->pluck('name')[0].' dengan data nama: '.$user->name.', binusian_id: '.$user->binusianid.', phone: '.$user->phone.', departemen: '.Division::where('id',$user->division_id)->pluck('name')[0].', email: '.$user->email.' menjadi '.'departemen baru: '.Division::where('id',$request->input('department'))->pluck('name')[0].', '.'role baru: '.Role::where('id',$request->input('role'))->pluck('name')[0].', '.'email baru: '.$request->input('email');
         $history->save();
         $user->division_id = $request->input('department');
-        $user->role_id = $request->input('role');
+        $user->role_id = $isStaffSelected ? 1 : ($isAdminSelected ? 2 : 3);
         $user->email = $request->input('email');
+        $user->isStaff = $isStaffSelected ? 1 : 0;
+        $user->isAdmin = $isAdminSelected ? 1 : 0;
+        $user->isApprover = $isApproverSelected ? 1 : 0;
         $user->update();
         return redirect('superadmin/dashboard')->with('message', 'Data User Berhasil Diupdate');
     }

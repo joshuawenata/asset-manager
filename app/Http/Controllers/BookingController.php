@@ -83,7 +83,7 @@ class BookingController extends Controller
         $receiverRole2 = DB::table('users')
         ->select('email')
         ->where('division_id', $div_id)
-        ->where('role_id', 2)
+        ->where('isAdmin', 1)
         ->get();
 
         $receiverEmailRole2 = $receiverRole2[0]->email;

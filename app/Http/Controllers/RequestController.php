@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Location;
 use App\Models\User;
 use App\Models\HistoryDetail;
+use App\Models\Division;
 use DateTime;
 use DateTimeZone;
 use Illuminate\Http\Request;
@@ -88,7 +89,10 @@ class RequestController extends Controller
      */
     public function check()
     {
-        return view('approver/checkRequest');
+        $data = Division::all();
+        return view('approver/checkRequest', [
+            'data' => $data,
+        ]);
     }
 
     public function kembali(Request $request){

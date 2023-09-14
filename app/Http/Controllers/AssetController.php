@@ -453,7 +453,7 @@ class AssetController extends Controller
 
     public function riwayat(){
         $data = HistoryUpdateAsset::where('id_pengubah',\Illuminate\Support\Facades\Auth::id())->get();
-        return View::make('admin.historyupdate', [
+        return View::make('admin.historyUpdate', [
             'data' => $data
         ]);
     }

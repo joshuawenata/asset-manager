@@ -449,7 +449,7 @@ class RequestController extends Controller
 
     public function showDetail()
     {
-        $data = HistoryDetail::where('user_id',auth()->user()->id)->get();
+        $data = historyDetail::where('user_id',auth()->user()->id)->get();
         return view('approver.historiDetail', [
             'data' => $data
         ]);

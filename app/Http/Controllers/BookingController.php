@@ -233,6 +233,27 @@ class BookingController extends Controller
      */
     public function destroy($id)
     {
+        $bookings = DB::table('bookings')
+            ->where('request_id', '=', $id)
+            ->get();
+
+        $request = \App\Models\Request::find($id);
+
+        foreach ($bookings as $b){
+            $aset = Asset::find($b->asset_id);
+
+            $prev_pos = AssetLocation::orderBy('id', 'desc')
+                ->where('asset_id', '=', $b->asset_id)
+                ->offset(1)->limit(1)
+                ->get();
+
+            foreach ($prev_pos as $p){
+                $lok = $p->to_location;
+            }
+
+            $aset->status = 'tersedia';
+            $aset->update();
+        }
         DB::table('bookings')->where('request_id', '=', $id)->delete();
     }
 

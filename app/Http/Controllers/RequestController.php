@@ -493,6 +493,9 @@ class RequestController extends Controller
             $history->aksi = \Illuminate\Support\Facades\Auth::user()->name . ' menolak peminjaman dari '.$req->nama_peminjam.'['.$req->prodi_peminjam.']'.' dengan tujuan '.$req->purpose.' dengan alasan '.$request->input('pesan');
             $history->save();
 
+            $bookings = new BookingController();
+            $bookings->updateReturn($request->request_perbaharui_id, NULL);
+
             $email = new SendEmailController();
             $email->indexPeminjam($receiver, $pesan, $subyek);
         }
@@ -615,9 +618,7 @@ class RequestController extends Controller
 
             $request->delete();
             $message = 'Request peminjaman berhasil dihapus';
-        }
-        else{
-            $message = 'Request peminjaman tidak bisa dicancel karena sudah diapprove admin.';
+
         }
         return redirect('/dashboard')->with('message', $message);
     }

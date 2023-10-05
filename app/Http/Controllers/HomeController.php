@@ -109,8 +109,8 @@ class HomeController extends Controller
         ]);
     }
 
-    public function HistoryDetail(){
-        $data = historyDetail::where('user_id',auth()->user()->id)->get();
+    public function historyDetail(){
+        $data = HistoryDetail::where('user_id', auth()->user()->id)->get();
         return view('historyDetail', [
             'data' => $data,
         ]);

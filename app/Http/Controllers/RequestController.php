@@ -87,6 +87,43 @@ class RequestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function cancel($request_delete_id)
+    {
+        return view('cancel',['request_delete_id' => $request_delete_id]);
+    }
+
+    public function reject($request_delete_id)
+    {
+        $assets = DB::table('bookings')
+            ->join('assets', 'bookings.asset_id', '=', 'assets.id')
+            ->join('asset_jenis', 'bookings.asset_jenis_id', '=', 'asset_jenis.id')
+            ->select('bookings.id','assets.serial_number', 'assets.brand', 'assets.spesifikasi_barang', 'assets.kategori_barang', 'asset_jenis.name', 'assets.status', 'assets.division_id')
+            ->where('bookings.request_id', '=', $request_delete_id)
+            ->get();
+
+        $request = \App\Models\Request::find($request_delete_id);
+        $stat = $request->status;
+        $request = $request->notes;
+        return view('reject',['request_delete_id' => $request_delete_id, 'bookings'=> $assets, 'request' => $request, 'stat' => $stat, 'request_id' => $request_delete_id]);
+    }
+
+    public function approve($request_delete_id)
+    {
+        $assets = DB::table('bookings')
+            ->join('assets', 'bookings.asset_id', '=', 'assets.id')
+            ->join('asset_jenis', 'bookings.asset_jenis_id', '=', 'asset_jenis.id')
+            ->select('bookings.id','assets.serial_number', 'assets.brand', 'assets.spesifikasi_barang', 'assets.kategori_barang', 'asset_jenis.name', 'assets.status', 'assets.division_id')
+            ->where('bookings.request_id', '=', $request_delete_id)
+            ->get();
+
+        $request = \App\Models\Request::find($request_delete_id);
+        $stat = $request->status;
+        $request = $request->notes;
+        return view('approve',['request_delete_id' => $request_delete_id, 'bookings'=> $assets, 'request' => $request, 'stat' => $stat, 'request_id' => $request_delete_id]);
+    }
+
+
     public function check()
     {
         $data = Division::all();

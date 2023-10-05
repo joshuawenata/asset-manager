@@ -99,6 +99,9 @@ Route::get('/see/{user}/dashboard/{id}', [\App\Http\Controllers\BookingControlle
 Route::get('/approve/{user}/dashboard/{id}', [\App\Http\Controllers\BookingController::class, 'showApprove'])->name('bookings.showApprove')->middleware(['auth', 'cekRole:staff,admin']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/perbaharui-request', [\App\Http\Controllers\RequestController::class, 'perbaharui'])->name('perbaharuiRequest')->middleware(['auth', 'cekRole:admin,staff,approver']);
+Route::post('/cancel/{request_delete_id}', [\App\Http\Controllers\RequestController::class, 'cancel'])->name('cancel')->middleware(['auth', 'cekRole:admin,staff,approver']);
+Route::post('/reject/{request_delete_id}', [\App\Http\Controllers\RequestController::class, 'reject'])->name('reject')->middleware(['auth', 'cekRole:admin,staff,approver']);
+Route::post('/approve/{request_delete_id}', [\App\Http\Controllers\RequestController::class, 'approve'])->name('approve')->middleware(['auth', 'cekRole:admin,staff,approver']);
 
 // Staff Routes
 
@@ -161,8 +164,7 @@ Route::middleware(['auth', 'cekRole:admin'])->group(function(){
     //unduh XLSX
     Route::get('export-asset', [\App\Http\Controllers\AssetController::class, 'export'])->name('unduhAsset');
     Route::get('export-deleted-asset', [\App\Http\Controllers\DeletedAssetController::class, 'export'])->name('unduhDeletedAsset');
-
-
+    
 });
 
 //Approver Routes

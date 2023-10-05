@@ -9,187 +9,9 @@
 @section('js')
     <script defer src="{{ asset('js/datatable.js') }}"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
-    <script defer>
-        $(document).ready(function() {
-            $('.rejectBtn').click(function(e) {
-                e.preventDefault();
-                var request_id = $(this).val();
-                $('#request_id').val(request_id);
-                $('#rejectModal').modal('show');
-            });
-
-            $('.approveBtn').click(function(e) {
-                e.preventDefault();
-                var request_id2 = $(this).val();
-                $('#request_id2').val(request_id2);
-                $('#approveModal').modal('show');
-            });
-
-            $('.deleteRequestBtn').click(function(e) {
-                e.preventDefault();
-                var request_id3 = $(this).val();
-                $('#request_id3').val(request_id3);
-                $('#deleteModal').modal('show');
-            });
-        });
-    </script>
-
-    <script defer>
-        $(document).ready(function() {
-
-            if (window.location.href.indexOf('#see') != -1) {
-                $('#see').modal('show');
-            }
-
-        });
-    </script>
 @endsection
 
 @section('content')
-    {{--    modal delete --}}
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-                <form action="{{ route('deleteRequest') }}" method="post">
-                    @csrf
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Cancel Request</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <input type="hidden" name="request_delete_id" id="request_id3">
-                        <h5>Apakah anda yakin ingin membatalkan request peminjaman?</h5>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
-                        <button type="submit" class="btn btn-danger">Ya</button>
-                    </div>
-                </form>
-
-            </div>
-        </div>
-    </div>
-    <!-- modal see -->
-    <div class="modal fade" id="see" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg"> <!-- Added the 'modal-lg' class for large size -->
-            <div class="modal-content">
-
-                <div class="modal-header">
-                    <h5 class="modal-title">Inventory</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-
-                <table class="display table">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Kode Barang</th>
-                                <th>Jenis Barang</th>
-                                <th>Kategori Barang</th>
-                                <th>Brand</th>
-                                <th>Spesifikasi Barang</th>
-                                <th>Kondisi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if (session('bookings'))
-                                @foreach (session('bookings') as $index => $item)
-                                    <tr>
-                                    <th scope="row">{{ $index + 1 }}</th>
-                                        <td>{{ $item->serial_number }}</td>
-                                        <td>{{ $item->name }}</td>
-                                        <td>{{ $item->kategori_barang }}</td>
-                                        <td>{{ $item->brand }}</td>
-                                        <td>{{ $item->spesifikasi_barang }}</td>
-                                        <td>{{ $item->status == 'tidak tersedia' ? 'tersedia' : $item->status }}</td>
-                                    </tr>
-                                @endforeach
-                            @endif
-                        </tbody>
-                    </table>
-
-                    <div class="mb-3">
-                        <label for="pesan" class="col-form-label">Catatan Peminjaman:</label>
-                        <textarea class="form-control" id="pesan" name="pesan" readonly autofocus>{{ session('request') }}</textarea>
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    {{--    modal reject --}}
-    <div class="modal fade" id="rejectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-                <form action="{{ route('perbaharuiRequest') }}" method="post">
-                    @csrf
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Reject Request</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <input type="hidden" name="request_perbaharui_id" id="request_id">
-                        <input type="hidden" name="request_perbaharui" value="rejected">
-                        <input type="hidden" name="user" value="approver">
-                        <input type="hidden" name="approver_num"
-                            value="{{ \Illuminate\Support\Facades\Auth::user()->division->approver }}">
-                        <h5>Apakah anda yakin ingin me-reject request peminjaman?</h5>
-                        <div class="mb-3">
-                            <label for="pesan" class="col-form-label">Pesan:</label>
-                            <textarea class="form-control" id="pesan" name="pesan" autofocus required>{{ '' }}</textarea>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
-                        <button type="submit" class="btn btn-danger">Ya</button>
-                    </div>
-                </form>
-
-            </div>
-        </div>
-    </div>
-
-    {{--    modal approve --}}
-    <div class="modal fade" id="approveModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-                <form action="{{ route('perbaharuiRequest') }}" method="post">
-                    @csrf
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Approve Request</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <input type="hidden" name="request_perbaharui_id" id="request_id2">
-                        <input type="hidden" name="request_perbaharui" value="approved sebagian">
-                        <input type="hidden" name="user" value="approver">
-                        <input type="hidden" name="approver_num"
-                            value="{{ \Illuminate\Support\Facades\Auth::user()->division->approver }}">
-                        <h5>Apakah anda yakin ingin meng-approve request peminjaman?</h5>
-                        <div class="mb-3">
-                            <label for="pesan" class="col-form-label">Pesan:</label>
-                            <textarea class="form-control" id="pesan" name="pesan" autofocus></textarea>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
-                        <button type="submit" class="btn btn-success">Ya</button>
-                    </div>
-                </form>
-
-            </div>
-        </div>
-    </div>
 
     {{-- content --}}
     <div class="container">
@@ -253,17 +75,22 @@
                                         @endif
                                         <td>
                                             @if ($req->status == 'waiting approval')
-                                                <button type="button" class="btn btn-danger deleteRequestBtn"
-                                                    value="{{ $req->id }}">Cancel</button>
+                                                <form action="{{ route('cancel', ['request_delete_id' => $req->id]) }}" method="post">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-danger">Cancel</button>
+                                                </form>
                                             @elseif($req->status == 'waiting next approval')
-                                                <button type="button" class="btn btn-danger rejectBtn mb-2"
-                                                    value="{{ $req->id }}">Tidak Jadi Pinjam</button>
-                                                <button type="button" class="btn btn-success approveBtn"
-                                                    value="{{ $req->id }}">Jadi Pinjam</button>
+                                                <form action="{{ route('reject', ['request_delete_id' => $req->id]) }}" method="post">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-danger">Tidak Jadi Pinjam</button>
+                                                </form>
+                                                <form action="{{ route('approve', ['request_delete_id' => $req->id]) }}" method="post">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-success">Jadi Pinjam</button>
+                                                </form>
                                             @elseif($req->status == 'approved')
                                                 {{ 'Silahkan ambil barang sesuai jadwal pinjam.' }}
                                             @elseif($req->status == 'on use' || $req->status == 'done')
-                                                {{--                                        DONE: upgrade laravel biar bisa generate receipt DOMPDF --}}
                                                 <form action="{{ route('unduh') }}" target="_blank" method="post">
                                                     @csrf
                                                     <button type="submit" class="btn btn-primary" name="request_id"

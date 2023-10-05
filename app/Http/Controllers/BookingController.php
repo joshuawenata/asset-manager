@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\View;
 
 class BookingController extends Controller
 {
@@ -127,34 +128,11 @@ class BookingController extends Controller
                 ->get();
         }
 
-
-        if($user == 'staff'){
-            return Redirect::to('/dashboard#see')->with(['bookings'=> $assets, 'request' => $request, 'stat' => $stat]);
-        }
-        else{
-            return Redirect::to($user . '/dashboard#see')->with(['bookings'=> $assets, 'request' => $request, 'stat' => $stat]);
-        }
-    }
-
-    public function showApprove($user, $id)
-    {
-        $assets = DB::table('bookings')
-            ->join('assets', 'bookings.asset_id', '=', 'assets.id')
-            ->join('asset_jenis', 'bookings.asset_jenis_id', '=', 'asset_jenis.id')
-            ->select('bookings.id','assets.serial_number', 'assets.brand', 'assets.spesifikasi_barang', 'assets.kategori_barang', 'asset_jenis.name', 'assets.status', 'assets.division_id')
-            ->where('bookings.request_id', '=', $id)
-            ->get();
-
-        $request = \App\Models\Request::find($id);
-        $stat = $request->status;
-        $request = $request->notes;
-
-        if($user == 'staff'){
-            return Redirect::to('/dashboard#approve')->with(['bookings'=> $assets, 'request' => $request, 'stat' => $stat, 'request_id' => $id]);
-        }
-        else{
-            return Redirect::to($user . '/dashboard#approve')->with(['bookings'=> $assets, 'request' => $request, 'stat' => $stat, 'request_id' => $id]);
-        }
+        session(['bookings' => $assets]);
+        session(['request' => $request]);
+        session(['stat' => $stat]);
+        
+        return View::make('see');
     }
 
     public function show2($id)

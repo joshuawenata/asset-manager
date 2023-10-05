@@ -457,4 +457,8 @@ class AssetController extends Controller
             'data' => $data
         ]);
     }
+
+    public function see(){
+        return View::make('admin.see');
+    }
 }

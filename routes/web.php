@@ -98,10 +98,11 @@ Route::post('insert-account',function(Request $request){
 Route::get('/see/{user}/dashboard/{id}', [\App\Http\Controllers\BookingController::class, 'show'])->name('bookings.show')->middleware(['auth', 'cekRole:staff,admin,approver']);
 Route::get('/approve/{user}/dashboard/{id}', [\App\Http\Controllers\BookingController::class, 'showApprove'])->name('bookings.showApprove')->middleware(['auth', 'cekRole:staff,admin']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::post('/perbaharui-request', [\App\Http\Controllers\RequestController::class, 'perbaharui'])->name('perbaharuiRequest')->middleware(['auth', 'cekRole:admin,staff,approver']);
+Route::post('/perbaharui-request/{request_perbaharui_id}', [\App\Http\Controllers\RequestController::class, 'perbaharui'])->name('perbaharuiRequest')->middleware(['auth', 'cekRole:admin,staff,approver']);
 Route::post('/cancel/{request_delete_id}', [\App\Http\Controllers\RequestController::class, 'cancel'])->name('cancel')->middleware(['auth', 'cekRole:admin,staff,approver']);
-Route::post('/reject/{request_delete_id}', [\App\Http\Controllers\RequestController::class, 'reject'])->name('reject')->middleware(['auth', 'cekRole:admin,staff,approver']);
-Route::post('/approve/{request_delete_id}', [\App\Http\Controllers\RequestController::class, 'approve'])->name('approve')->middleware(['auth', 'cekRole:admin,staff,approver']);
+Route::post('/reject/{request_perbaharui_id}', [\App\Http\Controllers\RequestController::class, 'reject'])->name('reject')->middleware(['auth', 'cekRole:admin,staff,approver']);
+Route::post('/approve/{request_perbaharui_id}', [\App\Http\Controllers\RequestController::class, 'approve'])->name('approve')->middleware(['auth', 'cekRole:admin,staff,approver']);
+Route::post('/approveonly/{request_perbaharui_id}', [\App\Http\Controllers\RequestController::class, 'approveonly'])->name('approveonly')->middleware(['auth', 'cekRole:admin,staff,approver']);
 
 // Staff Routes
 

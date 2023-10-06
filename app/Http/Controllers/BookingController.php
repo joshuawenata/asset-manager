@@ -118,13 +118,21 @@ class BookingController extends Controller
                 ->join('asset_jenis', 'bookings.asset_jenis_id', '=', 'asset_jenis.id')
                 ->select('bookings.id','assets.serial_number', 'assets.brand', 'asset_jenis.name', 'bookings.status', 'assets.division_id', 'assets.kategori_barang', 'assets.spesifikasi_barang')
                 ->where('bookings.request_id', '=', $id)
+                ->where(function ($query) {
+                    $query->where('bookings.status', '=', 'approved')
+                          ->orWhereNull('bookings.status');
+                })
                 ->get();
         }else{
             $assets = DB::table('bookings')
                 ->join('assets', 'bookings.asset_id', '=', 'assets.id')
                 ->join('asset_jenis', 'bookings.asset_jenis_id', '=', 'asset_jenis.id')
-                ->select('bookings.id','assets.serial_number', 'assets.brand', 'asset_jenis.name', 'assets.status', 'assets.division_id', 'assets.kategori_barang', 'assets.spesifikasi_barang')
+                ->select('bookings.id','assets.serial_number', 'assets.brand', 'asset_jenis.name', 'bookings.status', 'assets.division_id', 'assets.kategori_barang', 'assets.spesifikasi_barang')
                 ->where('bookings.request_id', '=', $id)
+                ->where(function ($query) {
+                    $query->where('bookings.status', '=', 'approved')
+                          ->orWhereNull('bookings.status');
+                })
                 ->get();
         }
 

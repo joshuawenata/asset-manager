@@ -80,11 +80,11 @@
                                                     <button type="submit" class="btn btn-danger">Cancel</button>
                                                 </form>
                                             @elseif($req->status == 'waiting next approval')
-                                                <form action="{{ route('reject', ['request_delete_id' => $req->id]) }}" method="post">
+                                                <form action="{{ route('reject', ['request_perbaharui_id' => $req->id]) }}" method="post">
                                                     @csrf
                                                     <button type="submit" class="btn btn-danger">Tidak Jadi Pinjam</button>
                                                 </form>
-                                                <form action="{{ route('approve', ['request_delete_id' => $req->id]) }}" method="post">
+                                                <form action="{{ route('approveonly', ['request_perbaharui_id' => $req->id]) }}" method="post">
                                                     @csrf
                                                     <button type="submit" class="btn btn-success">Jadi Pinjam</button>
                                                 </form>

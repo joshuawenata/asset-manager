@@ -6,6 +6,8 @@ use App\Models\Location;
 use App\Models\User;
 use App\Models\HistoryDetail;
 use App\Models\Division;
+use App\Models\Asset;
+use App\Models\AssetLocation;
 use DateTime;
 use DateTimeZone;
 use Illuminate\Http\Request;
@@ -93,34 +95,42 @@ class RequestController extends Controller
         return view('cancel',['request_delete_id' => $request_delete_id]);
     }
 
-    public function reject($request_delete_id)
+    public function reject($request_perbaharui_id)
     {
         $assets = DB::table('bookings')
             ->join('assets', 'bookings.asset_id', '=', 'assets.id')
             ->join('asset_jenis', 'bookings.asset_jenis_id', '=', 'asset_jenis.id')
             ->select('bookings.id','assets.serial_number', 'assets.brand', 'assets.spesifikasi_barang', 'assets.kategori_barang', 'asset_jenis.name', 'assets.status', 'assets.division_id')
-            ->where('bookings.request_id', '=', $request_delete_id)
+            ->where('bookings.request_id', '=', $request_perbaharui_id)
             ->get();
 
-        $request = \App\Models\Request::find($request_delete_id);
+        $request = \App\Models\Request::find($request_perbaharui_id);
         $stat = $request->status;
         $request = $request->notes;
-        return view('reject',['request_delete_id' => $request_delete_id, 'bookings'=> $assets, 'request' => $request, 'stat' => $stat, 'request_id' => $request_delete_id]);
+        return view('reject',['request_perbaharui_id' => $request_perbaharui_id, 'bookings'=> $assets, 'request' => $request, 'stat' => $stat, 'request_id' => $request_perbaharui_id]);
     }
 
-    public function approve($request_delete_id)
+    public function approve($request_perbaharui_id)
     {
         $assets = DB::table('bookings')
             ->join('assets', 'bookings.asset_id', '=', 'assets.id')
             ->join('asset_jenis', 'bookings.asset_jenis_id', '=', 'asset_jenis.id')
             ->select('bookings.id','assets.serial_number', 'assets.brand', 'assets.spesifikasi_barang', 'assets.kategori_barang', 'asset_jenis.name', 'assets.status', 'assets.division_id')
-            ->where('bookings.request_id', '=', $request_delete_id)
+            ->where('bookings.request_id', '=', $request_perbaharui_id)
             ->get();
 
-        $request = \App\Models\Request::find($request_delete_id);
+        $request = \App\Models\Request::find($request_perbaharui_id);
         $stat = $request->status;
         $request = $request->notes;
-        return view('approve',['request_delete_id' => $request_delete_id, 'bookings'=> $assets, 'request' => $request, 'stat' => $stat, 'request_id' => $request_delete_id]);
+        return view('approve',['request_perbaharui_id' => $request_perbaharui_id, 'bookings'=> $assets, 'request' => $request, 'stat' => $stat, 'request_id' => $request_perbaharui_id]);
+    }
+
+    public function approveonly($request_perbaharui_id)
+    {
+        $request = \App\Models\Request::find($request_perbaharui_id);
+        $stat = $request->status;
+        $request = $request->notes;
+        return view('approveonly',['request_perbaharui_id' => $request_perbaharui_id]);
     }
 
 
@@ -149,7 +159,7 @@ class RequestController extends Controller
             ->join('asset_jenis', 'bookings.asset_jenis_id', '=', 'asset_jenis.id')
             ->select('bookings.id', 'assets.serial_number', 'assets.brand', 'asset_jenis.name', 'bookings.return_conditions')
             ->where('bookings.request_id', '=', $id)
-            ->where('bookings.status', '=', 'approved')
+            ->where('bookings.status','!=','rejected')
             ->get();
 
         $current_date_time = new DateTime("now", new DateTimeZone('Asia/Jakarta'));
@@ -194,8 +204,8 @@ class RequestController extends Controller
         $email = new SendEmailController();
         $receiver = DB::table('users')
             ->select('email')
-            // ->where('division_id', '=', $req->division_id)
-            ->where('role_id', 3)
+            ->where('division_id', '=', $req->division_id)
+            ->where('isAdmin', '=', true)
             ->get();
         $receiver = $receiver[0]->email;
         $message = $req->User->name . ' mengajukan pengembalian barang.';
@@ -512,8 +522,6 @@ class RequestController extends Controller
      */
     public function perbaharui(Request $request)
     {
-        var_dump($request->request_perbaharui_id);
-        $user = $request->input('user');
         $req = \App\Models\Request::find($request->request_perbaharui_id);
 
         if($request->request_perbaharui == 'rejected'){
@@ -529,6 +537,26 @@ class RequestController extends Controller
             $history->user_id = \Illuminate\Support\Facades\Auth::user()->id;
             $history->aksi = \Illuminate\Support\Facades\Auth::user()->name . ' menolak peminjaman dari '.$req->nama_peminjam.'['.$req->prodi_peminjam.']'.' dengan tujuan '.$req->purpose.' dengan alasan '.$request->input('pesan');
             $history->save();
+
+            $bookings = DB::table('bookings')
+            ->where('request_id', '=', $request->request_perbaharui_id)
+            ->get();
+
+            foreach ($bookings as $b){
+                $aset = Asset::find($b->asset_id);
+
+                $prev_pos = AssetLocation::orderBy('id', 'desc')
+                    ->where('asset_id', '=', $b->asset_id)
+                    ->offset(1)->limit(1)
+                    ->get();
+
+                foreach ($prev_pos as $p){
+                    $lok = $p->to_location;
+                }
+
+                $aset->status = 'tersedia';
+                $aset->update();
+            }
 
             $email = new SendEmailController();
             $email->indexPeminjam($receiver, $pesan, $subyek);
@@ -558,12 +586,26 @@ class RequestController extends Controller
                     $booking->status = 'rejected';
                     $booking->save();
                     $counting++;
+
+                    $aset = Asset::find($booking->asset_id);
+
+                    $prev_pos = AssetLocation::orderBy('id', 'desc')
+                        ->where('asset_id', '=', $booking->asset_id)
+                        ->offset(1)->limit(1)
+                        ->get();
+
+                    foreach ($prev_pos as $p){
+                        $lok = $p->to_location;
+                    }
+
+                    $aset->status = 'tersedia';
+                    $aset->update();
                 }
             }
 
             if($counting == 0) {
                 $req->track_approver = $req->track_approver++;
-                $req->notes = $req->notes . "<br>" . $request->input('pesan');
+                $req->notes = $req->notes . $request->input('pesan');
                 $approver = $request->approver_num;
 
                 $req->status = $request->request_perbaharui;
@@ -584,7 +626,7 @@ class RequestController extends Controller
                 $history->save();
             }else{
                 $req->track_approver = $req->track_approver++;
-                $req->notes = $req->notes . "<br>" . $request->input('pesan');
+                $req->notes = $req->notes . $request->input('pesan');
                 $approver = $request->approver_num;
 
                 $req->status = "waiting next approval";
@@ -611,7 +653,7 @@ class RequestController extends Controller
             $message = 'Request berhasil diapprove.';
 
             $req->track_approver = $req->track_approver+1;
-            $req->notes = $req->notes . "<br>" . $request->input('pesan');
+            $req->notes = $req->notes . $request->input('pesan');
             $approver = $request->approver_num;
 
             $req->status = $request->request_perbaharui;
@@ -631,8 +673,11 @@ class RequestController extends Controller
         // DONE: ini kembali ke dashboard/approvernya gimana
         if(Auth::user()->role_id == 1){
             return redirect('/dashboard')->with('message', $message);
+        }else if(Auth::user()->role_id == 2){
+            return redirect('/admin/dashboard')->with('message', $message);
+        }else if(Auth::user()->role_id == 3){
+            return redirect('/approver/dashboard')->with('message', $message);
         }
-        return redirect('/'. $user . '/dashboard')->with('message', $message);
     }
 
     /**

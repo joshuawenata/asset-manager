@@ -9,24 +9,6 @@
 @section('js')
     <script defer src="{{ asset('js/datatable.js') }}"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script defer>
-        $(document).ready(function() {
-            $('.rejectBtn').click(function(e) {
-                e.preventDefault();
-                var request_id = $(this).val();
-                $('#request_id').val(request_id);
-                $('#rejectModal').modal('show');
-            });
-
-            if (window.location.href.indexOf('#approve') != -1) {
-                $('#approveModal').modal('show');
-            }
-
-            if (window.location.href.indexOf('#see') != -1) {
-                $('#see').modal('show');
-            }
-        });
-    </script>
 @endsection
 
 @section('content')
@@ -98,11 +80,11 @@
                                         <td>{{ $req->status }}</td>
                                         <td>
                                             @if ($req->status == 'waiting approval')
-                                                <form action="{{ route('reject', ['request_delete_id' => $req->id]) }}" method="post">
+                                                <form action="{{ route('reject', ['request_perbaharui_id' => $req->id]) }}" method="post">
                                                     @csrf
                                                     <button type="submit" class="btn btn-danger">Tolak</button>
                                                 </form>
-                                                <form action="{{ route('approve', ['request_delete_id' => $req->id]) }}" method="post">
+                                                <form action="{{ route('approve', ['request_perbaharui_id' => $req->id]) }}" method="post">
                                                     @csrf
                                                     <button type="submit" class="btn btn-success">Setuju</button>
                                                 </form>

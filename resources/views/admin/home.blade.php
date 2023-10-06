@@ -80,27 +80,33 @@
                                         <td>{{ $req->status }}</td>
                                         <td>
                                             @if ($req->status == 'waiting approval')
-                                                <form action="{{ route('reject', ['request_delete_id' => $req->id]) }}" method="post">
+                                                <form action="{{ route('reject', ['request_perbaharui_id' => $req->id]) }}" method="post">
                                                     @csrf
                                                     <button type="submit" class="btn btn-danger">Tolak</button>
                                                 </form>
-                                                <form action="{{ route('approve', ['request_delete_id' => $req->id]) }}" method="post">
+                                                <form action="{{ route('approve', ['request_perbaharui_id' => $req->id]) }}" method="post">
                                                     @csrf
                                                     <button type="submit" class="btn btn-success">Setuju</button>
                                                 </form>
                                             @elseif($req->status == 'on use')
-                                                {{--                                        DONE: ini tampilin receiptnya --}}
-                                                <form action="{{ route('kembali') }}" method="post">
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-primary mt-2"
-                                                        name="request_return_id" value="{{ $req->id }}">
-                                                        @if ($req->flag_return == null || $req->flag_return == 0)
-                                                            Kembalikan
-                                                        @elseif($req->flag_return == 1)
+                                                @if ($req->flag_return == null || $req->flag_return == 0)
+                                                    <form action="{{ route('kembali') }}" method="post">
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-primary mt-2"
+                                                            name="request_return_id" value="{{ $req->id }}">
+                                                                Kembalikan
+                                                        </button>
+                                                    </form>
+                                                @elseif($req->flag_return == 1)
+                                                    <form
+                                                        action="{{ route('bookings.show', ['user' => \Illuminate\Support\Facades\Auth::user()->role->name, 'id' => $req->id]) }}"
+                                                        method="GET">
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-small btn-primary mb-3">
                                                             <span class="material-symbols-outlined">visibility</span>
-                                                        @endif
-                                                    </button>
-                                                </form>
+                                                        </button>
+                                                    </form>
+                                                @endif
                                             @elseif($req->status == 'approved' || $req->status == 'approved sebagian')
                                                 <form action="{{ route('takenBooking') }}" method="post">
                                                     @csrf

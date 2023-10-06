@@ -167,7 +167,6 @@ class AssetController extends Controller
         }
     }
 
-
     public function createForStaff()
     {
         $data = Location::all();
@@ -257,7 +256,7 @@ class AssetController extends Controller
         ]);
 
         if($validator->fails()){
-            return redirect('create-asset')
+            return redirect('create-asset-staff')
                 ->withErrors($validator)
                 ->withInput();
         }

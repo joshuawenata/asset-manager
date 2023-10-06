@@ -17,21 +17,22 @@
             <form action="{{ route('perbaharuiRequest', ['request_perbaharui_id' => $request_perbaharui_id]) }}" method="post">
                 @csrf
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Reject Request</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Jadi Pinjam</h1>
                 </div>
                 <div class="modal-body">
                     <input type="hidden" name="request_perbaharui_id" value="{{ $request_perbaharui_id }}">
-                    <input type="hidden" name="request_perbaharui" value="rejected">
+                    <input type="hidden" name="request_perbaharui" value="approved sebagian">
+                    <input type="hidden" name="user" value="approver">
                     <input type="hidden" name="approver_num"
                         value="{{ \Illuminate\Support\Facades\Auth::user()->division->approver }}">
-                    <h5>Apakah anda yakin ingin me-reject request peminjaman?</h5>
+                    <h5>Apakah anda yakin ingin melanjutkan request peminjaman?</h5>
                     <div class="mb-3">
                         <label for="pesan" class="col-form-label">Pesan:</label>
-                        <textarea class="form-control" id="pesan" name="pesan" autofocus required>{{ '' }}</textarea>
+                        <textarea class="form-control" id="pesan" name="pesan" autofocus></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-danger">Ya</button>
+                    <button type="submit" class="btn btn-success">Ya</button>
                 </div>
             </form>
 

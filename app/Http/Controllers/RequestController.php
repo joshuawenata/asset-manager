@@ -212,12 +212,12 @@ class RequestController extends Controller
         $subjek = 'PENGAJUAN PENGEMBALIAN BARANG';
         $email->index($receiver, $message, $subjek);
 
-        $history = new HistoryDetail();
+        $history = new HistoryDetail;
         $history->user_id = \Illuminate\Support\Facades\Auth::user()->id;
         $history->aksi = \Illuminate\Support\Facades\Auth::user()->name . ' mengajukan pengembalian barang dari '.$req->nama_peminjam.'['.$req->prodi_peminjam.']'.' dengan kondisi '.$request->input('kondisi_aset').' dengan deskripsi '.$request->input('return_condition');
         $history->save();
 
-        $history = new HistoryDetail();
+        $history = new HistoryDetail;
         $history->user_id = \Illuminate\Support\Facades\Auth::user()->id;
         $history->aksi = \Illuminate\Support\Facades\Auth::user()->name . ' mengapprove pengembalian dari '.$req->nama_peminjam.'['.$req->prodi_peminjam.']'.' dengan pesan '.$request->input('pesan');
         $history->save();
@@ -289,7 +289,7 @@ class RequestController extends Controller
             $receiver = $receiver->User->email;
             $email->index($receiver, $message, $subjek);
 
-            $history = new HistoryDetail();
+            $history = new HistoryDetail;
             $history->user_id = \Illuminate\Support\Facades\Auth::user()->id;
             $history->aksi = \Illuminate\Support\Facades\Auth::user()->name . ' memberikan barang kepada '.$req->nama_peminjam.'['.$req->prodi_peminjam.']'.' dengan tujuan '.$req->purpose;
             $history->save();
@@ -533,7 +533,7 @@ class RequestController extends Controller
             $subyek = 'PEMINJAMAN REJECTED';
             $pesan = 'Mohon maaf, peminjaman anda tidak disetujui oleh approver. Silahkan pilih tanggal lain untuk meminjam.';
             $receiver = $req->email_peminjam;
-            $history = new HistoryDetail();
+            $history = new HistoryDetail;
             $history->user_id = \Illuminate\Support\Facades\Auth::user()->id;
             $history->aksi = \Illuminate\Support\Facades\Auth::user()->name . ' menolak peminjaman dari '.$req->nama_peminjam.'['.$req->prodi_peminjam.']'.' dengan tujuan '.$req->purpose.' dengan alasan '.$request->input('pesan');
             $history->save();
@@ -620,7 +620,7 @@ class RequestController extends Controller
 
                 $req->update();
 
-                $history = new HistoryDetail();
+                $history = new HistoryDetail;
                 $history->user_id = \Illuminate\Support\Facades\Auth::user()->id;
                 $history->aksi = \Illuminate\Support\Facades\Auth::user()->name . ' menyetujui peminjaman dari '.$req->nama_peminjam.'['.$req->prodi_peminjam.']'.' dengan tujuan '.$req->purpose.' dengan alasan '.$request->input('pesan');
                 $history->save();

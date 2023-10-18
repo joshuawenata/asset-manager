@@ -1,3 +1,22 @@
+### how to update
+<br>
+composer install --ignore-platform-reqs
+<br>
+php artisan key:generate
+<br>
+php artisan config:cache
+<br>
+php artisan migrate:fresh --seed
+<br>
+composer dump autoload
+<br>
+php artisan cache:clear
+<br>
+php artisan view:clear
+<br>
+php artisan route:clear
+<br>
+
 ### how to run
 
 <br>
@@ -18,12 +37,6 @@
 8. php artisan config:cache
 <br>
 9. php artisan migrate:fresh --seed
-<br>
-========
-<br>
-optional
-<br>
-========
 <br>
 10. php artisan route:cache 
 <br>

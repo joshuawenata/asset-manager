@@ -5,8 +5,7 @@
 @endsection
 
 @section('css')
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 @endsection
 
@@ -16,9 +15,9 @@
             <div class="col-md-12">
 
                 @if ($mode == 'current')
-                    <a title="Penambahan Barang" class="btn btn-outline-success mb-3"
-                        href="{{ route('admin.createAsset') }}"><span style="display: flex"
-                            class="material-symbols-outlined">add</span></a>
+                    <a href="{{ route('admin.createAsset') }}" type="button" class="no-underline text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                        Add New Item
+                    </a>
                 @endif
 
                 <div class="card">
@@ -76,27 +75,26 @@
                                                 <td>{{ $item->status }}</td>
                                             @endif
 
-                                            <td>
-                                                <a title="edit barang" class="btn btn-small btn-info"
-                                                    href="{{ URL::to('/edit-asset/' . $item->id) }}"><span
-                                                        class="material-symbols-outlined">edit_square</span></a>
-                                                {{--                                        <form action="{{ url('deleteAsset/' . $item->id) }}" method="post"> --}}
-                                                {{--                                            <button class="btn btn-small btn-info" type="submit"><span class="material-symbols-outlined">delete</span></button> --}}
-                                                {{--                                            <input type="hidden" name="_method" value="delete" /> --}}
-                                                {{--                                            <input type="hidden" name="_token" value="{{ csrf_token() }}"> --}}
-                                                {{--                                        </form> --}}
+                                            <td style="width: 2.5rem; height: 2.5rem;">
+                                                <a title="Edit Barang" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-2 py-2 text-center m-0.5" href="{{ URL::to('/edit-asset/' . $item->id) }}">
+                                                    <span class="material-icons">edit</span>
+                                                </a>
+
                                                 @if ($item->status != 'dipinjam')
-                                                    <a title="hapus barang" class="btn btn-small btn-danger"
-                                                        href="{{ URL::to('/edit-asset/' . $item->id) }}"><span
-                                                            class="material-symbols-outlined">delete</span></a>
+                                                    <a title="Hapus Barang" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded text-sm px-2 py-2 text-center m-0.5" href="{{ URL::to('/delete-asset/' . $item->id) }}">
+                                                        <span class="material-icons">delete</span>
+                                                    </a>
                                                 @endif
-                                                <a title="barang rusak" class="btn btn-small btn-info"
-                                                    href="{{ URL::to('/repair-asset-history/' . $item->id) }}"><span
-                                                        class="material-symbols-outlined">build</span></a>
-                                                <a title="riwayat pemindahan" class="btn btn-small btn-info"
-                                                    href="{{ URL::to('/move-asset-history/' . $item->id) }}"><span
-                                                        class="material-symbols-outlined">trolley</span></a>
+
+                                                <a title="Barang Rusak" class="text-white bg-gradient-to-r from-green-600 via-green-700 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-500 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-2 py-2 text-center m-0.5" href="{{ URL::to('/repair-asset-history/' . $item->id) }}">
+                                                    <span class="material-icons">build</span>
+                                                </a>
+
+                                                <a title="Riwayat Pemindahan" class="place-content-center text-white bg-gradient-to-r from-green-600 via-green-700 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-500 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-2 py-2 text-center m-0.5" href="{{ URL::to('/move-asset-history/' . $item->id) }}">
+                                                    <span class="material-icons">unarchive</span>
+                                                </a>
                                             </td>
+
                                         @endif
                                     </tr>
                                 @endforeach

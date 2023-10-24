@@ -1,3 +1,7 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
 /* Add your CSS styles here */
 #myTable {
     width: 100%;
@@ -50,4 +54,11 @@
 /* Change inside border on focus */
 .dataTables_wrapper .dataTables_filter input[type="search"]:focus {
     border: none !important;
+}
+
+#dropdown {
+    position: relative;
+    top: 100%; /* Place the dropdown below the button */
+    left: 0;
+    z-index: 1000; /* Ensure the dropdown appears above other content */
 }

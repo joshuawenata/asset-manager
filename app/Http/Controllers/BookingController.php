@@ -6,6 +6,7 @@ use App\Models\Asset;
 use App\Models\AssetLocation;
 use App\Models\Booking;
 use App\Models\User;
+use App\Models\HistoryDetail;
 use DateTime;
 use DateTimeZone;
 use Illuminate\Http\Request;
@@ -50,6 +51,17 @@ class BookingController extends Controller
 
         $data = $request->input();
         $assets = $data['assets'];
+
+        foreach ($assets as $i){
+            $asset = DB::table('assets')
+                ->join('asset_jenis', 'assets.asset_jenis_id', '=', 'asset_jenis.id')
+                ->select('assets.*', 'asset_jenis.name')
+                ->where('assets.id', '=', $i)
+                ->get();
+            foreach ($asset as $a){
+                DB::table('assets')->where('id', $a->id)->update(['status' => 'tidak tersedia']);
+            }
+        }
 
         foreach ($assets as $asset){
             $as = Asset::find($asset);

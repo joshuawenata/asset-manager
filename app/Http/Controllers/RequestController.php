@@ -301,7 +301,7 @@ class RequestController extends Controller
         }
         else{
             //TODO: gabisa diambil dulu = alert
-            echo 'alert';
+            echo 'belum bisa diambil karena belum tanggalnya';
         }
     }
 
@@ -397,7 +397,6 @@ class RequestController extends Controller
                 ->get();
             foreach ($asset as $a){
                 array_push($bookings, $a);
-                DB::table('assets')->where('id', $a->id)->update(['status' => 'tidak tersedia']);
             }
         }
 

@@ -78,7 +78,9 @@ class RequestController extends Controller
         }
         else if($p == 'approver'){
             $user_id = \Illuminate\Support\Facades\Auth::user()->id;
-            $data = \App\Models\Request::orderBy('id', 'desc')->where('user_id', $user_id)->get();
+            $data = \App\Models\Request::orderBy('id', 'desc')
+                ->where('user_id', $user_id)
+                ->where('status', '!=' , 'done')->get();
             $approver = null;
         }
         return [$data, $approver];
@@ -482,12 +484,16 @@ class RequestController extends Controller
         $user_div_id = \Illuminate\Support\Facades\Auth::user()->division->id;
         $data = DB::table('requests')
             ->orderBy('id', 'desc')
-            ->where('status', '=', 'done')
-            ->orWhere('status', '=', 'rejected')
+            ->where(function ($query) {
+                $query->where('status', 'done')
+                    ->orWhere('status', 'rejected');
+            })
+            ->where('user_id', \Illuminate\Support\Facades\Auth::user()->id)
             ->join('users', 'requests.user_id', '=', 'users.id')
             ->select('requests.*', 'users.id AS userid', 'users.binusianid')
             ->where('requests.division_id', '=', $user_div_id)
             ->get();
+
         return view('approver.historiRequest', [
             'data' => $data
         ]);
@@ -645,6 +651,11 @@ class RequestController extends Controller
                 // $email->index("bmopr.bdg@binus.edu", $pesan_bm , $subyek);
                 $email->indexPeminjam($receiver, $pesan, $subyek);
 
+                $history = new HistoryDetail;
+                $history->user_id = \Illuminate\Support\Facades\Auth::user()->id;
+                $history->aksi = \Illuminate\Support\Facades\Auth::user()->name . ' menyetujui sebagian peminjaman dari '.$req->nama_peminjam.'['.$req->prodi_peminjam.']'.' dengan tujuan '.$req->purpose.' dengan alasan '.$request->input('pesan');
+                $history->save();
+
                 $req->update();
             }
 
@@ -664,6 +675,10 @@ class RequestController extends Controller
             $email = new SendEmailController();
             // $email->index("bmopr.bdg@binus.edu", $pesan_bm , $subyek);
             $email->indexPeminjamApprove($receiver, $pesan, $subyek, $req->id);
+            $history = new HistoryDetail;
+            $history->user_id = \Illuminate\Support\Facades\Auth::user()->id;
+            $history->aksi = \Illuminate\Support\Facades\Auth::user()->name . ' approve peminjaman sebagian dari '.$req->nama_peminjam.'['.$req->prodi_peminjam.']'.' dengan tujuan '.$req->purpose.' dengan alasan '.$request->input('pesan');
+            $history->save();
 
             $req->update();
 
@@ -693,6 +708,11 @@ class RequestController extends Controller
 
             $bookings = new BookingController();
             $bookings->destroy($id->request_delete_id);
+
+            $history = new HistoryDetail;
+            $history->user_id = \Illuminate\Support\Facades\Auth::user()->id;
+            $history->aksi = \Illuminate\Support\Facades\Auth::user()->name . ' membatalkan peminjaman ';
+            $history->save();
 
             $request->delete();
             $message = 'Request peminjaman berhasil dihapus';

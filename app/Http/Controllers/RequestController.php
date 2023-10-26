@@ -135,6 +135,12 @@ class RequestController extends Controller
         return view('approveonly',['request_perbaharui_id' => $request_perbaharui_id]);
     }
 
+    public function repair(Request $request)
+    {
+        $repair_id = $request->input('repair_id');
+        return view('admin/repair',['repair_id' => $repair_id]);
+    }
+
 
     public function check()
     {

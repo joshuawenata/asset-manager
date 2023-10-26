@@ -72,7 +72,7 @@
                                                 action="{{ route('bookings.show', ['user' => 'admin', 'id' => $req->id]) }}"
                                                 method="GET">
                                                 @csrf
-                                                <button type="submit" class="btn btn-small btn-primary mb-3">
+                                                <button type="submit" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-3 py-2.5 text-center mr-2 mb-2">
                                                     <span class="material-symbols-outlined">visibility</span>
                                                 </button>
                                             </form>
@@ -82,17 +82,17 @@
                                             @if ($req->status == 'waiting approval')
                                                 <form action="{{ route('reject', ['request_perbaharui_id' => $req->id]) }}" method="post">
                                                     @csrf
-                                                    <button type="submit" class="btn btn-danger">Tolak</button>
+                                                    <button type="submit" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Tolak</button>
                                                 </form>
                                                 <form action="{{ route('approve', ['request_perbaharui_id' => $req->id]) }}" method="post">
                                                     @csrf
-                                                    <button type="submit" class="btn btn-success">Setuju</button>
+                                                    <button type="submit" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Setuju</button>
                                                 </form>
                                             @elseif($req->status == 'on use')
                                                 @if ($req->flag_return == null || $req->flag_return == 0)
                                                     <form action="{{ route('kembali') }}" method="post">
                                                         @csrf
-                                                        <button type="submit" class="btn btn-primary mt-2"
+                                                        <button type="submit" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 mt-2"
                                                             name="request_return_id" value="{{ $req->id }}">
                                                                 Kembalikan
                                                         </button>
@@ -102,7 +102,7 @@
                                                         action="{{ route('bookings.show', ['user' => \Illuminate\Support\Facades\Auth::user()->role->name, 'id' => $req->id]) }}"
                                                         method="GET">
                                                         @csrf
-                                                        <button type="submit" class="btn btn-small btn-primary mb-3">
+                                                        <button type="submit" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-3 py-2.5 text-center mr-2 mb-2">
                                                             <span class="material-symbols-outlined">visibility</span>
                                                         </button>
                                                     </form>
@@ -110,7 +110,7 @@
                                             @elseif($req->status == 'approved' || $req->status == 'approved sebagian')
                                                 <form action="{{ route('takenBooking') }}" method="post">
                                                     @csrf
-                                                    <button type="submit" class="btn btn-primary"
+                                                    <button type="submit" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
                                                         name="request_taken_id" value="{{ $req->id }}">Barang
                                                         sudah
                                                         diambil</button>

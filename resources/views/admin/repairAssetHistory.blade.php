@@ -11,55 +11,18 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script defer>
         $(document).ready(function() {
-            $('.perbaikiBtn').click(function(e) {
-                e.preventDefault();
+            $('.perbaikiBtn').click(function() {
                 var repair_id = $(this).val();
                 $('#repair_id').val(repair_id);
-                $('#exampleModal').modal('show');
+                console.log(repair_id);
+                // Trigger the form submission
+                $('#repairForm').submit();
             });
         });
     </script>
 @endsection
 
 @section('content')
-
-
-    {{--    perbaharui perbaikan (pic, repaired by, fixed boolean) --}}
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <form method="POST" action="{{ route('perbaharuiFixedAsset') }}">
-                    @csrf
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Barang Diperbaiki</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="mb-3">
-
-                            <label for="pic" class="col-form-label">{{ __('Diperbaiki oleh') }}</label>
-                            <input type="text" class="form-control" id="pic" name="pic" autocomplete="pic"
-                                autofocus>
-
-                        </div>
-                        <div class="mb-3">
-
-                            <label for="repaired-by" class="col-form-label">{{ __('Kontak') }}</label>
-                            <input type="text" class="form-control" id="repaired-by" name="repaired-by"
-                                autocomplete="repaired-by" autofocus>
-                            <input type="hidden" name="repair_id" id="repair_id">
-
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
 
     <div class="container">
         <div class="row justify-content-center">
@@ -80,12 +43,12 @@
 
                 @if ($status != 'dipinjam')
                     @if ($fixed == 1)
-                        <a class="btn btn-small btn-success mb-3"
+                        <a class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 no-underline"
                             href="{{ url('create-repair-asset/' . $asset->id) }}">Lapor Kerusakan</a>
                     @endif
                 @endif
 
-                <div class="card">
+                <div class="card mt-3">
                     <div class="card-header">{{ __('Riwayat Reparasi Barang') }}</div>
 
                     <div class="card-body">
@@ -116,10 +79,13 @@
                                         <td>{{ $item->reported_by }}</td>
                                         <td>
                                             @if (!$item->flag_fixed)
-                                                <button title="perbaiki barang" type="button"
-                                                    class="btn btn-small btn-success mb-3 perbaikiBtn"
-                                                    value="{{ $item->id }}"><span
-                                                        class="material-symbols-outlined">build</span></button>
+                                                <form id="repairForm" action="{{ route('repair') }}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="repair_id" id="repair_id">
+                                                    <button title="perbaiki barang" type="button" class="perbaikiBtn no-underline text-white bg-gradient-to-r from-lime-500 via-lime-600 to-lime-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 shadow-lg shadow-lime-500/50 dark:shadow-lg dark:shadow-lime-800/80 font-medium rounded-lg text-sm px-3 py-2 text-center m-0.5" value="{{ $item->id }}">
+                                                        <span class="material-symbols-outlined">build</span>
+                                                    </button>
+                                                </form>
                                             @else
                                                 Sudah diperbaiki
                                             @endif

@@ -115,10 +115,11 @@
                                         <td>{{ date('d M Y H:i', strtotime($req->return_date)) }}</td>
                                         <td>{{ $req->lokasi }}</td>
                                         <td>
-                                            <form action="{{ route('rejectedbookings.show', ['id' => $req->id]) }}"
+                                            <form
+                                                action="{{ route('bookings.show', ['user' => \Illuminate\Support\Facades\Auth::user()->role->name, 'id' => $req->id]) }}"
                                                 method="GET">
                                                 @csrf
-                                                <button type="submit" class="btn btn-small btn-primary mb-3">
+                                                <button type="submit" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-3 py-2.5 text-center mr-2 mb-2">
                                                     <span class="material-symbols-outlined">visibility</span>
                                                 </button>
                                             </form>
@@ -129,9 +130,9 @@
                                                 <form action="{{ route('unduh') }}" target="_blank" method="post">
                                                     @csrf
                                                     <button type="submit"
-                                                        @if ($req->return_notice == 'isu_rusak') class="btn btn-danger"
+                                                        @if ($req->return_notice == 'isu_rusak') class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
                                                         @else
-                                                            class="btn btn-primary" @endif
+                                                            class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" @endif
                                                         name="request_id" value="{{ $req->id }}"><span
                                                             class="material-symbols-outlined">file_download</span></button>
                                                 </form>

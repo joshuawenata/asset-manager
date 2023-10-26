@@ -5,8 +5,8 @@
 @endsection
 
 @section('css')
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 @endsection
 
 @section('content')
@@ -75,23 +75,23 @@
                                                 <td>{{ $item->status }}</td>
                                             @endif
 
-                                            <td style="width: 2.5rem; height: 2.5rem;">
-                                                <a title="Edit Barang" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-2 py-2 text-center m-0.5" href="{{ URL::to('/edit-asset/' . $item->id) }}">
-                                                    <span class="material-icons">edit</span>
+                                            <td class="flex items-center space-x-2">
+                                                <a title="Edit Barang" class="no-underline text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-2 py-2 text-center m-0.5" href="{{ URL::to('/edit-asset/' . $item->id) }}">
+                                                    <span class="material-symbols-outlined">edit</span>
                                                 </a>
 
                                                 @if ($item->status != 'dipinjam')
-                                                    <a title="Hapus Barang" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded text-sm px-2 py-2 text-center m-0.5" href="{{ URL::to('/delete-asset/' . $item->id) }}">
-                                                        <span class="material-icons">delete</span>
+                                                    <a title="Hapus Barang" class="no-underline text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-2 py-2 text-center m-0.5" href="{{ URL::to('/delete-asset/' . $item->id) }}">
+                                                        <span class="material-symbols-outlined">delete</span>
                                                     </a>
                                                 @endif
 
-                                                <a title="Barang Rusak" class="text-white bg-gradient-to-r from-green-600 via-green-700 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-500 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-2 py-2 text-center m-0.5" href="{{ URL::to('/repair-asset-history/' . $item->id) }}">
-                                                    <span class="material-icons">build</span>
+                                                <a title="Barang Rusak" class="no-underline text-white bg-gradient-to-r from-lime-500 via-lime-600 to-lime-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 shadow-lg shadow-lime-500/50 dark:shadow-lg dark:shadow-lime-800/80 font-medium rounded-lg text-sm px-2 py-2 text-center m-0.5" href="{{ URL::to('/repair-asset-history/' . $item->id) }}">
+                                                    <span class="material-symbols-outlined">build</span>
                                                 </a>
 
-                                                <a title="Riwayat Pemindahan" class="place-content-center text-white bg-gradient-to-r from-green-600 via-green-700 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-500 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-2 py-2 text-center m-0.5" href="{{ URL::to('/move-asset-history/' . $item->id) }}">
-                                                    <span class="material-icons">unarchive</span>
+                                                <a title="Riwayat Pemindahan" class="no-underline text-white bg-gradient-to-r from-green-500 via-green-600 to-green-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-2 py-2 text-center m-0.5" href="{{ URL::to('/move-asset-history/' . $item->id) }}">
+                                                    <span class="material-symbols-outlined">unarchive</span>
                                                 </a>
                                             </td>
 

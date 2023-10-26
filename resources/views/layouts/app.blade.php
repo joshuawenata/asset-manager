@@ -46,6 +46,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
+    <!-- icons -->
+    
+
 </head>
 
 <body>
@@ -80,55 +83,74 @@
                             </a>
                         @endguest
                     </div>
-                    <button id="MenuButton" data-dropdown-toggle="dropdownMenu" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 px-5 py-2.5 text-center inline-flex items-center" type="button">Action Menu<svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-                        </svg>
-                    </button>
-                    <div id="dropdownMenu" class="absolute hidden bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700 mt-[36rem] w-40 ml-[21.5rem] left-0 z-10">
-                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200 p-0 pt-4" aria-labelledby="dropdownDefaultButton">
+                    @guest
+                    @else
+                        <button id="MenuButton" data-dropdown-toggle="dropdownMenu" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 px-5 py-2.5 text-center inline-flex items-center" type="button">Action Menu<svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                            </svg>
+                        </button>
                         @guest
                         @else
                             @if (auth()->user()->role->name == 'staff')
-                                <li><a href="{{ url('/search-asset-staff/' . \Illuminate\Support\Facades\Auth::user()->division->id) }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Lihat Inventory</a></li>
-                                <li><a href="{{ route('staff.createAsset') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Tambah Barang</a></li>
-                                <li><a href="{{ route('staff.createAssetExcel') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Tambah Barang Melalui Excel</a></li>
-                                <li><a href="{{ route('historyAddAsset') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Riwayat Tambah Barang</a></li>
-                                <li><a href="{{ route('historyDetail') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Detil Riwayat</a></li>
-                                <li><a href="{{ route('historiRequest') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Riwayat Peminjaman</a></li>
+                                <div id="dropdownMenu" class="absolute hidden bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700 mt-[25rem] w-40 ml-[21.5rem] left-0 z-10">
+                                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200 p-0 pt-4" aria-labelledby="dropdownDefaultButton">
+                                        <li><a href="{{ url('/search-asset-staff/' . \Illuminate\Support\Facades\Auth::user()->division->id) }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Lihat Inventory</a></li>
+                                        <li><a href="{{ route('staff.createAsset') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Tambah Barang</a></li>
+                                        <li><a href="{{ route('staff.createAssetExcel') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Tambah Barang Melalui Excel</a></li>
+                                        <li><a href="{{ route('historyAddAsset') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Riwayat Tambah Barang</a></li>
+                                        <li><a href="{{ route('historyDetail') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Detil Riwayat</a></li>
+                                        <li><a href="{{ route('historiRequest') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Riwayat Peminjaman</a></li>
+                                    </ul>
+                                </div>
                             @elseif(auth()->user()->role->name == 'admin')
-                                <li><a href="{{ url('/search-asset/' . \Illuminate\Support\Facades\Auth::user()->division->id) }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Lihat Inventory</a></li>
-                                <li><a href="{{ route('admin.createAssetExcel') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Tambah Barang Melalui Excel</a></li>
-                                <li><a href="{{ route('historyAddAsset') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Riwayat Tambah Barang</a></li>
-                                <li><a href="{{ route('historyDetail') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Detil Riwayat</a></li>
-                                <li><a href="{{ url('/deleted-asset/') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Riwayat Pemusnahan Barang</a></li>
-                                <li><a href="{{ route('admin.riwayat-perbaharui') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Riwayat Perbaharui Barang</a></li>
-                                <li><a href="{{ url('/move-asset/' . \Illuminate\Support\Facades\Auth::user()->division->id) }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Pemindahan Barang</a></li>
-                                <li><a href="{{ route('historiRequest') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Riwayat Peminjaman</a></li>
+                                <div id="dropdownMenu" class="absolute hidden bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700 mt-[36rem] w-40 ml-[21.5rem] left-0 z-10">
+                                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200 p-0 pt-4" aria-labelledby="dropdownDefaultButton">
+                                        <li><a href="{{ url('/search-asset/' . \Illuminate\Support\Facades\Auth::user()->division->id) }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Lihat Inventory</a></li>
+                                        <li><a href="{{ route('admin.createAssetExcel') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Tambah Barang Melalui Excel</a></li>
+                                        <li><a href="{{ route('historyAddAsset') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Riwayat Tambah Barang</a></li>
+                                        <li><a href="{{ route('historyDetail') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Detil Riwayat</a></li>
+                                        <li><a href="{{ url('/deleted-asset/') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Riwayat Pemusnahan Barang</a></li>
+                                        <li><a href="{{ route('admin.riwayat-perbaharui') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Riwayat Perbaharui Barang</a></li>
+                                        <li><a href="{{ url('/move-asset/' . \Illuminate\Support\Facades\Auth::user()->division->id) }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Pemindahan Barang</a></li>
+                                        <li><a href="{{ route('historiRequest') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Riwayat Peminjaman</a></li>
+                                    </ul>
+                                </div>
                             @elseif(auth()->user()->role->name == 'approver')
-                                <li><a href="{{ route('approver.checkRequest') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Pinjam Inventory</a></li>
-                                <li><a href="{{ route('historiRequest') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Riwayat Peminjaman</a></li>
-                                <li><a href="{{ route('approver.historiDetail') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Detil Riwayat</a></li>
+                                <div id="dropdownMenu" class="absolute hidden bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700 mt-[16rem] w-40 ml-[21.5rem] left-0 z-10">    
+                                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200 p-0 pt-4" aria-labelledby="dropdownDefaultButton">
+                                        <li><a href="{{ route('approver.checkRequest') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Pinjam Inventory</a></li>
+                                        <li><a href="{{ route('historiRequest') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Riwayat Peminjaman</a></li>
+                                        <li><a href="{{ route('approver.historiDetail') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Detil Riwayat</a></li>
+                                    </ul>
+                                </div>
                             @elseif(auth()->user()->role->name == 'superadmin')
-                                <li><a href="{{ route('superadmin.division') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white dark:hover:text-white">Lihat Departemen</a></li>
-                                <li><a href="{{ route('superadmin.location') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white dark:hover:text-white">Kelola Lokasi</a></li>
-                                <li><a href="{{ route('superadmin.register-show') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white dark:hover:text-white">{{ __('Daftarkan akun') }}</a></li>
-                                <li><a href="{{ route('superadmin.kategori') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white dark:hover:text-white">{{ __('Kelola Kategori Barang') }}</a></li>
-                                <li><a href="{{ route('superadmin.pemilikbarang') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white dark:hover:text-white">{{ __('Kelola Pemilik Barang') }}</a></li>
-                                <li><a href="{{ route('superadmin.historyAkun') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white dark:hover:text-white">{{ __('History Akun') }}</a></li>
+                                <div id="dropdownMenu" class="absolute hidden bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700 mt-[24rem] w-40 ml-[21.5rem] left-0 z-10">
+                                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200 p-0 pt-4" aria-labelledby="dropdownDefaultButton">    
+                                        <li><a href="{{ route('superadmin.division') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white dark:hover:text-white">Lihat Departemen</a></li>
+                                        <li><a href="{{ route('superadmin.location') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white dark:hover:text-white">Kelola Lokasi</a></li>
+                                        <li><a href="{{ route('superadmin.register-show') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white dark:hover:text-white">{{ __('Daftarkan akun') }}</a></li>
+                                        <li><a href="{{ route('superadmin.kategori') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white dark:hover:text-white">{{ __('Kelola Kategori Barang') }}</a></li>
+                                        <li><a href="{{ route('superadmin.pemilikbarang') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white dark:hover:text-white">{{ __('Kelola Pemilik Barang') }}</a></li>
+                                        <li><a href="{{ route('superadmin.historyAkun') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white dark:hover:text-white">{{ __('History Akun') }}</a></li>
+                                    </ul>
+                                </div>
                             @endif
                         @endguest
-                    </div>
-                    <button id="AccountButton" data-dropdown-toggle="dropdownAccount" class="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 px-5 py-2.5 text-center inline-flex items-center ml-auto" type="button">{{ Auth::user()->name }}<svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-                        </svg>
-                    </button>
-                    <div id="dropdownAccount" class="absolute hidden bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700 mt-40 w-40 mr-[8.75rem] right-0 z-10">
-                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200 p-0 pt-4" aria-labelledby="dropdownDefaultButton">
-                        @guest
+                    @guest
                         @else
-                            <li><a href="{{ route('logout') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Keluar</a></li>
+                            <button id="AccountButton" data-dropdown-toggle="dropdownAccount" class="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 px-5 py-2.5 text-center inline-flex items-center ml-auto" type="button">{{ Auth::user()->name }}<svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                                </svg>
+                            </button>
                         @endguest
-                    </div>
+                        <div id="dropdownAccount" class="absolute hidden bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700 mt-40 w-40 mr-[8.75rem] right-0 z-10">
+                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200 p-0 pt-4" aria-labelledby="dropdownDefaultButton">
+                            @guest
+                            @else
+                                <li><a href="{{ route('logout') }}" class="text-black no-underline block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Keluar</a></li>
+                            @endguest
+                        </div>
+                    @endguest
                 </div>
             </div>
         </nav>

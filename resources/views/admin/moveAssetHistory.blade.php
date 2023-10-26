@@ -24,23 +24,23 @@
                         <table id="myTable" class="display table">
                             <thead>
                                 <tr>
-                                    <th scope="col">No</th>
-                                    <th scope="col">Kode Barang</th>
-                                    <th scope="col">Jenis Barang</th>
-                                    <th scope="col">Kategori Barang</th>
-                                    <th scope="col">Brand</th>
-                                    <th scope="col">Spesifikasi Barang</th>
-                                    <th scope="col">Lokasi pemindahan</th>
-                                    <th scope="col">Oleh</th>
-                                    <th scope="col">Tanggal</th>
-                                    <th scope="col">Status</th>
+                                    <th class="px-6 py-3" scope="col">No</th>
+                                    <th class="px-6 py-3" scope="col">Kode Barang</th>
+                                    <th class="px-6 py-3" scope="col">Jenis Barang</th>
+                                    <th class="px-6 py-3" scope="col">Kategori Barang</th>
+                                    <th class="px-6 py-3" scope="col">Brand</th>
+                                    <th class="px-6 py-3" scope="col">Spesifikasi Barang</th>
+                                    <th class="px-6 py-3" scope="col">Lokasi pemindahan</th>
+                                    <th class="px-6 py-3" scope="col">Oleh</th>
+                                    <th class="px-6 py-3" scope="col">Tanggal</th>
+                                    <th class="px-6 py-3" scope="col">Status</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($data as $index => $rec)
                                     <tr>
                                         {{--                masukin kolom --}}
-                                        <th scope="row">{{ $index + 1 }}</th>
+                                        <td class="px-6 py-3" scope="row">{{ $index + 1 }}</td>
                                         <td>{{ $rec->asset->serial_number }}</td>
                                         <td>{{ $rec->asset->assetJenis->name }}</td>
                                         <td>{{ $rec->asset->kategori_barang }}</td>

@@ -15,34 +15,37 @@
             </div>
             <div class="modal-body">
 
-            <table class="display table">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Kode Barang</th>
-                            <th>Jenis Barang</th>
-                            <th>Kategori Barang</th>
-                            <th>Brand</th>
-                            <th>Spesifikasi Barang</th>
-                            <th>Kondisi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if (session('bookings'))
-                            @foreach (session('bookings') as $index => $item)
-                                <tr>
-                                <th scope="row">{{ $index + 1 }}</th>
-                                    <td>{{ $item->serial_number }}</td>
-                                    <td>{{ $item->name }}</td>
-                                    <td>{{ $item->kategori_barang }}</td>
-                                    <td>{{ $item->brand }}</td>
-                                    <td>{{ $item->spesifikasi_barang }}</td>
-                                    <td>{{ $item->status == 'tidak tersedia' ? 'tersedia' : $item->status }}</td>
-                                </tr>
-                            @endforeach
-                        @endif
-                    </tbody>
-                </table>
+                <div class="relative overflow-x-auto">
+                    <table class="display table w-full text-sm text-left text-gray-500 dark:text-gray-400" width="100%">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                    
+                            <tr>
+                                <th class="px-6 py-3">No</th>
+                                <th class="px-6 py-3">Kode Barang</th>
+                                <th class="px-6 py-3">Jenis Barang</th>
+                                <th class="px-6 py-3">Kategori Barang</th>
+                                <th class="px-6 py-3">Brand</th>
+                                <th class="px-6 py-3">Spesifikasi Barang</th>
+                                <th class="px-6 py-3">Kondisi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (session('bookings'))
+                                @foreach (session('bookings') as $index => $item)
+                                    <tr>
+                                    <td class="px-6 py-3" scope="row">{{ $index + 1 }}</td>
+                                        <td>{{ $item->serial_number }}</td>
+                                        <td>{{ $item->name }}</td>
+                                        <td>{{ $item->kategori_barang }}</td>
+                                        <td>{{ $item->brand }}</td>
+                                        <td>{{ $item->spesifikasi_barang }}</td>
+                                        <td>{{ $item->status == 'tidak tersedia' ? 'tersedia' : $item->status }}</td>
+                                    </tr>
+                                @endforeach
+                            @endif
+                        </tbody>
+                    </table>
+                </div>
 
                 <div class="mb-3">
                     <label for="pesan" class="col-form-label">Catatan Peminjaman:</label>

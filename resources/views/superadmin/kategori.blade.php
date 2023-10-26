@@ -61,19 +61,19 @@
                             </div>
                         </form>
 
-                        <table id="myTable" class="display table">
-                            <thead>
+                        <table id="myTable" class="display table w-full text-sm text-left text-gray-500 dark:text-gray-400" width="100%">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
-                                    <th scope="col">No</th>
-                                    <th scope="col">Kategori Barang</th>
-                                    <th scope="col">Action</th>
+                                    <th class="px-6 py-3" scope="col">No</th>
+                                    <th class="px-6 py-3" scope="col">Kategori Barang</th>
+                                    <th class="px-6 py-3" scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($data as $index => $item)
                                     <tr>
                                         {{--                                masukin kolom --}}
-                                        <th scope="row">{{ $index + 1 }}</th>
+                                        <td class="px-6 py-3" scope="row">{{ $index + 1 }}</td>
                                         <td>{{ $item->name }}</td>
                                         <td>
                                             <form action="{{ route('perbaharuiKategoriBarang', $item->id) }}"

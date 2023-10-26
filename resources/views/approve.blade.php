@@ -25,39 +25,41 @@
                     <input type="hidden" name="approver_num"
                         value="{{ \Illuminate\Support\Facades\Auth::user()->division->approver }}">
                     <h5>Apakah anda yakin ingin meng-approve request peminjaman?</h5>
-                    <table class="display table">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Kode Barang</th>
-                                <th>Jenis Barang</th>
-                                <th>Kategori Barang</th>
-                                <th>Brand</th>
-                                <th>Spesifikasi Barang</th>
-                                <th>Kondisi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if ($bookings)
-                                @foreach ($bookings as $index => $item)
-                                    <tr>
-                                        <th scope="row">{{ $index + 1 }}</th>
-                                        <td>{{ $item->serial_number }}</td>
-                                        <td>{{ $item->name }}</td>
-                                        <td>{{ $item->kategori_barang }}</td>
-                                        <td>{{ $item->brand }}</td>
-                                        <td>{{ $item->spesifikasi_barang }}</td>
-                                        <td>{{ $item->status == 'tidak tersedia' ? 'tersedia' : $item->status }}</td>
-                                        <!-- Add name attribute to the checkbox inputs -->
-                                        <td class="text-center"><input type="checkbox"
-                                                name="booking_approval[{{ $index }}]" value="1" /></td>
-                                        <input type="hidden"
-                                            name="booking_id[{{ $index }}]"value="{{ $item->id }}">
-                                    </tr>
-                                @endforeach
-                            @endif
-                        </tbody>
-                    </table>
+                    <div class="relative overflow-x-auto">
+                        <table class="display table w-full text-sm text-left text-gray-500 dark:text-gray-400" width="100%">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                <tr>
+                                    <th class="px-6 py-3">No</th>
+                                    <th class="px-6 py-3">Kode Barang</th>
+                                    <th class="px-6 py-3">Jenis Barang</th>
+                                    <th class="px-6 py-3">Kategori Barang</th>
+                                    <th class="px-6 py-3">Brand</th>
+                                    <th class="px-6 py-3">Spesifikasi Barang</th>
+                                    <th class="px-6 py-3">Kondisi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if ($bookings)
+                                    @foreach ($bookings as $index => $item)
+                                        <tr>
+                                            <td class="px-6 py-3" scope="row">{{ $index + 1 }}</td>
+                                            <td>{{ $item->serial_number }}</td>
+                                            <td>{{ $item->name }}</td>
+                                            <td>{{ $item->kategori_barang }}</td>
+                                            <td>{{ $item->brand }}</td>
+                                            <td>{{ $item->spesifikasi_barang }}</td>
+                                            <td>{{ $item->status == 'tidak tersedia' ? 'tersedia' : $item->status }}</td>
+                                            <!-- Add name attribute to the checkbox inputs -->
+                                            <td class="text-center"><input type="checkbox"
+                                                    name="booking_approval[{{ $index }}]" value="1" /></td>
+                                            <input type="hidden"
+                                                name="booking_id[{{ $index }}]"value="{{ $item->id }}">
+                                        </tr>
+                                    @endforeach
+                                @endif
+                            </tbody>
+                        </table>
+                </div>
                     <div class="row mb-0">
                         <div class="col-md-6 offset-md-0">
                             <input class="form-check-input mt-1" type="checkbox" name="select-all" id="select-all">

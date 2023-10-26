@@ -28,25 +28,24 @@
                             </div>
                         @endif
 
-                        <table id="myTable" class="display table">
-                            <thead>
+                        <table id="myTable" class="display table w-full text-sm text-left text-gray-500 dark:text-gray-400" width="100%">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
-                                    <th scope="col">No</th>
-                                    <th scope="col">Binusian ID Peminjam</th>
-                                    <th scope="col">Tujuan Peminjaman</th>
-                                    <th scope="col">Tanggal Pinjam</th>
-                                    <th scope="col">Tanggal Kembali</th>
-                                    <th scope="col">Lokasi</th>
-                                    <th scope="col">Lihat Inventory</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Aksi</th>
+                                    <th class="px-6 py-3" scope="col">No</th>
+                                    <th class="px-6 py-3" scope="col">Binusian ID Peminjam</th>
+                                    <th class="px-6 py-3" scope="col">Tujuan Peminjaman</th>
+                                    <th class="px-6 py-3" scope="col">Tanggal Pinjam</th>
+                                    <th class="px-6 py-3" scope="col">Tanggal Kembali</th>
+                                    <th class="px-6 py-3" scope="col">Lokasi</th>
+                                    <th class="px-6 py-3" scope="col">Lihat Inventory</th>
+                                    <th class="px-6 py-3" scope="col">Status</th>
+                                    <th class="px-6 py-3" scope="col">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($data as $index => $req)
                                     <tr>
-                                        {{--                masukin kolom --}}
-                                        <th scope="row">{{ $index + 1 }}</th>
+                                        <td class="px-6 py-3" scope="row">{{ $index + 1 }}</td>
                                         <td>{{ $req->binusian_id_peminjam }}</td>
                                         <td>{{ $req->purpose }}</td>
                                         <td>{{ date('d M Y H:i', strtotime($req->book_date)) }}</td>

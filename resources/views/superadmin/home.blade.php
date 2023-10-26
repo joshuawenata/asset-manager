@@ -24,24 +24,24 @@
                             <div class="alert alert-success">{{ session('message') }}</div>
                         @endif
 
-                        <table id="myTable" class="display table">
-                            <thead>
+                        <table id="myTable" class="display table w-full text-sm text-left text-gray-500 dark:text-gray-400" width="100%">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
-                                    <th scope="col">No</th>
-                                    <th scope="col">Nama</th>
-                                    <th scope="col">Binusian ID</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">No. HP</th>
-                                    <th scope="col">Departemen</th>
-                                    <th scope="col">Role</th>
-                                    <th scope="col">Aksi</th>
+                                    <th class="px-6 py-3" scope="col">No</th>
+                                    <th class="px-6 py-3" scope="col">Nama</th>
+                                    <th class="px-6 py-3" scope="col">Binusian ID</th>
+                                    <th class="px-6 py-3" scope="col">Email</th>
+                                    <th class="px-6 py-3" scope="col">No. HP</th>
+                                    <th class="px-6 py-3" scope="col">Departemen</th>
+                                    <th class="px-6 py-3" scope="col">Role</th>
+                                    <th class="px-6 py-3" scope="col">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($data as $index => $item)
                                     <tr>
                                         {{--                                masukin kolom --}}
-                                        <th scope="row">{{ $index + 1 }}</th>
+                                        <td class="px-6 py-3" scope="row">{{ $index + 1 }}</td>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->binusianid }}</td>
                                         <td>{{ $item->email }}</td>

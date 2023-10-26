@@ -26,31 +26,31 @@
                             </div>
                         @endif
 
-                        <table id="myTable" class="display table">
-                            <thead>
+                        <table id="myTable" class="display table w-full text-sm text-left text-gray-500 dark:text-gray-400" width="100%">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
-                                    <th>No</th>
-                                    <th>Kode Barang </th>
-                                    <th>Jenis Barang</th>
-                                    <th>Kategori Barang</th>
-                                    <th>Status Barang</th>
-                                    <th>Brand</th>
-                                    <th>Spesifikasi Barang</th>
-                                    <th>Pemilik Barang</th>
-                                    <th>New Kode Barang </th>
-                                    <th>New Jenis Barang</th>
-                                    <th>New Kategori Barang</th>
-                                    <th>New Status Barang</th>
-                                    <th>New Brand</th>
-                                    <th>New Spesifikasi Barang</th>
-                                    <th>New Pemilik Barang</th>
+                                    <th class="px-6 py-3">No</th>
+                                    <th class="px-6 py-3">Kode Barang </th>
+                                    <th class="px-6 py-3">Jenis Barang</th>
+                                    <th class="px-6 py-3">Kategori Barang</th>
+                                    <th class="px-6 py-3">Status Barang</th>
+                                    <th class="px-6 py-3">Brand</th>
+                                    <th class="px-6 py-3">Spesifikasi Barang</th>
+                                    <th class="px-6 py-3">Pemilik Barang</th>
+                                    <th class="px-6 py-3">New Kode Barang </th>
+                                    <th class="px-6 py-3">New Jenis Barang</th>
+                                    <th class="px-6 py-3">New Kategori Barang</th>
+                                    <th class="px-6 py-3">New Status Barang</th>
+                                    <th class="px-6 py-3">New Brand</th>
+                                    <th class="px-6 py-3">New Spesifikasi Barang</th>
+                                    <th class="px-6 py-3">New Pemilik Barang</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($data as $index => $req)
                                     <tr>
                                         {{--                masukin kolom --}}
-                                        <th scope="row">{{ $index + 1 }}</th>
+                                        <td class="px-6 py-3" scope="row">{{ $index + 1 }}</td>
                                         <td>{{ $req->kode_barang }}</td>
                                         <td>{{ $req->jenis_barang }}</td>
                                         <td>{{ $req->kategori_barang }}</td>

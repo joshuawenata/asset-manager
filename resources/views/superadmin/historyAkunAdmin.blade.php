@@ -23,12 +23,12 @@
                             </div>
                         @endif
 
-                        <table id="myTable" class="display nowrap table">
-                            <thead>
+                        <table id="myTable" class="display table w-full text-sm text-left text-gray-500 dark:text-gray-400" width="100%">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
-                                    <th>No</th>
-                                    <th>Aksi</th>
-                                    <th>Timestamp</th>
+                                    <th class="px-6 py-3">No</th>
+                                    <th class="px-6 py-3">Aksi</th>
+                                    <th class="px-6 py-3">Timestamp</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -38,7 +38,7 @@
                                 @foreach ($dataHistoryAddAsset as $index => $req)
                                     <tr>
                                         {{--                masukin kolom --}}
-                                        <th scope="row">{{ $index + 1 }}</th>
+                                        <td class="px-6 py-3" scope="row">{{ $index + 1 }}</td>
                                         <td>{{ $req->aksi }}</td>
                                         <td>{{ $req->created_at }}</td>
                                     </tr>
@@ -52,7 +52,7 @@
                                 @foreach ($dataHistoryPemusnahanBarang as $index => $req)
                                     <tr>
                                         {{--                masukin kolom --}}
-                                        <th scope="row">{{ $index + 1 + $counting }}</th>
+                                        <th class="px-6 py-3" scope="row">{{ $index + 1 + $counting }}</th>
                                         <td>{{ $user[0]['name'] . ' memusnahkan barang dengan nomor seri ' . $req->serial_number . ', brand ' . $req->brand . ', lokasi ' . $req->location . ', pemilik barang ' . $req->pemilik_barang . ', divisi ' . $division . ', kategori barang ' }}
                                             @php
                                                 $assetJenis = \App\Models\AssetJenis::find($req->asset_jenis_id);
@@ -71,7 +71,7 @@
                                 @foreach ($dataHistoryPembaharuanBarang as $index => $req)
                                     <tr>
                                         {{--                masukin kolom --}}
-                                        <th scope="row">{{ $index + 1 + $counting + $counting1 }}</th>
+                                        <th class="px-6 py-3" scope="row">{{ $index + 1 + $counting + $counting1 }}</th>
                                         <td>{{ $user[0]['name'] . ' memperbaharui barang dengan nomor seri ' . $req->kode_barang . ', kategori barang ' }}
                                             @php
                                                 $assetJenis = \App\Models\AssetJenis::find($req->kategori_barang);
@@ -96,7 +96,7 @@
                                 @foreach ($dataHistoryPemindahanBarang as $index => $req)
                                     <tr>
                                         {{--                masukin kolom --}}
-                                        <th scope="row">{{ $index + 1 + $counting + $counting1 + $counting2 }}</th>
+                                        <th class="px-6 py-3" scope="row">{{ $index + 1 + $counting + $counting1 + $counting2 }}</th>
                                         <td>{{ $user[0]['name'] . ' memindahkan barang dengan nomor seri ' }}
                                             @php
                                                 $asset_serial_number = \App\Models\Asset::find($req->asset_serial_number_id);
@@ -116,7 +116,7 @@
                                 @foreach ($dataHistoryBarangRusak as $index => $req)
                                     <tr>
                                         @if ($req->flag_fixed == 0)
-                                            <th scope="row">
+                                            <th class="px-6 py-3" scope="row">
                                                 {{ $index + 1 + $counting + $counting1 + $counting2 + $counting3 }}</th>
                                             <td>{{ $user[0]['name'] . ' melaporkan kerusakan barang dengan nomor seri ' }}
                                                 @php
@@ -127,7 +127,7 @@
                                             </td>
                                             <td>{{ $req->created_at }}</td>
                                         @else
-                                            <th scope="row">
+                                            <th class="px-6 py-3" scope="row">
                                                 {{ $index + 1 + $counting + $counting1 + $counting2 + $counting3 }}</th>
                                             <td>{{ $user[0]['name'] . ' melaporkan kerusakan barang dengan nomor seri ' }}
                                                 @php
@@ -148,7 +148,7 @@
                                 @endphp
                                 @foreach ($data as $index => $req)
                                     <tr>
-                                        <th scope="row">
+                                        <th class="px-6 py-3" scope="row">
                                             {{ $index + 1 + $counting + $counting1 + $counting2 + $counting3 + $counting4 }}
                                         </th>
                                         <td>{{ $req->aksi }}</td>

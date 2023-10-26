@@ -128,26 +128,28 @@
                             <label class="col-form-label text-md-end">{{ __('Barang yang dikembalikan') }}</label>
 
                             <div class="md-6">
-                                <table class="display table">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Nomor Seri</th>
-                                            <th>Jenis</th>
-                                            <th>Spesifikasi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($assets as $index => $item)
+                                <div class="relative overflow-x-auto">
+                                    <table class="display table w-full text-sm text-left text-gray-500 dark:text-gray-400" width="100%">
+                                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             <tr>
-                                                <th scope="row">{{ $index + 1 }}</th>
-                                                <td>{{ $item->serial_number }}</td>
-                                                <td>{{ $item->name }}</td>
-                                                <td>{{ $item->brand }}</td>
+                                                <th class="px-6 py-3">No</th>
+                                                <th class="px-6 py-3">Nomor Seri</th>
+                                                <th class="px-6 py-3">Jenis</th>
+                                                <th class="px-6 py-3">Spesifikasi</th>
                                             </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($assets as $index => $item)
+                                                <tr>
+                                                    <td class="px-6 py-3" scope="row">{{ $index + 1 }}</td>
+                                                    <td>{{ $item->serial_number }}</td>
+                                                    <td>{{ $item->name }}</td>
+                                                    <td>{{ $item->brand }}</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
 

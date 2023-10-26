@@ -29,25 +29,25 @@
                             <div class="alert alert-success">{{ session('message') }}</div>
                         @endif
 
-                        <table class="display nowrap table" id="myTable">
-                            <thead>
+                        <table id="myTable" class="display table w-full text-sm text-left text-gray-500 dark:text-gray-400" width="100%">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
-                                    <th scope="col">No</th>
-                                    <th scope="col">Kode Barang</th>
-                                    <th scope="col">Jenis Barang</th>
-                                    <th scope="col">Kategori Barang</th>
-                                    <th scope="col">Brand</th>
-                                    <th scope="col">Spesifikasi Barang</th>
+                                    <th class="px-6 py-3" scope="col">No</th>
+                                    <th class="px-6 py-3" scope="col">Kode Barang</th>
+                                    <th class="px-6 py-3" scope="col">Jenis Barang</th>
+                                    <th class="px-6 py-3" scope="col">Kategori Barang</th>
+                                    <th class="px-6 py-3" scope="col">Brand</th>
+                                    <th class="px-6 py-3" scope="col">Spesifikasi Barang</th>
                                     @if ($mode == 'current')
-                                        <th scope="col">Lokasi</th>
+                                        <th class="px-6 py-3" scope="col">Lokasi</th>
                                     @endif
-                                    <th scope="col">Pemilik Barang</th>
+                                    <th class="px-6 py-3" scope="col">Pemilik Barang</th>
                                     @if ($mode == 'deleted')
-                                    <th scope="col">Timestamp</th>
+                                    <th class="px-6 py-3" scope="col">Timestamp</th>
                                     @endif
                                     @if ($mode == 'current')
-                                        <th scope="col">Status</th>
-                                        <th scope="col">Aksi</th>
+                                        <th class="px-6 py-3" scope="col">Status</th>
+                                        <th class="px-6 py-3" scope="col">Aksi</th>
                                     @endif
                                 </tr>
                             </thead>
@@ -55,7 +55,7 @@
                                 @foreach ($data as $index => $item)
                                     <tr>
                                         {{--                masukin kolom --}}
-                                        <th scope="row">{{ $index + 1 }}</th>
+                                        <td class="px-6 py-3" scope="row">{{ $index + 1 }}</td>
                                         <td>{{ $item->serial_number }}</td>
                                         <td>{{ $item->assetJenis->name }}</td>
                                         <td>{{ $item->kategori_barang }}</td>

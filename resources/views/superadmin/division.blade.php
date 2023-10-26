@@ -104,20 +104,20 @@
                             <div class="alert alert-success">{{ session('message') }}</div>
                         @endif
 
-                        <table id="myTable" class="display table">
-                            <thead>
+                        <table id="myTable" class="display table w-full text-sm text-left text-gray-500 dark:text-gray-400" width="100%">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
-                                    <th scope="col">No</th>
-                                    <th scope="col">Nama Departemen</th>
+                                    <th class="px-6 py-3" scope="col">No</th>
+                                    <th class="px-6 py-3" scope="col">Nama Departemen</th>
                                     {{--                                TODO: tambahin keterangan ada approver ato admin doang --}}
-                                    <th scope="col">Aksi</th>
+                                    <th class="px-6 py-3" scope="col">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($data as $index => $item)
                                     <tr>
                                         {{--                                masukin kolom --}}
-                                        <th scope="row">{{ $index + 1 }}</th>
+                                        <td class="px-6 py-3" scope="row">{{ $index + 1 }}</td>
                                         <td>{{ $item->name }}</td>
                                         <td>
                                             <button type="button" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 deleteDivisionBtn"

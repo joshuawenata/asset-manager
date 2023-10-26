@@ -60,13 +60,13 @@
                         <table id="myTable" class="display table">
                             <thead>
                                 <tr>
-                                    <th scope="col">No</th>
-                                    <th scope="col">Tanggal Lapor</th>
-                                    <th scope="col">Description</th>
-                                    <th scope="col">Pelapor</th>
-                                    <th scope="col">Action</th>
-                                    <th scope="col">Tanggal Perbaikan</th>
-                                    <th scope="col">Perbaikan Oleh</th>
+                                    <th class="px-6 py-3" scope="col">No</th>
+                                    <th class="px-6 py-3" scope="col">Tanggal Lapor</th>
+                                    <th class="px-6 py-3" scope="col">Description</th>
+                                    <th class="px-6 py-3" scope="col">Pelapor</th>
+                                    <th class="px-6 py-3" scope="col">Action</th>
+                                    <th class="px-6 py-3" scope="col">Tanggal Perbaikan</th>
+                                    <th class="px-6 py-3" scope="col">Perbaikan Oleh</th>
                                 </tr>
                             </thead>
                             <tbody>

@@ -33,32 +33,34 @@
                 </div>
                 <div class="modal-body">
 
-                    <table class="display table">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Kode Barang</th>
-                                <th>Jenis Barang</th>
-                                <th>Kategori Barang</th>
-                                <th>Brand</th>
-                                <th>Spesifikasi Barang</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if (session('bookings'))
-                                @foreach (session('bookings') as $index => $item)
-                                    <tr>
-                                        <th scope="row">{{ $index + 1 }}</th>
-                                        <td>{{ $item->serial_number }}</td>
-                                        <td>{{ $item->name }}</td>
-                                        <td>{{ $item->kategori_barang }}</td>
-                                        <td>{{ $item->brand }}</td>
-                                        <td>{{ $item->spesifikasi_barang }}</td>
-                                    </tr>
-                                @endforeach
-                            @endif
-                        </tbody>
-                    </table>
+                    <div class="relative overflow-x-auto">
+                        <table class="display table w-full text-sm text-left text-gray-500 dark:text-gray-400" width="100%">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                <tr>
+                                    <th class="px-6 py-3">No</th>
+                                    <th class="px-6 py-3">Kode Barang</th>
+                                    <th class="px-6 py-3">Jenis Barang</th>
+                                    <th class="px-6 py-3">Kategori Barang</th>
+                                    <th class="px-6 py-3">Brand</th>
+                                    <th class="px-6 py-3">Spesifikasi Barang</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (session('bookings'))
+                                    @foreach (session('bookings') as $index => $item)
+                                        <tr>
+                                            <td class="px-6 py-3" scope="row">{{ $index + 1 }}</td>
+                                            <td>{{ $item->serial_number }}</td>
+                                            <td>{{ $item->name }}</td>
+                                            <td>{{ $item->kategori_barang }}</td>
+                                            <td>{{ $item->brand }}</td>
+                                            <td>{{ $item->spesifikasi_barang }}</td>
+                                        </tr>
+                                    @endforeach
+                                @endif
+                            </tbody>
+                        </table>
+                    </div>
 
                     <div class="mb-3">
                         <label for="pesan" class="col-form-label">Catatan Peminjaman:</label>
@@ -89,25 +91,25 @@
                             </div>
                         @endif
 
-                        <table id="myTable" class="display table">
-                            <thead>
+                        <table id="myTable" class="display table w-full text-sm text-left text-gray-500 dark:text-gray-400" width="100%">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
-                                    <th scope="col">No</th>
-                                    <th scope="col">Nama Peminjam</th>
-                                    <th scope="col">Binusian ID</th>
-                                    <th scope="col">Tujuan Peminjaman</th>
-                                    <th scope="col">Tanggal Pinjam</th>
-                                    <th scope="col">Tanggal Kembali</th>
-                                    <th scope="col">Lokasi</th>
-                                    <th scope="col">Lihat inventory</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Aksi</th>
+                                    <th class="px-6 py-3" scope="col">No</th>
+                                    <th class="px-6 py-3" scope="col">Nama Peminjam</th>
+                                    <th class="px-6 py-3" scope="col">Binusian ID</th>
+                                    <th class="px-6 py-3" scope="col">Tujuan Peminjaman</th>
+                                    <th class="px-6 py-3" scope="col">Tanggal Pinjam</th>
+                                    <th class="px-6 py-3" scope="col">Tanggal Kembali</th>
+                                    <th class="px-6 py-3" scope="col">Lokasi</th>
+                                    <th class="px-6 py-3" scope="col">Lihat inventory</th>
+                                    <th class="px-6 py-3" scope="col">Status</th>
+                                    <th class="px-6 py-3" scope="col">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($data as $index => $req)
                                     <tr>
-                                        <th scope="row">{{ $index + 1 }}</th>
+                                        <td class="px-6 py-3" scope="row">{{ $index + 1 }}</td>
                                         <td>{{ $req->nama_peminjam }}</td>
                                         <td>{{ $req->binusianid }}</td>
                                         <td>{{ $req->purpose }}</td>

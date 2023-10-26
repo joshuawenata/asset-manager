@@ -26,25 +26,27 @@
                             </div>
                         @endif
 
-                        <table id="myTable" class="display table">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Aksi</th>
-                                    <th>Timestamp</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($data as $index => $req)
+                        <div class="relative overflow-x-auto">
+                            <table class="display table w-full text-sm text-left text-gray-500 dark:text-gray-400" width="100%" id="myTable">
+                                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                     <tr>
-                                        {{--                masukin kolom --}}
-                                        <th scope="row">{{ $index + 1 }}</th>
-                                        <td>{{ $req->aksi }}</td>
-                                        <td>{{ $req->created_at }}</td>
+                                        <th class="px-6 py-3">No</th>
+                                        <th class="px-6 py-3">Aksi</th>
+                                        <th class="px-6 py-3">Timestamp</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach ($data as $index => $req)
+                                        <tr>
+                                            {{--                masukin kolom --}}
+                                            <td class="px-6 py-3" scope="row">{{ $index + 1 }}</td>
+                                            <td>{{ $req->aksi }}</td>
+                                            <td>{{ $req->created_at }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

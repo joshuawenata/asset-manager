@@ -9,7 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @vite('public/css/app.css')
 
-    <title>{{ config('app.name', 'Inventory Management Bandung') }}</title>
+    <title>Inventory Management BDG</title>
 
     @yield('js')
     @yield('css')

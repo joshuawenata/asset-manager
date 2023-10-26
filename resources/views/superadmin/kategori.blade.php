@@ -16,7 +16,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <form action="{{ route('superadmin.historyAssetJenis') }}">
-                    <button type="submit" class="btn btn-small btn-success mb-3" data-bs-toggle="modal">
+                    <button type="submit" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" data-bs-toggle="modal">
                         History Jenis Barang
                     </button>
                 </form>
@@ -76,16 +76,15 @@
                                         <td class="px-6 py-3" scope="row">{{ $index + 1 }}</td>
                                         <td>{{ $item->name }}</td>
                                         <td>
-                                            <form action="{{ route('perbaharuiKategoriBarang', $item->id) }}"
-                                                method="POST">
+                                            <form action="{{ route('perbaharuiKategoriBarang', $item->id) }}" method="POST" class="flex items-center space-x-2">
                                                 @csrf
-                                                <input class="form-control mb-2" type="text" name="name"
-                                                    id="name">
-                                                <button class="btn btn-small btn-info" type="submit"><span
-                                                        class="material-symbols-outlined">edit_square</span></button>
-                                                <a class="btn btn-small btn-danger"
-                                                    href="{{ URL::to('delete-kategori-barang/' . $item->id) }}"><span
-                                                        class="material-symbols-outlined">delete</span></a>
+                                                <input class="form-input w-full" type="text" name="name" id="name">
+                                                <button class="bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 text-white font-medium rounded-lg text-sm px-5 py-2.5" type="submit">
+                                                    <span class="material-symbols-outlined">edit_square</span>
+                                                </button>
+                                                <a class="bg-red-500 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 text-white font-medium rounded-lg text-sm px-5 py-2.5" href="{{ URL::to('delete-kategori-barang/' . $item->id) }}">
+                                                    <span class="material-symbols-outlined">delete</span>
+                                                </a>
                                             </form>
                                         </td>
                                     </tr>

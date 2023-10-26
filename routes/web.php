@@ -162,7 +162,7 @@ Route::middleware(['auth', 'cekRole:admin'])->group(function(){
     Route::put('perbaharui-asset/{id}', [\App\Http\Controllers\AssetController::class, 'perbaharui']);
     Route::post('/perbaharui-asset', [\App\Http\Controllers\RepairAssetController::class, 'perbaharui'])->name('perbaharuiFixedAsset');
     //DELETE
-    Route::post('/delete-asset', [\App\Http\Controllers\AssetController::class, 'destroy']);
+    Route::get('/delete-asset/{id}', [\App\Http\Controllers\AssetController::class, 'destroy']);
     //unduh XLSX
     Route::get('export-asset', [\App\Http\Controllers\AssetController::class, 'export'])->name('unduhAsset');
     Route::get('export-deleted-asset', [\App\Http\Controllers\DeletedAssetController::class, 'export'])->name('unduhDeletedAsset');

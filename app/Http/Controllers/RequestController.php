@@ -308,8 +308,10 @@ class RequestController extends Controller
             return redirect('/admin/dashboard')->with('message', "Barang berhasil diambil.");
         }
         else{
-            //TODO: gabisa diambil dulu = alert
-            echo 'belum bisa diambil karena belum tanggalnya';
+            if(\Illuminate\Support\Facades\Auth::user()->role_id == 1){
+                return redirect('/dashboard')->with('errors', "Barang belum bisa diambil.");
+            }
+            return redirect('/admin/dashboard')->with('errors', "Barang belum bisa diambil.");
         }
     }
 

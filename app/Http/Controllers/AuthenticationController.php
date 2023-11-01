@@ -13,6 +13,12 @@ class AuthenticationController extends Controller
         $role_id = $request->input('role_id');
         $users = User::where('email', $request->input('email'))->first(); 
 
+        if($users == NULL){
+            Auth::logout();
+            session()->flush();
+            return redirect('/')->with('error', 'Invalid credentials');
+        }
+
         if ($role_id == 1 && $users->isStaff) { 
             $users->role_id = 1;
             $users->save();

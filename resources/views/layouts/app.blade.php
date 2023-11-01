@@ -77,10 +77,12 @@
                             <a class="text-lg font-semibold no-underline text-black" href="{{ url('/') }}">
                                 Management Inventory
                             </a>
+                            <p class="text-xs">by LB001, LB003, LB009</p>
                         @else
                             <a class="text-lg font-semibold no-underline text-black" href="{{ url('/home') }}">
                                 Management Inventory
                             </a>
+                            <p class="text-xs">by LB001, LB003, LB009</p>
                         @endguest
                     </div>
                     @guest

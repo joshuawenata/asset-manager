@@ -77,12 +77,22 @@
                             <a class="text-lg font-semibold no-underline text-black" href="{{ url('/') }}">
                                 Management Inventory
                             </a>
-                            <p class="text-xs">by LB001, LB003, LB009</p>
+                            <p class="text-xs font-bold">
+                                <span class="text-blue-700">created by LCBDG</span>
+                                <span class="text-blue-500 bg-blue-200">LB001</span>
+                                <span class="text-green-500 bg-green-200">LB003</span>
+                                <span class="text-red-500 bg-red-200">LB009</span>
+                            </p>
                         @else
                             <a class="text-lg font-semibold no-underline text-black" href="{{ url('/home') }}">
                                 Management Inventory
                             </a>
-                            <p class="text-xs">by LB001, LB003, LB009</p>
+                            <p class="text-xs font-bold">
+                                <span class="text-blue-700">created by LCBDG</span>
+                                <span class="text-blue-500 bg-blue-200">LB001</span>
+                                <span class="text-green-500 bg-green-200">LB003</span>
+                                <span class="text-red-500 bg-red-200">LB009</span>
+                            </p>
                         @endguest
                     </div>
                     @guest

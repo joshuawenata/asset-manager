@@ -7,7 +7,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    @vite('public/css/app.css')
+    @vite('resources/js/app.js')
 
     <title>Inventory Management BDG</title>
 

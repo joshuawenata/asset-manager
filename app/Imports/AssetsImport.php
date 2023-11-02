@@ -30,7 +30,7 @@ class AssetsImport implements ToModel, WithStartRow
         $aset->kategori_barang    = $row[4];
         $aset->spesifikasi_barang = $row[5];
         $aset->serial_number      = $row[0];
-        $aset->current_location   = $row[1];
+        $aset->current_location   = $row[1]<1000?"0".$row[1]:$row[1];
         $aset->pemilik_barang     = $row[2];
         $aset->brand              = $row[6];
         $aset->status             = $row[7];

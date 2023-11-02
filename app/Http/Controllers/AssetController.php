@@ -413,11 +413,19 @@ class AssetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    public function destroypopup($id)
+    {
+        return View::make('delete', [
+            'id' => $id
+        ]);
+    }
+
     public function destroy($id)
     {
         $aset = Asset::find($id);
-        $asetloc = AssetLocation::where('asset_id',$id);
-        $bookingsloc = Booking::where('asset_id',$id);
+        // $asetloc = AssetLocation::where('asset_id',$id);
+        // $bookingsloc = Booking::where('asset_id',$id);
         $d_aset = new DeletedAsset;
         $d_aset->user_id = \Illuminate\Support\Facades\Auth::user()->id;
         $d_aset->serial_number = $aset->serial_number;
@@ -430,9 +438,11 @@ class AssetController extends Controller
         $d_aset->spesifikasi_barang = $aset->spesifikasi_barang;
         $d_aset->save();
 
-        $asetloc->delete();
-        $bookingsloc->delete();
-        $aset->delete();
+        $aset->status = "dimusnahkan";
+        $aset->save();
+        // $asetloc->delete();
+        // $bookingsloc->delete();
+        // $aset->delete();
         return redirect('search-asset/' . \Illuminate\Support\Facades\Auth::user()->division->id)->with('message', 'Aset Berhasil Dihapus');
     }
 

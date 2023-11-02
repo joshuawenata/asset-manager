@@ -39,7 +39,7 @@
                                         <td>{{ $item->kategori_barang }}</td>
                                         <td>{{ $item->brand }}</td>
                                         <td>{{ $item->spesifikasi_barang }}</td>
-                                        <td>{{ $item->status == 'tidak tersedia' ? 'tersedia' : $item->status }}</td>
+                                        <td>{{ $item->status == 'tidak' ? 'tersedia' : $item->status }}</td>
                                     </tr>
                                 @endforeach
                             @endif

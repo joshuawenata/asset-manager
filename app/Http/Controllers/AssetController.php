@@ -67,7 +67,7 @@ class AssetController extends Controller
         $data = Asset::orderBy('id', 'desc')
             ->where('division_id', $id)
             ->where('status', 'tersedia')
-            ->orWhere('status', 'tidak tersedia')
+            ->orWhere('status', 'tidak')
             ->orWhere('status', 'rusak')
             ->get();
         return view('admin.selectMoveAsset', [
@@ -216,6 +216,8 @@ class AssetController extends Controller
 
             if($data['asset-status'] == 'tersedia'){
                 $aset->status = $data['asset-status'];
+            }else{
+                $aset->status = "tidak";
             }
 
             if($data['asset-jenis'] != null){
@@ -274,6 +276,8 @@ class AssetController extends Controller
 
             if($data['asset-status'] == 'tersedia'){
                 $aset->status = $data['asset-status'];
+            }else{
+                $aset->status = "tidak";
             }
 
             if($data['asset-jenis'] != null){

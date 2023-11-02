@@ -137,7 +137,7 @@
                                 <label class="col-md-4 col-form-label text-md-end"></label>
 
                                 <div class="col-md-6">
-                                    <input type="hidden" name="asset-status" value="tidak tersedia">
+                                    <input type="hidden" name="asset-status" value="tidak">
                                     <input class="form-check-input mt-1" name="asset-status" type="checkbox"
                                         value="tersedia">
                                     <label for="brand">Barang bisa dipinjam</label>

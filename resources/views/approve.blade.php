@@ -48,7 +48,7 @@
                                             <td>{{ $item->kategori_barang }}</td>
                                             <td>{{ $item->brand }}</td>
                                             <td>{{ $item->spesifikasi_barang }}</td>
-                                            <td>{{ $item->status == 'tidak tersedia' ? 'tersedia' : $item->status }}</td>
+                                            <td>{{ $item->status == 'tidak' ? 'tersedia' : $item->status }}</td>
                                             <!-- Add name attribute to the checkbox inputs -->
                                             <td class="text-center"><input type="checkbox"
                                                     name="booking_approval[{{ $index }}]" value="1" /></td>

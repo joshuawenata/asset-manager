@@ -59,7 +59,7 @@ class BookingController extends Controller
                 ->where('assets.id', '=', $i)
                 ->get();
             foreach ($asset as $a){
-                DB::table('assets')->where('id', $a->id)->update(['status' => 'tidak tersedia']);
+                DB::table('assets')->where('id', $a->id)->update(['status' => 'tidak']);
             }
         }
 

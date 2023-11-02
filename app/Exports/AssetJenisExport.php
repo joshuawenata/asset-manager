@@ -27,7 +27,7 @@ class AssetJenisExport implements FromCollection, WithHeadings, WithStyles, With
         return new Collection([
             ['B001', '', '', '', 'Kamera Digital', 'Canon', 'Canon ABC', 'tersedia'],
             ['B002', '',  '', '', 'Kamera Digital', 'Canon', 'Canon DEF', 'tersedia'],
-            ['B003', '', '', '', 'Kamera Digital', 'Canon', 'Canon GHI', 'tidak tersedia']
+            ['B003', '', '', '', 'Kamera Digital', 'Canon', 'Canon GHI', 'tidak']
         ]);
     }
 
@@ -157,7 +157,7 @@ class AssetJenisExport implements FromCollection, WithHeadings, WithStyles, With
                 $status_barang_drop_column = 'H'; // 'F' is the column index for the "Status Barang" column
 
                 // set dropdown options for "Status Barang"
-                $status_barang_options = ['tersedia', 'tidak tersedia'];
+                $status_barang_options = ['tersedia', 'tidak'];
 
                 // set dropdown list for first data row for "Status Barang"
                 $status_barang_validation = $event->sheet->getCell("{$status_barang_drop_column}2")->getDataValidation();

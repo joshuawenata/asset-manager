@@ -120,10 +120,10 @@
                                         <select class="form-select" name="asset-status" id="asset-status">
                                             @if ($data->status == 'tersedia')
                                                 <option value="tersedia" selected>Tersedia di penyimpanan</option>
-                                                <option value="tidak tersedia">Tidak tersedia/unavailable</option>
-                                            @elseif($data->status == 'tidak tersedia')
+                                                <option value="tidak">tidak/unavailable</option>
+                                            @elseif($data->status == 'tidak')
                                                 <option value="tersedia">Tersedia di penyimpanan</option>
-                                                <option value="tidak tersedia" selected>Tidak tersedia/unavailable</option>
+                                                <option value="tidak" selected>tidak/unavailable</option>
                                             @endif
                                         </select>
                                     </div>

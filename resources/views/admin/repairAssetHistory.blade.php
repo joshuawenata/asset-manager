@@ -9,17 +9,6 @@
 @section('js')
     <script defer src="{{ asset('js/datatable.js') }}"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script defer>
-        $(document).ready(function() {
-            $('.perbaikiBtn').click(function() {
-                var repair_id = $(this).val();
-                $('#repair_id').val(repair_id);
-                console.log(repair_id);
-                // Trigger the form submission
-                $('#repairForm').submit();
-            });
-        });
-    </script>
 @endsection
 
 @section('content')
@@ -93,8 +82,8 @@
                                             @if (!$item->flag_fixed)
                                                 <form id="repairForm" action="{{ route('repair') }}" method="post">
                                                     @csrf
-                                                    <input type="hidden" name="repair_id" id="repair_id">
-                                                    <button title="perbaiki barang" type="button" class="perbaikiBtn no-underline text-white bg-gradient-to-r from-lime-500 via-lime-600 to-lime-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 shadow-lg shadow-lime-500/50 dark:shadow-lg dark:shadow-lime-800/80 font-medium rounded-lg text-sm px-3 py-2 text-center m-0.5" value="{{ $item->id }}">
+                                                    <input type="hidden" name="repair_id" value="{{ $item->id }}">
+                                                    <button title="perbaiki barang" type="submit" class="perbaikiBtn no-underline text-white bg-gradient-to-r from-lime-500 via-lime-600 to-lime-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 shadow-lg shadow-lime-500/50 dark:shadow-lg dark:shadow-lime-800/80 font-medium rounded-lg text-sm px-3 py-2 text-center m-0.5" value="{{ $item->id }}">
                                                         <span class="material-symbols-outlined">build</span>
                                                     </button>
                                                 </form>

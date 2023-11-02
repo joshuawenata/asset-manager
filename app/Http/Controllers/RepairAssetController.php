@@ -33,7 +33,7 @@ class RepairAssetController extends Controller
             'data' => $data,
             'asset' => $asset,
             'fixed' => $fixed,
-            'status' => $status
+            'status' => $status,
         ]);
     }
 

@@ -16,6 +16,7 @@ php artisan view:clear
 <br>
 php artisan route:clear
 <br>
+npm run build
 
 ### how to run
 

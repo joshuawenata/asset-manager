@@ -80,7 +80,11 @@ class RequestController extends Controller
             $user_id = \Illuminate\Support\Facades\Auth::user()->id;
             $data = \App\Models\Request::orderBy('id', 'desc')
                 ->where('user_id', $user_id)
-                ->where('status', '!=' , 'done')->get();
+                ->where(function ($query) {
+                    $query->where('status', '!=', 'done')
+                        ->where('status', '!=', 'rejected');
+                })
+                ->get();
             $approver = null;
         }
         return [$data, $approver];
@@ -499,7 +503,7 @@ class RequestController extends Controller
             ->where('user_id', \Illuminate\Support\Facades\Auth::user()->id)
             ->join('users', 'requests.user_id', '=', 'users.id')
             ->select('requests.*', 'users.id AS userid', 'users.binusianid')
-            ->where('requests.division_id', '=', $user_div_id)
+            // ->where('requests.division_id', '=', $user_div_id)
             ->get();
 
         return view('approver.historiRequest', [

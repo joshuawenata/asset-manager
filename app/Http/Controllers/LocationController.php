@@ -73,9 +73,17 @@ class LocationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+        $id = $request->input("location_id");
+        $location = Location::find($id);
+        $name = $request->input("location_name");
+        $history = new HistoryLocation;
+        $history->aksi = "Superadmin memperbaharui lokasi ".$location->name." menjadi ".$name;
+        $history->save();
+        $location->name = $name;
+        $location->save();
+        return redirect('location')->with('message', 'Lokasi Berhasil Diperbaharui');
     }
 
     /**

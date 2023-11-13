@@ -9,7 +9,7 @@
 @section('js')
     <script defer src="{{ asset('js/datatable.js') }}"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script defer>
+    <!-- <script defer>
         $(document).ready(function() {
             $('.deleteLocationBtn').click(function(e) {
                 e.preventDefault();
@@ -18,11 +18,11 @@
                 $('#deleteModal').modal('show');
             });
         });
-    </script>
+    </script> -->
 @endsection
 
 @section('content')
-    {{--    deletelocation --}}
+    <!-- {{--    deletelocation --}}
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -45,7 +45,7 @@
 
             </div>
         </div>
-    </div>
+    </div> -->
 
     {{--    tambah divisi baru --}}
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -124,11 +124,23 @@
                                     <tr>
                                         <td class="px-6 py-3" scope="row">{{ $index + 1 }}</td>
                                         <td>{{ $item->name }}</td>
-                                        <td>
-                                            <button type="button" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 deleteLocationBtn"
-                                                value="{{ $item->id }}"><span
-                                                    class="material-symbols-outlined">delete</span>
-                                            </button>
+                                        <td class="flex space-x-2 align-middle">
+                                            <form action="{{ url('edit-location') }}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="location_id" value="{{ $item->id }}">
+                                                <input type="text" id="location_name" name="location_name" required class="item-center">
+                                                <button type="submit" class="bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 text-white font-medium rounded-lg text-sm px-5 py-2.5 ml-2">
+                                                    <span class="material-symbols-outlined">edit</span>
+                                                </button>
+                                            </form>
+
+                                            <form action="{{ url('delete-location') }}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="location_id" value="{{ $item->id }}">
+                                                <button type="submit" class="bg-red-500 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 text-white font-medium rounded-lg text-sm px-5 py-2.5">
+                                                    <span class="material-symbols-outlined">delete</span>
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

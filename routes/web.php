@@ -218,6 +218,8 @@ Route::middleware(['auth', 'cekRole:superadmin'])->group(function(){
     Route::get('/edit-user-active-status/{id}', [\App\Http\Controllers\UserController::class, 'editActive']);
     Route::put('/perbaharui-user/{id}', [\App\Http\Controllers\UserController::class, 'perbaharui']);
     Route::post('/reset-password', [\App\Http\Controllers\UserController::class, 'reset']);
+    Route::post('/edit-division', [\App\Http\Controllers\DivisionController::class, 'edit']);
+    Route::post('/edit-location', [\App\Http\Controllers\LocationController::class, 'edit']);
     //DELETE
     Route::post('/delete-user', [\App\Http\Controllers\UserController::class, 'destroy']);
 });

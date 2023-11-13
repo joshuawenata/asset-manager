@@ -96,7 +96,7 @@
                                 <div class="col-md-6">
                                     <input id="name" type="text"
                                         class="form-control @error('name') is-invalid @enderror" name="name"
-                                        value="{{ $data->name }}" required autocomplete="name" autofocus readonly>
+                                        value="{{ $data->name }}" required autocomplete="name" autofocus>
 
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
@@ -114,7 +114,7 @@
                                     <input id="binusianid" type="text"
                                         class="form-control @error('binusianid') is-invalid @enderror" name="binusianid"
                                         value="{{ $data->binusianid }}" required autocomplete="binusianid" autofocus
-                                        readonly>
+                                    >
 
                                     @error('binusianid')
                                         <span class="invalid-feedback" role="alert">
@@ -148,7 +148,7 @@
                                 <div class="col-md-6">
                                     <input id="phone" type="text"
                                         class="form-control @error('phone') is-invalid @enderror" name="phone"
-                                        value="{{ $data->phone }}" required autocomplete="phone" autofocus readonly>
+                                        value="{{ $data->phone }}" required autocomplete="phone" autofocus>
 
                                     @error('phone')
                                         <span class="invalid-feedback" role="alert">

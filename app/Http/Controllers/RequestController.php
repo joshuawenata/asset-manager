@@ -628,7 +628,7 @@ class RequestController extends Controller
                 $pesan_bm = 'Peminjaman barang oleh <b>' . $req->email_peminjam . '</b> berhasil di approve.';
                 $receiver = $req->email_peminjam;
                 $email = new SendEmailController();
-                // $email->index("bmopr.bdg@binus.edu", $pesan_bm , $subyek);
+                $email->index("bmopr.bdg@binus.edu", $pesan_bm , $subyek);
                 $email->indexPeminjamApprove($receiver, $pesan, $subyek, $req->id);
 
                 $req->update();
@@ -656,7 +656,7 @@ class RequestController extends Controller
                 $pesan .= "<br>" . 'Apabila anda tetap akan melakukan peminjaman barang yang approve harap mengirimkan email lanjutan kepada approver <b>' . $req->approver . '</b> ('. \App\Models\User::find($req->approver_id)->email .')';
                 $receiver = $req->email_peminjam;
                 $email = new SendEmailController();
-                // $email->index("bmopr.bdg@binus.edu", $pesan_bm , $subyek);
+                $email->index("bmopr.bdg@binus.edu", $pesan_bm , $subyek);
                 $email->indexPeminjam($receiver, $pesan, $subyek);
 
                 $history = new HistoryDetail;
@@ -681,7 +681,7 @@ class RequestController extends Controller
             $pesan_bm = 'Peminjaman barang oleh ' . $req->email_peminjam . ' berhasil di approve.';
             $receiver = $req->email_peminjam;
             $email = new SendEmailController();
-            // $email->index("bmopr.bdg@binus.edu", $pesan_bm , $subyek);
+            $email->index("bmopr.bdg@binus.edu", $pesan_bm , $subyek);
             $email->indexPeminjamApprove($receiver, $pesan, $subyek, $req->id);
             $history = new HistoryDetail;
             $history->user_id = \Illuminate\Support\Facades\Auth::user()->id;

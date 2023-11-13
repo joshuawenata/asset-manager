@@ -9,7 +9,7 @@
 @section('js')
     <script defer src="{{ asset('js/datatable.js') }}"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script defer>
+    <!-- <script defer>
         $(document).ready(function() {
             $('.deleteDivisionBtn').click(function(e) {
                 e.preventDefault();
@@ -18,12 +18,12 @@
                 $('#deleteModal').modal('show');
             });
         });
-    </script>
+    </script> -->
 @endsection
 
 @section('content')
     {{--    deletedivision --}}
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
 
@@ -45,7 +45,7 @@
 
             </div>
         </div>
-    </div>
+    </div> -->
 
     {{--    tambah divisi baru --}}
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -98,8 +98,6 @@
 
                     <div class="card-body">
 
-
-
                         @if (session('message'))
                             <div id="alert-border-1" class="flex items-center p-4 mb-4 text-green-800 border-t-4 border-green-300 bg-green-50 dark:text-green-400 dark:bg-gray-800 dark:border-green-800" role="alert">
                                 <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -129,19 +127,30 @@
                                 @foreach ($data as $index => $item)
                                     <tr>
                                         {{--                                masukin kolom --}}
-                                        <td class="px-6 py-3" scope="row">{{ $index + 1 }}</td>
+                                        <td class="px-6 py-2" scope="row">{{ $index + 1 }}</td>
                                         <td>{{ $item->name }}</td>
-                                        <td>
-                                            <button type="button" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 deleteDivisionBtn"
-                                                value="{{ $item->id }}"><span
-                                                    class="material-symbols-outlined">delete</span></button>
+                                        <td class="flex space-x-2 align-middle">
+                                            <form action="{{ url('edit-division') }}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="division_id" value="{{ $item->id }}">
+                                                <input type="text" id="division_name" name="division_name" required class="item-center">
+                                                <button type="submit" class="bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 text-white font-medium rounded-lg text-sm px-5 py-2.5 ml-2">
+                                                    <span class="material-symbols-outlined">edit</span>
+                                                </button>
+                                            </form>
+
+                                            <form action="{{ url('delete-division') }}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="division_id" value="{{ $item->id }}">
+                                                <button type="submit" class="bg-red-500 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 text-white font-medium rounded-lg text-sm px-5 py-2.5">
+                                                    <span class="material-symbols-outlined">delete</span>
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
-
-
 
                     </div>
                 </div>

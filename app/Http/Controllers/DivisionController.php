@@ -89,9 +89,17 @@ class DivisionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+        $id = $request->input("division_id");
+        $division = Division::find($id);
+        $name = $request->input("division_name");
+        $history = new HistoryDepartemen;
+        $history->aksi = "Superadmin memperbaharui departemen ".$division->name." menjadi ".$name;
+        $history->save();
+        $division->name = $name;
+        $division->save();
+        return redirect('division')->with('message', 'Departemen Berhasil Diperbaharui');
     }
 
     /**
@@ -112,9 +120,9 @@ class DivisionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $id)
+    public function destroy(Request $req)
     {
-        $dept = Division::find($id->asset_division_id);
+        $dept = Division::find($req->division_id);
         $history = new HistoryDepartemen;
         $history->aksi = "Superadmin menghapus departemen ".$dept->name;
         $history->save();

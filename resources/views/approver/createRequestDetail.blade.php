@@ -82,15 +82,14 @@
                                 <label class="col-form-label text-md-end">{{ __('Lokasi Peminjaman') }}</label>
 
                                 <div>
-                                    <input class="form-check-input mt-1" type="radio" id="hide" name="lokasi"
-                                        value="{{ 'keluar kampus BINUS' }}" checked />
+                                    <input class="form-check-input mt-1" type="radio" id="hide" name="lokasi" value="{{ 'keluar kampus BINUS' }}" checked />
                                     <label for="hide">keluar kampus BINUS</label>
 
                                     <div class="mt-2">
-                                        <input class="form-check-input mt-1" type="radio" id="show" name="lokasi"
-                                            value="" />
+                                        <input class="form-check-input mt-1" type="radio" id="show" name="lokasi" value="" />
                                         <label for="show">dalam lingkungan kampus BINUS</label>
                                     </div>
+
                                     <div id="box" class="col-sm-5 col-md-6" style="display: none;">
                                         <select class="form-select" name="new-lokasi" id="new-lokasi">
                                             @foreach ($data as $index => $item)

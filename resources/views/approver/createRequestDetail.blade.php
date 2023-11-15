@@ -90,13 +90,14 @@
                                         <label for="show">dalam lingkungan kampus BINUS</label>
                                     </div>
 
-                                    <div id="box" class="col-sm-5 col-md-6" style="display: none;">
-                                        <select class="form-select" name="new-lokasi" id="new-lokasi">
+                                    <div class="col-sm-5 col-md-6">
+                                        <select class="form-select mt-2" name="new-lokasi" id="new-lokasi">
                                             @foreach ($data as $index => $item)
                                                 <option value="{{ $item->name }}">{{ $item->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
+                                    <p>**abaikan lokasi ruangan apabila keluar kampus**</p>
                                 </div>
                             </div>
 

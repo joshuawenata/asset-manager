@@ -20,7 +20,6 @@ radioButtons.forEach((radio) => {
 
 const radioButtonslokasi = document.querySelectorAll('input[name="lokasi"]');
 radioButtonslokasi.forEach((radio) => {
-    radio.addEventListener("change", handleRadioClick);
+    radio.addEventListener("click", handleRadioClick);
 });
 
-handleRadioClick();

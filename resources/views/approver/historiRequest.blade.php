@@ -121,7 +121,7 @@
                                     <tr>
                                         <td class="px-6 py-3" scope="row">{{ $index + 1 }}</td>
                                         <td>{{ $req->nama_peminjam }}</td>
-                                        <td>{{ $req->binusianid }}</td>
+                                        <td>{{ $req->binusian_id_peminjam }}</td>
                                         <td>{{ $req->purpose }}</td>
                                         <td>{{ date('d M Y H:i', strtotime($req->book_date)) }}</td>
                                         <td>{{ date('d M Y H:i', strtotime($req->return_date)) }}</td>

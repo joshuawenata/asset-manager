@@ -386,7 +386,6 @@ class RequestController extends Controller
         $book_date = $request->input('book_date');
         $assets = $request->input('assets');
         $division_id = $request->input('division_id');
-        $approver = User::all()->where('role_id', 3);
 
         return view('approver.createRequestDetail', [
             'assets' => $assets,
@@ -394,7 +393,6 @@ class RequestController extends Controller
             'return_date' => $return_date,
             'data' => $data,
             'division_id' => $division_id,
-            'approver' => $approver
         ]);
     }
 
@@ -494,17 +492,29 @@ class RequestController extends Controller
     public function show()
     {
         $user_div_id = \Illuminate\Support\Facades\Auth::user()->division->id;
-        $data = DB::table('requests')
-            ->orderBy('id', 'desc')
-            ->where(function ($query) {
-                $query->where('status', 'done')
-                    ->orWhere('status', 'rejected');
-            })
-            ->where('user_id', \Illuminate\Support\Facades\Auth::user()->id)
-            ->join('users', 'requests.user_id', '=', 'users.id')
-            ->select('requests.*', 'users.id AS userid', 'users.binusianid')
-            // ->where('requests.division_id', '=', $user_div_id)
-            ->get();
+        if(\Illuminate\Support\Facades\Auth::user()->role_id == 1 || \Illuminate\Support\Facades\Auth::user()->role_id == 2){
+            $data = DB::table('requests')
+                ->orderBy('id', 'desc')
+                ->where('approver_id', \Illuminate\Support\Facades\Auth::user()->id)
+                ->where(function ($query) {
+                    $query->where('status', 'done')
+                        ->orWhere('status', 'rejected');
+                })
+                ->join('users', 'requests.approver_id', '=', 'users.id')
+                ->select('requests.*', 'users.id AS userid')
+                ->get();
+        }else{
+            $data = DB::table('requests')
+                ->orderBy('id', 'desc')
+                ->where(function ($query) {
+                    $query->where('status', 'done')
+                        ->orWhere('status', 'rejected');
+                })
+                ->where('user_id', \Illuminate\Support\Facades\Auth::user()->id)
+                ->join('users', 'requests.user_id', '=', 'users.id')
+                ->select('requests.*', 'users.id AS userid', 'users.binusianid')
+                ->get();
+        }
 
         return view('approver.historiRequest', [
             'data' => $data
@@ -540,10 +550,13 @@ class RequestController extends Controller
     public function perbaharui(Request $request)
     {
         $req = \App\Models\Request::find($request->request_perbaharui_id);
+        $req->approver_id = \Illuminate\Support\Facades\Auth::user()->id;
+        $req->approver = \Illuminate\Support\Facades\Auth::user()->name;
+        $req->update();
 
         if($request->request_perbaharui == 'rejected'){
             $req->status = $request->request_perbaharui;
-            $req->notes = $request->input('pesan') . "<br>";
+            $req->notes = $request->input('pesan');
             $req->update();
             $message = 'Request berhasil ditolak.';
 

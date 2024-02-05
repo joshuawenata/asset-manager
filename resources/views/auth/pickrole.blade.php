@@ -55,7 +55,7 @@
                                     <select class="form-select" name="role_id" id="role_id">
                                         <option value="1">Staff/Karyawan</option>
                                         <option value="2">Admin</option>
-                                        <option value="3">Approver</option>
+                                        <option value="3">User/Approver</option>
                                         <option value="4">Superadmin</option>
                                     </select>
                                 </div>

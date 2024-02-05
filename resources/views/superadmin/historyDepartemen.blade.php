@@ -6,6 +6,7 @@
 
 @section('js')
     <script defer src="{{ asset('js/datatable.js') }}"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 @endsection
 
 @section('content')
@@ -34,7 +35,7 @@
                             </div>
                         @endif
 
-                        <table id="myTable" class="display table w-full text-sm text-left text-gray-500 dark:text-gray-400" width="100%">
+                        <table id="myTable3" class="display table w-full text-sm text-left text-gray-500 dark:text-gray-400" width="100%">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <th class="px-6 py-3">No</th>

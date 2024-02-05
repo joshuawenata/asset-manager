@@ -101,7 +101,7 @@
                             </div>
                         @endif
 
-                        <table id="myTable" class="display table w-full text-sm text-left text-gray-500 dark:text-gray-400" width="100%">
+                        <table id="myTable10" class="display table w-full text-sm text-left text-gray-500 dark:text-gray-400" width="100%">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <th class="px-6 py-3" scope="col">No</th>

@@ -67,8 +67,14 @@ class AssetController extends Controller
         $data = Asset::orderBy('id', 'desc')
             ->where('division_id', $id)
             ->where('status', 'tersedia')
-            ->orWhere('status', 'tidak')
-            ->orWhere('status', 'rusak')
+            ->orWhere(function ($query) use ($id) {
+                $query->where('status', 'tidak')
+                      ->where('division_id', $id);
+            })
+            ->orWhere(function ($query) use ($id) {
+                $query->where('status', 'rusak')
+                      ->where('division_id', $id);
+            })
             ->get();
         return view('admin.selectMoveAsset', [
             'data' => $data

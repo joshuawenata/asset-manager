@@ -178,8 +178,6 @@ class AssetJenisExport implements FromCollection, WithHeadings, WithStyles, With
                     $event->sheet->getCell("{$status_barang_drop_column}{$i}")->setDataValidation(clone $status_barang_validation);
                 }
 
-
-
                 // set columns to autosize
                 for ($i = 1; $i <= $column_count; $i++) {
                     $column = Coordinate::stringFromColumnIndex($i);

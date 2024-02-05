@@ -45,6 +45,7 @@ Route::get('register-show', function (Request $request) {
         'data' => $data,
     ])->with('role_id', $role_id);
 })->name('superadmin.register-show');
+
 Route::post('insert-account',function(Request $request){
     $validator = Validator::make(
         $request->all(),

@@ -3,7 +3,7 @@
 @import 'tailwindcss/utilities';
 
 /* Add your CSS styles here */
-#myTable, #myTable7, #myTable2 {
+#myTable, #myTable7, #myTable2, #myTable3, #myTable8, #myTable9, #approverTable9, #myTable10, #myTable15 {
     width: 100%;
     border-collapse: collapse;
     border-spacing: 0;

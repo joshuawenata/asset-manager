@@ -76,7 +76,7 @@ class AssetJenisExport implements FromCollection, WithHeadings, WithStyles, With
             AfterSheet::class => function(AfterSheet $event) {
 
                 // get layout counts (add 1 to rows for heading row)
-                $row_count = 10000;
+                $row_count = 100;
                 $column_count = 5;
 
                 $location_drop_column = 'B'; // 'B' is the column index for the "Location" column

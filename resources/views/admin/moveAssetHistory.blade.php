@@ -21,7 +21,7 @@
 
                     <div class="card-body">
 
-                        <table id="myTable" class="display table">
+                        <table id="myTable10" class="display table">
                             <thead>
                                 <tr>
                                     <th class="px-6 py-3" scope="col">No</th>

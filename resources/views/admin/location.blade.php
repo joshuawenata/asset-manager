@@ -103,7 +103,7 @@
                             </div>
                         @endif
 
-                        <table id="myTable" class="display table">
+                        <table id="myTable3" class="display table">
                             <thead>
                                 <tr>
                                     <th class="px-6 py-3" scope="col">No</th>

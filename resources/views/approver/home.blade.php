@@ -7,7 +7,7 @@
 @endsection
 
 @section('js')
-    <script defer src="{{ asset('js/datatable.js') }}"></script>
+    <script defer src="{{ asset('js/approvertable9.js') }}"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 @endsection
 

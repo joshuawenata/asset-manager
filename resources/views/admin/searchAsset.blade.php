@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('js')
-    <script defer src="{{ asset('js/datatable.js') }}"></script>
+    <script defer src="{{ asset('js/datatable8.js') }}"></script>
+    <script defer src="{{ asset('js/datatable9.js') }}"></script>
 @endsection
 
 @section('css')

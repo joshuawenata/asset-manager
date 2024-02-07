@@ -7,7 +7,7 @@
 @endsection
 
 @section('js')
-    <script defer src="{{ asset('js/datatable.js') }}"></script>
+    <script defer src="{{ asset('js/datatable7.js') }}"></script>
 @endsection
 
 @section('content')

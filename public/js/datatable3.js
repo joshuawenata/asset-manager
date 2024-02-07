@@ -1,11 +1,11 @@
 $(document).ready(function () {
-    $("#myTable").DataTable({
+    $("#myTable3").DataTable({
         dom: "Blfrtip",
         buttons: [
             {
                 extend: "excelHtml5",
                 exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5],
+                    columns: [0, 1, 2],
                 },
             },
         ],
@@ -13,7 +13,7 @@ $(document).ready(function () {
 
     // Function to wrap text in DataTable cells
     function wrapTextInCells() {
-        $("#myTable td").each(function () {
+        $("#myTable3 td").each(function () {
             $(this).css({
                 "white-space": "normal", 
                 "padding": "8px", 
@@ -21,9 +21,9 @@ $(document).ready(function () {
                 "text-align": "left",
             });
         });
-        $("#myTable tr:even").css("background-color", "#eef2fb");
-        $("#myTable tr:odd").css("background-color", "white");
-        $("#myTable th").each(function () {
+        $("#myTable3 tr:even").css("background-color", "#eef2fb");
+        $("#myTable3 tr:odd").css("background-color", "white");
+        $("#myTable3 th").each(function () {
             $(this).css({
                 "background-color": "#b0d1ed", 
                 "color": "black", 
@@ -36,6 +36,6 @@ $(document).ready(function () {
     
 
     // Call the wrapTextInCells function on initial load and whenever the DataTable is redrawn
-    $("#myTable").on("draw.dt", wrapTextInCells);
+    $("#myTable3").on("draw.dt", wrapTextInCells);
     wrapTextInCells();
 });

@@ -182,7 +182,10 @@ class UserController extends Controller
         $history = new HistoryAkun;
         $history->aksi = 'superadmin mengupdate akun '.Role::where('id',$user->role_id)->pluck('name')[0].' dengan data nama: '.$user->name.', binusian_id: '.$user->binusianid.', phone: '.$user->phone.', departemen: '.Division::where('id',$user->division_id)->pluck('name')[0].', email: '.$user->email.' menjadi '.'departemen baru: '.Division::where('id',$request->input('department'))->pluck('name')[0].', '.'role baru: '.Role::where('id',$request->input('role'))->pluck('name')[0].', '.'email baru: '.$request->input('email');
         $history->save();
+        $user->name = $request->input('name');
         $user->division_id = $request->input('department');
+        $user->binusianid = $request->input('binusianid');
+        $user->phone = $request->input('phone');
         $user->role_id = $isStaffSelected ? 1 : ($isAdminSelected ? 2 : 3);
         $user->email = $request->input('email');
         $user->isStaff = $isStaffSelected ? 1 : 0;

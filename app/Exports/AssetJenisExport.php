@@ -24,10 +24,15 @@ class AssetJenisExport implements FromCollection, WithHeadings, WithStyles, With
 {
     public function collection()
     {
+        $userDivisionId = Auth::user()->division_id;
+        $location_options = Location::pluck('name')->toArray();
+        $pemilik_barang_options = PemilikBarang::where('division_id', $userDivisionId)->pluck('nama')->toArray();
+        $kategori_barang_options = AssetJenis::where('status', 1)->pluck('name')->toArray();
+
         return new Collection([
-            ['PCS001001', '', '', '', 'Projector', 'HP', 'HP ABC', 'tersedia'],
-            ['DKV001002', '',  '', '', 'Projector', 'HP', 'HP DEF', 'tersedia'],
-            ['PCP001003', '', '', '', 'Projector', 'HP', 'HP GHI', 'tidak']
+            ['PCS001001', $location_options[0], $pemilik_barang_options[0], $kategori_barang_options[0], 'Projector', 'HP', 'HP ABC', 'tersedia'],
+            ['DKV001002', $location_options[0], $pemilik_barang_options[0], $kategori_barang_options[0], 'Projector', 'HP', 'HP DEF', 'tersedia'],
+            ['PCP001003', $location_options[0], $pemilik_barang_options[0], $kategori_barang_options[0], 'Projector', 'HP', 'HP GHI', 'tidak']
         ]);
     }
 
@@ -76,7 +81,7 @@ class AssetJenisExport implements FromCollection, WithHeadings, WithStyles, With
             AfterSheet::class => function(AfterSheet $event) {
 
                 // get layout counts (add 1 to rows for heading row)
-                $row_count = 1;
+                $row_count = 10000;
                 $column_count = 5;
 
                 $location_drop_column = 'B'; // 'B' is the column index for the "Location" column

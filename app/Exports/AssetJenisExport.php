@@ -92,15 +92,15 @@ class AssetJenisExport implements FromCollection, WithHeadings, WithStyles, With
                 // set dropdown list for first data row for "Location"
                 $location_validation = $event->sheet->getCell("{$location_drop_column}2")->getDataValidation();
                 $location_validation->setType(DataValidation::TYPE_LIST);
-                $location_validation->setErrorStyle(DataValidation::STYLE_INFORMATION);
+                // $location_validation->setErrorStyle(DataValidation::STYLE_INFORMATION);
                 $location_validation->setAllowBlank(true);
-                $location_validation->setShowInputMessage(true);
-                $location_validation->setShowErrorMessage(true);
+                // $location_validation->setShowInputMessage(true);
+                // $location_validation->setShowErrorMessage(true);
                 $location_validation->setShowDropDown(true);
-                $location_validation->setErrorTitle('Input error');
-                $location_validation->setError('Value is not in the list.');
-                $location_validation->setPromptTitle('Pick from the list');
-                $location_validation->setPrompt('Please pick a value from the drop-down list.');
+                // $location_validation->setErrorTitle('Input error');
+                // $location_validation->setError('Value is not in the list.');
+                // $location_validation->setPromptTitle('Pick from the list');
+                // $location_validation->setPrompt('Please pick a value from the drop-down list.');
                 $location_validation->setFormula1(sprintf('"%s"', implode(',', $location_options)));
 
                 // clone validation to remaining rows for "Location"
@@ -117,15 +117,15 @@ class AssetJenisExport implements FromCollection, WithHeadings, WithStyles, With
                 // set dropdown list for first data row for "Pemilik Barang"
                 $pemilik_barang_validation = $event->sheet->getCell("{$pemilik_barang_drop_column}2")->getDataValidation();
                 $pemilik_barang_validation->setType(DataValidation::TYPE_LIST);
-                $pemilik_barang_validation->setErrorStyle(DataValidation::STYLE_INFORMATION);
+                // $pemilik_barang_validation->setErrorStyle(DataValidation::STYLE_INFORMATION);
                 $pemilik_barang_validation->setAllowBlank(true);
-                $pemilik_barang_validation->setShowInputMessage(true);
-                $pemilik_barang_validation->setShowErrorMessage(true);
+                // $pemilik_barang_validation->setShowInputMessage(true);
+                // $pemilik_barang_validation->setShowErrorMessage(true);
                 $pemilik_barang_validation->setShowDropDown(true);
-                $pemilik_barang_validation->setErrorTitle('Input error');
-                $pemilik_barang_validation->setError('Value is not in the list.');
-                $pemilik_barang_validation->setPromptTitle('Pick from the list');
-                $pemilik_barang_validation->setPrompt('Please pick a value from the drop-down list.');
+                // $pemilik_barang_validation->setErrorTitle('Input error');
+                // $pemilik_barang_validation->setError('Value is not in the list.');
+                // $pemilik_barang_validation->setPromptTitle('Pick from the list');
+                // $pemilik_barang_validation->setPrompt('Please pick a value from the drop-down list.');
                 $pemilik_barang_validation->setFormula1(sprintf('"%s"', implode(',', $pemilik_barang_options)));
 
                 // clone validation to remaining rows for "Pemilik Barang"
@@ -142,15 +142,15 @@ class AssetJenisExport implements FromCollection, WithHeadings, WithStyles, With
                 // set dropdown list for first data row for "Kategori Barang"
                 $kategori_barang_validation = $event->sheet->getCell("{$kategori_barang_drop_column}2")->getDataValidation();
                 $kategori_barang_validation->setType(DataValidation::TYPE_LIST);
-                $kategori_barang_validation->setErrorStyle(DataValidation::STYLE_INFORMATION);
+                // $kategori_barang_validation->setErrorStyle(DataValidation::STYLE_INFORMATION);
                 $kategori_barang_validation->setAllowBlank(true);
-                $kategori_barang_validation->setShowInputMessage(true);
-                $kategori_barang_validation->setShowErrorMessage(true);
+                // $kategori_barang_validation->setShowInputMessage(true);
+                // $kategori_barang_validation->setShowErrorMessage(true);
                 $kategori_barang_validation->setShowDropDown(true);
-                $kategori_barang_validation->setErrorTitle('Input error');
-                $kategori_barang_validation->setError('Value is not in the list.');
-                $kategori_barang_validation->setPromptTitle('Pick from the list');
-                $kategori_barang_validation->setPrompt('Please pick a value from the drop-down list.');
+                // $kategori_barang_validation->setErrorTitle('Input error');
+                // $kategori_barang_validation->setError('Value is not in the list.');
+                // $kategori_barang_validation->setPromptTitle('Pick from the list');
+                // $kategori_barang_validation->setPrompt('Please pick a value from the drop-down list.');
                 $kategori_barang_validation->setFormula1(sprintf('"%s"', implode(',', $kategori_barang_options)));
 
                 // clone validation to remaining rows for "Kategori Barang"
@@ -167,15 +167,15 @@ class AssetJenisExport implements FromCollection, WithHeadings, WithStyles, With
                 // set dropdown list for first data row for "Status Barang"
                 $status_barang_validation = $event->sheet->getCell("{$status_barang_drop_column}2")->getDataValidation();
                 $status_barang_validation->setType(DataValidation::TYPE_LIST);
-                $status_barang_validation->setErrorStyle(DataValidation::STYLE_INFORMATION);
+                // $status_barang_validation->setErrorStyle(DataValidation::STYLE_INFORMATION);
                 $status_barang_validation->setAllowBlank(true);
-                $status_barang_validation->setShowInputMessage(true);
-                $status_barang_validation->setShowErrorMessage(true);
+                // $status_barang_validation->setShowInputMessage(true);
+                // $status_barang_validation->setShowErrorMessage(true);
                 $status_barang_validation->setShowDropDown(true);
-                $status_barang_validation->setErrorTitle('Input error');
-                $status_barang_validation->setError('Value is not in the list.');
-                $status_barang_validation->setPromptTitle('Pick from the list');
-                $status_barang_validation->setPrompt('Please pick a value from the drop-down list.');
+                // $status_barang_validation->setErrorTitle('Input error');
+                // $status_barang_validation->setError('Value is not in the list.');
+                // $status_barang_validation->setPromptTitle('Pick from the list');
+                // $status_barang_validation->setPrompt('Please pick a value from the drop-down list.');
                 $status_barang_validation->setFormula1(sprintf('"%s"', implode(',', $status_barang_options)));
 
                 // clone validation to remaining rows for "Status Barang"

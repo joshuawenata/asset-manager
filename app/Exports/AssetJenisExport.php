@@ -93,7 +93,7 @@ class AssetJenisExport implements FromCollection, WithHeadings, WithStyles, With
                 $location_validation = $event->sheet->getCell("{$location_drop_column}2")->getDataValidation();
                 $location_validation->setType(DataValidation::TYPE_LIST);
                 $location_validation->setErrorStyle(DataValidation::STYLE_INFORMATION);
-                $location_validation->setAllowBlank(false);
+                $location_validation->setAllowBlank(true);
                 $location_validation->setShowInputMessage(true);
                 $location_validation->setShowErrorMessage(true);
                 $location_validation->setShowDropDown(true);
@@ -118,7 +118,7 @@ class AssetJenisExport implements FromCollection, WithHeadings, WithStyles, With
                 $pemilik_barang_validation = $event->sheet->getCell("{$pemilik_barang_drop_column}2")->getDataValidation();
                 $pemilik_barang_validation->setType(DataValidation::TYPE_LIST);
                 $pemilik_barang_validation->setErrorStyle(DataValidation::STYLE_INFORMATION);
-                $pemilik_barang_validation->setAllowBlank(false);
+                $pemilik_barang_validation->setAllowBlank(true);
                 $pemilik_barang_validation->setShowInputMessage(true);
                 $pemilik_barang_validation->setShowErrorMessage(true);
                 $pemilik_barang_validation->setShowDropDown(true);
@@ -143,7 +143,7 @@ class AssetJenisExport implements FromCollection, WithHeadings, WithStyles, With
                 $kategori_barang_validation = $event->sheet->getCell("{$kategori_barang_drop_column}2")->getDataValidation();
                 $kategori_barang_validation->setType(DataValidation::TYPE_LIST);
                 $kategori_barang_validation->setErrorStyle(DataValidation::STYLE_INFORMATION);
-                $kategori_barang_validation->setAllowBlank(false);
+                $kategori_barang_validation->setAllowBlank(true);
                 $kategori_barang_validation->setShowInputMessage(true);
                 $kategori_barang_validation->setShowErrorMessage(true);
                 $kategori_barang_validation->setShowDropDown(true);
@@ -168,7 +168,7 @@ class AssetJenisExport implements FromCollection, WithHeadings, WithStyles, With
                 $status_barang_validation = $event->sheet->getCell("{$status_barang_drop_column}2")->getDataValidation();
                 $status_barang_validation->setType(DataValidation::TYPE_LIST);
                 $status_barang_validation->setErrorStyle(DataValidation::STYLE_INFORMATION);
-                $status_barang_validation->setAllowBlank(false);
+                $status_barang_validation->setAllowBlank(true);
                 $status_barang_validation->setShowInputMessage(true);
                 $status_barang_validation->setShowErrorMessage(true);
                 $status_barang_validation->setShowDropDown(true);

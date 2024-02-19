@@ -479,4 +479,30 @@ class AssetController extends Controller
     public function see(){
         return View::make('admin.see');
     }
+
+    public function destroypermanent($id){
+        $aset = Asset::find($id);
+        $d_aset = new DeletedAsset;
+        $d_aset->user_id = \Illuminate\Support\Facades\Auth::user()->id;
+        $d_aset->serial_number = $aset->serial_number;
+        $d_aset->brand = $aset->brand;
+        $d_aset->location = $aset->current_location;
+        $d_aset->pemilik_barang = $aset->pemilik_barang;
+        $d_aset->division_id = $aset->division_id;
+        $d_aset->asset_jenis_id = $aset->asset_jenis_id;
+        $d_aset->kategori_barang = $aset->kategori_barang;
+        $d_aset->spesifikasi_barang = $aset->spesifikasi_barang;
+        $d_aset->save();
+
+        $loc_aset = AssetLocation::where('asset_id', $id)->delete();
+        $aset->delete();
+        return redirect('superadmin/asset/')->with('message', 'Aset Berhasil Dihapus');
+    }
+
+    public function superadminasset(){
+        $data = Asset::all();
+        return View::make('superadmin.asset', [
+            'data' => $data
+        ]);
+    }
 }

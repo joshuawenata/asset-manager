@@ -184,6 +184,8 @@ Route::middleware(['auth', 'cekRole:approver'])->group(function(){
 
 //Superadmin Routes
 Route::middleware(['auth', 'cekRole:superadmin'])->group(function(){
+    Route::get('/delete-asset-permanent/{id}', [\App\Http\Controllers\AssetController::class, 'destroypermanent'])->name('delete-asset-permanent');
+    Route::get('/superadmin/asset', [\App\Http\Controllers\AssetController::class, 'superadminasset'] )->name('superadmin.asset');
     Route::get('/superadmin/dashboard', [\App\Http\Controllers\HomeController::class, 'superadmindashboard'] )->name('superadmin.dashboard');
     Route::get('/superadmin/kategori', [\App\Http\Controllers\AssetJenisController::class, 'superadminKategori'] )->name('superadmin.kategori');
     Route::get('/superadmin/pemilik-barang', [\App\Http\Controllers\PemilikBarangController::class, 'superadminPemilikBarang'] )->name('superadmin.pemilikbarang');

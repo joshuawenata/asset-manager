@@ -43,4 +43,8 @@ npm run build
 <br>
 11. php artisan ui:auth
 <br>
-12. composer dump autoload
+12. composer dump-autoload
+<br>
+13. npm i vite
+<br>
+14. npm run build

@@ -46,11 +46,11 @@
 
                         <div class="mb-3">
                             <label for="pesan" class="col-form-label">Pesan:</label>
-                            <textarea class="form-control" id="pesan" name="pesan" autofocus required></textarea>
+                            <textarea class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 " id="pesan" name="pesan" autofocus required></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="text-white text-gray-900 bg-gray-500 border border-gray-500 focus:outline-none hover:bg-gray-300 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" data-bs-dismiss="modal">Tidak</button>
+                        <button type="button" class="text-gray-900 bg-gray-500 border border-gray-500 focus:outline-none hover:bg-gray-300 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" data-bs-dismiss="modal">Tidak</button>
                         <button type="submit" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Ya</button>
                     </div>
                 </form>
@@ -74,7 +74,7 @@
                                 class="col-md-4 col-form-label text-md-end">{{ __('Pinjaman nomor') }}</label>
 
                             <div class="col-md-6">
-                                <input id="req_id" type="text" class="form-control mt-2" name="req_id"
+                                <input id="req_id" type="text" class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400  mt-2" name="req_id"
                                     value="{{ $request->id }}" readonly>
                             </div>
                         </div>
@@ -82,7 +82,7 @@
                             <label for="peminjam" class="col-md-4 col-form-label text-md-end">{{ __('Peminjam') }}</label>
 
                             <div class="col-md-6">
-                                <input id="peminjam" type="text" class="form-control mt-2" name="peminjam"
+                                <input id="peminjam" type="text" class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400  mt-2" name="peminjam"
                                     value="{{ $request->User->name }}" readonly>
                             </div>
                         </div>
@@ -91,7 +91,7 @@
                                 class="col-md-4 col-form-label text-md-end">{{ __('Binusian ID') }}</label>
 
                             <div class="col-md-6">
-                                <input id="binusianid" type="text" class="form-control mt-2" name="binusianid"
+                                <input id="binusianid" type="text" class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400  mt-2" name="binusianid"
                                     value="{{ $request->User->binusianid }}" readonly>
                             </div>
                         </div>
@@ -99,7 +99,7 @@
                             <label class="col-md-4 col-form-label text-md-end">{{ __('Periode Peminjaman') }}</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control mt-2"
+                                <input type="text" class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400  mt-2"
                                     value="{{ date('l, d M Y H:i', strtotime($request->book_date)) . ' - ' . date('l, d M Y H:i', strtotime($request->return_date)) }}"
                                     readonly>
                             </div>
@@ -109,7 +109,7 @@
                                 class="col-md-4 col-form-label text-md-end">{{ __('Tanggal Pengembalian') }}</label>
 
                             <div class="col-md-6">
-                                <input id="realize_return_date" type="text" class="form-control mt-2"
+                                <input id="realize_return_date" type="text" class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400  mt-2"
                                     name="realize_return_date"
                                     value="{{ date('l, d M Y H:i', strtotime($request->realize_return_date)) }}" readonly>
                             </div>
@@ -119,7 +119,7 @@
                                 class="col-form-label text-md-end"><b>{{ __('Tujuan Peminjaman') }}</b></label>
 
                             <div>
-                                <textarea class="form-control" id="purpose" name="purpose" required readonly>{{ $request->purpose }}</textarea>
+                                <textarea class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 " id="purpose" name="purpose" required readonly>{{ $request->purpose }}</textarea>
                             </div>
                         </div>
 
@@ -158,7 +158,7 @@
                                 class="col-md-4 col-form-label text-md-end">{{ __('Kondisi Barang') }}</label>
 
                             <div class="col-md-6">
-                                <input id="return_status" type="text" class="form-control mt-2" name="return_status"
+                                <input id="return_status" type="text" class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400  mt-2" name="return_status"
                                     value="{{ $request->return_status }}" readonly>
                             </div>
                         </div>
@@ -166,7 +166,7 @@
                             <label class="col-form-label text-md-end"><b>{{ __('Deskripsi Pengembalian') }}</b></label>
 
                             <div>
-                                <textarea class="form-control" readonly>{{ $request->return_notes }}</textarea>
+                                <textarea class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 " readonly>{{ $request->return_notes }}</textarea>
                             </div>
                         </div>
 

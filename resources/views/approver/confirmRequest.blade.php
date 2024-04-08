@@ -59,7 +59,7 @@
                             <div class="mb-3">
                                 <label for="binusian_id_peminjam"
                                     class="col-sm-5 col-md-6"><b>{{ __('Binusian ID Peminjam') }}</b></label>
-                                <div class="col-sm-5 col-md-6"><input type="text" class="form-control mt-2" readonly
+                                <div class="col-sm-5 col-md-6"><input type="text" class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400  mt-2" readonly
                                         name="binusian_id_peminjam" value="{{ $binusian_id_peminjam }}" />
                                 </div>
                             </div>
@@ -72,10 +72,10 @@
                                         class="col-sm-5 col-md-6"><b>{{ __('No. Handphone Peminjam') }}</b></label>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-5 col-md-6"><input type="text" class="form-control mt-2" readonly
+                                    <div class="col-sm-5 col-md-6"><input type="text" class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400  mt-2" readonly
                                             name="nama_peminjam" value="{{ $nama_peminjam }}" />
                                     </div>
-                                    <div class="col-sm-5 col-md-6"><input type="text" class="form-control mt-2" readonly
+                                    <div class="col-sm-5 col-md-6"><input type="text" class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400  mt-2" readonly
                                             name="nohp_peminjam" value="{{ $nohp_peminjam }}" />
                                     </div>
                                 </div>
@@ -89,10 +89,10 @@
                                         class="col-sm-5 col-md-6"><b>{{ __('Email Peminjam') }}</b></label>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-5 col-md-6"><input type="text" class="form-control mt-2" readonly
+                                    <div class="col-sm-5 col-md-6"><input type="text" class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400  mt-2" readonly
                                             name="prodi_peminjam" value="{{ $prodi_peminjam }}" />
                                     </div>
-                                    <div class="col-sm-5 col-md-6"><input type="text" class="form-control mt-2" readonly
+                                    <div class="col-sm-5 col-md-6"><input type="text" class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400  mt-2" readonly
                                             name="email_peminjam" value="{{ $email_peminjam }}" />
                                     </div>
                                 </div>
@@ -103,7 +103,7 @@
                                     class="col-form-label text-md-end"><b>{{ __('Tujuan Peminjaman') }}</b></label>
 
                                 <div>
-                                    <textarea class="form-control" id="purpose" name="purpose" required readonly>{{ $purpose }}</textarea>
+                                    <textarea class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 " id="purpose" name="purpose" required readonly>{{ $purpose }}</textarea>
                                 </div>
                             </div>
 
@@ -117,9 +117,9 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-sm-5 col-md-6"><input type="text" class="form-control mt-2" readonly
+                                    <div class="col-sm-5 col-md-6"><input type="text" class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400  mt-2" readonly
                                             name="lokasi" value="{{ $lokasi }}" /></div>
-                                    <div class="col-sm-5 col-md-6"><input type="text" class="form-control mt-2" readonly
+                                    <div class="col-sm-5 col-md-6"><input type="text" class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400  mt-2" readonly
                                             name="approver" value="{{ $approver }}" /></div>
                                 </div>
                             </div>
@@ -134,9 +134,9 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-5 col-md-6"><input type="text" class="form-control mt-2" readonly
+                                    <div class="col-sm-5 col-md-6"><input type="text" class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400  mt-2" readonly
                                             name="book_date" value="{{ date('l, d M Y H:i', $book_date) }}" /></div>
-                                    <div class="col-sm-5 col-md-6"><input type="text" class="form-control mt-2"
+                                    <div class="col-sm-5 col-md-6"><input type="text" class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400  mt-2"
                                             readonly name="return_date"
                                             value="{{ date('l, d M Y H:i', $return_date) }}" /></div>
                                 </div>

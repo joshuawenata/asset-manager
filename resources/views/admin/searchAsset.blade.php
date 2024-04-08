@@ -22,7 +22,7 @@
                 @endif
 
                 <div class="card">
-                    <div class="card-header">{{ __('Kelola Barang') }}</div>
+                    <div class="card-header">{{ __('Kelola Inventori') }}</div>
 
                     <div class="card-body">
 

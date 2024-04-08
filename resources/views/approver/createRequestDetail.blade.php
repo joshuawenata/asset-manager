@@ -29,7 +29,7 @@
                                     class="col-form-label text-md-end">{{ __('Binusian ID Peminjam') }}</label>
 
                                 <div>
-                                    <input id="binusian_id_peminjam" type="text" class="form-control"
+                                    <input id="binusian_id_peminjam" type="text" class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 "
                                         name="binusian_id_peminjam" required>
                                 </div>
 
@@ -37,7 +37,7 @@
                                     class="col-form-label text-md-end">{{ __('Nama Peminjam') }}</label>
 
                                 <div>
-                                    <input id="nama_peminjam" type="text" class="form-control" name="nama_peminjam"
+                                    <input id="nama_peminjam" type="text" class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 " name="nama_peminjam"
                                         required>
                                 </div>
 
@@ -45,7 +45,7 @@
                                     class="col-form-label text-md-end">{{ __('Prodi/Unit Peminjam') }}</label>
 
                                 <div>
-                                    <input id="prodi_peminjam" type="text" class="form-control" name="prodi_peminjam"
+                                    <input id="prodi_peminjam" type="text" class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 " name="prodi_peminjam"
                                         required>
                                 </div>
 
@@ -53,7 +53,7 @@
                                     class="col-form-label text-md-end">{{ __('Email Peminjam') }}</label>
 
                                 <div>
-                                    <input id="email_peminjam" type="text" class="form-control" name="email_peminjam"
+                                    <input id="email_peminjam" type="text" class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 " name="email_peminjam"
                                         required>
                                 </div>
 
@@ -61,7 +61,7 @@
                                     class="col-form-label text-md-end">{{ __('No. Handphone Peminjam') }}</label>
 
                                 <div>
-                                    <input id="nohp_peminjam" type="text" class="form-control" name="nohp_peminjam"
+                                    <input id="nohp_peminjam" type="text" class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 " name="nohp_peminjam"
                                         required>
                                 </div>
 
@@ -74,7 +74,7 @@
                                     class="col-form-label text-md-end">{{ __('Tujuan Peminjaman') }}</label>
 
                                 <div>
-                                    <textarea class="form-control" id="purpose" name="purpose" required autofocus></textarea>
+                                    <textarea class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 " id="purpose" name="purpose" required autofocus></textarea>
                                 </div>
                             </div>
 
@@ -91,7 +91,7 @@
                                     </div>
 
                                     <div class="col-sm-5 col-md-6">
-                                        <select class="form-select mt-2" name="new-lokasi" id="new-lokasi">
+                                        <select class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400  mt-2" name="new-lokasi" id="new-lokasi">
                                             @foreach ($data as $index => $item)
                                                 <option value="{{ $item->name }}">{{ $item->name }}</option>
                                             @endforeach

@@ -17,8 +17,6 @@
 
                     <div class="card-body">
 
-
-
                         <form method="POST" action="{{ route('storeRepairAsset') }}">
                             @csrf
 
@@ -28,7 +26,7 @@
 
                                 <div class="col-md-6">
                                     <input id="pelapor" type="text"
-                                        class="form-control @error('pelapor') is-invalid @enderror" name="pelapor"
+                                        class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 @error('pelapor') is-invalid @enderror" name="pelapor"
                                         value="{{ old('pelapor') }}" required autocomplete="pelapor" autofocus>
 
                                     @error('pelapor')
@@ -44,11 +42,10 @@
                                     class="col-md-4 col-form-label text-md-end">{{ __('Deskripsi Kerusakan') }}</label>
 
                                 <div class="col-md-6">
-                                    <textarea class="form-control" id="description" name="description" required autofocus></textarea>
+                                    <textarea class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 " id="description" name="description" required autofocus></textarea>
                                 </div>
                             </div>
 
-                            {{--                            hidden asset id --}}
                             <input type="hidden" name="asset_id" id="asset_id" value="{{ $asset }}">
 
                             <div class="row mb-0">
@@ -60,9 +57,6 @@
                             </div>
 
                         </form>
-
-
-
 
                     </div>
                 </div>

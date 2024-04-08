@@ -19,7 +19,7 @@
             <div class="col-md-12">
 
                 <div class="card">
-                    <div class="card-header">{{ __('dashboard User/Approver') }}</div>
+                    <div class="card-header">{{ __('dashboard user') }}</div>
 
                     <div class="card-body">
                         @if (session('message'))
@@ -89,13 +89,13 @@
                                                     <button type="submit" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Cancel</button>
                                                 </form>
                                             @elseif($req->status == 'waiting next approval')
-                                                <form action="{{ route('reject', ['request_perbaharui_id' => $req->id]) }}" method="post">
-                                                    @csrf
-                                                    <button type="submit" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Tidak Jadi Pinjam</button>
-                                                </form>
                                                 <form action="{{ route('approveonly', ['request_perbaharui_id' => $req->id]) }}" method="post">
                                                     @csrf
                                                     <button type="submit" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Jadi Pinjam</button>
+                                                </form>
+                                                <form action="{{ route('reject', ['request_perbaharui_id' => $req->id]) }}" method="post">
+                                                    @csrf
+                                                    <button type="submit" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Tidak Jadi Pinjam</button>
                                                 </form>
                                             @elseif($req->status == 'approved')
                                                 {{ 'Silahkan ambil barang sesuai jadwal pinjam.' }}

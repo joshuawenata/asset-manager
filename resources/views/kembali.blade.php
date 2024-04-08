@@ -25,7 +25,7 @@
                                         class="col-md-4 col-form-label text-md-end">{{ __('Peminjam') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="peminjam" type="text" class="form-control mt-2" name="peminjam"
+                                        <input id="peminjam" type="text" class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400  mt-2" name="peminjam"
                                             value="{{ $request->User->name }}" readonly>
                                     </div>
                                 </div>
@@ -34,7 +34,7 @@
                                         class="col-md-4 col-form-label text-md-end">{{ __('Binusian ID') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="binusianid" type="text" class="form-control mt-2" name="binusianid"
+                                        <input id="binusianid" type="text" class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400  mt-2" name="binusianid"
                                             value="{{ $request->User->binusianid }}" readonly>
                                     </div>
                                 </div>
@@ -43,7 +43,7 @@
                                         class="col-md-4 col-form-label text-md-end">{{ __('Periode Peminjaman') }}</label>
 
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control mt-2"
+                                        <input type="text" class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400  mt-2"
                                             value="{{ date('l, d M Y H:i', strtotime($request->book_date)) . ' - ' . date('l, d M Y H:i', strtotime($request->return_date)) }}"
                                             readonly>
                                     </div>
@@ -55,7 +55,7 @@
                                     class="col-md-4 col-form-label text-md-end">{{ __('Tanggal Pengembalian') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="realize_return_date" type="text" class="form-control mt-2"
+                                    <input id="realize_return_date" type="text" class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400  mt-2"
                                         name="realize_return_date" value="{{ $current_date }}" readonly>
                                 </div>
                             </div>
@@ -66,7 +66,7 @@
                                         class="col-form-label text-md-end"><b>{{ __('Tujuan Peminjaman') }}</b></label>
 
                                     <div>
-                                        <textarea class="form-control" id="purpose" name="purpose" required readonly>{{ $request->purpose }}</textarea>
+                                        <textarea class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 " id="purpose" name="purpose" required readonly>{{ $request->purpose }}</textarea>
                                     </div>
                                 </div>
                             @endif
@@ -119,7 +119,7 @@
                                         class="col-form-label text-md-end"><b>{{ __('Deskripsi Pengembalian') }}</b></label>
 
                                     <div>
-                                        <textarea class="form-control" readonly>{{ $request->return_notes }}</textarea>
+                                        <textarea class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 " readonly>{{ $request->return_notes }}</textarea>
                                     </div>
                                 </div>
                             @endif
@@ -140,7 +140,7 @@
                                         class="col-form-label text-md-end">{{ __('Deskripsi Kondisi Barang') }}</label>
 
                                     <div>
-                                        <textarea class="form-control" id="return_condition" name="return_condition" required></textarea>
+                                        <textarea class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 " id="return_condition" name="return_condition" required></textarea>
                                     </div>
                                 </div>
 
@@ -160,7 +160,7 @@
                                         class="col-form-label text-md-end">{{ __('Pesan pengembalian:') }}</label>
 
                                     <div>
-                                        <textarea class="form-control" id="return_notice" name="return_notice" autofocus readonly>{{ $request->return_notice }}</textarea>
+                                        <textarea class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 " id="return_notice" name="return_notice" autofocus readonly>{{ $request->return_notice }}</textarea>
                                     </div>
                                 </div>
                             @endif

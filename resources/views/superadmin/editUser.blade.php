@@ -32,7 +32,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        {{ __('Edit Role User') }}
+                        {{ __('Edit Akun User') }}
                     </div>
 
                     <div class="card-body">
@@ -47,7 +47,7 @@
 
                                 <div class="col-md-6">
                                     <input id="name" type="text"
-                                        class="form-control @error('name') is-invalid @enderror" name="name"
+                                        class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400  @error('name') is-invalid @enderror" name="name"
                                         value="{{ $data->name }}" required autocomplete="name" autofocus>
 
                                     @error('name')
@@ -64,7 +64,7 @@
 
                                 <div class="col-md-6">
                                     <input id="binusianid" type="text"
-                                        class="form-control @error('binusianid') is-invalid @enderror" name="binusianid"
+                                        class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400  @error('binusianid') is-invalid @enderror" name="binusianid"
                                         value="{{ $data->binusianid }}" required autocomplete="binusianid" autofocus
                                     >
 
@@ -82,7 +82,7 @@
 
                                 <div class="col-md-6">
                                     <input id="email" type="email"
-                                        class="form-control @error('email') is-invalid @enderror" name="email"
+                                        class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400  @error('email') is-invalid @enderror" name="email"
                                         value="{{ $data->email }}" required autocomplete="email" autofocus>
 
                                     @error('email')
@@ -99,7 +99,7 @@
 
                                 <div class="col-md-6">
                                     <input id="phone" type="text"
-                                        class="form-control @error('phone') is-invalid @enderror" name="phone"
+                                        class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400  @error('phone') is-invalid @enderror" name="phone"
                                         value="{{ $data->phone }}" required autocomplete="phone" autofocus>
 
                                     @error('phone')
@@ -115,7 +115,7 @@
                                     class="col-md-4 col-form-label text-md-end">{{ __('Departemen') }}</label>
 
                                 <div class="col-md-6">
-                                    <select class="form-select" name="department" id="department">
+                                    <select class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 " name="department" id="department">
                                         @foreach ($dept as $index => $item)
                                             @if ($data->division_id == $item->id)
                                                 <option value="{{ $item->id }}" selected>{{ $item->name }}</option>

@@ -27,7 +27,7 @@
 
                                 <div>
                                     <div class="col-sm-5 col-md-6">
-                                        <input type="text" class="form-control mt-2" required id="responsible"
+                                        <input type="text" class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400  mt-2" required id="responsible"
                                             name="responsible" />
                                     </div>
                                 </div>
@@ -38,7 +38,7 @@
                                     class="col-form-label text-md-end"><b>{{ __('Dipindahkan ke: ') }}</b></label>
 
                                 <div>
-                                    <select class="form-select" name="to_location" id="to_location">
+                                    <select class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 " name="to_location" id="to_location">
                                         @foreach ($data as $index => $item)
                                             <option value="{{ $item->name }}">{{ $item->name }}</option>
                                         @endforeach
@@ -49,7 +49,7 @@
                             {{--                            keterangan barang saat dipindahkan --}}
                             <div class="mb-3">
                                 <label for="notes" class="col-form-label"><b>Catatan Pemindahan: </b></label>
-                                <textarea class="form-control" id="notes" name="notes" autofocus></textarea>
+                                <textarea class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 " id="notes" name="notes" autofocus></textarea>
                             </div>
 
                             <div class="row mb-0">

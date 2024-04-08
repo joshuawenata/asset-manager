@@ -29,7 +29,7 @@
                                     class="col-md-4 col-form-label text-md-end">{{ __('Tanggal Peminjaman') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="datetimes" type="text" class="form-control" name="datetimes" required
+                                    <input id="datetimes" type="text" class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 " name="datetimes" required
                                         autofocus>
 
                                     <script>
@@ -55,7 +55,7 @@
 
                                     <div class="col-md-6">
                                         @if ($data)
-                                            <select class="form-select" name="division_id" id="division_id">
+                                            <select class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 " name="division_id" id="division_id">
                                                 @foreach ($data as $item)
                                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                                 @endforeach

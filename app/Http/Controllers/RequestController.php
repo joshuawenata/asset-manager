@@ -673,7 +673,6 @@ class RequestController extends Controller
                 $pesan .= "<br>" . 'Apabila anda tetap akan melakukan peminjaman barang yang approve harap mengirimkan email lanjutan kepada approver <b>' . $req->approver . '</b> ('. \App\Models\User::find($req->approver_id)->email .')';
                 $receiver = $req->email_peminjam;
                 $email = new SendEmailController();
-                $email->index("bmopr.bdg@binus.edu", $pesan_bm , $subyek);
                 $email->indexPeminjam($receiver, $pesan, $subyek);
 
                 $history = new HistoryDetail;

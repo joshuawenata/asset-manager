@@ -22,12 +22,12 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="pic" class="col-form-label">{{ __('Diperbaiki oleh') }}</label>
-                        <input type="text" class="form-control" id="pic" name="pic" autocomplete="pic"
+                        <input type="text" class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 " id="pic" name="pic" autocomplete="pic"
                             autofocus required>
                     </div>
                     <div class="mb-3">
                         <label for="repaired-by" class="col-form-label">{{ __('Kontak') }}</label>
-                        <input type="text" class="form-control" id="repaired-by" name="repaired-by"
+                        <input type="text" class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 " id="repaired-by" name="repaired-by"
                             autocomplete="repaired-by" autofocus required>
                     </div>
                 </div>

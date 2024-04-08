@@ -36,7 +36,7 @@
                         <h5>Apakah anda yakin ingin menghapus barang?</h5>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="text-white text-gray-900 bg-gray-500 border border-gray-500 focus:outline-none hover:bg-gray-300 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" data-bs-dismiss="modal">Batal</button>
+                        <button type="button" class="text-gray-900 bg-gray-500 border border-gray-500 focus:outline-none hover:bg-gray-300 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" data-bs-dismiss="modal">Batal</button>
                         <button type="submit" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Hapus</button>
                     </div>
                 </form>
@@ -65,7 +65,7 @@
 
                                 <div class="col-md-6">
                                     <input id="serial_number" type="text"
-                                        class="form-control @error('serial_number') is-invalid @enderror"
+                                        class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 @error('serial_number') is-invalid @enderror"
                                         name="serial_number" value="{{ $data->serial_number }}" required
                                         autocomplete="serial_number" autofocus>
 
@@ -82,7 +82,7 @@
                                     class="col-md-4 col-form-label text-md-end">{{ __('Jenis Barang') }}</label>
 
                                 <div class="col-md-6">
-                                    <select class="form-select" name="asset_jenis" id="asset_jenis">
+                                    <select class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 " name="asset_jenis" id="asset_jenis">
                                         @foreach ($show as $index => $item)
                                             @if ($data->asset_jenis_id == $item->id)
                                                 <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
@@ -100,7 +100,7 @@
 
                                 <div class="col-md-6">
                                     <input id="kategori_barang" type="text"
-                                        class="form-control @error('kategori_barang') is-invalid @enderror" name="kategori_barang"
+                                        class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 @error('kategori_barang') is-invalid @enderror" name="kategori_barang"
                                         value="{{ $data->kategori_barang }}" required autocomplete="kategori_barang" autofocus>
 
                                     @error('brand')
@@ -117,7 +117,7 @@
                                         class="col-md-4 col-form-label text-md-end">{{ __('Status Barang') }}</label>
 
                                     <div class="col-md-6">
-                                        <select class="form-select" name="asset-status" id="asset-status">
+                                        <select class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 " name="asset-status" id="asset-status">
                                             @if ($data->status == 'tersedia')
                                                 <option value="tersedia" selected>Tersedia di penyimpanan</option>
                                                 <option value="tidak">tidak/unavailable</option>
@@ -136,7 +136,7 @@
 
                                 <div class="col-md-6">
                                     <input id="brand" type="text"
-                                        class="form-control @error('brand') is-invalid @enderror" name="brand"
+                                        class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 @error('brand') is-invalid @enderror" name="brand"
                                         value="{{ $data->brand }}" required autocomplete="brand" autofocus>
 
                                     @error('brand')
@@ -153,7 +153,7 @@
 
                                 <div class="col-md-6">
                                     <input id="spesifikasi_barang" type="text"
-                                        class="form-control @error('spesifikasi_barang') is-invalid @enderror" name="spesifikasi_barang"
+                                        class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 @error('spesifikasi_barang') is-invalid @enderror" name="spesifikasi_barang"
                                         value="{{ $data->spesifikasi_barang }}" required autocomplete="spesifikasi_barang" autofocus>
 
                                     @error('spesifikasi_barang')
@@ -169,7 +169,7 @@
                                     class="col-md-4 col-form-label text-md-end">{{ __('Pemilik Barang') }}</label>
 
                                 <div class="col-md-6">
-                                    <select class="form-select @error('pemilik-barang') is-invalid @enderror"
+                                    <select class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 @error('pemilik-barang') is-invalid @enderror"
                                         name="pemilik-barang" id="pemilik-barang" autofocus>
                                         @foreach ($pemilik as $index => $item)
                                             <option value="{{ $item->nama }}">{{ $item->nama }}</option>

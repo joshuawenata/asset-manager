@@ -50,7 +50,7 @@ class AssetJenisController extends Controller
     public function createNewAssetJenis(Request $request)
     {
         $new_jenis = new AssetJenisController();
-        $new_cat_id = $new_jenis->store($request->input('new-asset-Jenis'));
+        $new_cat_id = $new_jenis->store($request->input('new-asset-jenis'));
         $data = DB::table('asset_jenis')->where('status',1)->get();
         return view('superadmin.kategori', [
            'data' => $data

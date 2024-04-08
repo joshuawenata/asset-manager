@@ -49,7 +49,7 @@
 
                 <div class="mb-3">
                     <label for="pesan" class="col-form-label">Catatan Peminjaman:</label>
-                    <textarea class="form-control" id="pesan" name="pesan" readonly autofocus>{{ session('request') }}</textarea>
+                    <textarea class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 " id="pesan" name="pesan" readonly autofocus>{{ session('request') }}</textarea>
                 </div>
 
             </div>

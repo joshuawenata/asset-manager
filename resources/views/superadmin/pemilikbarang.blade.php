@@ -12,9 +12,52 @@
 @endsection
 
 @section('content')
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form method="POST" action="{{ route('createNewPemilikBarang') }}">
+                    @csrf
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Pemilik Barang Baru</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="new-pemilik-barang" class="col-form-label">{{ __('Nama Pemilik Barang') }}</label>
+                            <input type="text" class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 " id="new-pemilik-barang" name="new-pemilik-barang"
+                                autocomplete="new-pemilik-barang" autofocus>
+                        </div>
+                        <div id="box2">
+                            <select class="form-input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400  mb-3" name="division-id" id="division-id">
+                                @foreach ($divisi as $index => $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <div class="mt-2">
+                                <input hidden class="form-check-input mt-1" type="checkbox" value="1" id="approver"
+                                    name="approver" checked onclick="return false" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="text-gray-900 bg-gray-500 border border-gray-500 focus:outline-none hover:bg-gray-300 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Tambahkan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
+                
+                <button type="button" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">
+                    Tambah Pemilik Barang Baru
+                </button>
                 <form action="{{ route('superadmin.historyPemilikBarang') }}">
                     <button type="submit" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" data-bs-toggle="modal">
                         History Pemilik Barang
@@ -40,40 +83,6 @@
                                 </button>
                             </div>
                         @endif
-
-                        <form method="POST" action="{{ route('createNewPemilikBarang') }}">
-                            @csrf
-                            <div class="mt-2">
-                                <input class="form-check-input mt-1 mb-3" type="checkbox" id="show"
-                                    name="pemilik-barang" value="" />
-                                <label for="show">Tambah Pemilik Barang Baru</label>
-                            </div>
-                            <div id="box" style="display: none;">
-                                <input id="new-pemilik-barang" type="text" placeholder="Input Nama Pemilik Barang"
-                                    class="form-control mt-2 mb-3 @error('new-pemilik-barang') is-invalid @enderror"
-                                    name="new-pemilik-barang" value="{{ old('new-pemilik-barang') }}" />
-
-                                @error('new-pemilik-barang')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            <div id="box2" style="display: none;">
-                                <select class="form-select mb-3" name="division-id" id="division-id">
-                                    @foreach ($divisi as $index => $item)
-                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="row mb-3" id="box3" style="display: none;">
-                                <div>
-                                    <button type="submit" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-                                        {{ __('Tambahkan') }}
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
 
                         <table id="myTable3" class="display table w-full text-sm text-left text-gray-500 dark:text-gray-400" width="100%">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

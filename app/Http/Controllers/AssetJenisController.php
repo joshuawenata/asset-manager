@@ -70,7 +70,7 @@ class AssetJenisController extends Controller
         $cat->status = 1;
         $cat->save();
         $history = new HistoryAssetJenis;
-        $history->aksi = "Superadmin menambahkan kategori barang ".$new_jenis;
+        $history->aksi = "Superadmin menambahkan jenis barang ".$new_jenis;
         $history->save();
 
         return DB::table('asset_jenis')->max('id');

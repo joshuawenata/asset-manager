@@ -15,7 +15,7 @@
             <div class="col-md-12">
 
                 <div class="card">
-                    <div class="card-header">{{ __('Riwayat Kategori Barang Superadmin') }}</div>
+                    <div class="card-header">{{ __('Riwayat Jenis Barang Superadmin') }}</div>
 
                     <div class="card-body">
                         @if (session('message'))

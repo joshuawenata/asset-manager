@@ -8,16 +8,12 @@ use App\Models\User;
 use App\Models\Role;
 use App\Models\Division;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\Auth\ResetPasswordController;
 
-// TODO: ini klo udh login gabisa ke dashboard page / nya malah ke login mesti cek user session
 Route::get('/', function () {
     return view('auth.pickrole');
 })->name('login')->middleware('guest');
 
-// Import the necessary classes at the beginning of the file
-use App\Http\Controllers\Auth\ResetPasswordController;
-
-// Add the following lines to your routes file
 Route::get('password/reset', 'App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
 Route::post('password/email', 'App\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 Route::get('password/reset/{token}', 'App\Http\Controllers\Auth\ResetPasswordController@showResetForm')->name('password.reset');

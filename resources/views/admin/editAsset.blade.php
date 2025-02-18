@@ -65,7 +65,7 @@
 
                                 <div class="col-md-6">
                                     <input id="serial_number" type="text"
-                                        class="form-control @error('serial_number') is-invalid @enderror"
+                                        class="form-control rounded-md @error('serial_number') is-invalid @enderror"
                                         name="serial_number" value="{{ $data->serial_number }}" required
                                         autocomplete="serial_number" autofocus>
 
@@ -100,7 +100,7 @@
 
                                 <div class="col-md-6">
                                     <input id="kategori_barang" type="text"
-                                        class="form-control @error('kategori_barang') is-invalid @enderror" name="kategori_barang"
+                                        class="form-control rounded-md @error('kategori_barang') is-invalid @enderror" name="kategori_barang"
                                         value="{{ $data->kategori_barang }}" required autocomplete="kategori_barang" autofocus>
 
                                     @error('brand')
@@ -136,7 +136,7 @@
 
                                 <div class="col-md-6">
                                     <input id="brand" type="text"
-                                        class="form-control @error('brand') is-invalid @enderror" name="brand"
+                                        class="form-control rounded-md @error('brand') is-invalid @enderror" name="brand"
                                         value="{{ $data->brand }}" required autocomplete="brand" autofocus>
 
                                     @error('brand')
@@ -153,7 +153,7 @@
 
                                 <div class="col-md-6">
                                     <input id="spesifikasi_barang" type="text"
-                                        class="form-control @error('spesifikasi_barang') is-invalid @enderror" name="spesifikasi_barang"
+                                        class="form-control rounded-md @error('spesifikasi_barang') is-invalid @enderror" name="spesifikasi_barang"
                                         value="{{ $data->spesifikasi_barang }}" required autocomplete="spesifikasi_barang" autofocus>
 
                                     @error('spesifikasi_barang')

@@ -47,7 +47,7 @@
 
                                 <div class="col-md-6">
                                     <input id="name" type="text"
-                                        class="form-control @error('name') is-invalid @enderror" name="name"
+                                        class="form-control rounded-md @error('name') is-invalid @enderror" name="name"
                                         value="{{ $data->name }}" required autocomplete="name" autofocus>
 
                                     @error('name')
@@ -64,7 +64,7 @@
 
                                 <div class="col-md-6">
                                     <input id="binusianid" type="text"
-                                        class="form-control @error('binusianid') is-invalid @enderror" name="binusianid"
+                                        class="form-control rounded-md @error('binusianid') is-invalid @enderror" name="binusianid"
                                         value="{{ $data->binusianid }}" required autocomplete="binusianid" autofocus
                                     >
 
@@ -82,7 +82,7 @@
 
                                 <div class="col-md-6">
                                     <input id="email" type="email"
-                                        class="form-control @error('email') is-invalid @enderror" name="email"
+                                        class="form-control rounded-md @error('email') is-invalid @enderror" name="email"
                                         value="{{ $data->email }}" required autocomplete="email" autofocus>
 
                                     @error('email')
@@ -99,7 +99,7 @@
 
                                 <div class="col-md-6">
                                     <input id="phone" type="text"
-                                        class="form-control @error('phone') is-invalid @enderror" name="phone"
+                                        class="form-control rounded-md @error('phone') is-invalid @enderror" name="phone"
                                         value="{{ $data->phone }}" required autocomplete="phone" autofocus>
 
                                     @error('phone')

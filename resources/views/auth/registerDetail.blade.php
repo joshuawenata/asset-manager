@@ -17,7 +17,7 @@
 
                                 <div class="col-md-6">
                                     <input id="name" type="text"
-                                        class="form-control @error('name') is-invalid @enderror" name="name"
+                                        class="form-control rounded-md @error('name') is-invalid @enderror" name="name"
                                         value="{{ old('name') }}" required autocomplete="name" autofocus>
 
                                     @error('name')
@@ -28,9 +28,6 @@
                                 </div>
                             </div>
 
-                            {{--                        customized filed --}}
-
-                            {{--                        1. BINUSIAN ID --}}
                             <div class="row mb-3">
                                 <label for="binusianid" class="col-md-4 col-form-label text-md-end">
                                     {{ __('Binusian ID') }}
@@ -38,7 +35,7 @@
 
                                 <div class="col-md-6">
                                     <input id="binusianid" type="text"
-                                        class="form-control @error('binusianid') is-invalid @enderror" name="binusianid"
+                                        class="form-control rounded-md @error('binusianid') is-invalid @enderror" name="binusianid"
                                         value="{{ old('binusianid') }}" required autocomplete="binusianid" autofocus>
 
                                     @error('binusianid')
@@ -49,14 +46,13 @@
                                 </div>
                             </div>
 
-                            {{--                        3. PHONE NUMBER --}}
                             <div class="row mb-3">
                                 <label for="phone"
                                     class="col-md-4 col-form-label text-md-end">{{ __('Nomor HP') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="phone" type="text"
-                                        class="form-control @error('phone') is-invalid @enderror" name="phone"
+                                        class="form-control rounded-md @error('phone') is-invalid @enderror" name="phone"
                                         value="{{ old('phone') }}" required autocomplete="phone" autofocus>
 
                                     @error('phone')
@@ -67,7 +63,6 @@
                                 </div>
                             </div>
 
-                            {{--                        4. PRODI (Dropdown) --}}
                             <div class="row mb-3">
                                 <label for="division_id"
                                     class="col-md-4 col-form-label text-md-end">{{ __('Prodi/Divisi') }}</label>
@@ -81,17 +76,16 @@
                                 </div>
                             </div>
 
-                            {{--                        end of customized field --}}
 
                             <div class="row mb-3">
                                 <label for="email"
                                     class="col-md-4 col-form-label text-md-end">{{ __('Email') }}</label>
 
                                 <div class="col-md-6 input-group">
-                                    <input id="email" type="text" class="form-control" name="email"
+                                    <input id="email" type="text" class="form-control rounded-md" name="email"
                                         value="{{ old('email') }}" required autocomplete="email" autofocus>
                                     <div class="input-group-append">
-                                        <span class="input-group-text" id="basic-addon2">@binus.edu</span>
+                                        <span class="input-group-text py-2" id="basic-addon2">@binus.edu</span>
                                     </div>
                                 </div>
                             </div>
@@ -102,7 +96,7 @@
 
                                 <div class="col-md-6">
                                     <input id="password" type="password"
-                                        class="form-control @error('password') is-invalid @enderror" name="password"
+                                        class="form-control rounded-md @error('password') is-invalid @enderror" name="password"
                                         required autocomplete="new-password">
 
                                     @error('password')
@@ -118,7 +112,7 @@
                                     class="col-md-4 col-form-label text-md-end">{{ __('Konfirmasi Password') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="password-confirm" type="password" class="form-control"
+                                    <input id="password-confirm" type="password" class="form-control rounded-md"
                                         name="password_confirmation" required autocomplete="new-password">
                                 </div>
                             </div>
@@ -129,15 +123,15 @@
 
                                     <div class="col-md-6">
                                         <div class="form-check">
-                                            <input class="form-check-input mt-2" name="role[]" type="checkbox" id="isStaff" name="isStaff" value="1">
+                                            <input class="form-check-input mt-[11px]" name="role[]" type="checkbox" id="isStaff" name="isStaff" value="1">
                                             <label class="form-check-label mt-2" for="isStaff">Staff</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input mt-2" name="role[]" type="checkbox" id="isAdmin" name="isAdmin" value="2">
+                                            <input class="form-check-input mt-[11px]" name="role[]" type="checkbox" id="isAdmin" name="isAdmin" value="2">
                                             <label class="form-check-label mt-2" for="isAdmin">Admin</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input mt-2" name="role[]" type="checkbox" id="isApprover" name="isApprover" value="3">
+                                            <input class="form-check-input mt-[11px]" name="role[]" type="checkbox" id="isApprover" name="isApprover" value="3">
                                             <label class="form-check-label mt-2" for="isApprover">Approver</label>
                                         </div>
                                     </div>

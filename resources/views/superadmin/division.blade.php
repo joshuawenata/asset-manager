@@ -13,7 +13,6 @@
 
 @section('content')
 
-    {{--    tambah divisi baru --}}
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -26,7 +25,7 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="division-name" class="col-form-label">{{ __('Nama Departemen') }}</label>
-                            <input type="text" class="form-control" id="division-name" name="division-name"
+                            <input type="text" class="form-control rounded-md" id="division-name" name="division-name"
                                 autocomplete="division-name" autofocus>
                         </div>
                         <div class="mb-3">
@@ -37,7 +36,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="text-white text-gray-900 bg-gray-500 border border-gray-500 focus:outline-none hover:bg-gray-300 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="text-white bg-gray-500 border border-gray-500 focus:outline-none hover:bg-gray-300 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Tambahkan</button>
                     </div>
                 </form>
@@ -85,27 +84,25 @@
                                 <tr>
                                     <th class="px-6 py-3" scope="col">No</th>
                                     <th class="px-6 py-3" scope="col">Nama Departemen</th>
-                                    {{--                                TODO: tambahin keterangan ada approver ato admin doang --}}
                                     <th class="px-6 py-3" scope="col">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($data as $index => $item)
                                     <tr>
-                                        {{--                                masukin kolom --}}
                                         <td class="px-6 py-2" scope="row">{{ $index + 1 }}</td>
                                         <td>{{ $item->name }}</td>
                                         <td class="flex space-x-2 align-middle">
-                                            <form action="{{ url('edit-division') }}" method="post">
+                                            <form action="{{ url('edit-division') }}" method="post" class="flex items-center">
                                                 @csrf
                                                 <input type="hidden" name="division_id" value="{{ $item->id }}">
-                                                <input type="text" id="division_name" name="division_name" required class="item-center">
+                                                <input type="text" id="division_name" name="division_name" required class="item-center rounded-md">
                                                 <button type="submit" class="bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 text-white font-medium rounded-lg text-sm px-5 py-2.5 ml-2">
                                                     <span class="material-symbols-outlined">edit</span>
                                                 </button>
                                             </form>
 
-                                            <form action="{{ url('delete-division') }}" method="post">
+                                            <form action="{{ url('delete-division') }}" method="post" class="flex items-center">
                                                 @csrf
                                                 <input type="hidden" name="division_id" value="{{ $item->id }}">
                                                 <button type="submit" class="bg-red-500 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 text-white font-medium rounded-lg text-sm px-5 py-2.5">

@@ -28,7 +28,7 @@
 
                                 <div class="col-md-6">
                                     <input id="serial_number" type="text"
-                                        class="form-control @error('serial_number') is-invalid @enderror"
+                                        class="form-control rounded-md @error('serial_number') is-invalid @enderror"
                                         name="serial_number" value="{{ old('serial_number') }}" required
                                         autocomplete="serial_number" autofocus>
 
@@ -52,7 +52,6 @@
                                 </div>
                             </div>
 
-                            {{-- fitur baru pemilik barang --}}
                             <div class="row mb-3">
                                 <label for="pemilik-barang"
                                     class="col-md-4 col-form-label text-md-end">{{ __('Pemilik Barang') }}</label>
@@ -72,10 +71,10 @@
                                 <div class="col-md-6">
                                     @if ($show)
                                         @foreach ($show as $index => $item)
-                                            <div class="mt-2">
-                                                <input class="form-check-input mt-1" type="radio" id="hide"
+                                            <div class="mt-2 flex items-center">
+                                                <input class="form-check-input mb-1" type="radio" id="hide"
                                                     name="asset-jenis" value="{{ $item->id }}" checked />
-                                                <label for="hide">{{ $item->name }}</label>
+                                                <label class="mx-2" for="hide">{{ $item->name }}</label>
                                             </div>
                                         @endforeach
                                     @endif
@@ -88,7 +87,7 @@
 
                                 <div class="col-md-6">
                                     <input id="kategori_barang" type="text"
-                                        class="form-control @error('kategori_barang') is-invalid @enderror" name="kategori_barang"
+                                        class="form-control rounded-md @error('kategori_barang') is-invalid @enderror" name="kategori_barang"
                                         value="{{ old('kategori_barang') }}" required autocomplete="kategori_barang" autofocus>
 
                                     @error('kategori_barang')
@@ -105,7 +104,7 @@
 
                                 <div class="col-md-6">
                                     <input id="spesifikasi_barang" type="text"
-                                        class="form-control @error('spesifikasi_barang') is-invalid @enderror" name="spesifikasi_barang"
+                                        class="form-control rounded-md @error('spesifikasi_barang') is-invalid @enderror" name="spesifikasi_barang"
                                         value="{{ old('spesifikasi_barang') }}" required autocomplete="spesifikasi_barang" autofocus>
 
                                     @error('spesifikasi_barang')
@@ -122,7 +121,7 @@
 
                                 <div class="col-md-6">
                                     <input id="brand" type="text"
-                                        class="form-control @error('brand') is-invalid @enderror" name="brand"
+                                        class="form-control rounded-md @error('brand') is-invalid @enderror" name="brand"
                                         value="{{ old('brand') }}" required autocomplete="brand" autofocus>
 
                                     @error('brand')
@@ -136,11 +135,11 @@
                             <div class="row mb-3">
                                 <label class="col-md-4 col-form-label text-md-end"></label>
 
-                                <div class="col-md-6">
+                                <div class="col-md-6 flex items-center">
                                     <input type="hidden" name="asset-status" value="tidak">
-                                    <input class="form-check-input mt-1" name="asset-status" type="checkbox"
+                                    <input class="form-check-input" name="asset-status" type="checkbox"
                                         value="tersedia">
-                                    <label for="brand">Barang bisa dipinjam</label>
+                                    <label class="mx-2 mt-1" for="brand">Barang bisa dipinjam</label>
                                 </div>
                             </div>
 

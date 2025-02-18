@@ -29,7 +29,7 @@
                                     class="col-form-label text-md-end">{{ __('Binusian ID Peminjam') }}</label>
 
                                 <div>
-                                    <input id="binusian_id_peminjam" type="text" class="form-control"
+                                    <input id="binusian_id_peminjam" type="text" class="form-control rounded-md"
                                         name="binusian_id_peminjam" required>
                                 </div>
 
@@ -37,7 +37,7 @@
                                     class="col-form-label text-md-end">{{ __('Nama Peminjam') }}</label>
 
                                 <div>
-                                    <input id="nama_peminjam" type="text" class="form-control" name="nama_peminjam"
+                                    <input id="nama_peminjam" type="text" class="form-control rounded-md" name="nama_peminjam"
                                         required>
                                 </div>
 
@@ -45,7 +45,7 @@
                                     class="col-form-label text-md-end">{{ __('Prodi/Unit Peminjam') }}</label>
 
                                 <div>
-                                    <input id="prodi_peminjam" type="text" class="form-control" name="prodi_peminjam"
+                                    <input id="prodi_peminjam" type="text" class="form-control rounded-md" name="prodi_peminjam"
                                         required>
                                 </div>
 
@@ -53,7 +53,7 @@
                                     class="col-form-label text-md-end">{{ __('Email Peminjam') }}</label>
 
                                 <div>
-                                    <input id="email_peminjam" type="text" class="form-control" name="email_peminjam"
+                                    <input id="email_peminjam" type="text" class="form-control rounded-md" name="email_peminjam"
                                         required>
                                 </div>
 
@@ -61,7 +61,7 @@
                                     class="col-form-label text-md-end">{{ __('No. Handphone Peminjam') }}</label>
 
                                 <div>
-                                    <input id="nohp_peminjam" type="text" class="form-control" name="nohp_peminjam"
+                                    <input id="nohp_peminjam" type="text" class="form-control rounded-md" name="nohp_peminjam"
                                         required>
                                 </div>
 
@@ -74,7 +74,7 @@
                                     class="col-form-label text-md-end">{{ __('Tujuan Peminjaman') }}</label>
 
                                 <div>
-                                    <textarea class="form-control" id="purpose" name="purpose" required autofocus></textarea>
+                                    <textarea class="form-control rounded-md" id="purpose" name="purpose" required autofocus></textarea>
                                 </div>
                             </div>
 
@@ -82,12 +82,12 @@
                                 <label class="col-form-label text-md-end">{{ __('Lokasi Peminjaman') }}</label>
 
                                 <div>
-                                    <input class="form-check-input mt-1" type="radio" id="hide" name="lokasi" value="{{ 'keluar kampus BINUS' }}" checked />
-                                    <label for="hide">keluar kampus BINUS</label>
+                                    <input class="form-check-input mt-1 mb-2" type="radio" id="hide" name="lokasi" value="{{ 'keluar kampus BINUS' }}" checked />
+                                    <label for="hide" class="mx-2">keluar kampus BINUS</label>
 
-                                    <div class="mt-2">
-                                        <input class="form-check-input mt-1" type="radio" id="show" name="lokasi" value="" />
-                                        <label for="show">dalam lingkungan kampus BINUS</label>
+                                    <div class="mt-2 mb-2">
+                                        <input class="form-check-input mt-1 mb-2" type="radio" id="show" name="lokasi" value="" />
+                                        <label for="show" class="mx-2">dalam lingkungan kampus BINUS</label>
                                     </div>
 
                                     <div class="col-sm-5 col-md-6">

@@ -47,14 +47,14 @@
 
                         <form method="POST" action="{{ route('createNewAssetJenis') }}">
                             @csrf
-                            <div class="mt-2">
-                                <input class="form-check-input mt-1 mb-3" type="checkbox" id="show"
+                            <div class="mb-2">
+                                <input class="form-check-input mb-2" type="checkbox" id="show"
                                     name="asset-Jenis" value="" />
                                 <label for="show">Tambah Jenis Barang Baru</label>
                             </div>
                             <div id="box" style="display: none;">
                                 <input id="new-asset-Jenis" type="text"
-                                    class="form-control mt-2 mb-3 @error('new-asset-jenis') is-invalid @enderror"
+                                    class="form-control rounded-md mt-2 mb-3 @error('new-asset-jenis') is-invalid @enderror"
                                     name="new-asset-Jenis" value="{{ old('new-asset-jenis') }}" />
 
                                 @error('new-asset-jenis')
@@ -89,7 +89,7 @@
                                         <td>
                                             <form action="{{ route('perbaharuiKategoriBarang', $item->id) }}" method="POST" class="flex items-center space-x-2">
                                                 @csrf
-                                                <input class="form-input w-full" type="text" name="name" id="name">
+                                                <input class="form-input w-full rounded-md" type="text" name="name" id="name">
                                                 <button class="bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 text-white font-medium rounded-lg text-sm px-5 py-2.5" type="submit">
                                                     <span class="material-symbols-outlined">edit_square</span>
                                                 </button>

@@ -61,8 +61,8 @@
                             </table>
 
                             <div class="row mb-0">
-                                <div class="col-md-6 offset-md-0">
-                                    <input class="form-check-input mt-1 mb-3" type="checkbox" name="select-all"
+                                <div class="col-md-6 offset-md-0 mb-2">
+                                    <input class="form-check-input mb-2" type="checkbox" name="select-all"
                                         id="select-all">
                                     <label for="select-all">pilih semua</label>
                                 </div>

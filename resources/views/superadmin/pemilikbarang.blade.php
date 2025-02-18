@@ -43,8 +43,8 @@
 
                         <form method="POST" action="{{ route('createNewPemilikBarang') }}">
                             @csrf
-                            <div class="mt-2">
-                                <input class="form-check-input mt-1 mb-3" type="checkbox" id="show"
+                            <div class="mb-2">
+                                <input class="form-check-input mb-2" type="checkbox" id="show"
                                     name="pemilik-barang" value="" />
                                 <label for="show">Tambah Pemilik Barang Baru</label>
                             </div>

@@ -29,11 +29,11 @@
                                     class="col-md-4 col-form-label text-md-end">{{ __('Tanggal Peminjaman') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="datetimes" type="text" class="form-control" name="datetimes" required
-                                        autofocus>
+                                    <input id="datetimes" type="text" class="form-control rounded-md" name="datetimes"
+                                        required autofocus>
 
                                     <script>
-                                        $(function() {
+                                        $(function () {
                                             $('input[name="datetimes"]').daterangepicker({
                                                 timePicker: true,
                                                 startDate: moment().startOf('hour'),
@@ -53,21 +53,22 @@
                                 <label for="division_id"
                                     class="col-md-4 col-form-label text-md-end">{{ __('Divisi Barang') }}</label>
 
-                                    <div class="col-md-6">
-                                        @if ($data)
-                                            <select class="form-select" name="division_id" id="division_id">
-                                                @foreach ($data as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        @endif
-                                    </div>
+                                <div class="col-md-6">
+                                    @if ($data)
+                                        <select class="form-select" name="division_id" id="division_id">
+                                            @foreach ($data as $item)
+                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    @endif
+                                </div>
 
                             </div>
 
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                                    <button type="submit"
+                                        class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
                                         {{ __('Lanjut') }}
                                     </button>
                                 </div>

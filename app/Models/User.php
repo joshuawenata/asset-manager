@@ -28,7 +28,10 @@ class User extends Authenticatable
         'active_status',
         'division_id',
         'password',
-        'role_id'
+        'role_id',
+        'isStaff',
+        'isAdmin',
+        'isApprover',
     ];
 
     /**
@@ -50,29 +53,34 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function division(){
+    public function division()
+    {
         return $this->belongsTo(Division::class, 'division_id');
     }
 
-    public function role(){
+    public function role()
+    {
         return $this->belongsTo(Role::class, 'role_id');
     }
 
-    public function requests(){
+    public function requests()
+    {
         return $this->hasMany(Request::class);
     }
 
-    public function getAtasan($track_approver, $atasan){
+    public function getAtasan($track_approver, $atasan)
+    {
 
-        if($track_approver == 0){
+        if ($track_approver == 0) {
             $atasan = User::where('division_id', $atasan)->where('role_id', '2')->first()->name;
         }
 
         return $atasan;
     }
 
-    public static function getRolePage(){
-        if (Auth::user()->role->name == 'approver'){
+    public static function getRolePage()
+    {
+        if (Auth::user()->role->name == 'approver') {
             return 'chooseDivision';
         }
     }

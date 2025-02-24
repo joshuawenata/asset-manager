@@ -55,7 +55,7 @@
                                     class="col-md-4 col-form-label text-md-end">{{ __('Tanggal Pengembalian') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="realize_return_date" type="text" class="form-control mt-2"
+                                    <input id="realize_return_date" type="text" class="form-control rounded-md"
                                         name="realize_return_date" value="{{ $current_date }}" readonly>
                                 </div>
                             </div>
@@ -109,9 +109,9 @@
                             @if ($returned)
                                 <div class="row mb-0">
                                     <div class="col-md-6 offset-md-0">
-                                        <input class="form-check-input mt-1" type="checkbox" name="select-all"
+                                        <input class="form-check-input mb-2" type="checkbox" name="select-all"
                                             id="select-all">
-                                        <label for="select-all">pilih semua</label>
+                                        <label for="select-all" class="mx-2">pilih semua</label>
                                     </div>
                                 </div>
                                 <div class="mb-3">
@@ -128,9 +128,9 @@
                                 <div class="mb-3">
                                     <div class="row mb-0">
                                         <div class="col-md-6 offset-md-0">
-                                            <input class="form-check-input mt-1" type="checkbox" name="select-all"
+                                            <input class="form-check-input mb-2" type="checkbox" name="select-all"
                                                 id="select-all">
-                                            <label for="select-all">pilih semua</label>
+                                            <label for="select-all" class="mx-2">pilih semua</label>
                                         </div>
                                     </div>
                                 </div>

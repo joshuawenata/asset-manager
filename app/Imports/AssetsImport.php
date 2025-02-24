@@ -18,7 +18,15 @@ class AssetsImport implements ToModel, WithStartRow
      */
     public function model(array $row)
     {
+        if (empty(array_filter($row))) {
+            return null;
+        }
+
         $asset_jenis = DB::table('asset_jenis')->where('name', $row[3])->first();
+
+        if (!$asset_jenis) {
+            throw new \Exception("Jenis barang tidak ditemukan dalam database.");
+        }
 
         $history = new HistoryAddAsset();
         $history->user_id = \Illuminate\Support\Facades\Auth::user()->id;
@@ -41,7 +49,7 @@ class AssetsImport implements ToModel, WithStartRow
 
         $this->storeLoc();
 
-        return null;
+        return $aset;
 
     }
 

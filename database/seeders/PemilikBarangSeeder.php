@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\PemilikBarang;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class PemilikBarangSeeder extends Seeder
@@ -16,8 +15,8 @@ class PemilikBarangSeeder extends Seeder
     public function run()
     {
         PemilikBarang::create([
-            'nama' => 'joshua',
-            'division_id' => 5
+            'nama' => 'Joshua',
+            'division_id' => 6
         ]);
     }
 }

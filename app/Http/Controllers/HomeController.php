@@ -30,12 +30,13 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
-    public function index(){
+    public function index()
+    {
 
-        for($i = 1; $i <= 4; $i++){
+        for ($i = 1; $i <= 4; $i++) {
             $res = $this->validateUser($i);
-            if($res->count()){
-                foreach ($res as $r){
+            if ($res->count()) {
+                foreach ($res as $r) {
                     $role = $r->role_id;
                 }
 
@@ -46,7 +47,7 @@ class HomeController extends Controller
                     ->where('page_id', $i)
                     ->get();
 
-                foreach ($pages as $page){
+                foreach ($pages as $page) {
                     $p = $page->name;
                 }
 
@@ -56,7 +57,8 @@ class HomeController extends Controller
 
     }
 
-    public function validateUser(int $page_id){
+    public function validateUser(int $page_id)
+    {
         $user_role_id = auth()->user()->role->id;
         $role = RolePageMapping::where('role_id', $user_role_id)->where('page_id', $page_id)->get();
 
@@ -74,7 +76,8 @@ class HomeController extends Controller
         ]);
     }
 
-    public function admindashboard(){
+    public function admindashboard()
+    {
         $view = new RequestController();
         list($data, $approver) = $view->index();
 
@@ -84,7 +87,8 @@ class HomeController extends Controller
         ]);
     }
 
-    public function approverdashboard(){
+    public function approverdashboard()
+    {
         $view = new RequestController();
         list($data, $approver) = $view->index();
 
@@ -94,7 +98,8 @@ class HomeController extends Controller
         ]);
     }
 
-    public function superadmindashboard(){
+    public function superadmindashboard()
+    {
         $view = new UserController();
         $data = $view->index();
         return view('superadmin.home', [
@@ -102,14 +107,16 @@ class HomeController extends Controller
         ]);
     }
 
-    public function historyAddAsset(){
-        $data = historyAddAsset::where('user_id',auth()->user()->id)->get();
+    public function historyAddAsset()
+    {
+        $data = historyAddAsset::where('user_id', auth()->user()->id)->get();
         return view('historyAddAsset', [
             'data' => $data
         ]);
     }
 
-    public function historyDetail(){
+    public function historyDetail()
+    {
         $data = HistoryDetail::where('user_id', auth()->user()->id)->get();
         return view('historyDetail', [
             'data' => $data,

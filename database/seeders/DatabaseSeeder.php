@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AssetSeeder::class);
         $this->call(AssetLocationSeeder::class);
         $this->call(PageSeeder::class);
+        $this->call(PemilikBarangSeeder::class);
         $this->call(RolePageMappingSeeder::class);
         $this->call(RequestSeeder::class);
         $this->call(BookingSeeder::class);

@@ -43,5 +43,11 @@ class DivisionSeeder extends Seeder
             'role_id' => '2',
             'approver' => '1'
         ]);
+
+        Division::create([
+            'name' => 'CS',
+            'role_id' => '1',
+            'approver' => '1'
+        ]);
     }
 }

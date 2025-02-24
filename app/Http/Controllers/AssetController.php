@@ -63,17 +63,18 @@ class AssetController extends Controller
         ]);
     }
 
-    public function pick($id){
+    public function pick($id)
+    {
         $data = Asset::orderBy('id', 'desc')
             ->where('division_id', $id)
             ->where('status', 'tersedia')
             ->orWhere(function ($query) use ($id) {
                 $query->where('status', 'tidak')
-                      ->where('division_id', $id);
+                    ->where('division_id', $id);
             })
             ->orWhere(function ($query) use ($id) {
                 $query->where('status', 'rusak')
-                      ->where('division_id', $id);
+                    ->where('division_id', $id);
             })
             ->get();
         return view('admin.selectMoveAsset', [
@@ -89,8 +90,8 @@ class AssetController extends Controller
     public function create()
     {
         $data = Location::all();
-        $show = DB::table('asset_jenis')->where('status',1)->get();
-        $pemilik = DB::table('pemilik_barangs')->select('nama')->where('division_id',\Illuminate\Support\Facades\Auth::user()->division->id)->get();
+        $show = DB::table('asset_jenis')->where('status', 1)->get();
+        $pemilik = DB::table('pemilik_barangs')->select('nama')->where('division_id', \Illuminate\Support\Facades\Auth::user()->division->id)->get();
 
         return View::make('admin.createAsset', [
             'show' => $show,
@@ -99,15 +100,18 @@ class AssetController extends Controller
         ]);
     }
 
-    public function createAssetExcelForStaff(Request $request){
+    public function createAssetExcelForStaff(Request $request)
+    {
         return View::make('createAssetExcel');
     }
 
-    public function createAssetExcel(Request $request){
+    public function createAssetExcel(Request $request)
+    {
         return View::make('admin.createAssetExcel');
     }
 
-    public function storeAssetExcelForStaff(Request $request){
+    public function storeAssetExcelForStaff(Request $request)
+    {
         request()->validate([
             'excel' => 'required|mimes:xlsx'
         ]);
@@ -140,7 +144,8 @@ class AssetController extends Controller
         }
     }
 
-    public function storeAssetExcel(Request $request){
+    public function storeAssetExcel(Request $request)
+    {
         request()->validate([
             'excel' => 'required|mimes:xlsx'
         ]);
@@ -148,7 +153,7 @@ class AssetController extends Controller
         try {
             if ($request->file('excel')) {
                 $import = Excel::import(new AssetsImport, request()->file('excel'));
-                
+
                 $msg_success = "Data Uploaded Successfully!";
                 $msg_danger = "Data Upload Failed!";
 
@@ -176,8 +181,8 @@ class AssetController extends Controller
     public function createForStaff()
     {
         $data = Location::all();
-        $show = DB::table('asset_jenis')->where('status',1)->get();
-        $pemilik = DB::table('pemilik_barangs')->select('nama')->where('division_id',\Illuminate\Support\Facades\Auth::user()->division->id)->get();
+        $show = DB::table('asset_jenis')->where('status', 1)->get();
+        $pemilik = DB::table('pemilik_barangs')->select('nama')->where('division_id', \Illuminate\Support\Facades\Auth::user()->division->id)->get();
 
         return View::make('createAsset', [
             'show' => $show,
@@ -202,13 +207,12 @@ class AssetController extends Controller
             'brand' => 'required',
             'spesifikasi_barang' => 'required',
         ]);
-        
-        if($validator->fails()){
+
+        if ($validator->fails()) {
             return redirect('create-asset')
                 ->withErrors($validator)
                 ->withInput();
-        }
-        else{
+        } else {
             //store
             $data = $request->input();
             $aset = new Asset;
@@ -216,25 +220,25 @@ class AssetController extends Controller
             $aset->brand = $data['brand'];
             $aset->current_location = $data['location'];
 
-            if($data['pemilik-barang'] != null){
+            if ($data['pemilik-barang'] != null) {
                 $aset->pemilik_barang = $data['pemilik-barang'];
             }
 
-            if($data['asset-status'] == 'tersedia'){
+            if ($data['asset-status'] == 'tersedia') {
                 $aset->status = $data['asset-status'];
-            }else{
+            } else {
                 $aset->status = "tidak";
             }
 
-            if($data['asset-jenis'] != null){
+            if ($data['asset-jenis'] != null) {
                 $aset->asset_jenis_id = $data['asset-jenis'];
             }
 
-            if($data['kategori_barang'] != null){
+            if ($data['kategori_barang'] != null) {
                 $aset->kategori_barang = $data['kategori_barang'];
             }
 
-            if($data['spesifikasi_barang'] != null){
+            if ($data['spesifikasi_barang'] != null) {
                 $aset->spesifikasi_barang = $data['spesifikasi_barang'];
             }
 
@@ -243,7 +247,7 @@ class AssetController extends Controller
 
             $history = new HistoryAddAsset;
             $history->user_id = \Illuminate\Support\Facades\Auth::user()->id;
-            $history->aksi = \Illuminate\Support\Facades\Auth::user()->name." menambahkan barang dengan nomor seri ".$data['serial_number'].", brand ".$data['brand'].", lokasi ".$data['location'].", pemilik barang ".$data['pemilik-barang'].", jenis barang ".$data['asset-jenis'].", kategori barang ".$data['kategori_barang'].", spesifikasi barang ".$data['spesifikasi_barang'];
+            $history->aksi = \Illuminate\Support\Facades\Auth::user()->name . " menambahkan barang dengan nomor seri " . $data['serial_number'] . ", brand " . $data['brand'] . ", lokasi " . $data['location'] . ", pemilik barang " . $data['pemilik-barang'] . ", jenis barang " . $data['asset-jenis'] . ", kategori barang " . $data['kategori_barang'] . ", spesifikasi barang " . $data['spesifikasi_barang'];
             $history->save();
 
             $this->storeLoc();
@@ -263,12 +267,11 @@ class AssetController extends Controller
             'spesifikasi_barang' => 'required',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return redirect('create-asset-staff')
                 ->withErrors($validator)
                 ->withInput();
-        }
-        else{
+        } else {
             //store
             $data = $request->input();
             $aset = new Asset;
@@ -276,25 +279,25 @@ class AssetController extends Controller
             $aset->brand = $data['brand'];
             $aset->current_location = $data['location'];
 
-            if($data['pemilik-barang'] != null){
+            if ($data['pemilik-barang'] != null) {
                 $aset->pemilik_barang = $data['pemilik-barang'];
             }
 
-            if($data['asset-status'] == 'tersedia'){
+            if ($data['asset-status'] == 'tersedia') {
                 $aset->status = $data['asset-status'];
-            }else{
+            } else {
                 $aset->status = "tidak";
             }
 
-            if($data['asset-jenis'] != null){
+            if ($data['asset-jenis'] != null) {
                 $aset->asset_jenis_id = $data['asset-jenis'];
             }
 
-            if($data['kategori_barang'] != null){
+            if ($data['kategori_barang'] != null) {
                 $aset->kategori_barang = $data['kategori_barang'];
             }
 
-            if($data['spesifikasi_barang'] != null){
+            if ($data['spesifikasi_barang'] != null) {
                 $aset->spesifikasi_barang = $data['spesifikasi_barang'];
             }
 
@@ -303,7 +306,7 @@ class AssetController extends Controller
 
             $history = new HistoryAddAsset;
             $history->user_id = \Illuminate\Support\Facades\Auth::user()->id;
-            $history->aksi = \Illuminate\Support\Facades\Auth::user()->name." menambahkan barang dengan nomor seri ".$data['serial_number'].", brand ".$data['brand'].", lokasi ".$data['location'].", pemilik barang ".$data['pemilik-barang'].", jenis barang ".$data['asset-jenis'].", kategori barang ".$data['kategori_barang'].", spesifikasi barang ".$data['spesifikasi_barang'];
+            $history->aksi = \Illuminate\Support\Facades\Auth::user()->name . " menambahkan barang dengan nomor seri " . $data['serial_number'] . ", brand " . $data['brand'] . ", lokasi " . $data['location'] . ", pemilik barang " . $data['pemilik-barang'] . ", jenis barang " . $data['asset-jenis'] . ", kategori barang " . $data['kategori_barang'] . ", spesifikasi barang " . $data['spesifikasi_barang'];
             $history->save();
 
             $this->storeLoc();
@@ -312,7 +315,8 @@ class AssetController extends Controller
         }
     }
 
-    public function storeLoc(){
+    public function storeLoc()
+    {
         $aset = Asset::max('id');
         $aset = Asset::find($aset);
         $save_loc = new AssetLocationController();
@@ -340,7 +344,7 @@ class AssetController extends Controller
     {
         $data = Asset::find($id);
         $show = AssetJenis::all();
-        $pemilik = DB::table('pemilik_barangs')->select('nama')->where('division_id',\Illuminate\Support\Facades\Auth::user()->division->id)->get();
+        $pemilik = DB::table('pemilik_barangs')->select('nama')->where('division_id', \Illuminate\Support\Facades\Auth::user()->division->id)->get();
 
         return View::make('admin.editAsset', [
             'data' => $data,
@@ -364,23 +368,23 @@ class AssetController extends Controller
             'asset_jenis' => 'required'
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return redirect('edit-asset/' . $id)
                 ->withErrors($validator)
                 ->withInput();
-        }else {
+        } else {
             $aset = Asset::find($id);
             $history_update = new HistoryUpdateAsset;
             $history_update->id_pengubah = \Illuminate\Support\Facades\Auth::id();
             $history_update->kode_barang = $aset->serial_number;
-            $history_update->jenis_barang = AssetJenis::where('id',$aset->asset_jenis_id)->pluck('name')[0];
+            $history_update->jenis_barang = AssetJenis::where('id', $aset->asset_jenis_id)->pluck('name')[0];
             $history_update->kategori_barang = $aset->kategori_barang;
             $history_update->status_barang = $aset->status;
             $history_update->brand = $aset->brand;
             $history_update->spesifikasi_barang = $aset->spesifikasi_barang;
             $history_update->pemilik_barang = $aset->pemilik_barang;
             $history_update->new_kode_barang = $request->input('serial_number');
-            $history_update->new_jenis_barang = AssetJenis::where('id',$request->input('asset_jenis'))->pluck('name')[0];
+            $history_update->new_jenis_barang = AssetJenis::where('id', $request->input('asset_jenis'))->pluck('name')[0];
             $history_update->new_kategori_barang = $request->input('kategori_barang');
             $history_update->new_status_barang = $request->input('asset-status');
             $history_update->new_spesifikasi_barang = $request->input('spesifikasi_barang');
@@ -390,10 +394,10 @@ class AssetController extends Controller
             $aset->spesifikasi_barang = $request->input('spesifikasi_barang');
             $aset->brand = $request->input('brand');
 
-            if($request->input('pemilik-barang') != null){
+            if ($request->input('pemilik-barang') != null) {
                 $aset->pemilik_barang = $request->input('pemilik-barang');
                 $history_update->new_pemilik_barang = $request->input('pemilik-barang');
-            }else if ($request->input('new-pemilik-barang') != null){
+            } else if ($request->input('new-pemilik-barang') != null) {
                 $new_pemilik_barang = new PemilikBarangController();
                 $new_pemilik_barang = $new_pemilik_barang->store($request->input('new-pemilik-barang'), \Illuminate\Support\Facades\Auth::user()->division_id);
                 $history_update->new_pemilik_barang = $request->input('new-pemilik-barang');
@@ -403,7 +407,7 @@ class AssetController extends Controller
 
             $aset->asset_jenis_id = $request->input('asset_jenis');
 
-            if($request->input('asset-status')){
+            if ($request->input('asset-status')) {
                 $aset->status = $request->input('asset-status');
             }
 
@@ -457,7 +461,8 @@ class AssetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function export(){
+    public function export()
+    {
         $aset = DB::table('assets')
             ->orderBy('id', 'desc')
             ->where('division_id', '=', \Illuminate\Support\Facades\Auth::user()->division->id)
@@ -469,18 +474,21 @@ class AssetController extends Controller
         return Excel::download(new AssetExport($aset), 'rekap_aset.xlsx');
     }
 
-    public function riwayat(){
-        $data = HistoryUpdateAsset::where('id_pengubah',\Illuminate\Support\Facades\Auth::id())->get();
+    public function riwayat()
+    {
+        $data = HistoryUpdateAsset::where('id_pengubah', \Illuminate\Support\Facades\Auth::id())->get();
         return View::make('admin.historyUpdate', [
             'data' => $data
         ]);
     }
 
-    public function see(){
+    public function see()
+    {
         return View::make('admin.see');
     }
 
-    public function destroypermanent($id){
+    public function destroypermanent($id)
+    {
         $aset = Asset::find($id);
         $d_aset = new DeletedAsset;
         $d_aset->user_id = \Illuminate\Support\Facades\Auth::user()->id;
@@ -499,7 +507,8 @@ class AssetController extends Controller
         return redirect('superadmin/asset/')->with('message', 'Aset Berhasil Dihapus');
     }
 
-    public function superadminasset(){
+    public function superadminasset()
+    {
         $data = Asset::all();
         return View::make('superadmin.asset', [
             'data' => $data

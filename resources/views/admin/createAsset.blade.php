@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('css')
-    {{--    <link href="{{ asset('css/pizza.css') }}" rel="stylesheet"> --}}
+    {{--
+    <link href="{{ asset('css/pizza.css') }}" rel="stylesheet"> --}}
 @endsection
 
 @section('js')
@@ -73,10 +74,10 @@
                                 <div class="col-md-6">
                                     @if ($show)
                                         @foreach ($show as $index => $item)
-                                            <div class="mt-2">
-                                                <input class="form-check-input mt-1" type="radio" id="hide"
-                                                    name="asset-jenis" value="{{ $item->id }}" checked />
-                                                <label for="hide">{{ $item->name }}</label>
+                                            <div>
+                                                <input class="form-check-input mr-2 mb-2" type="radio" id="hide" name="asset-jenis"
+                                                    value="{{ $item->id }}" checked />
+                                                <label for="hide" class="mt-2">{{ $item->name }}</label>
                                             </div>
                                         @endforeach
                                     @endif
@@ -89,8 +90,9 @@
 
                                 <div class="col-md-6">
                                     <input id="kategori_barang" type="text"
-                                        class="form-control rounded-md @error('kategori_barang') is-invalid @enderror" name="kategori_barang"
-                                        value="{{ old('kategori_barang') }}" required autocomplete="kategori_barang" autofocus>
+                                        class="form-control rounded-md @error('kategori_barang') is-invalid @enderror"
+                                        name="kategori_barang" value="{{ old('kategori_barang') }}" required
+                                        autocomplete="kategori_barang" autofocus>
 
                                     @error('kategori_barang')
                                         <span class="invalid-feedback" role="alert">
@@ -106,8 +108,9 @@
 
                                 <div class="col-md-6">
                                     <input id="spesifikasi_barang" type="text"
-                                        class="form-control rounded-md @error('spesifikasi_barang') is-invalid @enderror" name="spesifikasi_barang"
-                                        value="{{ old('spesifikasi_barang') }}" required autocomplete="spesifikasi_barang" autofocus>
+                                        class="form-control rounded-md @error('spesifikasi_barang') is-invalid @enderror"
+                                        name="spesifikasi_barang" value="{{ old('spesifikasi_barang') }}" required
+                                        autocomplete="spesifikasi_barang" autofocus>
 
                                     @error('spesifikasi_barang')
                                         <span class="invalid-feedback" role="alert">
@@ -118,8 +121,7 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="brand"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Brand') }}</label>
+                                <label for="brand" class="col-md-4 col-form-label text-md-end">{{ __('Brand') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="brand" type="text"
@@ -152,12 +154,13 @@
 
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                                    <button type="submit"
+                                        class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
                                         {{ __('Tambahkan') }}
                                     </button>
                                 </div>
                             </div>
-                            
+
                         </form>
 
                     </div>

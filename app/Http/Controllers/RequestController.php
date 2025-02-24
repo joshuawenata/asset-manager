@@ -29,7 +29,7 @@ class RequestController extends Controller
         $current_date_time = new DateTime("now", new DateTimeZone('Asia/Jakarta'));
         $current_date_time = $current_date_time->format('Y-m-d H:i:s');
 
-//        kalau tgl bookingnya dah lewat (return date < current) otomatis ke reject
+        //        kalau tgl bookingnya dah lewat (return date < current) otomatis ke reject
         DB::table('requests')
             ->where(function ($query) {
                 $query->where('status', '=', 'waiting approval')
@@ -40,7 +40,7 @@ class RequestController extends Controller
 
         $p = Auth::user()->role->name;
 
-        if($p == 'staff'){
+        if ($p == 'staff') {
             $user_div_id = \Illuminate\Support\Facades\Auth::user()->division_id;
             $data = DB::table('requests')
                 ->orderBy('id', 'asc')
@@ -57,8 +57,7 @@ class RequestController extends Controller
                 ->where('requests.division_id', '=', $user_div_id)
                 ->get();
             $approver = \Illuminate\Support\Facades\Auth::user()->division->approver;
-        }
-        else if($p == 'admin'){
+        } else if ($p == 'admin') {
             $user_div_id = \Illuminate\Support\Facades\Auth::user()->division_id;
             $data = DB::table('requests')
                 ->orderBy('id', 'asc')
@@ -75,8 +74,7 @@ class RequestController extends Controller
                 ->where('requests.division_id', '=', $user_div_id)
                 ->get();
             $approver = \Illuminate\Support\Facades\Auth::user()->division->approver;
-        }
-        else if($p == 'approver'){
+        } else if ($p == 'approver') {
             $user_id = \Illuminate\Support\Facades\Auth::user()->id;
             $data = \App\Models\Request::orderBy('id', 'desc')
                 ->where('user_id', $user_id)
@@ -98,7 +96,7 @@ class RequestController extends Controller
 
     public function cancel($request_delete_id)
     {
-        return view('cancel',['request_delete_id' => $request_delete_id]);
+        return view('cancel', ['request_delete_id' => $request_delete_id]);
     }
 
     public function reject($request_perbaharui_id)
@@ -106,14 +104,14 @@ class RequestController extends Controller
         $assets = DB::table('bookings')
             ->join('assets', 'bookings.asset_id', '=', 'assets.id')
             ->join('asset_jenis', 'bookings.asset_jenis_id', '=', 'asset_jenis.id')
-            ->select('bookings.id','assets.serial_number', 'assets.brand', 'assets.spesifikasi_barang', 'assets.kategori_barang', 'asset_jenis.name', 'assets.status', 'assets.division_id')
+            ->select('bookings.id', 'assets.serial_number', 'assets.brand', 'assets.spesifikasi_barang', 'assets.kategori_barang', 'asset_jenis.name', 'assets.status', 'assets.division_id')
             ->where('bookings.request_id', '=', $request_perbaharui_id)
             ->get();
 
         $request = \App\Models\Request::find($request_perbaharui_id);
         $stat = $request->status;
         $request = $request->notes;
-        return view('reject',['request_perbaharui_id' => $request_perbaharui_id, 'bookings'=> $assets, 'request' => $request, 'stat' => $stat, 'request_id' => $request_perbaharui_id]);
+        return view('reject', ['request_perbaharui_id' => $request_perbaharui_id, 'bookings' => $assets, 'request' => $request, 'stat' => $stat, 'request_id' => $request_perbaharui_id]);
     }
 
     public function approve($request_perbaharui_id)
@@ -121,14 +119,14 @@ class RequestController extends Controller
         $assets = DB::table('bookings')
             ->join('assets', 'bookings.asset_id', '=', 'assets.id')
             ->join('asset_jenis', 'bookings.asset_jenis_id', '=', 'asset_jenis.id')
-            ->select('bookings.id','assets.serial_number', 'assets.brand', 'assets.spesifikasi_barang', 'assets.kategori_barang', 'asset_jenis.name', 'assets.status', 'assets.division_id')
+            ->select('bookings.id', 'assets.serial_number', 'assets.brand', 'assets.spesifikasi_barang', 'assets.kategori_barang', 'asset_jenis.name', 'assets.status', 'assets.division_id')
             ->where('bookings.request_id', '=', $request_perbaharui_id)
             ->get();
 
         $request = \App\Models\Request::find($request_perbaharui_id);
         $stat = $request->status;
         $request = $request->notes;
-        return view('approve',['request_perbaharui_id' => $request_perbaharui_id, 'bookings'=> $assets, 'request' => $request, 'stat' => $stat, 'request_id' => $request_perbaharui_id]);
+        return view('approve', ['request_perbaharui_id' => $request_perbaharui_id, 'bookings' => $assets, 'request' => $request, 'stat' => $stat, 'request_id' => $request_perbaharui_id]);
     }
 
     public function approveonly($request_perbaharui_id)
@@ -136,13 +134,13 @@ class RequestController extends Controller
         $request = \App\Models\Request::find($request_perbaharui_id);
         $stat = $request->status;
         $request = $request->notes;
-        return view('approveonly',['request_perbaharui_id' => $request_perbaharui_id]);
+        return view('approveonly', ['request_perbaharui_id' => $request_perbaharui_id]);
     }
 
     public function repair(Request $request)
     {
         $repair_id = $request->input('repair_id');
-        return view('admin/repair',['repair_id' => $repair_id]);
+        return view('admin/repair', ['repair_id' => $repair_id]);
     }
 
 
@@ -154,14 +152,14 @@ class RequestController extends Controller
         ]);
     }
 
-    public function kembali(Request $request){
+    public function kembali(Request $request)
+    {
         $id = $request->input('request_return_id');
         $req = \App\Models\Request::find($id);
-        if($req->flag_return == null){
+        if ($req->flag_return == null) {
             //balikin form utk kembaliin
             $returned = null;
-        }
-        else{
+        } else {
             //balikin form utk tampilin kembalian
             $returned = 1;
         }
@@ -171,7 +169,7 @@ class RequestController extends Controller
             ->join('asset_jenis', 'bookings.asset_jenis_id', '=', 'asset_jenis.id')
             ->select('bookings.id', 'assets.serial_number', 'assets.brand', 'asset_jenis.name', 'bookings.return_conditions')
             ->where('bookings.request_id', '=', $id)
-            ->where('bookings.status','!=','rejected')
+            ->where('bookings.status', '!=', 'rejected')
             ->get();
 
         $current_date_time = new DateTime("now", new DateTimeZone('Asia/Jakarta'));
@@ -185,7 +183,8 @@ class RequestController extends Controller
         ]);
     }
 
-    public function perbaharuiReturn(Request $request){
+    public function perbaharuiReturn(Request $request)
+    {
         $id = $request->input('request_id');
         $req = \App\Models\Request::find($request->input('request_id'));
         $req->return_notes = $request->input('return_condition');
@@ -226,12 +225,12 @@ class RequestController extends Controller
 
         $history = new HistoryDetail;
         $history->user_id = \Illuminate\Support\Facades\Auth::user()->id;
-        $history->aksi = \Illuminate\Support\Facades\Auth::user()->name . ' mengajukan pengembalian barang dari '.$req->nama_peminjam.'['.$req->prodi_peminjam.']'.' dengan kondisi '.$request->input('kondisi_aset').' dengan deskripsi '.$request->input('return_condition');
+        $history->aksi = \Illuminate\Support\Facades\Auth::user()->name . ' mengajukan pengembalian barang dari ' . $req->nama_peminjam . '[' . $req->prodi_peminjam . ']' . ' dengan kondisi ' . $request->input('kondisi_aset') . ' dengan deskripsi ' . $request->input('return_condition');
         $history->save();
 
         $history = new HistoryDetail;
         $history->user_id = \Illuminate\Support\Facades\Auth::user()->id;
-        $history->aksi = \Illuminate\Support\Facades\Auth::user()->name . ' mengapprove pengembalian dari '.$req->nama_peminjam.'['.$req->prodi_peminjam.']'.' dengan pesan '.$request->input('pesan');
+        $history->aksi = \Illuminate\Support\Facades\Auth::user()->name . ' mengapprove pengembalian dari ' . $req->nama_peminjam . '[' . $req->prodi_peminjam . ']' . ' dengan pesan ' . $request->input('pesan');
         $history->save();
 
         $req->return_notice = $request->input('isu_rusak');
@@ -247,14 +246,15 @@ class RequestController extends Controller
         $receiver = $req->email_peminjam;
         $email->indexPeminjamApprove($receiver, $message, $subjek, $req->id);
 
-        if(\Illuminate\Support\Facades\Auth::user()->role_id == 1){
+        if (\Illuminate\Support\Facades\Auth::user()->role_id == 1) {
             return redirect('dashboard')->with('message', 'Peminjaman berhasil dikembalikan.');
-        }else if(\Illuminate\Support\Facades\Auth::user()->role_id == 2){
+        } else if (\Illuminate\Support\Facades\Auth::user()->role_id == 2) {
             return redirect('/admin/dashboard')->with('message', 'Peminjaman berhasil dikembalikan.');
         }
     }
 
-    public function cekPengembalian(Request $request){
+    public function cekPengembalian(Request $request)
+    {
         $id = $request->input('request_id');
         $req = \App\Models\Request::find($id);
 
@@ -283,11 +283,11 @@ class RequestController extends Controller
             ->get();
 
         $id = null;
-        foreach ($req as $r){
+        foreach ($req as $r) {
             $id = $r->id;
         }
 
-        if($id != null){
+        if ($id != null) {
 
             $req = \App\Models\Request::find($request->request_taken_id);
             //barang bisa diambil = update bookings
@@ -303,23 +303,24 @@ class RequestController extends Controller
 
             $history = new HistoryDetail;
             $history->user_id = \Illuminate\Support\Facades\Auth::user()->id;
-            $history->aksi = \Illuminate\Support\Facades\Auth::user()->name . ' memberikan barang kepada '.$req->nama_peminjam.'['.$req->prodi_peminjam.']'.' dengan tujuan '.$req->purpose;
+            $history->aksi = \Illuminate\Support\Facades\Auth::user()->name . ' memberikan barang kepada ' . $req->nama_peminjam . '[' . $req->prodi_peminjam . ']' . ' dengan tujuan ' . $req->purpose;
             $history->save();
 
-            if(\Illuminate\Support\Facades\Auth::user()->role_id == 1){
+            if (\Illuminate\Support\Facades\Auth::user()->role_id == 1) {
                 return redirect('/dashboard')->with('message', "Barang berhasil diambil.");
             }
             return redirect('/admin/dashboard')->with('message', "Barang berhasil diambil.");
-        }
-        else{
-            if(\Illuminate\Support\Facades\Auth::user()->role_id == 1){
-                return redirect('/dashboard')->with('errors', "Barang belum bisa diambil.");
+        } else {
+            if (\Illuminate\Support\Facades\Auth::user()->role_id == 1) {
+                return redirect('/dashboard')->withErrors(["message" => "Barang belum bisa diambil."]);
             }
-            return redirect('/admin/dashboard')->with('errors', "Barang belum bisa diambil.");
+            return redirect('/admin/dashboard')->withErrors(["message" => "Barang belum bisa diambil."]);
         }
+
     }
 
-    public function createRequest(Request $request){
+    public function createRequest(Request $request)
+    {
         $res = $request->input('datetimes');
         $res = explode(" - ", $res);
         $book_date = strtotime($res[0]);
@@ -337,7 +338,7 @@ class RequestController extends Controller
 
         $avail_items = array();
 
-        foreach ($assets as $asset){
+        foreach ($assets as $asset) {
             $id = $asset->id;
             $bookings = DB::table('bookings')
                 ->join('requests', 'bookings.request_id', '=', 'requests.id')
@@ -348,24 +349,22 @@ class RequestController extends Controller
                 ->where('bookings.status', '!=', 'rejected')
                 ->get();
 
-            if($bookings->isEmpty()){
+            if ($bookings->isEmpty()) {
                 array_push($avail_items, $asset);
-            }
-            else{
+            } else {
                 $available = true;
-                foreach ($bookings as $booking){
+                foreach ($bookings as $booking) {
                     $test_book_date = strtotime($booking->book_date);
                     $test_return_date = strtotime($booking->return_date);
 
-                    if($book_date > $test_return_date || $return_date < $test_book_date){
+                    if ($book_date > $test_return_date || $return_date < $test_book_date) {
                         $available = true;
-                    }
-                    else{
+                    } else {
                         $available = false;
                         break;
                     }
                 }
-                if($available){
+                if ($available) {
                     array_push($avail_items, $asset);
                 }
             }
@@ -396,26 +395,26 @@ class RequestController extends Controller
         ]);
     }
 
-    public function confirm(Request $request){
+    public function confirm(Request $request)
+    {
 
         $assets = unserialize($request->input('assets'));
         $bookings = array();
 
-        foreach ($assets as $i){
+        foreach ($assets as $i) {
             $asset = DB::table('assets')
                 ->join('asset_jenis', 'assets.asset_jenis_id', '=', 'asset_jenis.id')
                 ->select('assets.*', 'asset_jenis.name')
                 ->where('assets.id', '=', $i)
                 ->get();
-            foreach ($asset as $a){
+            foreach ($asset as $a) {
                 array_push($bookings, $a);
             }
         }
 
-        if($request->input('lokasi') != null){
+        if ($request->input('lokasi') != null) {
             $lokasi = $request->input('lokasi');
-        }
-        else if ($request->input('new-lokasi') != null){
+        } else if ($request->input('new-lokasi') != null) {
             $lokasi = $request->input('new-lokasi');
         }
         $purpose = $request->input('purpose');
@@ -480,7 +479,7 @@ class RequestController extends Controller
 
         return DB::table('requests')->max('id');
 
-//        dd($request->purpose, $request->lokasi, $request->user_id, $request->book_date, $request->return_date);
+        //        dd($request->purpose, $request->lokasi, $request->user_id, $request->book_date, $request->return_date);
     }
 
     /**
@@ -492,7 +491,7 @@ class RequestController extends Controller
     public function show()
     {
         $user_div_id = \Illuminate\Support\Facades\Auth::user()->division->id;
-        if(\Illuminate\Support\Facades\Auth::user()->role_id == 1 || \Illuminate\Support\Facades\Auth::user()->role_id == 2){
+        if (\Illuminate\Support\Facades\Auth::user()->role_id == 1 || \Illuminate\Support\Facades\Auth::user()->role_id == 2) {
             $data = DB::table('requests')
                 ->orderBy('id', 'desc')
                 ->where('approver_id', \Illuminate\Support\Facades\Auth::user()->id)
@@ -503,7 +502,7 @@ class RequestController extends Controller
                 ->join('users', 'requests.approver_id', '=', 'users.id')
                 ->select('requests.*', 'users.id AS userid')
                 ->get();
-        }else{
+        } else {
             $data = DB::table('requests')
                 ->orderBy('id', 'desc')
                 ->where(function ($query) {
@@ -523,7 +522,7 @@ class RequestController extends Controller
 
     public function showDetail()
     {
-        $data = historyDetail::where('user_id',auth()->user()->id)->get();
+        $data = historyDetail::where('user_id', auth()->user()->id)->get();
         return view('approver.historiDetail', [
             'data' => $data
         ]);
@@ -554,7 +553,7 @@ class RequestController extends Controller
         $req->approver = \Illuminate\Support\Facades\Auth::user()->name;
         $req->update();
 
-        if($request->request_perbaharui == 'rejected'){
+        if ($request->request_perbaharui == 'rejected') {
             $req->status = $request->request_perbaharui;
             $req->notes = $request->input('pesan');
             $req->update();
@@ -565,14 +564,14 @@ class RequestController extends Controller
             $receiver = $req->email_peminjam;
             $history = new HistoryDetail;
             $history->user_id = \Illuminate\Support\Facades\Auth::user()->id;
-            $history->aksi = \Illuminate\Support\Facades\Auth::user()->name . ' menolak peminjaman dari '.$req->nama_peminjam.'['.$req->prodi_peminjam.']'.' dengan tujuan '.$req->purpose.' dengan alasan '.$request->input('pesan');
+            $history->aksi = \Illuminate\Support\Facades\Auth::user()->name . ' menolak peminjaman dari ' . $req->nama_peminjam . '[' . $req->prodi_peminjam . ']' . ' dengan tujuan ' . $req->purpose . ' dengan alasan ' . $request->input('pesan');
             $history->save();
 
             $bookings = DB::table('bookings')
-            ->where('request_id', '=', $request->request_perbaharui_id)
-            ->get();
+                ->where('request_id', '=', $request->request_perbaharui_id)
+                ->get();
 
-            foreach ($bookings as $b){
+            foreach ($bookings as $b) {
                 $aset = Asset::find($b->asset_id);
 
                 $prev_pos = AssetLocation::orderBy('id', 'desc')
@@ -580,7 +579,7 @@ class RequestController extends Controller
                     ->offset(1)->limit(1)
                     ->get();
 
-                foreach ($prev_pos as $p){
+                foreach ($prev_pos as $p) {
                     $lok = $p->to_location;
                 }
 
@@ -590,8 +589,7 @@ class RequestController extends Controller
 
             $email = new SendEmailController();
             $email->indexPeminjam($receiver, $pesan, $subyek);
-        }
-        else if ($request->request_perbaharui == 'approved'){
+        } else if ($request->request_perbaharui == 'approved') {
             $bookingApproval = $request->input('booking_approval', []);
 
             // Check if at least one checkbox is checked
@@ -624,7 +622,7 @@ class RequestController extends Controller
                         ->offset(1)->limit(1)
                         ->get();
 
-                    foreach ($prev_pos as $p){
+                    foreach ($prev_pos as $p) {
                         $lok = $p->to_location;
                     }
 
@@ -633,7 +631,7 @@ class RequestController extends Controller
                 }
             }
 
-            if($counting == 0) {
+            if ($counting == 0) {
                 $req->track_approver = $req->track_approver++;
                 $req->notes = $req->notes . $request->input('pesan');
                 $approver = $request->approver_num;
@@ -641,20 +639,20 @@ class RequestController extends Controller
                 $req->status = $request->request_perbaharui;
 
                 $subyek = 'PEMINJAMAN APPROVED';
-                $pesan = 'Selamat peminjaman anda berhasil di approve! silakan menghubungi staff ' . \App\Models\Division::find($req->division_id)->name .  ' untuk pengambilan barang sesuai dengan tanggal peminjaman';
+                $pesan = 'Selamat peminjaman anda berhasil di approve! silakan menghubungi staff ' . \App\Models\Division::find($req->division_id)->name . ' untuk pengambilan barang sesuai dengan tanggal peminjaman';
                 $pesan_bm = 'Peminjaman barang oleh <b>' . $req->email_peminjam . '</b> berhasil di approve.';
                 $receiver = $req->email_peminjam;
                 $email = new SendEmailController();
-                $email->index("bmopr.bdg@binus.edu", $pesan_bm , $subyek);
+                $email->index("bmopr.bdg@binus.edu", $pesan_bm, $subyek);
                 $email->indexPeminjamApprove($receiver, $pesan, $subyek, $req->id);
 
                 $req->update();
 
                 $history = new HistoryDetail;
                 $history->user_id = \Illuminate\Support\Facades\Auth::user()->id;
-                $history->aksi = \Illuminate\Support\Facades\Auth::user()->name . ' menyetujui peminjaman dari '.$req->nama_peminjam.'['.$req->prodi_peminjam.']'.' dengan tujuan '.$req->purpose.' dengan alasan '.$request->input('pesan');
+                $history->aksi = \Illuminate\Support\Facades\Auth::user()->name . ' menyetujui peminjaman dari ' . $req->nama_peminjam . '[' . $req->prodi_peminjam . ']' . ' dengan tujuan ' . $req->purpose . ' dengan alasan ' . $request->input('pesan');
                 $history->save();
-            }else{
+            } else {
                 $req->track_approver = $req->track_approver++;
                 $req->notes = $req->notes . $request->input('pesan');
                 $approver = $request->approver_num;
@@ -670,24 +668,24 @@ class RequestController extends Controller
                 }
 
                 // Continue with the rest of the message
-                $pesan .= "<br>" . 'Apabila anda tetap akan melakukan peminjaman barang yang approve harap mengirimkan email lanjutan kepada approver <b>' . $req->approver . '</b> ('. \App\Models\User::find($req->approver_id)->email .')';
+                $pesan .= "<br>" . 'Apabila anda tetap akan melakukan peminjaman barang yang approve harap mengirimkan email lanjutan kepada approver <b>' . $req->approver . '</b> (' . \App\Models\User::find($req->approver_id)->email . ')';
                 $receiver = $req->email_peminjam;
                 $email = new SendEmailController();
-                $email->index("bmopr.bdg@binus.edu", $pesan_bm , $subyek);
+                // $email->index("bmopr.bdg@binus.edu", $pesan_bm , $subyek);
                 $email->indexPeminjam($receiver, $pesan, $subyek);
 
                 $history = new HistoryDetail;
                 $history->user_id = \Illuminate\Support\Facades\Auth::user()->id;
-                $history->aksi = \Illuminate\Support\Facades\Auth::user()->name . ' menyetujui sebagian peminjaman dari '.$req->nama_peminjam.'['.$req->prodi_peminjam.']'.' dengan tujuan '.$req->purpose.' dengan alasan '.$request->input('pesan');
+                $history->aksi = \Illuminate\Support\Facades\Auth::user()->name . ' menyetujui sebagian peminjaman dari ' . $req->nama_peminjam . '[' . $req->prodi_peminjam . ']' . ' dengan tujuan ' . $req->purpose . ' dengan alasan ' . $request->input('pesan');
                 $history->save();
 
                 $req->update();
             }
 
-        }else if ($request->request_perbaharui == 'approved sebagian'){
+        } else if ($request->request_perbaharui == 'approved sebagian') {
             $message = 'Request berhasil diapprove.';
 
-            $req->track_approver = $req->track_approver+1;
+            $req->track_approver = $req->track_approver + 1;
             $req->notes = $req->notes . $request->input('pesan');
             $approver = $request->approver_num;
 
@@ -698,11 +696,11 @@ class RequestController extends Controller
             $pesan_bm = 'Peminjaman barang oleh ' . $req->email_peminjam . ' berhasil di approve.';
             $receiver = $req->email_peminjam;
             $email = new SendEmailController();
-            $email->index("bmopr.bdg@binus.edu", $pesan_bm , $subyek);
+            $email->index("bmopr.bdg@binus.edu", $pesan_bm, $subyek);
             $email->indexPeminjamApprove($receiver, $pesan, $subyek, $req->id);
             $history = new HistoryDetail;
             $history->user_id = \Illuminate\Support\Facades\Auth::user()->id;
-            $history->aksi = \Illuminate\Support\Facades\Auth::user()->name . ' approve peminjaman sebagian dari '.$req->nama_peminjam.'['.$req->prodi_peminjam.']'.' dengan tujuan '.$req->purpose.' dengan alasan '.$request->input('pesan');
+            $history->aksi = \Illuminate\Support\Facades\Auth::user()->name . ' approve peminjaman sebagian dari ' . $req->nama_peminjam . '[' . $req->prodi_peminjam . ']' . ' dengan tujuan ' . $req->purpose . ' dengan alasan ' . $request->input('pesan');
             $history->save();
 
             $req->update();
@@ -710,11 +708,11 @@ class RequestController extends Controller
         }
 
         // DONE: ini kembali ke dashboard/approvernya gimana
-        if(Auth::user()->role_id == 1){
+        if (Auth::user()->role_id == 1) {
             return redirect('/dashboard')->with('message', $message);
-        }else if(Auth::user()->role_id == 2){
+        } else if (Auth::user()->role_id == 2) {
             return redirect('/admin/dashboard')->with('message', $message);
-        }else if(Auth::user()->role_id == 3){
+        } else if (Auth::user()->role_id == 3) {
             return redirect('/approver/dashboard')->with('message', $message);
         }
     }
@@ -727,9 +725,9 @@ class RequestController extends Controller
      */
     public function destroy(Request $id)
     {
-//        DONE: ini gimana yak delete requestny pas cancel?
+        //        DONE: ini gimana yak delete requestny pas cancel?
         $request = \App\Models\Request::find($id->request_delete_id);
-        if($request->status == 'waiting approval'){
+        if ($request->status == 'waiting approval') {
 
             $bookings = new BookingController();
             $bookings->destroy($id->request_delete_id);

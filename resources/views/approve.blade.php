@@ -14,7 +14,8 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
 
-            <form action="{{ route('perbaharuiRequest', ['request_perbaharui_id' => $request_perbaharui_id]) }}" method="post">
+            <form action="{{ route('perbaharuiRequest', ['request_perbaharui_id' => $request_perbaharui_id]) }}"
+                method="post">
                 @csrf
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Approve Request</h1>
@@ -50,42 +51,42 @@
                                             <td>{{ $item->spesifikasi_barang }}</td>
                                             <td>{{ $item->status == 'tidak' ? 'tersedia' : $item->status }}</td>
                                             <!-- Add name attribute to the checkbox inputs -->
-                                            <td class="text-center"><input type="checkbox"
-                                                    name="booking_approval[{{ $index }}]" value="1" /></td>
-                                            <input type="hidden"
-                                                name="booking_id[{{ $index }}]"value="{{ $item->id }}">
+                                            <td class="text-center"><input type="checkbox" name="booking_approval[{{ $index }}]"
+                                                    value="1" /></td>
+                                            <input type="hidden" name="booking_id[{{ $index }}]" value="{{ $item->id }}">
                                         </tr>
                                     @endforeach
                                 @endif
                             </tbody>
                         </table>
-                </div>
+                    </div>
                     <div class="row mb-0">
                         <div class="col-md-6 offset-md-0">
-                            <input class="form-check-input mt-1" type="checkbox" name="select-all" id="select-all">
+                            <input class="form-check-input mb-2 mr-2" type="checkbox" name="select-all" id="select-all">
                             <label for="select-all">pilih semua</label>
                         </div>
                     </div>
-                        <div class="mb-3">
-                            <label for="pesan" class="col-form-label">Pesan:</label>
-                            <textarea class="form-control" id="pesan" name="pesan" autofocus required></textarea>
-                        </div>
+                    <div class="mb-3">
+                        <label for="pesan" class="col-form-label">Pesan:</label>
+                        <textarea class="form-control" id="pesan" name="pesan" autofocus required></textarea>
                     </div>
+                </div>
                 <div class="modal-footer">
-                    <button type="submit" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Ya</button>
+                    <button type="submit"
+                        class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Ya</button>
                 </div>
             </form>
 
         </div>
     </div>
     <script>
-        $('#select-all').click(function(event) {
+        $('#select-all').click(function (event) {
             if (this.checked) {
-                $(':checkbox').each(function() {
+                $(':checkbox').each(function () {
                     this.checked = true;
                 });
             } else {
-                $(':checkbox').each(function() {
+                $(':checkbox').each(function () {
                     this.checked = false;
                 });
             }

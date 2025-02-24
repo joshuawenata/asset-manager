@@ -29,6 +29,18 @@ class AssetJenisExport implements FromCollection, WithHeadings, WithStyles, With
         $pemilik_barang_options = PemilikBarang::where('division_id', $userDivisionId)->pluck('nama')->toArray();
         $kategori_barang_options = AssetJenis::where('status', 1)->pluck('name')->toArray();
 
+        if (empty($location_options)) {
+            throw new \Exception('Location options are empty.');
+        }
+
+        if (empty($pemilik_barang_options)) {
+            throw new \Exception('Pemilik Barang options are empty.');
+        }
+
+        if (empty($kategori_barang_options)) {
+            throw new \Exception('Kategori Barang options are empty.');
+        }
+
         return new Collection([
             ['PCS001001', $location_options[0], $pemilik_barang_options[0], $kategori_barang_options[0], 'Projector', 'HP', 'HP ABC', 'tersedia'],
             ['DKV001002', $location_options[0], $pemilik_barang_options[0], $kategori_barang_options[0], 'Projector', 'HP', 'HP DEF', 'tersedia'],
@@ -77,15 +89,15 @@ class AssetJenisExport implements FromCollection, WithHeadings, WithStyles, With
     public function registerEvents(): array
     {
         return [
-            // handle by a closure.
-            AfterSheet::class => function(AfterSheet $event) {
+                // handle by a closure.
+            AfterSheet::class => function (AfterSheet $event) {
 
                 // get layout counts (add 1 to rows for heading row)
                 $row_count = 10000;
                 $column_count = 5;
 
                 $location_drop_column = 'B'; // 'B' is the column index for the "Location" column
-
+    
                 // Fetch dropdown options for "Location" from the "AssetLocation" table
                 $location_options = Location::pluck('name')->toArray();
 
@@ -109,7 +121,7 @@ class AssetJenisExport implements FromCollection, WithHeadings, WithStyles, With
                 }
 
                 $pemilik_barang_drop_column = 'C'; // 'D' is the column index for the "Pemilik Barang" column
-
+    
                 // Fetch dropdown options for "Pemilik Barang" based on the logged-in user's division ID
                 $userDivisionId = Auth::user()->division_id; // Assuming you have a user authentication system
                 $pemilik_barang_options = PemilikBarang::where('division_id', $userDivisionId)->pluck('nama')->toArray();
@@ -135,7 +147,7 @@ class AssetJenisExport implements FromCollection, WithHeadings, WithStyles, With
 
                 // set dropdown column for "Kategori Barang"
                 $kategori_barang_drop_column = 'D'; // 'E' is the column index for the "Kategori Barang" column
-
+    
                 // set dropdown options for "Kategori Barang"
                 $kategori_barang_options = AssetJenis::where('status', 1)->pluck('name')->toArray();
 
@@ -160,7 +172,7 @@ class AssetJenisExport implements FromCollection, WithHeadings, WithStyles, With
 
                 // set dropdown column for "Status Barang"
                 $status_barang_drop_column = 'H'; // 'F' is the column index for the "Status Barang" column
-
+    
                 // set dropdown options for "Status Barang"
                 $status_barang_options = ['tersedia', 'tidak'];
 

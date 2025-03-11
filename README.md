@@ -1,7 +1,7 @@
 ### how to clone
+<br>
 
 git clone https://github.com/joshuawenata/asset-manager.git
-<br>
 
 ### how to update
 <br>

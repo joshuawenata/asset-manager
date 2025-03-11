@@ -1,3 +1,8 @@
+### how to clone
+
+git clone https://github.com/joshuawenata/asset-manager.git
+<br>
+
 ### how to update
 <br>
 composer install --ignore-platform-reqs
